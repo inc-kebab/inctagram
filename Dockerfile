@@ -1,4 +1,4 @@
-FROM node:18.15 as dependencies
+FROM node:18.17 as dependencies
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
