@@ -45,6 +45,7 @@
     "@storybook/nextjs": "^7.6.11",
     "@storybook/react": "^7.6.11",
     "@storybook/test": "^7.6.11",
+    "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
