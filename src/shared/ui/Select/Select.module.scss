@@ -1,16 +1,12 @@
 .root {
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 100%;
 
   .label {
     color: var(--light-900);
     font-size: 14px;
     line-height: 24px;
-  }
-
-  &.fullWidth {
-    width: 100%;
   }
 
   .trigger {
@@ -28,6 +24,23 @@
     border-radius: 2px;
     outline: 1px solid var(--dark-100);
 
+    &[data-state='open'] {
+      background-color: var(--dark-500);
+      outline: 1px solid var(--light-100);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      .icon {
+        rotate: 90deg;
+      }
+    }
+
+    &[data-state='closed'] {
+      .icon {
+        rotate: 270deg;
+      }
+    }
+
     span {
       display: flex;
       gap: 12px;
@@ -39,8 +52,16 @@
       color: var(--light-900);
     }
 
-    &:active {
-      background-color: var(--dark-500);
+    &[data-disabled] {
+      color: var(--dark-100);
+      outline: 1px solid var(--dark-100);
+      cursor: inherit;
+
+      .icon {
+        path {
+          fill: var(--dark-100);
+        }
+      }
     }
 
     .iconWrapper {
@@ -59,18 +80,6 @@
       outline: 2px solid var(--primary-500);
       color: var(--light-900);
     }
-
-
-    &:disabled {
-      color: var(--dark-100);
-      outline: 1px solid var(--dark-100);
-
-      .icon {
-        path {
-          fill: var(--dark-100);
-        }
-      }
-    }
   }
 }
 
@@ -78,8 +87,8 @@
   cursor: pointer;
   width: var(--radix-select-trigger-width);
   background-color: var(--dark-500);
-  outline: 1px solid var(--dark-300);
-  border-radius: 2px;
+  outline: 1px solid var(--light-100);
+  border-radius: 0 0 2px 2px;
 
   &:active {
     background-color: var(--dark-500);
@@ -111,20 +120,13 @@
   }
 }
 
-.iconDown {
-  rotate: 270deg;
-}
-
-.iconUp {
-  rotate: 90deg;
-}
-
 .withPagination {
   padding: 0 2px 0 5px;
 }
 
 .withoutPagination {
   padding: 6px 10px 6px 12px;
+
   &:hover {
     color: var(--primary-500);
   }
