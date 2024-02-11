@@ -1,0 +1,131 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+
+  .label {
+    color: var(--light-900);
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  .trigger {
+    cursor: pointer;
+    position: relative;
+    border: none;
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 36px;
+    color: var(--light-100);
+    background-color: var(--dark-700);
+    border-radius: 2px;
+    outline: 1px solid var(--dark-100);
+
+    span {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    &:hover {
+      outline: 1px solid var(--light-900);
+      color: var(--light-900);
+    }
+
+    &:active {
+      background-color: var(--dark-500);
+    }
+
+    .iconWrapper {
+      display: flex;
+
+      .icon {
+        transition: all 0.2s ease-in-out;
+
+        path {
+          fill: var(--light-100);
+        }
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-500);
+      color: var(--light-900);
+    }
+
+
+    &:disabled {
+      color: var(--dark-100);
+      outline: 1px solid var(--dark-100);
+
+      .icon {
+        path {
+          fill: var(--dark-100);
+        }
+      }
+    }
+  }
+}
+
+.viewport {
+  cursor: pointer;
+  width: var(--radix-select-trigger-width);
+  background-color: var(--dark-500);
+  outline: 1px solid var(--dark-300);
+  border-radius: 2px;
+
+  &:active {
+    background-color: var(--dark-500);
+    outline: 1px solid var(--light-100);
+  }
+
+  &:hover {
+    outline: 1px solid var(--light-100);
+  }
+
+  .item {
+    height: 36px;
+    outline: none;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    &[data-highlighted] {
+      background-color: var(--dark-300);
+    }
+
+    .itemText {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #234e99;
+      color: #0f9954;
+    }
+  }
+}
+
+.iconDown {
+  rotate: 270deg;
+}
+
+.iconUp {
+  rotate: 90deg;
+}
+
+.withPagination {
+  padding: 0 2px 0 5px;
+}
+
+.withoutPagination {
+  padding: 6px 10px 6px 12px;
+  &:hover {
+    color: var(--primary-500);
+  }
+}
