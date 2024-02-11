@@ -10,12 +10,16 @@
 
   transition: color 0.2s linear;
 
-  &:focus {
+  &:focus-visible {
     outline: 2px solid var(--primary-700);
   }
 
   &:hover {
     color: var(--primary-700);
+  }
+
+  &:active {
+    color: var(--light-100);
   }
 }
 
