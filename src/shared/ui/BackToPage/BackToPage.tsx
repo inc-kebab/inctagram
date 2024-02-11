@@ -1,3 +1,5 @@
+import { ElementRef, forwardRef } from 'react'
+
 import ArrowIcon from '@/shared/assets/icons/common/arrow.svg'
 import clsx from 'clsx'
 
@@ -9,11 +11,17 @@ interface Props {
   title?: string
 }
 
-export const BackToPage = ({ className, onNavigate, title }: Props) => {
-  return (
-    <button className={clsx(s.root, { [s.withTitle]: !!title }, className)} onClick={onNavigate}>
-      <ArrowIcon />
-      <span className={s.title}>{title}</span>
-    </button>
-  )
-}
+export const BackToPage = forwardRef<ElementRef<'button'>, Props>(
+  ({ className, onNavigate, title }, ref) => {
+    return (
+      <button
+        className={clsx(s.root, { [s.withTitle]: !!title }, className)}
+        onClick={onNavigate}
+        ref={ref}
+      >
+        <ArrowIcon />
+        <span className={s.title}>{title}</span>
+      </button>
+    )
+  }
+)
