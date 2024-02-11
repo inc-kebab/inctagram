@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import En from '../../shared/assets/icons/lang/ru.svg'
-import UK from '../../shared/assets/icons/lang/uk.svg'
-import { Select } from './select'
+import En from '@/shared/assets/icons/lang/ru.svg'
+import UK from '@/shared/assets/icons/lang/uk.svg'
+
+import { Select } from '.'
 
 const meta = {
   component: Select,

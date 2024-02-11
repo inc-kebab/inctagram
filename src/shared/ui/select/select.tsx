@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 import s from './select.module.scss'
 
-import ArrowIcon from '../assets/icons/common/arrow-ios.svg'
+import ArrowIcon from '../../assets/icons/common/arrow-ios.svg'
 
 export type Options = {
   icon?: any
