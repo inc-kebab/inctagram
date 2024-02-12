@@ -37,8 +37,7 @@ const meta = {
         'smallLink',
       ],
       control: { type: 'radio' },
-      description: 'typography sizes',
-      defaultValue: 'regular16'
+      description: 'typography sizes'
     },
   },
 } satisfies Meta<typeof Typography>
