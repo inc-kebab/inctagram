@@ -1,0 +1,94 @@
+.textField {
+  display: flex;
+  flex-direction: column;
+  color: var(--light-900);
+
+  span {
+    color: var(--danger-500);
+  }
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 6px 42px 6px 12px;
+
+  background-color: var(--dark-900);
+  border: 1px solid var(--dark-100);
+  border-radius: 2px;
+  outline: none;
+
+  &:hover {
+    border: 1px solid var(--light-900);
+  }
+
+  &:active {
+    color: var(--light-100);
+    border: 1px solid var(--light-100);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--primary-500);
+  }
+
+  &:disabled {
+    color: var(--dark-100);
+  }
+}
+
+.email,
+.text {
+  padding-right: 12px;
+}
+
+.search {
+  padding-right: 12px;
+  padding-left: 42px;
+}
+
+.disabled {
+  color: var(--dark-100);
+
+  input:hover {
+    border-color: var(--dark-100);
+  }
+}
+
+.error {
+  color: var(--light-100);
+  border: 1px solid var(--danger-500);
+
+  &:hover,
+  &:active {
+    border: 1px solid var(--danger-500);
+  }
+}
+
+.buttonPassword {
+  all: unset;
+
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+
+  color: var(--light-100);
+
+  &:disabled {
+    color: var(--dark-100);
+  }
+}
+
+.searchSvg {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+}
