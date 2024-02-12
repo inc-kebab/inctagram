@@ -1,35 +1,35 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import En from '@/shared/assets/icons/lang/ru.svg'
-import UK from '@/shared/assets/icons/lang/uk.svg'
+import { useState } from 'react'
+
+import { RuIcon, UkIcon } from '@/shared/assets/icons/lang'
 
 import { Select } from './Select'
 
 const meta = {
   argTypes: {
     defaultValue: {
-      control: true,
-      description: 'Default value',
+      control: false,
+      description: 'Set a default value',
     },
     disabled: {
-      control: true,
-      description: 'Disabled value',
+      control: 'boolean',
+      description: 'Disables the Select use',
     },
     label: {
-      control: true,
-      description: 'Label',
+      control: false,
+      description: 'Set a label',
     },
     onValueChange: {
       action: 'Value changed',
-      control: true,
       description: 'Callback for change current value',
     },
     options: {
-      control: true,
+      control: false,
       description: 'Options',
     },
     pagination: {
-      control: true,
+      control: false,
       description: 'Props changing styles for pagination',
     },
   },
@@ -40,6 +40,8 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+const options = [{ value: '100' }, { value: '70' }, { value: '50' }]
 
 export const Primary: Story = {
   args: {
@@ -54,16 +56,14 @@ export const WithPagination: Story = {
   args: {
     defaultValue: '100',
     disabled: false,
-    options: [{ value: '100' }, { value: '70' }, { value: '50' }],
+    options,
     pagination: true,
   },
-  decorators: [
-    Select => (
-      <div style={{ width: 60 }}>
-        <Select />
-      </div>
-    ),
-  ],
+  render: args => (
+    <div style={{ width: 50 }}>
+      <Select {...args} />
+    </div>
+  ),
 }
 
 export const WithFlag: Story = {
@@ -72,20 +72,37 @@ export const WithFlag: Story = {
     disabled: false,
     options: [
       {
-        icon: <En />,
+        icon: <RuIcon />,
         value: 'Russian',
       },
       {
-        icon: <UK />,
+        icon: <UkIcon />,
         value: 'English',
       },
     ],
   },
-  decorators: [
-    Select => (
-      <div style={{ width: 163 }}>
-        <Select />
-      </div>
-    ),
-  ],
+  render: args => (
+    <div style={{ width: 163 }}>
+      <Select {...args} />
+    </div>
+  ),
+}
+
+export const Controlled: Story = {
+  args: { options },
+  render: args => {
+    const [current, setCurrent] = useState<null | string>(null)
+
+    const handleChangeCurrentOption = (value: string) => {
+      setCurrent(value)
+    }
+
+    return (
+      <Select
+        label={`Current option value: ${current || 'none'}`}
+        onValueChange={handleChangeCurrentOption}
+        options={args.options}
+      />
+    )
+  },
 }

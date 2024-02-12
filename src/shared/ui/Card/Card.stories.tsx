@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    children: <div>Card</div>,
+    children: 'Card',
   },
+  render: args => <Card style={{ padding: 50, textAlign: 'center', width: 300 }} {...args} />,
 }

@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
+import { ArrowIosIcon } from '@/shared/assets/icons/common'
 import * as SelectRadix from '@radix-ui/react-select'
 import clsx from 'clsx'
 
 import s from './Select.module.scss'
-
-import ArrowIcon from '../../assets/icons/common/arrow-ios.svg'
 
 export type Options = {
   icon?: ReactNode
@@ -67,8 +66,8 @@ export const Select = forwardRef<Ref, SelectProps>(
         >
           <SelectRadix.Trigger className={cNames.trigger} ref={ref}>
             <SelectRadix.Value placeholder={placeholder} />
-            <SelectRadix.Icon className={s.iconWrapper}>
-              <ArrowIcon className={s.icon} />
+            <SelectRadix.Icon>
+              <ArrowIosIcon className={s.icon} />
             </SelectRadix.Icon>
           </SelectRadix.Trigger>
           <SelectRadix.Portal>
