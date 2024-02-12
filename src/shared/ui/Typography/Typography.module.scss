@@ -1,0 +1,55 @@
+@import '../../../app/styles/mixins.scss';
+
+.typography {
+  user-select: none;
+  color: var(--light-100);
+  margin: 0;
+}
+
+.large {
+  @include typography(var(--font-size-xxl), var(--font-weight-semibold), var(--line-height-l));
+}
+.h1 {
+  @include typography(var(--font-size-xl), var(--font-weight-bold), var(--line-height-l));
+}
+.h2 {
+  @include typography(var(--font-size-l), var(--font-weight-bold), var(--line-height-m));
+}
+.h3 {
+  @include typography(var(--font-size-m), var(--font-weight-semibold), var(--line-height-m));
+}
+.regular16 {
+  @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
+}
+.regularBold16 {
+  @include typography(var(--font-size-m), var(--font-weight-bold), var(--line-height-m));
+}
+.regular14 {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
+}
+.regularMedium14 {
+  @include typography(var(--font-size-s), var(--font-weight-medium), var(--line-height-m));
+}
+.regularBold14 {
+  @include typography(var(--font-size-s), var(--font-weight-bold), var(--line-height-m));
+}
+.small {
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
+}
+.smallSemiBold {
+  @include typography(var(--font-size-xs), var(--font-weight-semibold), var(--line-height-s));
+}
+.regularLink {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
+
+  cursor: pointer;
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+.smallLink {
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
+
+  cursor: pointer;
+  color: var(--primary-500);
+  text-decoration: underline;
+}
