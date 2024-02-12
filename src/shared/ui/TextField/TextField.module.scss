@@ -10,16 +10,21 @@
 
 .inputWrapper {
   position: relative;
+  background: var(--dark-900);
 }
 
 .input {
   width: 100%;
   padding: 6px 42px 6px 12px;
 
-  background-color: var(--dark-900);
+  background: transparent;
   border: 1px solid var(--dark-100);
   border-radius: 2px;
   outline: none;
+
+  &:-webkit-autofill {
+    transition: all 5000s ease-in-out 0s;
+  }
 
   &:hover {
     border: 1px solid var(--light-900);

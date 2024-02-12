@@ -7,15 +7,24 @@ import clsx from 'clsx'
 
 import s from './TextField.module.scss'
 
-type Props = {
+export type TextFieldProps = {
   error?: string
+  id?: string
   label?: string
   onValueChange?: (value: string) => void
-  type: 'email' | 'password' | 'search' | 'text'
+  type?: 'email' | 'password' | 'search'
   width?: string
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField: FC<Props> = ({ error, label, onValueChange, type, width, ...props }) => {
+export const TextField: FC<TextFieldProps> = ({
+  error,
+  id,
+  label,
+  onValueChange,
+  type = 'text',
+  width,
+  ...props
+}) => {
   const [isVisible, setIsVisible] = useState(false)
 
   const classes = {
@@ -33,12 +42,12 @@ export const TextField: FC<Props> = ({ error, label, onValueChange, type, width,
 
   return (
     <div className={classes.textField} style={{ width: `${width}` }}>
-      <label htmlFor={type}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <div className={s.inputWrapper}>
         <input
           className={classes.input}
           disabled={props.disabled}
-          id={type}
+          id={id}
           onChange={onchangeHandler}
           placeholder={type === 'search' ? 'Input search' : props.placeholder}
           type={!isVisible ? type : 'text'}
