@@ -3,24 +3,22 @@ import { Typography } from './Typography'
 
 const meta = {
   component: Typography,
-  title: 'Components/Typography',
+  title: 'Shared/Typography',
   tags: ['autodocs'],
   argTypes: {
     as: {
       control: { type: 'select' },
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a'],
       description: 'Html Element',
-      defaultValue: 'p',
     },
     children: {
       control: { type: 'text' },
-      description: 'Text Content',
+      description: 'Text Content'
     },
     textAlign: {
       control: { type: 'select' },
       options: ['start', 'center', 'end', 'inherit'],
-      description: 'Text Content position inner Html Element',
-      defaultValue: 'start',
+      description: 'Text Content position inner Html Element'
     },
     variant: {
       options: [
@@ -40,7 +38,7 @@ const meta = {
       ],
       control: { type: 'radio' },
       description: 'typography sizes',
-      defaultValue: 'regular16',
+      defaultValue: 'regular16'
     },
   },
 } satisfies Meta<typeof Typography>

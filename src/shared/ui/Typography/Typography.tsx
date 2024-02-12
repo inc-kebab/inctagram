@@ -32,7 +32,7 @@ export const Typography: TypographyComponent = forwardRef(
     props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>,
     ref: ElementRef<T>
   ) => {
-    const { as, children, variant = 'large', textAlign = 'start', ...rest } = props
+    const { as, children, variant = 'regular16', textAlign = 'start', ...rest } = props
     const Component: ElementType = as || 'p'
     const finishClassName = clsx(`${s.typography} ${s[variant]}`)
     return (
