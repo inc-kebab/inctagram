@@ -1,0 +1,24 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 13.75rem;
+  height: calc(100vh); // minus header height
+  padding: 4.5rem 0 2.25rem;
+
+  background-color: var(--dark-700);
+  border-right: 1px solid var(--dark-300);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  padding: 0;
+}
+
+.logout {
+  margin-top: auto;
+}

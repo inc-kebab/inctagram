@@ -1,0 +1,5 @@
+export { default as BookmarkOutline } from './bookmark.svg'
+export { default as HomeOutline } from './home.svg'
+export { default as MessageCircleOutline } from './message-circle.svg'
+export { default as PersonOutline } from './person.svg'
+export { default as SquarePlusOutline } from './plus-square.svg'

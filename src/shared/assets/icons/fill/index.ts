@@ -1,0 +1,5 @@
+export { default as Bookmark } from './bookmark.svg'
+export { default as Home } from './home.svg'
+export { default as MessageCircle } from './message-circle.svg'
+export { default as Person } from './person.svg'
+export { default as SquarePlus } from './plus-square.svg'
