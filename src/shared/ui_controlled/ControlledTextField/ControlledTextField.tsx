@@ -14,5 +14,14 @@ export const ControlledTextField = <T extends FieldValues>({ name, ...rest }: Pr
     ...rest,
   })
 
-  return <TextField id={name} onChange={onChange} value={value} {...field} error={error?.message} />
+  return (
+    <TextField
+      id={name}
+      onChange={onChange}
+      value={value}
+      {...rest}
+      {...field}
+      error={error?.message}
+    />
+  )
 }
