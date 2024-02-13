@@ -1,17 +1,19 @@
 import * as React from 'react'
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
-import { ArrowIosIcon } from '@/shared/assets/icons/common'
+import { ArrowIos } from '@/shared/assets/icons/common'
 import * as SelectRadix from '@radix-ui/react-select'
 import clsx from 'clsx'
 
 import s from './Select.module.scss'
 
-export type Options = {
+export interface Options {
   icon?: ReactNode
   value: string
 }
+
 type Ref = ElementRef<typeof SelectRadix.Trigger>
+
 type SelectProps = {
   className?: string
   classNameViewport?: string
@@ -23,29 +25,9 @@ type SelectProps = {
 
 export const Select = forwardRef<Ref, SelectProps>(
   (
-    {
-      className,
-      classNameViewport,
-      defaultValue,
-      disabled,
-      label,
-      onOpenChange,
-      onValueChange,
-      options,
-      pagination = false,
-      placeholder,
-      value,
-      ...rest
-    },
+    { className, classNameViewport, label, options, pagination = false, placeholder, ...rest },
     ref
   ) => {
-    const handleValueChange = (value: string) => {
-      onValueChange?.(value)
-    }
-    const handleOpenChange = (open: boolean) => {
-      onOpenChange?.(open)
-    }
-
     const cNames = {
       item: clsx(s.item, pagination ? s.withPagination : s.withoutPagination),
       root: clsx(s.root, className),
@@ -56,18 +38,11 @@ export const Select = forwardRef<Ref, SelectProps>(
     return (
       <div className={cNames.root}>
         <label className={s.label}>{label}</label>
-        <SelectRadix.Root
-          defaultValue={defaultValue}
-          disabled={disabled}
-          onOpenChange={handleOpenChange}
-          onValueChange={handleValueChange}
-          value={value}
-          {...rest}
-        >
+        <SelectRadix.Root {...rest}>
           <SelectRadix.Trigger className={cNames.trigger} ref={ref}>
             <SelectRadix.Value placeholder={placeholder} />
             <SelectRadix.Icon>
-              <ArrowIosIcon className={s.icon} />
+              <ArrowIos className={s.icon} />
             </SelectRadix.Icon>
           </SelectRadix.Trigger>
           <SelectRadix.Portal>

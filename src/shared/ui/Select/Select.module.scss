@@ -10,6 +10,7 @@
 
 .withoutPagination {
   padding: 6px 10px 6px 12px;
+  transition: all 0.1s linear;
 
   .icon {
     width: 24px;
@@ -27,6 +28,7 @@
   width: 100%;
 
   .label {
+    user-select: none;
     font-size: var(--font-size-s);
     line-height: var(--line-height-m);
     color: var(--light-900);
@@ -49,7 +51,7 @@
     border-radius: 2px;
     outline: 1px solid var(--dark-100);
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s linear;
 
     &[data-state='open'] {
       background-color: var(--dark-500);
@@ -59,14 +61,14 @@
 
       .icon {
         rotate: 90deg;
-        transition: rotate 0.2s ease-in-out;
+        transition: rotate 0.2s linear;
       }
     }
 
     &[data-state='closed'] {
       .icon {
         rotate: 270deg;
-        transition: rotate 0.2s ease-in-out;
+        transition: rotate 0.2s linear;
       }
     }
 
@@ -93,6 +95,7 @@
 
     &:focus-visible {
       outline: 2px solid var(--primary-500);
+      transition: all 1ms linear;
     }
   }
 }
@@ -117,6 +120,7 @@
 
     &[data-highlighted] {
       background-color: var(--dark-300);
+      transition: all 0.2s linear;
     }
   }
 }

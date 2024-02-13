@@ -1,1 +1,1 @@
-export { default as ArrowIosIcon } from './arrow-ios.svg'
+export { default as ArrowIos } from './arrow-ios.svg'
