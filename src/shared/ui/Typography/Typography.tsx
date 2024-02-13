@@ -1,26 +1,28 @@
 import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
-import s from './Typography.module.scss'
-import clsx from 'clsx'
+
 import { PolymorphRef } from '@/shared/types'
+import clsx from 'clsx'
+
+import s from './Typography.module.scss'
 
 type Props<T extends ElementType = 'p'> = {
   as?: T
-  textAlign?: 'start' | 'center' | 'end' | 'inherit'
   children: string
+  textAlign?: 'center' | 'end' | 'inherit' | 'start'
   variant?:
-    | 'large'
     | 'h1'
     | 'h2'
     | 'h3'
-    | 'regular16'
-    | 'regularBold16'
+    | 'large'
     | 'regular14'
-    | 'regularMedium14'
+    | 'regular16'
     | 'regularBold14'
-    | 'small'
-    | 'smallSemiBold'
+    | 'regularBold16'
     | 'regularLink'
+    | 'regularMedium14'
+    | 'small'
     | 'smallLink'
+    | 'smallSemiBold'
 } & ComponentPropsWithoutRef<T>
 
 type TypographyComponent = <T extends ElementType = 'p'>(
@@ -32,9 +34,10 @@ export const Typography: TypographyComponent = forwardRef(
     props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>,
     ref: ElementRef<T>
   ) => {
-    const { as, children, variant = 'regular16', textAlign = 'start', ...rest } = props
+    const { as, children, textAlign = 'start', variant = 'regular16', ...rest } = props
     const Component: ElementType = as || 'p'
-    const finishClassName = clsx(`${s.typography} ${s[variant]}`)
+    const finishClassName = clsx(s.typography, s[variant])
+
     return (
       <Component className={finishClassName} style={{ textAlign }} {...rest} ref={ref}>
         {children}
