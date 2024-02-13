@@ -1,0 +1,2 @@
+export { default as Close } from './close.svg'
+export { default as Search } from './search.svg'
