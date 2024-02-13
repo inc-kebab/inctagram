@@ -34,6 +34,9 @@ const meta = {
     },
   },
   component: Select,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'shared/Select',
 } satisfies Meta<typeof Select>
@@ -43,16 +46,24 @@ type Story = StoryObj<typeof meta>
 
 const options = [{ value: '100' }, { value: '70' }, { value: '50' }]
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     defaultValue: 'Select-box1',
-    disabled: false,
     label: 'Select-box',
     options: [{ value: 'Select-box1' }, { value: 'Select-box2' }, { value: 'Select-box3' }],
   },
 }
 
-export const WithPagination: Story = {
+export const Disabled: Story = {
+  args: {
+    defaultValue: 'Select-box1',
+    disabled: true,
+    label: 'Select-box',
+    options: [{ value: 'Select-box1' }, { value: 'Select-box2' }, { value: 'Select-box3' }],
+  },
+}
+
+export const PaginationVersion: Story = {
   args: {
     defaultValue: '100',
     disabled: false,
@@ -66,7 +77,7 @@ export const WithPagination: Story = {
   ),
 }
 
-export const WithFlag: Story = {
+export const LangVersion: Story = {
   args: {
     defaultValue: 'Russian',
     disabled: false,
@@ -102,6 +113,7 @@ export const Controlled: Story = {
         label={`Current option value: ${current || 'none'}`}
         onValueChange={handleChangeCurrentOption}
         options={args.options}
+        placeholder="Select controlled value"
       />
     )
   },
