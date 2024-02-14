@@ -4,7 +4,7 @@
 .text {
   cursor: pointer;
 
-  display: flex;
+  display: inline-flex;
   gap: 12px;
   align-items: center;
   justify-content: center;
@@ -68,6 +68,7 @@
 }
 
 .outline {
+  padding: 5px 24px;
   color: var(--primary-500);
   background-color: transparent;
   border: 1px solid var(--primary-500);

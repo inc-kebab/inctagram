@@ -16,7 +16,9 @@ const meta: Meta<typeof Button> = {
 }
 
 export default meta
+
 type Story = StoryObj<typeof Button>
+
 export const Primary: Story = {
   args: {
     children: 'Primary Button',
@@ -49,7 +51,16 @@ export const Text: Story = {
   },
 }
 
-export const Link: Story = {
+export const FullWidth: Story = {
+  args: {
+    children: 'Primary Button',
+    disabled: false,
+    fullWidth: true,
+    variant: 'primary',
+  },
+}
+
+export const AsLink: Story = {
   args: {
     as: 'a',
     children: 'Text Button',
@@ -59,15 +70,12 @@ export const Link: Story = {
   },
 }
 
-export const WithIcon: Story = {
+export const WithIcons: Story = {
   args: {
-    children: (
-      <>
-        <User />
-        <span>User</span>
-      </>
-    ),
+    children: 'User',
     disabled: false,
+    endIcon: <User />,
+    startIcon: <User />,
     variant: 'secondary',
   },
 }

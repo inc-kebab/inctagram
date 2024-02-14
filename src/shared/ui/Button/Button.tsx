@@ -1,5 +1,6 @@
-import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
+import { PolymorphRef } from '@/shared/types'
 import clsx from 'clsx'
 
 import s from './Button.module.scss'
@@ -7,35 +8,43 @@ import s from './Button.module.scss'
 type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   className?: string
+  endIcon?: ReactNode
   fullWidth?: boolean
+  startIcon?: ReactNode
   variant?: 'outline' | 'primary' | 'secondary' | 'text'
-} & ComponentPropsWithoutRef<T>
+} & Omit<ComponentPropsWithoutRef<T>, 'className'>
 
-const ButtonPolymorph = <T extends ElementType = 'button'>(props: ButtonProps<T>, ref: any) => {
-  const {
-    as: Component = 'button',
-    children,
-    className,
-    disabled,
-    fullWidth,
-    variant = 'primary',
-    ...restProps
-  } = props
+type ButtonComponent = <T extends ElementType = 'button'>(
+  props: ButtonProps<T> & PolymorphRef<T>
+) => ReactNode
 
-  const classNames = {
-    btn: clsx(className, s.button, s[variant], { [s.fullWidth]: fullWidth }),
-  }
+export const Button: ButtonComponent = forwardRef(
+  <T extends ElementType = 'button'>(
+    {
+      as,
+      children,
+      className,
+      disabled,
+      endIcon,
+      fullWidth,
+      startIcon,
+      variant = 'primary',
+      ...restProps
+    }: ButtonProps<T>,
+    ref: ElementRef<T>
+  ) => {
+    const Component: ElementType = as || 'button'
 
-  return (
-    <Component className={classNames.btn} {...restProps} disabled={disabled} ref={ref}>
-      {children}
-    </Component>
-  )
-}
-
-export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType>(
-  props: ButtonProps<T> &
-    Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>> & {
-      ref?: ForwardedRef<ElementType<T>>
+    const classNames = {
+      btn: clsx(s.button, s[variant], { [s.fullWidth]: fullWidth }, className),
     }
-) => ReturnType<typeof ButtonPolymorph>
+
+    return (
+      <Component className={classNames.btn} {...restProps} disabled={disabled} ref={ref}>
+        {startIcon}
+        {children}
+        {endIcon}
+      </Component>
+    )
+  }
+)
