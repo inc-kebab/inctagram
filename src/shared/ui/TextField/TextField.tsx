@@ -8,18 +8,16 @@ import clsx from 'clsx'
 import s from './TextField.module.scss'
 
 export type TextFieldProps = {
-  className?: string
-  disabled?: boolean
+  classNameInput?: string
   error?: string
-  id?: string
   label?: string
   onValueChange?: (value: string) => void
   type?: 'email' | 'password' | 'search'
-  value: string
-} & ComponentPropsWithoutRef<'input'>
+} & Omit<ComponentPropsWithoutRef<'input'>, 'type'>
 
 export const TextField: FC<TextFieldProps> = ({
   className,
+  classNameInput,
   disabled,
   error,
   id,
@@ -32,16 +30,16 @@ export const TextField: FC<TextFieldProps> = ({
   const [isVisible, setIsVisible] = useState(false)
 
   const classes = {
-    closeBtn: clsx(s.closeBtn, { [s.active]: value }),
-    input: clsx(s.input, error && s.error, s[type], { [s.active]: value }),
-    searchSvg: clsx(s.searchSvg, { [s.active]: value }),
-    textField: clsx(s.textField, className, { [s.disabled]: disabled }),
+    input: clsx(s.input, s[type], { [s.error]: error }, classNameInput),
+    label: clsx(s.label, { [s.disabled]: disabled }),
+    textField: clsx(s.textField, className),
   }
+
   const onVisible = () => {
     setIsVisible(prevState => !prevState)
   }
 
-  const onchangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(e)
     onValueChange?.(e.target.value)
   }
@@ -51,35 +49,37 @@ export const TextField: FC<TextFieldProps> = ({
 
   return (
     <div className={classes.textField}>
-      <label htmlFor={id}>{label}</label>
+      <label className={classes.label} htmlFor={id}>
+        {label}
+      </label>
       <div className={s.inputWrapper}>
-        {type === 'search' && <Search className={classes.searchSvg} />}
         <input
           className={classes.input}
           disabled={disabled}
           id={id}
-          onChange={onchangeHandler}
+          onChange={onChangeHandler}
           type={!isVisible ? type : 'text'}
           value={value}
           {...props}
         />
+        {type === 'search' && <Search className={s.searchIcon} />}
         {type === 'password' &&
           (isVisible ? (
-            <button className={s.buttonPassword} disabled={disabled} onClick={onVisible}>
+            <button className={s.rightBtn} disabled={disabled} onClick={onVisible}>
               <EyeOff />
             </button>
           ) : (
-            <button className={s.buttonPassword} disabled={disabled} onClick={onVisible}>
+            <button className={s.rightBtn} disabled={disabled} onClick={onVisible}>
               <Eye />
             </button>
           ))}
         {type === 'search' && value && (
-          <button className={classes.closeBtn} onClick={clearFieldHandler}>
+          <button className={s.rightBtn} disabled={disabled} onClick={clearFieldHandler}>
             <Close />
           </button>
         )}
       </div>
-      {error && <span>{error}</span>}
+      {error && <span className={s.errorText}>{error}</span>}
     </div>
   )
 }

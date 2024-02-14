@@ -1,51 +1,94 @@
+.rightBtn {
+  all: unset;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+
+  color: var(--light-100);
+
+  &:disabled {
+    color: var(--dark-100);
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+
+  color: var(--light-900);
+}
+
 .textField {
   display: flex;
   flex-direction: column;
+}
 
+.label {
   font-size: var(--font-size-s);
-  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-m);
   color: var(--light-900);
-
-  span {
-    color: var(--danger-500);
-  }
 }
 
 .inputWrapper {
   position: relative;
-  background: var(--dark-900);
 }
 
 .input {
   width: 100%;
   padding: 6px 42px 6px 12px;
 
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--light-900);
+
   background: transparent;
-  border: 1px solid var(--dark-100);
+  border: none;
   border-radius: 2px;
-  outline: none;
+  outline: 1px solid var(--dark-100);
 
   &:-webkit-autofill {
     transition: all 5000s ease-in-out 0s;
   }
 
-  &:hover {
-    border: 1px solid var(--light-900);
-  }
-
   &:disabled {
     color: var(--dark-100);
+
+    & + .searchIcon {
+      color: var(--dark-100);
+    }
   }
 
-  &:focus.active {
+  &:focus-visible {
     color: var(--light-100);
-    border: 1px solid var(--light-100);
+    outline: 2px solid var(--primary-500);
+
+    & + .searchIcon,
+    & + .rightBtn {
+      color: var(--light-100);
+    }
   }
 
-  &:focus:not(.active) {
-    border: 1px solid var(--primary-500);
-    outline: 1px solid var(--primary-500);
+  &:active:not(:disabled) {
+    color: var(--light-100);
+    outline: 1px solid var(--light-100);
+
+    & + .searchIcon,
+    & + .rightBtn {
+      color: var(--light-100);
+    }
+  }
+
+  &:hover:not(:disabled, :focus-visible, .error) {
+    outline: 1px solid var(--light-900);
   }
 }
 
@@ -66,68 +109,13 @@
 
 .disabled {
   color: var(--dark-100);
-
-  input:hover {
-    border-color: var(--dark-100);
-  }
 }
 
 .error {
   color: var(--light-100);
-  border: 1px solid var(--danger-500);
-
-  &:hover {
-    border: 1px solid var(--danger-500);
-  }
+  outline: 1px solid var(--danger-500);
 }
 
-.buttonPassword {
-  all: unset;
-
-  cursor: pointer;
-
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-
-  display: flex;
-  align-items: center;
-
-  color: var(--light-100);
-
-  &:disabled {
-    color: var(--dark-100);
-  }
-}
-
-.searchSvg {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-
-  &.active {
-    color: var(--light-100);
-  }
-}
-
-.closeBtn {
-  all: unset;
-
-  cursor: pointer;
-
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-
-  display: flex;
-  align-items: center;
-
-  background: transparent;
-
-  &.active {
-    color: var(--light-100);
-  }
+.errorText {
+  color: var(--danger-500);
 }

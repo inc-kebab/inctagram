@@ -7,6 +7,10 @@ import { TextField } from '@/shared/ui/TextField'
 const meta: Meta<typeof TextField> = {
   argTypes: {
     type: ['email', 'password', 'search'],
+    value: {
+      control: 'text',
+      description: 'Current value for controlled text field',
+    },
   },
   component: TextField,
   tags: ['autodocs'],
@@ -24,6 +28,13 @@ export const WithLabel: Story = {
   },
 }
 
+export const Email: Story = {
+  args: {
+    label: 'Email',
+    type: 'email',
+  },
+}
+
 export const Password: Story = {
   args: {
     label: 'Password',
@@ -32,13 +43,10 @@ export const Password: Story = {
 }
 
 export const Search: Story = {
-  decorators: [
-    () => {
-      const [value, setValue] = useState('')
-
-      return <TextField onValueChange={setValue} type="search" value={value} />
-    },
-  ],
+  args: {
+    label: 'Search',
+    type: 'search',
+  },
 }
 
 export const PasswordWithError: Story = {
@@ -54,5 +62,18 @@ export const PasswordDisabled: Story = {
     disabled: true,
     label: 'Password',
     type: 'password',
+  },
+}
+
+export const Controlled: Story = {
+  render: () => {
+    const [value, setValue] = useState('')
+
+    return (
+      <>
+        <div style={{ marginBottom: 10 }}>Value in state: {value}</div>
+        <TextField onValueChange={setValue} type="search" value={value} />
+      </>
+    )
   },
 }
