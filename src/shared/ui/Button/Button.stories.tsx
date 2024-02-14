@@ -1,16 +1,44 @@
-import User from '@/shared/assets/icons/fill/image.svg'
+import { Image } from '@/shared/assets/icons/fill'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from './index'
 
 const meta: Meta<typeof Button> = {
   argTypes: {
+    as: {
+      description: 'html element',
+    },
+    children: {
+      description: 'text in button',
+    },
+    className: {
+      description: 'className',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'disabled',
+    },
+    endIcon: {
+      description: 'icon after text in button',
+    },
+    startIcon: {
+      description: 'icon before text in button',
+    },
     variant: {
-      control: { disabled: 'radio' },
+      control: { type: 'radio' },
+      description: 'button style variants',
       options: ['primary', 'secondary', 'outline', 'text'],
     },
   },
   component: Button,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Button component is polymorphic, meaning it can be rendered as different HTML elements based on the value of the "as" prop. By default, it renders as a `<button>` element, but you can also specify other HTML tags such as `<a>` to render the Button as a link or any other valid HTML element.',
+      },
+    },
+  },
   tags: ['autodocs'],
   title: 'shared/Button',
 }
@@ -22,7 +50,6 @@ type Story = StoryObj<typeof Button>
 export const Primary: Story = {
   args: {
     children: 'Primary Button',
-    disabled: false,
     variant: 'primary',
   },
 }
@@ -30,7 +57,6 @@ export const Primary: Story = {
 export const Outline: Story = {
   args: {
     children: 'Outline Button',
-    disabled: false,
     variant: 'outline',
   },
 }
@@ -38,7 +64,6 @@ export const Outline: Story = {
 export const Secondary: Story = {
   args: {
     children: 'Secondary Button',
-    disabled: false,
     variant: 'secondary',
   },
 }
@@ -46,7 +71,6 @@ export const Secondary: Story = {
 export const Text: Story = {
   args: {
     children: 'Text Button',
-    disabled: false,
     variant: 'text',
   },
 }
@@ -54,7 +78,6 @@ export const Text: Story = {
 export const FullWidth: Story = {
   args: {
     children: 'Primary Button',
-    disabled: false,
     fullWidth: true,
     variant: 'primary',
   },
@@ -64,7 +87,6 @@ export const AsLink: Story = {
   args: {
     as: 'a',
     children: 'Text Button',
-    disabled: false,
     href: '#',
     variant: 'text',
   },
@@ -73,9 +95,8 @@ export const AsLink: Story = {
 export const WithIcons: Story = {
   args: {
     children: 'User',
-    disabled: false,
-    endIcon: <User />,
-    startIcon: <User />,
+    endIcon: <Image />,
+    startIcon: <Image />,
     variant: 'secondary',
   },
 }
