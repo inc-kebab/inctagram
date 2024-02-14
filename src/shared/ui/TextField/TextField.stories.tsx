@@ -6,10 +6,22 @@ import { TextField } from '@/shared/ui/TextField'
 
 const meta: Meta<typeof TextField> = {
   argTypes: {
-    type: ['email', 'password', 'search'],
-    value: {
-      control: 'text',
+    classNameInput: {
+      description: 'Styles directly for the input tag',
+    },
+    error: {
+      description: 'String describing the error',
+    },
+    label: {
+      description: 'Label',
+    },
+    onValueChange: {
+      description: 'The function is used to handle changes in the input field value.',
+    },
+    type: {
+      control: { type: 'radio' },
       description: 'Current value for controlled text field',
+      variant: ['email', 'password', 'search'],
     },
   },
   component: TextField,
