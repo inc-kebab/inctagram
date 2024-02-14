@@ -1,0 +1,123 @@
+.primary,
+.secondary,
+.outline,
+.text {
+  cursor: pointer;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  padding: 6px 24px;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-m);
+  color: var(--light-100);
+
+  border: none;
+  border-radius: 2px;
+  outline: none;
+}
+
+.primary {
+  background-color: var(--primary-500);
+
+  &:hover {
+    background-color: var(--primary-100);
+  }
+
+  &:active {
+    color: var(--light-500);
+    background-color: var(--primary-700);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-700);
+  }
+
+  &:disabled {
+    cursor: unset;
+    color: var(--light-900);
+    background-color: var(--primary-900);
+  }
+}
+
+.secondary {
+  background-color: var(--dark-300);
+
+  &:hover {
+    background-color: var(--dark-100);
+  }
+
+  &:active {
+    background-color: var(--dark-400);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--primary-300);
+  }
+
+  &:disabled {
+    cursor: unset;
+    color: var(--light-900);
+    background-color: var(--dark-500);
+  }
+}
+
+.outline {
+  color: var(--primary-500);
+  background-color: transparent;
+  border: 1px solid var(--primary-500);
+
+  &:focus-visible {
+    color: var(--primary-700);
+    border-color: var(--primary-700);
+    outline: 1px solid var(--primary-700);
+  }
+
+  &:hover {
+    color: var(--primary-100);
+    border-color: var(--primary-100);
+  }
+
+  &:active {
+    color: var(--primary-700);
+    border-color: var(--primary-700);
+  }
+
+  &:disabled {
+    cursor: unset;
+    color: var(--primary-900);
+    border-color: var(--primary-900);
+  }
+}
+
+.text {
+  color: var(--primary-500);
+  background-color: transparent;
+
+  &:focus-visible {
+    color: var(--primary-700);
+    outline: 2px solid var(--primary-700);
+  }
+
+  &:hover {
+    color: var(--primary-100);
+  }
+
+  &:active {
+    color: var(--primary-700);
+  }
+
+  &:disabled {
+    cursor: unset;
+    color: var(--primary-900);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
