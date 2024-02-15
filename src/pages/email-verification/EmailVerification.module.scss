@@ -1,0 +1,49 @@
+.wrapper {
+  text-align: center;
+}
+
+.title {
+  margin-top: 35px;
+}
+
+.text {
+  width: 294px;
+  margin: 19px auto 0;
+}
+
+.button {
+  margin-top: 30px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 473px;
+  height: 352px;
+  margin: 31px auto 0;
+}
+
+@media (width <= 768px) {
+  .wrapper {
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .title {
+    margin-top: 17px;
+  }
+
+  .text {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .button {
+    margin-top: 42px;
+  }
+
+  .imageWrapper {
+    width: 330px;
+    height: 246px;
+    margin-top: 30px;
+  }
+}
