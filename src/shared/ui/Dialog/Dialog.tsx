@@ -1,40 +1,37 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
-import s from './Dialog.module.scss'
+
+import { Close } from '@/shared/assets/icons/common'
 import * as RadixDialog from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 
+import s from './Dialog.module.scss'
+
+import { DialogClose } from './DialogClose'
+
 export type Props = {
-  title?: string
-  children?: ReactNode
-  closeButton?: ReactNode
-  trigger: ReactNode
   className?: string
+  title?: string
+  trigger: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixDialog.Root>
 
-export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Root>, Props>((props, ref) => {
-  const { title, children, closeButton, className, trigger, ...rest } = props
-
-  const visibleTitle = title && (
-    <div className={s.title}>
-      <h2 className={s.title_text}>{title}</h2>
-    </div>
-  )
-
-  const closeBtn = closeButton && (
-    <RadixDialog.Close asChild className={s.CloseButton}>
-      {closeButton}
-    </RadixDialog.Close>
-  )
+export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>((props, ref) => {
+  const { children, className, title, trigger, ...rest } = props
 
   return (
     <RadixDialog.Root {...rest}>
       <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
       <RadixDialog.Portal>
-        <RadixDialog.Overlay className={s.DialogOverlay} />
-        <RadixDialog.Content className={clsx(s.DialogContent, className)} ref={ref}>
-          {visibleTitle}
-          <div className={s.dialog_description}>{children}</div>
-          {closeBtn}
+        <RadixDialog.Overlay className={s.overlay} />
+        <RadixDialog.Content className={clsx(s.content, className)} ref={ref}>
+          {title && (
+            <div className={s.title}>
+              <h2 className={s.titleText}>{title}</h2>
+              <DialogClose>
+                <Close className={s.closeIcon} />
+              </DialogClose>
+            </div>
+          )}
+          {children}
         </RadixDialog.Content>
       </RadixDialog.Portal>
     </RadixDialog.Root>

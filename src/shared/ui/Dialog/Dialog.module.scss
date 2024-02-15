@@ -1,100 +1,65 @@
-.DialogOverlay {
-  background-color: var(--color-dark-900);
+.overlay {
   position: fixed;
   inset: 0;
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: rgb(0 0 0 / 60%);
+  animation: overlayshow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.DialogContent {
-  background-color: var(--dark-300);
-  border-radius: 2px;
-  box-shadow:
-    hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0;
+  padding: 12px 24px;
+
+  border-bottom: 1px solid var(--dark-100);
+
+  & .titleText {
+    margin: 0;
+    padding: 0;
+
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-l);
+  }
+}
+
+.content {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: 378px;
-  min-height: 228px;
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  background-color: var(--dark-300);
   border: 1px solid var(--dark-100);
-}
-.DialogContent:focus {
-  outline: none;
+  border-radius: 2px;
+
+  animation: contentshow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.title {
-  margin: 0;
+.closeIcon {
   color: var(--light-100);
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--dark-100);
-  padding: 10px 24px 8px;
-  min-height: 58px;
-
-  &_text {
-    padding: 0;
-    margin: 0;
-    font-size: var(--font-size-l);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-m);
-  }
 }
 
-.dialog_description {
-  color: var(--light-100);
-  font-size: 15px;
-  line-height: 1.5;
-  padding: 10px 24px 37px;
-  display: flex;
-  flex-direction: column;
-
-  & button {
-    display: inline-flex;
-    align-self: flex-end;
-  }
-}
-
-.CloseButton {
-  font-family: inherit;
-  height: 25px;
-  width: 30px;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  background-color: inherit;
-  justify-content: center;
-  color: var(--light-100);
-  position: absolute;
-  top: 18px;
-  right: 15px;
-  padding: 0;
-  overflow: none;
-
-  &:focus-visible {
-    outline: 2px solid var(--primary-700);
-  }
-}
-
-@keyframes overlayShow {
+@keyframes overlayshow {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
-@keyframes contentShow {
+@keyframes contentshow {
   from {
-    opacity: 0;
     transform: translate(-50%, -48%) scale(0.96);
+    opacity: 0;
   }
+
   to {
-    opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
   }
 }
