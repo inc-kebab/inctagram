@@ -7,6 +7,8 @@ import s from './Typography.module.scss'
 
 type Props<T extends ElementType = 'p'> = {
   as?: T
+  children?: ReactNode
+  className?: string
   textAlign?: 'center' | 'end' | 'inherit' | 'start'
   variant?:
     | 'h1'
