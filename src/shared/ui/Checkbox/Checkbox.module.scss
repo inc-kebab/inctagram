@@ -28,47 +28,76 @@
   align-items: center;
   justify-content: center;
 
-  padding: 6px;
+  width: 36px;
+  height: 36px;
 
   background-color: inherit;
   border-radius: 50%;
 
-  transition: background-color 0.2s ease-in-out;
-
   &.disabled {
     cursor: default;
-  }
-
-  &:focus {
-    background-color: var(--dark-500);
-  }
-
-  &:active:not(.disabled) {
-    background-color: var(--dark-100);
-  }
-
-  &:hover:not(.disabled),
-  &:hover.root:not([data-state='checked'], .disabled) {
-    background-color: var(--dark-100);
   }
 }
 
 .checkbox {
   cursor: pointer;
 
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-sizing: border-box;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
+  padding: 3px 1px;
 
   background-color: transparent;
   border: 2px solid var(--light-500);
   border-radius: 3px;
 
-  transition: 0.2s ease-in-out;
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+
+    width: 36px;
+    height: 36px;
+
+    opacity: 0;
+    background-color: var(--dark-100);
+    border-radius: 50%;
+  }
+
+  &:hover:not(.disabled),
+  &.root:not([data-state='checked'], .disabled) {
+    &::before {
+      opacity: 1;
+      background-color: var(--dark-300);
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
+
+  &:focus:not(.disabled),
+  &:focus-visible:not(.disabled),
+  &:focus-within:not(.disabled),
+  &.root:not([data-state='checked'], .disabled) {
+    outline: none;
+
+    &::before {
+      opacity: 1;
+      background-color: var(--dark-500);
+    }
+  }
+
+  &:active:not(.disabled),
+  &.root:not([data-state='checked'], .disabled) {
+    &::before {
+      opacity: 1;
+      background-color: var(--dark-100);
+    }
+  }
 
   &.disabled {
     cursor: initial;

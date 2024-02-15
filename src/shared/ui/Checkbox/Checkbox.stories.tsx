@@ -9,19 +9,18 @@ const CHECKBOX_LABEL: string = 'Check-box'
 const meta = {
   argTypes: {
     checked: {
-      control: { type: 'boolean' },
+      control: 'boolean',
       description: 'Set checked state',
-      options: [true, false],
     },
     disabled: {
       control: 'boolean',
       description: 'Disables the Checkbox use',
     },
     label: {
-      control: false,
-      description: 'Set a label',
+      control: 'text',
+      description: 'Set label for Checkbox',
     },
-    onChange: {
+    onCheckedChange: {
       action: 'Value changed',
       description: 'Callback for change current value',
     },
@@ -37,24 +36,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof Checkbox>
 
-export const Default: Story = {
-  render: args => {
-    const [checked, setChecked] = useState(false)
-
-    return (
-      <>
-        <Checkbox
-          {...args}
-          checked={checked}
-          disabled={false}
-          label={CHECKBOX_LABEL}
-          onValueChange={() => setChecked(!checked)}
-        />
-      </>
-    )
-  },
-}
-
 export const Checked: Story = {
   args: { checked: true, disabled: false, label: CHECKBOX_LABEL },
 }
@@ -68,18 +49,20 @@ export const DisabledAndNotChecked: Story = {
   args: { checked: false, disabled: true, label: CHECKBOX_LABEL },
 }
 export const NoLabel: Story = {
-  render: args => {
+  args: { checked: false, disabled: false },
+}
+
+export const Controlled: Story = {
+  render: () => {
     const [checked, setChecked] = useState(false)
 
     return (
-      <>
-        <Checkbox
-          {...args}
-          checked={checked}
-          disabled={false}
-          onChange={() => setChecked(!checked)}
-        />
-      </>
+      <Checkbox
+        checked={checked}
+        disabled={false}
+        label={CHECKBOX_LABEL}
+        onCheckedChange={() => setChecked(!checked)}
+      />
     )
   },
 }
