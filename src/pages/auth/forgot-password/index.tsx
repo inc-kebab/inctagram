@@ -1,5 +1,7 @@
-const ForgotPassword = () => {
-  return <div>Forgot-password page</div>
+import { ForgotPassword } from '@/feature/auth'
+
+const ForgotPasswordPage = () => {
+  return <ForgotPassword />
 }
 
-export default ForgotPassword
+export default ForgotPasswordPage
