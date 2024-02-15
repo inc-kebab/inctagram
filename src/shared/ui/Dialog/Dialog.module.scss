@@ -1,27 +1,3 @@
-.button_wrapper {
-  margin: 0 24px 34px;
-  display: flex;
-  justify-content: flex-end;
-
-  & > .accept {
-    padding: 5px 24px;
-    border-radius: 2px;
-    background-color: var(--primary-500);
-    color: var(--light-100);
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s linear;
-
-    &:hover {
-      background-color: var(--primary-300);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--primary-700);
-    }
-  }
-}
-
 .DialogOverlay {
   background-color: var(--color-dark-900);
   position: fixed;
@@ -49,46 +25,39 @@
   outline: none;
 }
 
-.DialogTitle {
+.title {
   margin: 0;
-  font-weight: 500;
   color: var(--light-100);
-  font-size: 17px;
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid var(--dark-100);
   padding: 10px 24px 8px;
   min-height: 58px;
+
+  &_text {
+    padding: 0;
+    margin: 0;
+    font-size: var(--font-size-l);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
+  }
 }
 
-.DialogDescription {
-  margin: 25px 0;
+.dialog_description {
   color: var(--light-100);
   font-size: 15px;
   line-height: 1.5;
-  padding: 10px 24px;
+  padding: 10px 24px 37px;
+  display: flex;
+  flex-direction: column;
+
+  & button {
+    display: inline-flex;
+    align-self: flex-end;
+  }
 }
 
-.Button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  padding: 0 15px;
-  font-size: 15px;
-  line-height: 1;
-  font-weight: 500;
-  height: 35px;
-}
-.Button.violet {
-  background-color: var(--dark-100);
-  color: var(--primary-500);
-  box-shadow: 0 2px 10px var(--dark-100);
-  border: 1px solid var(--light-900);
-}
-.Button.violet:focus {
-  box-shadow: 0 0 0 2px black;
-}
-
-.IconButton {
+.CloseButton {
   font-family: inherit;
   height: 25px;
   width: 30px;
