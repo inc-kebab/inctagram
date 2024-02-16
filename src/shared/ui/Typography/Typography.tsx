@@ -7,7 +7,8 @@ import s from './Typography.module.scss'
 
 type Props<T extends ElementType = 'p'> = {
   as?: T
-  children: string
+  children?: ReactNode
+  className?: string
   textAlign?: 'center' | 'end' | 'inherit' | 'start'
   variant?:
     | 'h1'
@@ -34,9 +35,9 @@ export const Typography: TypographyComponent = forwardRef(
     props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>,
     ref: ElementRef<T>
   ) => {
-    const { as, children, textAlign = 'start', variant = 'regular16', ...rest } = props
+    const { as, children, className, textAlign = 'start', variant = 'regular16', ...rest } = props
     const Component: ElementType = as || 'p'
-    const finishClassName = clsx(s.typography, s[variant])
+    const finishClassName = clsx(s.typography, s[variant], className)
 
     return (
       <Component className={finishClassName} style={{ textAlign }} {...rest} ref={ref}>
