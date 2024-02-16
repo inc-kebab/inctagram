@@ -10,7 +10,8 @@
     "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "format": "prettier --write src",
     "sb": "storybook dev -p 6006",
-    "sb:b": "storybook build"
+    "sb:b": "storybook build",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.16",
@@ -54,6 +55,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "eslint-plugin-storybook": "^0.6.15",
+    "husky": "^9.0.11",
     "sass": "^1.70.0",
     "storybook": "^7.6.11",
     "stylelint": "^16.1.0",
