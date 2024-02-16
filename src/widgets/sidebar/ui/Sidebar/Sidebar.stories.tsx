@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Search, Tranding } from '@/shared/assets/icons/common'
-import { Bookmark, Home, MessageCircle, Person, SquarePlus } from '@/shared/assets/icons/fill'
+import { Bookmark, Home, MessageCircle, Person, PlusSquare } from '@/shared/assets/icons/fill'
 import {
-  BookmarkOutline,
-  HomeOutline,
-  MessageCircleOutline,
-  PersonOutline,
-  SquarePlusOutline,
+  Bookmark as BookmarkOutline,
+  Home as HomeOutline,
+  MessageCircle as MessageCircleOutline,
+  Person as PersonOutline,
+  PlusSquare as PlusSquareOutline,
 } from '@/shared/assets/icons/outline'
 
 import { Sidebar } from './Sidebar'
@@ -46,9 +46,9 @@ export const Demo: Story = {
         title: 'Home',
       },
       {
-        activeIcon: <SquarePlus />,
+        activeIcon: <PlusSquare />,
         href: '/create',
-        icon: <SquarePlusOutline />,
+        icon: <PlusSquareOutline />,
         title: 'Create',
       },
       {

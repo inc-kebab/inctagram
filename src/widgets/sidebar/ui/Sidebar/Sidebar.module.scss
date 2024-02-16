@@ -3,7 +3,7 @@
   flex-direction: column;
 
   max-width: 13.75rem;
-  height: calc(100vh); // minus header height
+  height: calc(100vh - var(--header-height)); // minus header height
   padding: 4.5rem 0 2.25rem;
 
   background-color: var(--dark-700);
@@ -21,4 +21,9 @@
 
 .logout {
   margin-top: auto;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-m);
+  color: var(--light-100);
 }
