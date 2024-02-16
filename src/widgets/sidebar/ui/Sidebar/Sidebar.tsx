@@ -1,5 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Logout } from '@/shared/assets/icons/common'
+import { Button } from '@/shared/ui/Button'
 import { usePathname } from 'next/navigation'
 
 import s from './Sidebar.module.scss'
@@ -25,7 +27,9 @@ export const Sidebar = ({ items, ...rest }: Props) => {
           return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
         })}
       </ul>
-      <button className={s.logout}> Logout</button>
+      <Button className={s.logout} startIcon={<Logout />} variant="text">
+        Log Out
+      </Button>
     </aside>
   )
 }

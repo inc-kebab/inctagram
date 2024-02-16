@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Home } from '@/shared/assets/icons/fill'
-import { HomeOutline } from '@/shared/assets/icons/outline'
+import { Home as HomeOutline } from '@/shared/assets/icons/outline'
 
 import { SidebarItem } from './SidebarItem'
 

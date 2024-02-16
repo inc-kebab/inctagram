@@ -19,9 +19,9 @@ export const SidebarItem = ({ disabled, isActive, isLastGroupItem, item, ...rest
     <li className={clsx(s.item, { [s.lastGroupItem]: isLastGroupItem })} {...rest}>
       <Link
         className={clsx(s.link, {
-          [s.activeLink]: isActive,
-          [s.disabledLink]: disabled,
-          [s.fullLink]: item.title && item.icon,
+          [s.active]: isActive,
+          [s.disabled]: disabled,
+          [s.full]: item.title && item.icon,
         })}
         href={item.href}
       >
