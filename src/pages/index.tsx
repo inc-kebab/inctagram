@@ -37,6 +37,9 @@ const Home = () => {
             <Link href="/auth/create-new-password">create-new-password</Link>
           </li>
           <li>
+            <Link href="/auth/email-verification">email-verification</Link>
+          </li>
+          <li>
             <Link href="/favorites">favorites</Link>
           </li>
           <li>
