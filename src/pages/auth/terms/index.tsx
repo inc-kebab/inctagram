@@ -38,7 +38,7 @@ const Terms = memo(() => {
         account credentials with third parties or allow them to use your account.
       </Typography>
       <Typography className={s.text} variant="regular14">
-        1.3 You agree not to create multiple accounts or use other users' accounts without their
+        1.3 You agree not to create multiple accounts or use other users accounts without their
         permission.
       </Typography>
       <Typography as="h2" className={s.subTitle} variant="h2">

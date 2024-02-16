@@ -1,6 +1,6 @@
 import { ElementRef, forwardRef } from 'react'
 
-import ArrowIcon from '@/shared/assets/icons/common/arrow.svg'
+import { Arrow } from '@/shared/assets/icons/common'
 import clsx from 'clsx'
 
 import s from './BackToPage.module.scss'
@@ -19,7 +19,7 @@ export const BackToPage = forwardRef<ElementRef<'button'>, Props>(
         onClick={onNavigate}
         ref={ref}
       >
-        <ArrowIcon />
+        <Arrow />
         <span className={s.title}>{title}</span>
       </button>
     )
