@@ -6,7 +6,21 @@ import { Home as HomeOutline } from '@/shared/assets/icons/outline'
 import { SidebarItem } from './SidebarItem'
 
 const meta = {
-  argTypes: {}, // TODO
+  argTypes: {
+    disabled: {
+      description: 'Flag for blocking interaction',
+    },
+    isActive: {
+      description: 'Flag for change style active element',
+    },
+    isLastGroupItem: {
+      description: 'Flag for increasing the margin from the bottom',
+    },
+    item: {
+      control: false,
+      description: 'Current sidebar item data',
+    },
+  },
   component: SidebarItem,
   parameters: {
     layout: 'centered',
