@@ -23,6 +23,12 @@ const meta = {
   },
   component: Dialog,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'The Dialog component provides a flexible dialog box functionality in React, utilizing Radix for styling and behavior. It supports features like a customizable title, trigger element, and children content, making it easy to create interactive dialog interfaces with ease.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],

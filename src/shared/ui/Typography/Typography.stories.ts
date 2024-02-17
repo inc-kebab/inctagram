@@ -43,6 +43,14 @@ const meta = {
     },
   },
   component: Typography,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Typography component in React serves as a versatile text rendering tool, allowing users to display text with various styles and alignments based on specified props. The component is polymorphic, the `p` tag is drawn by default',
+      },
+    },
+  },
   tags: ['autodocs'],
   title: 'Shared/Typography',
 } satisfies Meta<typeof Typography>

@@ -23,6 +23,12 @@ const meta = {
   },
   component: SidebarItem,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'The SidebarItem component in React is a versatile element used to represent individual items within a sidebar navigation menu. This component allows for the creation of interactive and visually distinct sidebar items that can be customized based on various states and properties.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],

@@ -21,7 +21,15 @@ const meta = {
     },
   },
   component: Tabs.Root,
-  parameters: { layout: 'centered' },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The Tabs component in React encapsulates the functionality of a tabbed interface, providing components for creating tab structures with ease. It consists of `Root`, `List`, `Item`, `Content`.',
+      },
+    },
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'shared/Tabs',
 } satisfies Meta<typeof Tabs.Root>
