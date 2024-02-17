@@ -4,7 +4,7 @@ import { Typography } from './Typography'
 
 const meta = {
   argTypes: {
-    as: {
+    asComponent: {
       control: { type: 'select' },
       description: 'Html Element',
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a'],
@@ -12,6 +12,10 @@ const meta = {
     children: {
       control: { type: 'text' },
       description: 'Text Content',
+    },
+    ref: {
+      control: false,
+      description: 'standart ref props',
     },
     textAlign: {
       control: { type: 'select' },
@@ -48,7 +52,7 @@ type Story = StoryObj<typeof meta>
 
 export const Large: Story = {
   args: {
-    as: 'p',
+    asComponent: 'p',
     children:
       'Large - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, voluptate perspiciatis laudantium odit quod nihil, excepturi veniam officia maiores vero, tenetur doloribus! Molestias officia error temporibus cum. Commodi, quam odit.',
     textAlign: 'start',
@@ -58,7 +62,7 @@ export const Large: Story = {
 
 export const H1: Story = {
   args: {
-    as: 'h1',
+    asComponent: 'h1',
     children: 'H1 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'h1',
@@ -66,7 +70,7 @@ export const H1: Story = {
 }
 export const H2: Story = {
   args: {
-    as: 'h2',
+    asComponent: 'h2',
     children: 'H2 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'h2',
@@ -74,7 +78,7 @@ export const H2: Story = {
 }
 export const H3: Story = {
   args: {
-    as: 'h3',
+    asComponent: 'h3',
     children: 'H3 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'h3',
@@ -82,7 +86,6 @@ export const H3: Story = {
 }
 export const Regular16: Story = {
   args: {
-    as: 'p',
     children: 'Regular16 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'regular16',
@@ -90,7 +93,6 @@ export const Regular16: Story = {
 }
 export const RegularBold16: Story = {
   args: {
-    as: 'p',
     children: 'RegularBold16 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'regularBold16',
@@ -98,7 +100,6 @@ export const RegularBold16: Story = {
 }
 export const Regular14: Story = {
   args: {
-    as: 'p',
     children: 'Regular14 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'regular14',
@@ -106,7 +107,6 @@ export const Regular14: Story = {
 }
 export const RegularMedium14: Story = {
   args: {
-    as: 'p',
     children: 'RegularMedium14 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'regularMedium14',
@@ -114,7 +114,6 @@ export const RegularMedium14: Story = {
 }
 export const RegularBold14: Story = {
   args: {
-    as: 'p',
     children: 'RegularBold14 - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'regularBold14',
@@ -122,7 +121,6 @@ export const RegularBold14: Story = {
 }
 export const Small: Story = {
   args: {
-    as: 'p',
     children: 'Small - Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
     textAlign: 'start',
     variant: 'small',
