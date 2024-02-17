@@ -1,6 +1,7 @@
 import { Recaptcha } from '@/shared/assets/icons/other'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
+import { Checkbox } from '@/shared/ui/Checkbox'
 import { TextField } from '@/shared/ui/TextField'
 import { Typography } from '@/shared/ui/Typography'
 
@@ -9,7 +10,7 @@ import s from './ForgotPassword.module.scss'
 export const ForgotPassword = () => {
   return (
     <form>
-      <Card className={s.wrapper}>
+      <Card className={s.card}>
         <Typography textAlign="center" variant="h1">
           Forgot Password
         </Typography>
@@ -26,7 +27,7 @@ export const ForgotPassword = () => {
           </Button>
         </div>
         <Card className={s.recaptcha}>
-          I’m not a robot
+          <Checkbox label="I’m not a robot" />
           <Recaptcha />
         </Card>
       </Card>
