@@ -27,6 +27,12 @@ const meta = {
   },
   component: Checkbox,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'The Checkbox component is a customizable checkbox control with a label, utilizing Radix for styling. It supports properties like `checked`, `disabled`, and `label`, offering flexibility in checkbox appearance based on these props.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],

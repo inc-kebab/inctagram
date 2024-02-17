@@ -17,9 +17,19 @@ const meta = {
     items: {
       description: 'Array sidebar items',
     },
+    onLogout: {
+      action: 'Success logout',
+      description: 'Callback for logout',
+    },
   },
   component: Sidebar,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'The Sidebar component in React is designed to create a dynamic and interactive sidebar navigation menu for web applications. This component allows users to navigate through different sections or pages easily and efficiently.',
+      },
+    },
     layout: 'fullscreen',
     nextjs: {
       appDirectory: true,

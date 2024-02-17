@@ -25,6 +25,14 @@ const meta: Meta<typeof TextField> = {
     },
   },
   component: TextField,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'The TextField component in React offers a versatile input field with additional features like error handling, label support, and customizable input types such as `email`, `password`, and `search`.',
+      },
+    },
+  },
   tags: ['autodocs'],
   title: 'shared/TextField',
 }
