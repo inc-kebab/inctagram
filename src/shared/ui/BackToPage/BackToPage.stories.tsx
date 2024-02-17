@@ -18,6 +18,12 @@ const meta = {
   },
   component: BackToPage,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'BackToPage is a "Back" button designed for navigating back to the previous page. It accepts style classes, an onNavigate callback function, and a title. Visually includes an arrow and a title if provided.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],

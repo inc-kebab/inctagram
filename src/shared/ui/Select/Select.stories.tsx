@@ -35,6 +35,12 @@ const meta = {
   },
   component: Select,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'The Select component in React provides a customizable dropdown selection interface with options, supporting features like pagination, placeholder text, and styling classes for easy customization. It utilizes Radix for enhanced styling and functionality, making it simple to create interactive select dropdowns for various use cases.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],
