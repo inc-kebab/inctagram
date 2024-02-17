@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, KeyboardEvent, forwardRef, useState } from 'react'
 
 import { Close, Search } from '@/shared/assets/icons/common'
 import { Eye, EyeOff } from '@/shared/assets/icons/outline'
@@ -23,6 +23,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       error,
       id,
       label,
+      onKeyDown,
       onValueChange,
       type = 'text',
       value,
@@ -50,6 +51,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       onValueChange?.('')
     }
 
+    const onKeydownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        onKeyDown && onKeyDown(e)
+      }
+    }
+
     return (
       <div className={classes.textField}>
         <label className={classes.label} htmlFor={id}>
@@ -62,6 +70,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             disabled={disabled}
             id={id}
             onChange={onChangeHandler}
+            onKeyDown={onKeydownHandler}
             ref={ref}
             type={!isVisible ? type : 'text'}
             value={value}
