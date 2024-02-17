@@ -1,33 +1,43 @@
 import { Recaptcha } from '@/shared/assets/icons/other'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
-import { Checkbox } from '@/shared/ui/Checkbox'
-import { TextField } from '@/shared/ui/TextField'
 import { Typography } from '@/shared/ui/Typography'
+import { ControlledCheckbox } from '@/shared/ui_controlled/ControlledCheckbox'
+import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
+import Link from 'next/link'
 
 import s from './ForgotPassword.module.scss'
 
-export const ForgotPassword = () => {
+import { useForgotPasswordForm } from '../../model/hooks/useForgotPasswordForm'
+import { ForgotPasswordProps } from '../../model/types'
+
+export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForgotPasswordForm()
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Card className={s.card}>
-        <Typography textAlign="center" variant="h1">
+        <Typography className={s.title} textAlign="center" variant="h1">
           Forgot Password
         </Typography>
-        <TextField className={s.textField} label="Email" name="email" />
+        <ControlledTextField className={s.textField} control={control} label="Email" name="email" />
         <Typography className={s.description} variant="regular14">
           Enter your email address and we will send you further instructions
         </Typography>
-        <Button className={s.button} fullWidth>
+        <Button className={s.button} fullWidth type="submit">
           Send Link
         </Button>
         <div className={s.linkWrapper}>
-          <Button as="a" href="/sign-in" type="button" variant="text">
+          <Button asComponent={Link} href="/auth/sign-in" type="button" variant="text">
             Back to Sign In
           </Button>
         </div>
         <Card className={s.recaptcha}>
-          <Checkbox label="I’m not a robot" />
+          <ControlledCheckbox control={control} label="I’m not a robot" name="captcha" />
           <Recaptcha />
         </Card>
       </Card>
