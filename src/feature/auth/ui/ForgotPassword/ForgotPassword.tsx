@@ -1,22 +1,27 @@
+import { useForm } from 'react-hook-form'
+
+import { forgotPasswordSchema } from '@/feature/auth/model/utils/validators/forgotPasswordValidationSchema'
 import { Recaptcha } from '@/shared/assets/icons/other'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledCheckbox } from '@/shared/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
 import s from './ForgotPassword.module.scss'
 
-import { useForgotPasswordForm } from '../../model/hooks/useForgotPasswordForm'
-import { ForgotPasswordProps } from '../../model/types'
+import { ForgotPasswordFormValues, ForgotPasswordProps } from '../../model/types'
 
 export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForgotPasswordForm()
+  } = useForm<ForgotPasswordFormValues>({
+    resolver: zodResolver(forgotPasswordSchema),
+  })
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -31,11 +36,15 @@ export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
         <Button className={s.button} fullWidth type="submit">
           Send Link
         </Button>
-        <div className={s.linkWrapper}>
-          <Button asComponent={Link} href="/auth/sign-in" type="button" variant="text">
-            Back to Sign In
-          </Button>
-        </div>
+        <Button
+          asComponent={Link}
+          className={s.link}
+          href="/auth/sign-in"
+          type="button"
+          variant="text"
+        >
+          Back to Sign In
+        </Button>
         <Card className={s.recaptcha}>
           <ControlledCheckbox control={control} label="I’m not a robot" name="captcha" />
           <Recaptcha />
