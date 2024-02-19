@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CreateNewPasswordForm } from '@/feature/auth/ui/CreateNewPasswordForm/CreateNewPasswordForm'
+import { CreateNewPasswordForm } from './CreateNewPasswordForm'
 
 const meta: Meta<typeof CreateNewPasswordForm> = {
   argTypes: {

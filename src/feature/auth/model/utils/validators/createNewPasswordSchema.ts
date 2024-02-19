@@ -33,4 +33,4 @@ export const createNewPasswordSchema = z
     }
   )
 
-export type CreateNewPasswordFormSchema = z.infer<typeof createNewPasswordSchema>
+export type CreateNewPasswordFormValues = z.infer<typeof createNewPasswordSchema>

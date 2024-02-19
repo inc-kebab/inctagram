@@ -1,10 +1,6 @@
 import { KeyboardEvent } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import {
-  CreateNewPasswordFormSchema,
-  createNewPasswordSchema,
-} from '@/feature/auth/model/sсhemas/createNewPasswordSchema'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
@@ -13,12 +9,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './CreateNewPasswordForm.module.scss'
 
+import {
+  CreateNewPasswordFormValues,
+  createNewPasswordSchema,
+} from '../../model/utils/validators/createNewPasswordSchema'
+
 type Props = {
-  onSubmit: () => void
+  onSubmit: (values: CreateNewPasswordFormValues) => void
 }
 
 export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
-  const { control, handleSubmit } = useForm<CreateNewPasswordFormSchema>({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<CreateNewPasswordFormValues>({
     resolver: zodResolver(createNewPasswordSchema),
   })
 
@@ -30,41 +35,31 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
 
   return (
     <Card className={s.card}>
-      <Typography asComponent="h1" variant="h1">
+      <Typography asComponent="h1" className={s.title} variant="h1">
         Create New Password
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
+        <ControlledTextField
+          autoFocus
+          className={s.firstTextField}
           control={control}
+          defaultValue=""
+          error={errors?.password?.message}
+          label="New password"
           name="password"
-          render={({ field, fieldState: { error } }) => (
-            <ControlledTextField
-              autoFocus
-              className={s.firstTextField}
-              control={control}
-              error={error?.message}
-              label="New password"
-              type="password"
-              {...field}
-            />
-          )}
+          type="password"
         />
-        <Controller
+        <ControlledTextField
+          className={s.secondTextField}
           control={control}
+          defaultValue=""
+          error={errors?.confirmPassword?.message}
+          label="Password confirmation"
           name="confirmPassword"
-          render={({ field, fieldState: { error } }) => (
-            <ControlledTextField
-              className={s.secondTextField}
-              control={control}
-              error={error?.message}
-              label="Password confirmation"
-              onKeyDown={onKeydownHandler}
-              type="password"
-              {...field}
-            />
-          )}
+          onKeyDown={onKeydownHandler}
+          type="password"
         />
-        <Typography variant="regular14">
+        <Typography className={s.limitations} variant="regular14">
           Your password must be between 6 and 20 characters
         </Typography>
         <Button fullWidth type="submit">
