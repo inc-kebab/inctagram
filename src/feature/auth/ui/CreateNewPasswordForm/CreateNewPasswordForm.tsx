@@ -24,6 +24,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
     formState: { errors },
     handleSubmit,
   } = useForm<CreateNewPasswordFormValues>({
+    mode: 'onBlur',
     resolver: zodResolver(createNewPasswordSchema),
   })
 

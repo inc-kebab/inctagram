@@ -21,11 +21,7 @@ export const createNewPasswordSchema = z
   })
   .refine(
     ({ confirmPassword, password }) => {
-      if (password.length > 0) {
-        return confirmPassword === password
-      }
-
-      return true
+      return confirmPassword === password && confirmPassword.length > 0
     },
     {
       message: 'The passwords must match',
