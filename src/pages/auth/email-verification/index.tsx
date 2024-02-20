@@ -1,7 +1,5 @@
-import { EmailVerification } from '@/feature/auth/ui/EmailVerification'
-
-const EmailVerificationPage = () => {
-  return <EmailVerification />
+const EmailVerification = () => {
+  return <div>Email verification page</div>
 }
 
-export default EmailVerificationPage
+export default EmailVerification

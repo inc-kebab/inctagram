@@ -7,7 +7,7 @@ import s from './EmailVerification.module.scss'
 interface Props {
   onResendLink?: () => void
 }
-export const EmailVerification = ({ onResendLink }: Props) => {
+export const EmailVerificationBlock = ({ onResendLink }: Props) => {
   return (
     <section className={s.wrapper}>
       <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
@@ -29,5 +29,3 @@ export const EmailVerification = ({ onResendLink }: Props) => {
     </section>
   )
 }
-
-export default EmailVerification

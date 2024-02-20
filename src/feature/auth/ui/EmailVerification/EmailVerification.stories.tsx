@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { EmailVerification } from './EmailVerification'
+import { EmailVerificationBlock } from './EmailVerification'
 
 const meta = {
   argTypes: {
@@ -9,7 +9,7 @@ const meta = {
       description: 'Callback for resend verification link',
     },
   },
-  component: EmailVerification,
+  component: EmailVerificationBlock,
   parameters: {
     docs: {
       description: {
@@ -19,14 +19,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'feature/auth/EmailVerification',
-} satisfies Meta<typeof EmailVerification>
+  title: 'feature/auth/EmailVerificationBlock',
+} satisfies Meta<typeof EmailVerificationBlock>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    onResendLink: () => {},
-  },
-}
+export const Default: Story = {}
