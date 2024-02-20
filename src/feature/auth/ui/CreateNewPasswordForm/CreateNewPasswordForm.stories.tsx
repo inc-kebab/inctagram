@@ -5,6 +5,7 @@ import { CreateNewPasswordForm } from '../index'
 const meta: Meta<typeof CreateNewPasswordForm> = {
   argTypes: {
     onSubmit: {
+      action: 'Form submitted',
       description: 'onSubmit handler',
     },
   },
