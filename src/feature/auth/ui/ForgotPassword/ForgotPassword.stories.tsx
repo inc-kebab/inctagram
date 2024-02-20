@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { ForgotPassword } from './ForgotPassword'
+import { ForgotPasswordForm } from './ForgotPassword'
 
 const meta = {
   argTypes: {
     onSubmit: {
-      control: false,
+      action: 'Form sent',
       description:
         'Is used to pass a handler function that will be called when the form is submitted',
     },
   },
-  component: ForgotPassword,
+  component: ForgotPasswordForm,
   parameters: {
     docs: {
       description: {
@@ -20,8 +20,8 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'feature/auth/ForgotPassword',
-} satisfies Meta<typeof ForgotPassword>
+  title: 'feature/auth/ForgotPasswordForm',
+} satisfies Meta<typeof ForgotPasswordForm>
 
 export default meta
 

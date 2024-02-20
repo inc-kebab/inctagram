@@ -1,6 +1,5 @@
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { forgotPasswordSchema } from '@/feature/auth/model/utils/validators/forgotPasswordValidationSchema'
 import { Recaptcha } from '@/shared/assets/icons/other'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
@@ -12,9 +11,15 @@ import Link from 'next/link'
 
 import s from './ForgotPassword.module.scss'
 
-import { ForgotPasswordFormValues, ForgotPasswordProps } from '../../model/types'
+import {
+  ForgotPasswordFormValues,
+  forgotPasswordSchema,
+} from '../../model/utils/validators/forgotPasswordValidationSchema'
 
-export const ForgotPassword = ({ onSubmit }: ForgotPasswordProps) => {
+export type ForgotPasswordProps = {
+  onSubmit: SubmitHandler<ForgotPasswordFormValues>
+}
+export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordProps) => {
   const {
     control,
     formState: { errors },
