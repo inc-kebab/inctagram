@@ -18,7 +18,7 @@ export const Sidebar = ({ items, onLogout, ...rest }: Props) => {
   const pathname = usePathname()
 
   return (
-    <aside className={s.sidebar} {...rest}>
+    <nav className={s.sidebar} {...rest}>
       <ul className={s.menu}>
         {items.map((el, i) => {
           const itemPath = typeof el.href === 'string' ? el.href : el.href.pathname
@@ -31,6 +31,6 @@ export const Sidebar = ({ items, onLogout, ...rest }: Props) => {
       <Button className={s.logout} onClick={onLogout} startIcon={<Logout />} variant="text">
         Log Out
       </Button>
-    </aside>
+    </nav>
   )
 }
