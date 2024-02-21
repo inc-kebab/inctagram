@@ -11,7 +11,7 @@ const meta: Meta<typeof CreateNewPasswordForm> = {
   },
   component: CreateNewPasswordForm,
   tags: ['autodocs'],
-  title: 'feature/forms/CreateNewPasswordForm',
+  title: 'feature/Auth/CreateNewPasswordForm',
 }
 
 export default meta

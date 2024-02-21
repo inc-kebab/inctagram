@@ -44,7 +44,6 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
           autoFocus
           className={s.firstTextField}
           control={control}
-          defaultValue=""
           error={errors?.password?.message}
           label="New password"
           name="password"
@@ -53,7 +52,6 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
         <ControlledTextField
           className={s.secondTextField}
           control={control}
-          defaultValue=""
           error={errors?.confirmPassword?.message}
           label="Password confirmation"
           name="confirmPassword"
