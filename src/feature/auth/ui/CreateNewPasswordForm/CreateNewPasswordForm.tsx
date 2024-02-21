@@ -15,10 +15,11 @@ import {
 } from '../../model/utils/validators/createNewPasswordSchema'
 
 type Props = {
+  disabled?: boolean
   onSubmit: (values: CreateNewPasswordFormValues) => void
 }
 
-export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
+export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -44,6 +45,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
           autoFocus
           className={s.firstTextField}
           control={control}
+          disabled={disabled}
           error={errors?.password?.message}
           label="New password"
           name="password"
@@ -52,6 +54,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
         <ControlledTextField
           className={s.secondTextField}
           control={control}
+          disabled={disabled}
           error={errors?.confirmPassword?.message}
           label="Password confirmation"
           name="confirmPassword"
@@ -61,7 +64,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: Props) => {
         <Typography className={s.limitations} variant="regular14">
           Your password must be between 6 and 20 characters
         </Typography>
-        <Button fullWidth type="submit">
+        <Button disabled={disabled} fullWidth type="submit">
           Create new password
         </Button>
       </form>
