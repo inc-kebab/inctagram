@@ -19,7 +19,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'feature/auth/EmailVerificationBlock',
+  title: 'feature/Auth/EmailVerificationBlock',
 } satisfies Meta<typeof EmailVerificationBlock>
 
 export default meta
