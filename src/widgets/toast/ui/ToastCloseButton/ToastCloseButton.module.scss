@@ -1,0 +1,18 @@
+.ToastCloseButton {
+  all: unset;
+
+  cursor: pointer;
+
+  width: 24px;
+  height: 24px;
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}

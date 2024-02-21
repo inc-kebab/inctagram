@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Search, Tranding } from '@/shared/assets/icons/common'
+import { Search, Trending } from '@/shared/assets/icons/common'
 import { Bookmark, Home, MessageCircle, Person, PlusSquare } from '@/shared/assets/icons/fill'
 import {
   Bookmark as BookmarkOutline,
@@ -80,9 +80,9 @@ export const Demo: Story = {
         title: 'Search',
       },
       {
-        activeIcon: <Tranding />,
+        activeIcon: <Trending />,
         href: 'statistics',
-        icon: <Tranding />,
+        icon: <Trending />,
         showForOnlyPremium: true,
         title: 'Statistics',
       },

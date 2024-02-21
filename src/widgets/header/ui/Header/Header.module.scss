@@ -1,0 +1,42 @@
+.header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: var(--header-height);
+  padding: 0.75rem 3.75rem;
+
+  background-color: var(--dark-700);
+  border-bottom: 1px solid var(--dark-300);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.login {
+  margin-left: 2.25rem;
+}
+
+.register {
+  margin-left: 1.5rem;
+}

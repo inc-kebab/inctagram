@@ -46,7 +46,7 @@ export const Select = forwardRef<Ref, SelectProps>(
             </SelectRadix.Icon>
           </SelectRadix.Trigger>
           <SelectRadix.Portal>
-            <SelectRadix.Content collisionPadding={0} position="popper">
+            <SelectRadix.Content className={s.content} collisionPadding={0} position="popper">
               <SelectRadix.Viewport className={cNames.viewport}>
                 <SelectRadix.Group>
                   {options.map(option => (
