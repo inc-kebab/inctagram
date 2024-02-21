@@ -1,3 +1,4 @@
+import { PASSWORD_PATTERN } from '@/shared/const/regexs'
 import { z } from 'zod'
 
 export const createNewPasswordSchema = z
@@ -7,16 +8,10 @@ export const createNewPasswordSchema = z
       .string()
       .min(6, 'Minimum 6 characters for password')
       .max(20, 'Maximum 20 characters for password')
-      .refine(
-        value =>
-          /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,-.\\/:;<=>?@[\]^_`{|}~])[A-Za-z0-9!"#$%&'()*+,-.\\/:;<=>?@[\]^_`{|}~]+$/.test(
-            value
-          ),
-        {
-          message:
-            'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-        }
-      )
+      .regex(PASSWORD_PATTERN, {
+        message:
+          'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      })
       .default(''),
   })
   .refine(
