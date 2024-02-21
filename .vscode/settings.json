@@ -1,0 +1,10 @@
+{
+    "stylelint.config": {},
+    "stylelint.stylelintPath": "{**/*,*}.{css,scss}",
+    "stylelint.validate": [
+        "css",
+        "less",
+        "postcss",
+        "scss"
+    ]
+}
