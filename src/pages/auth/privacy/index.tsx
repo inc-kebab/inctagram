@@ -1,12 +1,14 @@
-import { memo } from 'react'
+import { ReactElement, memo } from 'react'
 
+import { Page } from '@/shared/types/layout'
 import { BackToPage } from '@/shared/ui/BackToPage'
 import { Typography } from '@/shared/ui/Typography'
+import { AuthLayout } from '@/widgets/layout'
 import { useRouter } from 'next/router'
 
 import s from './Privacy.module.scss'
 
-const Privacy = memo(() => {
+const Privacy: Page = memo(() => {
   const router = useRouter()
 
   const handleNavigateToPrevPage = () => router.back()
@@ -18,10 +20,10 @@ const Privacy = memo(() => {
         onNavigate={handleNavigateToPrevPage}
         title="Back to Sign Up"
       />
-      <Typography as="h1" className={s.title} textAlign="center" variant="h1">
+      <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
         Privacy Policy
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         Your Privacy Matters to Us
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -29,7 +31,7 @@ const Privacy = memo(() => {
         privacy policy describes how we collect, use, disclose, and safeguard your personal data.
         Please read this policy carefully to understand how we handle your information.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         Collection and Use of Personal Data
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -42,7 +44,7 @@ const Privacy = memo(() => {
         content, communicating with you, ensuring security, and preventing fraud. We may also use
         anonymous and aggregated data for analysis and statistics.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         Disclosure of Personal Data
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -51,7 +53,7 @@ const Privacy = memo(() => {
         We may disclose your data to our partners, agents, or service providers who work on our
         behalf and according to our instructions.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         Protection of Personal Data
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -59,7 +61,7 @@ const Privacy = memo(() => {
         disclosure. We use technical, administrative, and physical security measures to safeguard
         your data.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         Links to Third-Party Websites
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -68,7 +70,7 @@ const Privacy = memo(() => {
         collected by these third-party sites or services. It is recommended to review the privacy
         policy of these third-party resources before providing them with your personal data.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         Changes to the Privacy Policy
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -79,5 +81,9 @@ const Privacy = memo(() => {
     </div>
   )
 })
+
+Privacy.getLayout = (page: ReactElement) => {
+  return <AuthLayout>{page}</AuthLayout>
+}
 
 export default Privacy
