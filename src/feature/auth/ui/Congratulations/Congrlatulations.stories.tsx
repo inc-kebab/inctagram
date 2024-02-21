@@ -10,7 +10,7 @@ const meta: Meta<typeof Congratulations> = {
     },
   },
   tags: ['autodocs'],
-  title: 'auth/Congratulations',
+  title: 'feature/Auth/Congratulations',
 }
 
 export default meta

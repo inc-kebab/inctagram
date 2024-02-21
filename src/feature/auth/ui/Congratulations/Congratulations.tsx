@@ -15,7 +15,7 @@ export const Congratulations = () => {
       <Typography asComponent="p" className={s.text} textAlign="center" variant="regular16">
         Your email has been confirmed
       </Typography>
-      <Button asComponent={Link} className={s.button} href="auth/sign-in">
+      <Button asComponent={Link} className={s.button} href="/auth/sign-in">
         Sign in
       </Button>
       <Image alt="Congratulation image" className={s.image} height={0} src={img} width={0} />
