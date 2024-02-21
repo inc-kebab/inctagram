@@ -1,12 +1,14 @@
-import { memo } from 'react'
+import { ReactElement, memo } from 'react'
 
+import { Page } from '@/shared/types/layout'
 import { BackToPage } from '@/shared/ui/BackToPage'
 import { Typography } from '@/shared/ui/Typography'
+import { AuthLayout } from '@/widgets/layout'
 import { useRouter } from 'next/router'
 
 import s from './Terms.module.scss'
 
-const Terms = memo(() => {
+const Terms: Page = memo(() => {
   const router = useRouter()
 
   const handleNavigateToPrevPage = () => router.back()
@@ -18,7 +20,7 @@ const Terms = memo(() => {
         onNavigate={handleNavigateToPrevPage}
         title="Back to Sign Up"
       />
-      <Typography as="h1" className={s.title} textAlign="center" variant="h1">
+      <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
         Terms of Service
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -26,7 +28,7 @@ const Terms = memo(() => {
         By using our application, you agree to our terms and commit to abide by them. If you do not
         agree with our terms, please do not use our application.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         1. Your Privacy Matters to Us
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -41,7 +43,7 @@ const Terms = memo(() => {
         1.3 You agree not to create multiple accounts or use other users accounts without their
         permission.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         2. Rules of Use
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -62,7 +64,7 @@ const Terms = memo(() => {
         2.5 We reserve the right to remove any content or account that violates our terms of use or
         may harm other users.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         3. Intellectual Property
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -74,7 +76,7 @@ const Terms = memo(() => {
         3.2 By using Inctagram, you do not acquire any rights to use our intellectual property
         without our explicit permission.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         4. Liability
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -89,7 +91,7 @@ const Terms = memo(() => {
         4.3 You use Inctagram at your own risk. We do not guarantee that our application will work
         without errors or interruptions.
       </Typography>
-      <Typography as="h2" className={s.subTitle} variant="h2">
+      <Typography asComponent="h2" className={s.subTitle} variant="h2">
         5. Changes to the Terms
       </Typography>
       <Typography className={s.text} variant="regular14">
@@ -103,5 +105,9 @@ const Terms = memo(() => {
     </div>
   )
 })
+
+Terms.getLayout = (page: ReactElement) => {
+  return <AuthLayout>{page}</AuthLayout>
+}
 
 export default Terms
