@@ -17,9 +17,10 @@ import {
 } from '../../model/utils/validators/forgotPasswordValidationSchema'
 
 export type ForgotPasswordProps = {
+  disabled?: boolean
   onSubmit: SubmitHandler<ForgotPasswordFormValues>
 }
-export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordProps) => {
+export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) => {
   const {
     control,
     formState: { errors },
@@ -34,11 +35,17 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordProps) => {
         <Typography className={s.title} textAlign="center" variant="h1">
           Forgot Password
         </Typography>
-        <ControlledTextField className={s.textField} control={control} label="Email" name="email" />
+        <ControlledTextField
+          className={s.textField}
+          control={control}
+          disabled={disabled}
+          label="Email"
+          name="email"
+        />
         <Typography className={s.description} variant="regular14">
           Enter your email address and we will send you further instructions
         </Typography>
-        <Button className={s.button} fullWidth type="submit">
+        <Button className={s.button} disabled={disabled} fullWidth type="submit">
           Send Link
         </Button>
         <Button
@@ -51,7 +58,12 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordProps) => {
           Back to Sign In
         </Button>
         <Card className={s.recaptcha}>
-          <ControlledCheckbox control={control} label="I’m not a robot" name="captcha" />
+          <ControlledCheckbox
+            control={control}
+            disabled={disabled}
+            label="I’m not a robot"
+            name="captcha"
+          />
           <Recaptcha />
         </Card>
       </Card>
