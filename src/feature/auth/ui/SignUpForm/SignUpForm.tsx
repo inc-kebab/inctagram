@@ -25,7 +25,17 @@ export const SignUpForm = (props: Props) => {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<SignUpSchemaType>({ mode: 'onBlur', resolver: zodResolver(SignUpSchema) })
+  } = useForm<SignUpSchemaType>({
+    defaultValues: {
+      accept: false,
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      username: '',
+    },
+    mode: 'onBlur',
+    resolver: zodResolver(SignUpSchema),
+  })
 
   const { disabled, onSubmit } = props
 
