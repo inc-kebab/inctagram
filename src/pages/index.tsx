@@ -1,7 +1,11 @@
+import { ReactElement } from 'react'
+
+import { Page } from '@/shared/types/layout'
+import { PublicLayout } from '@/widgets/layout'
 import Head from 'next/head'
 import Link from 'next/link'
 
-const Home = () => {
+const Public: Page = () => {
   return (
     <>
       <Head>
@@ -13,7 +17,7 @@ const Home = () => {
       <main>
         <ul>
           <li>
-            <Link href="/">home</Link>
+            <Link href="/home">home</Link>
           </li>
           <li>
             <Link href="/auth/sign-in">sign-in</Link>
@@ -37,6 +41,9 @@ const Home = () => {
             <Link href="/auth/create-new-password">create-new-password</Link>
           </li>
           <li>
+            <Link href="/auth/email-verification">email-verification</Link>
+          </li>
+          <li>
             <Link href="/favorites">favorites</Link>
           </li>
           <li>
@@ -57,4 +64,8 @@ const Home = () => {
   )
 }
 
-export default Home
+Public.getLayout = (page: ReactElement) => {
+  return <PublicLayout>{page}</PublicLayout>
+}
+
+export default Public

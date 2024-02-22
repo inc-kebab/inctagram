@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { AuthRoutes } from '@/shared/const/routes'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
@@ -21,6 +22,7 @@ type Props = {
   onSubmit: (data: SignUpSchemaType) => void
 }
 export const SignUpForm = (props: Props) => {
+  const { t } = useTranslation()
   const {
     control,
     formState: { errors },
@@ -34,7 +36,7 @@ export const SignUpForm = (props: Props) => {
       username: '',
     },
     mode: 'onBlur',
-    resolver: zodResolver(SignUpSchema),
+    resolver: zodResolver(SignUpSchema(t)),
   })
 
   const { disabled, onSubmit } = props
@@ -69,7 +71,7 @@ export const SignUpForm = (props: Props) => {
           className={s.input}
           control={control}
           error={errors.email?.message}
-          label="Email"
+          label={t.label.email}
           name="email"
           rules={{ required: true }}
           type="email"
@@ -78,7 +80,7 @@ export const SignUpForm = (props: Props) => {
           className={s.input}
           control={control}
           error={errors.password?.message}
-          label="Password"
+          label={t.label.password}
           name="password"
           rules={{ required: true }}
           type="password"
@@ -87,7 +89,7 @@ export const SignUpForm = (props: Props) => {
           className={s.input}
           control={control}
           error={errors.passwordConfirm?.message}
-          label="Password confirmation"
+          label={t.label.confirmPassword}
           name="passwordConfirm"
           rules={{ required: true }}
           type="password"

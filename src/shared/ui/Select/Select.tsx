@@ -9,6 +9,7 @@ import s from './Select.module.scss'
 
 export interface Options {
   icon?: ReactNode
+  name?: string
   value: string
 }
 
@@ -56,7 +57,7 @@ export const Select = forwardRef<Ref, SelectProps>(
                       value={option.value}
                     >
                       {option.icon && <SelectRadix.ItemText>{option.icon}</SelectRadix.ItemText>}
-                      <SelectRadix.ItemText>{option.value}</SelectRadix.ItemText>
+                      <SelectRadix.ItemText>{option.name || option.value}</SelectRadix.ItemText>
                     </SelectRadix.Item>
                   ))}
                 </SelectRadix.Group>

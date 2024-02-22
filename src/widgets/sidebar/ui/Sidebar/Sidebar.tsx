@@ -10,15 +10,16 @@ import { SidebarElement } from '../../model/types/sidebar'
 import { SidebarItem } from '../SidebarItem/SidebarItem'
 
 type Props = {
+  buttonName?: string
   items: SidebarElement[]
   onLogout: () => void
 } & ComponentPropsWithoutRef<'aside'>
 
-export const Sidebar = ({ items, onLogout, ...rest }: Props) => {
+export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
   const pathname = usePathname()
 
   return (
-    <aside className={s.sidebar} {...rest}>
+    <nav className={s.sidebar} {...rest}>
       <ul className={s.menu}>
         {items.map((el, i) => {
           const itemPath = typeof el.href === 'string' ? el.href : el.href.pathname
@@ -29,8 +30,8 @@ export const Sidebar = ({ items, onLogout, ...rest }: Props) => {
         })}
       </ul>
       <Button className={s.logout} onClick={onLogout} startIcon={<Logout />} variant="text">
-        Log Out
+        {buttonName || 'Logout'}
       </Button>
-    </aside>
+    </nav>
   )
 }
