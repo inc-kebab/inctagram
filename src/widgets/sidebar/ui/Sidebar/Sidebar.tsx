@@ -10,11 +10,12 @@ import { SidebarElement } from '../../model/types/sidebar'
 import { SidebarItem } from '../SidebarItem/SidebarItem'
 
 type Props = {
+  buttonName?: string
   items: SidebarElement[]
   onLogout: () => void
 } & ComponentPropsWithoutRef<'aside'>
 
-export const Sidebar = ({ items, onLogout, ...rest }: Props) => {
+export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
   const pathname = usePathname()
 
   return (
@@ -29,7 +30,7 @@ export const Sidebar = ({ items, onLogout, ...rest }: Props) => {
         })}
       </ul>
       <Button className={s.logout} onClick={onLogout} startIcon={<Logout />} variant="text">
-        Log Out
+        {buttonName || 'Logout'}
       </Button>
     </nav>
   )

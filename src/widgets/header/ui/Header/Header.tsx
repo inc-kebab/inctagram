@@ -1,4 +1,5 @@
 import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import { LangSwitcherSelect } from '@/widgets/lang-switcher'
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export const Header = ({ isUnauthorized }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <header className={s.header}>
       <div className={s.content}>
@@ -33,7 +36,7 @@ export const Header = ({ isUnauthorized }: Props) => {
                 href={AuthRoutes.SIGN_IN}
                 variant="text"
               >
-                Sign In
+                {t.button.signIn}
               </Button>
               <Button
                 asComponent={Link}
@@ -41,7 +44,7 @@ export const Header = ({ isUnauthorized }: Props) => {
                 href={AuthRoutes.SIGN_UP}
                 variant="primary"
               >
-                Sign Up
+                {t.button.signUp}
               </Button>
             </>
           )}

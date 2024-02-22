@@ -1,6 +1,7 @@
 import { KeyboardEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
@@ -20,13 +21,15 @@ type Props = {
 }
 
 export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
+  const { t } = useTranslation()
+
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm<CreateNewPasswordFormValues>({
     mode: 'onBlur',
-    resolver: zodResolver(createNewPasswordSchema),
+    resolver: zodResolver(createNewPasswordSchema(t)),
   })
 
   const onKeydownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -38,7 +41,7 @@ export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
   return (
     <Card className={s.card}>
       <Typography asComponent="h1" className={s.title} variant="h1">
-        Create New Password
+        {t.pages.createNewPassword.title}
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ControlledTextField
@@ -47,7 +50,7 @@ export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
           control={control}
           disabled={disabled}
           error={errors?.password?.message}
-          label="New password"
+          label={t.label.newPassword}
           name="password"
           type="password"
         />
@@ -56,16 +59,16 @@ export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
           control={control}
           disabled={disabled}
           error={errors?.confirmPassword?.message}
-          label="Password confirmation"
+          label={t.label.confirmPassword}
           name="confirmPassword"
           onKeyDown={onKeydownHandler}
           type="password"
         />
         <Typography className={s.limitations} variant="regular14">
-          Your password must be between 6 and 20 characters
+          {t.pages.createNewPassword.description}
         </Typography>
         <Button disabled={disabled} fullWidth type="submit">
-          Create new password
+          {t.button.createNewPassword}
         </Button>
       </form>
     </Card>
