@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import Image from 'next/image'
@@ -8,17 +9,20 @@ interface Props {
   disabled?: boolean
   onResendLink?: () => void
 }
+
 export const EmailVerificationBlock = ({ disabled, onResendLink }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <section className={s.wrapper}>
       <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
-        Email verification link expired
+        {t.pages.emailVerification.title}
       </Typography>
       <Typography className={s.text} textAlign="center" variant="regular16">
-        Looks like the verification link has expired. Not to worry, we can send the link again
+        {t.pages.emailVerification.description}
       </Typography>
       <Button className={s.button} disabled={disabled} onClick={onResendLink}>
-        Resend verification link
+        {t.button.resendLink}
       </Button>
       <Image
         alt="Email verification"

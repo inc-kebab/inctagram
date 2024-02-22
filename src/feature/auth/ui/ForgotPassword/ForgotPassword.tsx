@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Recaptcha } from '@/shared/assets/icons/other'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
@@ -21,32 +22,33 @@ export type ForgotPasswordProps = {
   onSubmit: SubmitHandler<ForgotPasswordFormValues>
 }
 export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) => {
+  const { t } = useTranslation()
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm<ForgotPasswordFormValues>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema(t)),
   })
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card className={s.card}>
         <Typography className={s.title} textAlign="center" variant="h1">
-          Forgot Password
+          {t.pages.forgotPassword.title}
         </Typography>
         <ControlledTextField
           className={s.textField}
           control={control}
           disabled={disabled}
-          label="Email"
+          label={t.label.email}
           name="email"
         />
         <Typography className={s.description} variant="regular14">
-          Enter your email address and we will send you further instructions
+          {t.pages.forgotPassword.description}
         </Typography>
         <Button className={s.button} disabled={disabled} fullWidth type="submit">
-          Send Link
+          {t.button.sendLink}
         </Button>
         <Button
           asComponent={Link}
@@ -55,13 +57,13 @@ export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) 
           type="button"
           variant="text"
         >
-          Back to Sign In
+          {t.button.backToSignIn}
         </Button>
         <Card className={s.recaptcha}>
           <ControlledCheckbox
             control={control}
             disabled={disabled}
-            label="I’m not a robot"
+            label={t.label.reCaptcha}
             name="captcha"
           />
           <Recaptcha />
