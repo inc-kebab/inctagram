@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 378px;
+  margin: auto;
+  padding: 24px;
+}
+
+.formName {
+  margin-bottom: 20px;
+}
+
+.formNetwork {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  margin-bottom: 20px;
+}
+
+.terms {
+  font-size: 0.6rem;
+}
+
+.networkLink {
+  margin: 0 30px;
+  padding: 0;
+  outline-style: none;
+}
+
+.input {
+  margin: 0 0 20px;
+}
+
+.footerText {
+  margin: 24px 0 14px;
+}
