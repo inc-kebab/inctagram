@@ -1,9 +1,5 @@
 import { useForm } from 'react-hook-form'
 
-import {
-  SignInFormValues,
-  signInValidationSchema,
-} from '@/feature/auth/model/utils/validators/signInValidationSchema'
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -15,6 +11,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
 import s from './SignInForm.module.scss'
+
+import {
+  SignInFormValues,
+  signInValidationSchema,
+} from '../../model/utils/validators/signInValidationSchema'
 
 type SignInFormProps = {
   disabled?: boolean
