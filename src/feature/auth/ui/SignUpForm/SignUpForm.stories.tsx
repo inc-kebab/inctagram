@@ -23,12 +23,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'feature/auth/SignUpForm',
+  title: 'feature/Auth/SignUpForm',
 } satisfies Meta<typeof SignUpForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  render: args => <SignUpForm {...args} />,
-}
+export const Default: Story = {}
