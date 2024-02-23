@@ -14,4 +14,4 @@ export const signInValidationSchema = (t: LocaleType) =>
       .default(''),
   })
 
-export type signInSchemaType = z.infer<ReturnType<typeof signInValidationSchema>>
+export type SignInFormValues = z.infer<ReturnType<typeof signInValidationSchema>>

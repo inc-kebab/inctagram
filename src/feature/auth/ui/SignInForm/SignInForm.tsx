@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 import {
-  signInSchemaType,
+  SignInFormValues,
   signInValidationSchema,
 } from '@/feature/auth/model/utils/validators/signInValidationSchema'
 import { Github, Google } from '@/shared/assets/icons/other'
@@ -18,7 +18,7 @@ import s from './SignInForm.module.scss'
 
 type SignInFormProps = {
   disabled?: boolean
-  onSubmit: (data: signInSchemaType) => void
+  onSubmit: (data: SignInFormValues) => void
 }
 export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
   const { t } = useTranslation()
@@ -26,7 +26,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<signInSchemaType>({
+  } = useForm<SignInFormValues>({
     defaultValues: {
       email: '',
       password: '',
