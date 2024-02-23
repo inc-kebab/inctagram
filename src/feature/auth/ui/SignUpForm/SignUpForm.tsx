@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes } from '@/shared/const/routes'
@@ -21,6 +21,7 @@ type Props = {
 }
 export const SignUpForm = ({ disabled, onSubmit }: Props) => {
   const { t } = useTranslation()
+
   const {
     control,
     formState: { errors },
@@ -37,13 +38,9 @@ export const SignUpForm = ({ disabled, onSubmit }: Props) => {
     resolver: zodResolver(SignUpSchema(t)),
   })
 
-  const onSubmitHandler: SubmitHandler<SignUpSchemaType> = (data: SignUpSchemaType) => {
-    onSubmit(data)
-  }
-
   return (
     <Card>
-      <form className={s.form} onSubmit={handleSubmit(onSubmitHandler)}>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
           Sign Up
         </Typography>
