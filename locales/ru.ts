@@ -53,8 +53,15 @@ export const ru: LocaleType = {
       description: 'Введите свою почту и мы отправим вам инструкции по восстановлению пароля',
       title: 'Забыли пароль',
     },
+    signIn: {
+      forgotPassword: 'Забыли пароль',
+      signUpSuggestion: 'У вас нет аккаунта?',
+      title: 'Логин',
+    },
   },
   validation: {
+    invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
+    invalidEmailFormat: 'Email должен соответствовать формату example@example.com',
     maxLength20: 'Максимальное количество символов 20',
     minLength6: 'Минимальное количество символов 6',
     passwordMismatch: 'Пароли должны совпадать',

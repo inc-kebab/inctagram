@@ -1,0 +1,54 @@
+.card {
+  width: 378px;
+  padding: 24px;
+}
+
+.formNetwork {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.networkLink {
+  margin: 0 30px;
+  padding: 0;
+  outline-style: none;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.signInButton {
+  margin-top: 24px;
+}
+
+.forgotPassword {
+  display: block;
+  margin-top: 36px;
+  color: var(--light-900);
+}
+
+.signUpSuggestion {
+  margin-top: 18px;
+}
+
+.signUpButton {
+  margin-top: 6px;
+}
+
+@media (width <= 768px) {
+  .card {
+    width: 360px;
+    padding: 17px 15px;
+    background-color: inherit;
+    border: none;
+  }
+
+  .forgotPassword {
+    margin-top: 6px;
+  }
+}
