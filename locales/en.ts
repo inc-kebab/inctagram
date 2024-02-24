@@ -55,8 +55,15 @@ export const en = {
       description: 'Enter your email address and we will send you further instructions',
       title: 'Forgot Password',
     },
+    signIn: {
+      forgotPassword: 'Forgot Password',
+      signUpSuggestion: 'Don’t have an account?',
+      title: 'Sign In',
+    },
   },
   validation: {
+    invalidCredentials: 'The email or password are incorrect. Try again please',
+    invalidEmailFormat: 'The email must match the format example@example.com',
     maxLength20: 'Maximum 20 characters for password',
     minLength6: 'Minimum 6 characters for password',
     passwordMismatch: 'The passwords must match',
