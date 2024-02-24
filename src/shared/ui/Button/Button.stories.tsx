@@ -26,7 +26,7 @@ const meta: Meta<typeof Button> = {
     },
     ref: {
       control: false,
-      description: 'standart ref props',
+      description: 'standard ref props',
     },
     startIcon: {
       control: false,

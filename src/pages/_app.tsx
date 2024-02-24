@@ -4,7 +4,8 @@ import { Fragment } from 'react'
 import { Provider } from 'react-redux'
 
 import { store } from '@/app'
-import { useLoader } from '@/shared/hooks'
+import { AuthProvider } from '@/app/providers/AuthProvider'
+import { useLoader } from '@/shared/hooks/useLoader'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
 
@@ -27,8 +28,10 @@ export default function App({ Component, pageProps }: Props) {
 
   return (
     <Provider store={store}>
-      <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
-      <ToastProvider />
+      <AuthProvider>
+        <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+        <ToastProvider />
+      </AuthProvider>
     </Provider>
   )
 }

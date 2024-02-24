@@ -6,7 +6,7 @@ export const ru: LocaleType = {
   button: {
     backToSignIn: 'Страница входа',
     createNewPassword: 'Создать новый пароль',
-    resendLink: 'Отправить новую ссылку',
+    resendVerificationLink: 'Отправить повторное подтверждение',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
@@ -18,6 +18,7 @@ export const ru: LocaleType = {
     newPassword: 'Новый пароль',
     password: 'Пароль',
     reCaptcha: 'Я не робот',
+    userName: 'Имя пользователя',
   },
   lang: {
     en: 'Английский',
@@ -58,15 +59,25 @@ export const ru: LocaleType = {
       signUpSuggestion: 'У вас нет аккаунта?',
       title: 'Логин',
     },
+    signUp: {
+      agreement: {
+        description: `Я согласен с <1>privacy</1> и <2>terms</2>`,
+        privacy: 'Условиями использования',
+        terms: 'Политикой конфиденциальности',
+      },
+      question: 'У вас уже есть аккаунт?',
+      title: 'Регистрация',
+    },
   },
   validation: {
+    emailVerification: 'Почта должна соответствовать формату example@example.com',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
-    invalidEmailFormat: 'Email должен соответствовать формату example@example.com',
     maxLength20: 'Максимальное количество символов 20',
     minLength6: 'Минимальное количество символов 6',
     passwordMismatch: 'Пароли должны совпадать',
     passwordVerification:
       'Пароль должен содержать a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
     required: 'Обязательное поле',
+    userNameVerification: 'Имя пользователя должно содержать:\n' + '0-9; A-Z; a-z; _ ; -',
   },
 }

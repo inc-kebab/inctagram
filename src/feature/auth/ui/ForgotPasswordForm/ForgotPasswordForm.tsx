@@ -10,7 +10,7 @@ import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
-import s from './ForgotPassword.module.scss'
+import s from './ForgotPasswordForm.module.scss'
 
 import {
   ForgotPasswordFormValues,
@@ -25,9 +25,14 @@ export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) 
   const { t } = useTranslation()
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = useForm<ForgotPasswordFormValues>({
+    defaultValues: {
+      captcha: false,
+      email: '',
+    },
+    mode: 'onBlur',
     resolver: zodResolver(forgotPasswordSchema(t)),
   })
 
@@ -40,6 +45,7 @@ export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) 
         className={s.textField}
         control={control}
         disabled={disabled}
+        error={errors?.email?.message}
         label={t.label.email}
         name="email"
         type="email"
@@ -47,7 +53,7 @@ export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) 
       <Typography className={s.description} variant="regular14">
         {t.pages.forgotPassword.description}
       </Typography>
-      <Button className={s.button} disabled={disabled} fullWidth type="submit">
+      <Button className={s.button} disabled={disabled || !isValid} fullWidth type="submit">
         {t.button.sendLink}
       </Button>
       <Button
