@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Recaptcha } from '@/shared/assets/icons/other'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -19,7 +19,7 @@ import {
 
 export type ForgotPasswordProps = {
   disabled?: boolean
-  onSubmit: SubmitHandler<ForgotPasswordFormValues>
+  onSubmit: (values: ForgotPasswordFormValues) => void
 }
 export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) => {
   const { t } = useTranslation()
@@ -34,7 +34,7 @@ export const ForgotPasswordForm = ({ disabled, onSubmit }: ForgotPasswordProps) 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card className={s.card}>
-        <Typography className={s.title} textAlign="center" variant="h1">
+        <Typography textAlign="center" variant="h1">
           {t.pages.forgotPassword.title}
         </Typography>
         <ControlledTextField
