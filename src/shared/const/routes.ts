@@ -9,5 +9,26 @@ export enum AuthRoutes {
 }
 
 export enum AppRoutes {
+  FAVORITES = '/favorites',
+  HOME = '/home',
   MAIN = '/',
+  MESSENGER = '/messenger',
+  PROFILE = '/profile',
+  PROFILE_DEVICES = '/profile/devices',
+  PROFILE_GENERAL = '/profile/general-information',
+  PROFILE_MANAGE = '/profile/account-management',
+  PROFILE_PAY = '/profile/payments',
+  SEARCH = '/search',
+  STATISTICS = '/statistics',
 }
+
+export const PublicRoutes: string[] = [
+  AppRoutes.MAIN,
+  AuthRoutes.SIGN_UP,
+  AuthRoutes.SIGN_IN,
+  AuthRoutes.PRIVACY,
+  AuthRoutes.CREATE_NEW_PASSWORD,
+  AuthRoutes.FORGOT_PASSWORD,
+  AuthRoutes.PASSWORD_RECOVERY,
+  AuthRoutes.TERMS,
+]

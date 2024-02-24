@@ -10,7 +10,7 @@ import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
-import s from './ForgotPassword.module.scss'
+import s from './ForgotPasswordForm.module.scss'
 
 import {
   ForgotPasswordFormValues,
