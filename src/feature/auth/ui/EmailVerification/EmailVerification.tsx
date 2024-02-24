@@ -22,7 +22,7 @@ export const EmailVerificationBlock = ({ disabled, onResendLink }: Props) => {
         {t.pages.emailVerification.description}
       </Typography>
       <Button className={s.button} disabled={disabled} onClick={onResendLink}>
-        {t.button.resendLink}
+        {t.button.resendVerificationLink}
       </Button>
       <Image
         alt="Email verification"

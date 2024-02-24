@@ -25,9 +25,13 @@ export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
 
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = useForm<CreateNewPasswordFormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      password: '',
+    },
     mode: 'onBlur',
     resolver: zodResolver(createNewPasswordSchema(t)),
   })
@@ -65,7 +69,7 @@ export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
       <Typography className={s.limitations} variant="regular14">
         {t.pages.createNewPassword.description}
       </Typography>
-      <Button disabled={disabled} fullWidth type="submit">
+      <Button disabled={disabled || !isValid} fullWidth type="submit">
         {t.button.createNewPassword}
       </Button>
     </Card>

@@ -25,7 +25,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
   const { t } = useTranslation()
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = useForm<SignInFormValues>({
     defaultValues: {
@@ -78,7 +78,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
       >
         {t.pages.signIn.forgotPassword}
       </Typography>
-      <Button className={s.signInButton} disabled={disabled} fullWidth>
+      <Button className={s.signInButton} disabled={disabled || !isValid} fullWidth>
         {t.button.signIn}
       </Button>
       <Typography className={s.signUpSuggestion} textAlign="center">

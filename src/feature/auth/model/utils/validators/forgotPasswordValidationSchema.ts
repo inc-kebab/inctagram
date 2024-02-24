@@ -5,6 +5,12 @@ export type ForgotPasswordFormValues = z.infer<ReturnType<typeof forgotPasswordS
 
 export const forgotPasswordSchema = (t: LocaleType) =>
   z.object({
-    captcha: z.boolean(),
-    email: z.string().trim().min(1, t.validation.required).email(),
+    captcha: z.boolean().refine(value => value, {
+      message: t.validation.required,
+    }),
+    email: z
+      .string()
+      .trim()
+      .min(1, t.validation.required)
+      .email({ message: t.validation.emailVerification }),
   })

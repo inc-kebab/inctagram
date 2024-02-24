@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { Provider } from 'react-redux'
 
 import { store } from '@/app'
-import { useLoader } from '@/shared/hooks'
+import { useLoader } from '@/shared/hooks/useLoader'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
 

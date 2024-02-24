@@ -5,6 +5,7 @@ import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
+import { Trans } from '@/shared/ui/Trans'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledCheckbox } from '@/shared/ui_controlled/ControlledCheckbox'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
@@ -24,7 +25,7 @@ export const SignUpForm = ({ disabled, onSubmit }: Props) => {
 
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = useForm<SignUpSchemaType>({
     defaultValues: {
@@ -41,7 +42,7 @@ export const SignUpForm = ({ disabled, onSubmit }: Props) => {
   return (
     <Card asComponent="form" className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
-        Sign Up
+        {t.pages.signUp.title}
       </Typography>
       <div className={s.formNetwork}>
         <Button className={s.networkLink} variant="text">
@@ -56,7 +57,7 @@ export const SignUpForm = ({ disabled, onSubmit }: Props) => {
         control={control}
         disabled={disabled}
         error={errors.username?.message}
-        label="Username"
+        label={t.label.userName}
         name="username"
         rules={{ required: true }}
       />
@@ -96,28 +97,35 @@ export const SignUpForm = ({ disabled, onSubmit }: Props) => {
         disabled={disabled}
         label={
           <Typography variant="small">
-            I agree to the{' '}
-            <Typography asComponent={Link} href={AuthRoutes.TERMS} variant="smallLink">
-              Terms of Service{' '}
-            </Typography>
-            and{' '}
-            <Typography asComponent={Link} href={AuthRoutes.PRIVACY} variant="smallLink">
-              Privacy Policy
-            </Typography>
+            <Trans
+              tags={{
+                '1': () => (
+                  <Typography asComponent={Link} href={AuthRoutes.TERMS} variant="smallLink">
+                    {t.pages.signUp.agreement.terms}
+                  </Typography>
+                ),
+                '2': () => (
+                  <Typography asComponent={Link} href={AuthRoutes.PRIVACY} variant="smallLink">
+                    {t.pages.signUp.agreement.privacy}
+                  </Typography>
+                ),
+              }}
+              text={t.pages.signUp.agreement.description}
+            />
           </Typography>
         }
         name="accept"
         rules={{ required: true }}
         type="button"
       />
-      <Button className={s.signUp} disabled={disabled} fullWidth>
-        Sign Up
+      <Button className={s.signUp} disabled={disabled || !isValid} fullWidth>
+        {t.button.signUp}
       </Button>
       <Typography className={s.footerText} textAlign="center">
-        Do you have an account?
+        {t.pages.signUp.question}
       </Typography>
       <Button asComponent={Link} fullWidth href={AuthRoutes.SIGN_IN} variant="text">
-        Sign In
+        {t.button.signIn}
       </Button>
     </Card>
   )

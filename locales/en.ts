@@ -8,7 +8,7 @@ export const en = {
   button: {
     backToSignIn: 'Back to Sign In',
     createNewPassword: 'Create new password',
-    resendLink: 'Resend link',
+    resendVerificationLink: 'Resend verification link',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
@@ -20,6 +20,7 @@ export const en = {
     newPassword: 'New Password',
     password: 'Password',
     reCaptcha: 'I’m not a robot',
+    userName: 'Username',
   },
   lang: {
     en: 'English',
@@ -60,16 +61,26 @@ export const en = {
       signUpSuggestion: 'Don’t have an account?',
       title: 'Sign In',
     },
+    signUp: {
+      agreement: {
+        description: `I agree to the <1>privacy</1> and <2>terms</2>`,
+        privacy: 'Privacy Policy',
+        terms: 'Terms of Service',
+      },
+      question: 'Do you have an account?',
+      title: 'Sign Up',
+    },
   },
   validation: {
+    emailVerification: 'The email must match the format example@example.com',
     invalidCredentials: 'The email or password are incorrect. Try again please',
-    invalidEmailFormat: 'The email must match the format example@example.com',
     maxLength20: 'Maximum 20 characters for password',
     minLength6: 'Minimum 6 characters for password',
     passwordMismatch: 'The passwords must match',
     passwordVerification:
       'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-    required: 'Required',
+    required: 'Required field',
+    userNameVerification: 'Username must contain:\n' + '0-9; A-Z; a-z; _ ; -',
   },
 }
 
