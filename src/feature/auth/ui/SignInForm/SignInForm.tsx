@@ -50,26 +50,26 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
             <Github />
           </Button>
         </div>
-        <div className={s.inputs}>
-          <ControlledTextField
-            control={control}
-            disabled={disabled}
-            error={errors.email?.message}
-            label={t.label.email}
-            name="email"
-            rules={{ required: true }}
-            type="email"
-          />
-          <ControlledTextField
-            control={control}
-            disabled={disabled}
-            error={errors.password?.message}
-            label={t.label.password}
-            name="password"
-            rules={{ required: true }}
-            type="password"
-          />
-        </div>
+        <ControlledTextField
+          className={s.input}
+          control={control}
+          disabled={disabled}
+          error={errors.email?.message}
+          label={t.label.email}
+          name="email"
+          rules={{ required: true }}
+          type="email"
+        />
+        <ControlledTextField
+          className={s.input}
+          control={control}
+          disabled={disabled}
+          error={errors.password?.message}
+          label={t.label.password}
+          name="password"
+          rules={{ required: true }}
+          type="password"
+        />
         <Typography
           asComponent={Link}
           className={s.forgotPassword}

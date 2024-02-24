@@ -2,13 +2,13 @@
 
 .card {
   width: 378px;
-  padding: 24px;
+  padding: 23px 24px 36px;
 }
 
 .formNetwork {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 13px;
 }
 
 .networkLink {
@@ -17,14 +17,7 @@
   outline-style: none;
 }
 
-.inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 24px;
-}
-
-.signInButton {
+.input {
   margin-top: 24px;
 }
 
@@ -32,6 +25,10 @@
   display: block;
   margin-top: 36px;
   color: var(--light-900);
+}
+
+.signInButton {
+  margin-top: 24px;
 }
 
 .signUpSuggestion {
@@ -42,15 +39,25 @@
   margin-top: 6px;
 }
 
-@media (width <= 768px) {
+@include mobile-small {
   .card {
     width: 100%;
-    padding: 17px 15px;
+    margin: 0;
+    padding: 17px 15px 0;
+
     background-color: inherit;
     border: none;
   }
 
+  .formNetwork {
+    margin-top: 19px;
+  }
+
   .forgotPassword {
     margin-top: 6px;
+  }
+
+  .signInButton {
+    margin-top: 66px;
   }
 }

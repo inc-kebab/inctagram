@@ -5,7 +5,6 @@ import { SignInForm } from './SignInForm'
 const meta = {
   argTypes: {
     disabled: {
-      defaultValue: true,
       description: 'Disabled for form component',
     },
     onSubmit: {

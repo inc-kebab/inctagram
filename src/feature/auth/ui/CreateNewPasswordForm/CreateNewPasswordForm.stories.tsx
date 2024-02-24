@@ -4,6 +4,9 @@ import { CreateNewPasswordForm } from './CreateNewPasswordForm'
 
 const meta: Meta<typeof CreateNewPasswordForm> = {
   argTypes: {
+    disabled: {
+      description: 'Disabled for form component',
+    },
     onSubmit: {
       action: 'Form submitted',
       description: 'onSubmit handler',
