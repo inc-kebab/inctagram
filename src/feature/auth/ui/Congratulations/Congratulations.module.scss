@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -29,7 +31,7 @@
   margin-top: 72px;
 }
 
-@media (width <= 768px) {
+@include mobile-small {
   .wrapper {
     padding: 0 15px;
   }
