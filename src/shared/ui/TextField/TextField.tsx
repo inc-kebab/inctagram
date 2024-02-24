@@ -79,16 +79,21 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {type === 'search' && <Search className={s.searchIcon} />}
           {type === 'password' &&
             (isVisible ? (
-              <button className={s.rightBtn} disabled={disabled} onClick={onVisible}>
+              <button className={s.rightBtn} disabled={disabled} onClick={onVisible} type="button">
                 <EyeOff />
               </button>
             ) : (
-              <button className={s.rightBtn} disabled={disabled} onClick={onVisible}>
+              <button className={s.rightBtn} disabled={disabled} onClick={onVisible} type="button">
                 <Eye />
               </button>
             ))}
           {type === 'search' && value && (
-            <button className={s.rightBtn} disabled={disabled} onClick={clearFieldHandler}>
+            <button
+              className={s.rightBtn}
+              disabled={disabled}
+              onClick={clearFieldHandler}
+              type="button"
+            >
               <Close />
             </button>
           )}

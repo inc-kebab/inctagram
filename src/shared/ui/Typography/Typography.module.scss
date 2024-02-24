@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .typography {
   user-select: none;
   margin: 0;
@@ -89,7 +91,7 @@
   text-decoration: underline;
 }
 
-@media (width <= 768px) {
+@include mobile-small {
   .h1 {
     font-size: var(--font-size-l);
     font-weight: var(--font-weight-bold);

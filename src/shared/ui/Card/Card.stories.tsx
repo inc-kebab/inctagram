@@ -3,6 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Card } from './Card'
 
 const meta = {
+  argTypes: {
+    asComponent: {
+      control: { type: 'select' },
+      description: 'Html Element',
+      options: ['div', 'section', 'form'],
+    },
+    ref: {
+      control: false,
+      description: 'standart ref props',
+    },
+  },
   component: Card,
   parameters: {
     docs: {
