@@ -7,17 +7,13 @@
 }
 
 .title {
-  margin-top: 24px;
-}
-
-.text {
-  margin-top: 19px;
+  margin-top: 35px;
+  margin-bottom: 19px;
 }
 
 .button {
   order: 1;
-  width: 100%;
-  max-width: 182px;
+  width: 182px;
   margin-top: 54px;
 }
 
@@ -38,12 +34,7 @@
 
   .title {
     margin-top: 17px;
-  }
-
-  .text {
-    width: 100%;
-    max-width: 330px;
-    margin-top: 13px;
+    margin-bottom: 13px;
   }
 
   .image {
@@ -53,7 +44,7 @@
 
   .button {
     order: 2;
-    max-width: none;
+    width: 100%;
     margin-top: 46px;
   }
 }

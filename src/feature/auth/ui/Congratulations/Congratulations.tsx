@@ -11,14 +11,14 @@ export const Congratulations = () => {
 
   return (
     <section className={s.wrapper}>
-      <Typography asComponent="h1" className={s.title} variant="h1">
+      <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
         {t.pages.congratulations.title}
       </Typography>
-      <Typography asComponent="p" className={s.text} textAlign="center" variant="regular16">
+      <Typography textAlign="center" variant="regular16">
         {t.pages.congratulations.description}
       </Typography>
       <Button asComponent={Link} className={s.button} href="/auth/sign-in">
-        {t.button.signUp}
+        {t.button.signIn}
       </Button>
       <Image
         alt="Congratulation image"
