@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CreateNewPasswordForm } from '../../index'
+import { CreateNewPasswordForm } from './CreateNewPasswordForm'
 
 const meta: Meta<typeof CreateNewPasswordForm> = {
   argTypes: {
@@ -10,6 +10,14 @@ const meta: Meta<typeof CreateNewPasswordForm> = {
     },
   },
   component: CreateNewPasswordForm,
+  parameters: {
+    docs: {
+      description: {
+        component: 'Form for create new password.',
+      },
+    },
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'feature/Auth/CreateNewPasswordForm',
 }

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Congratulations } from '../../index'
+import { Congratulations } from './Congratulations'
 
 const meta: Meta<typeof Congratulations> = {
   component: Congratulations,

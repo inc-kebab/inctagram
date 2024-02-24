@@ -40,12 +40,11 @@ export const CreateNewPasswordForm = ({ disabled, onSubmit }: Props) => {
 
   return (
     <Card className={s.card}>
-      <Typography asComponent="h1" className={s.title} variant="h1">
-        {t.pages.createNewPassword.title}
-      </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
+          {t.pages.createNewPassword.title}
+        </Typography>
         <ControlledTextField
-          autoFocus
           className={s.firstTextField}
           control={control}
           disabled={disabled}
