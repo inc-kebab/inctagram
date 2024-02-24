@@ -39,102 +39,86 @@ export const SignUpForm = ({ disabled, onSubmit }: Props) => {
   })
 
   return (
-    <Card>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
-          Sign Up
-        </Typography>
-        <div className={s.formNetwork}>
-          <Button className={s.networkLink} variant="text">
-            <Google />
-          </Button>
-          <Button className={s.networkLink} variant="text">
-            <Github />
-          </Button>
-        </div>
-        <ControlledTextField
-          className={s.input}
-          control={control}
-          disabled={disabled}
-          error={errors.username?.message}
-          label="Username"
-          name="username"
-          rules={{ required: true }}
-        />
-        <ControlledTextField
-          className={s.input}
-          control={control}
-          disabled={disabled}
-          error={errors.email?.message}
-          label={t.label.email}
-          name="email"
-          rules={{ required: true }}
-          type="email"
-        />
-        <ControlledTextField
-          className={s.input}
-          control={control}
-          disabled={disabled}
-          error={errors.password?.message}
-          label={t.label.password}
-          name="password"
-          rules={{ required: true }}
-          type="password"
-        />
-        <ControlledTextField
-          className={s.input}
-          control={control}
-          disabled={disabled}
-          error={errors.passwordConfirm?.message}
-          label={t.label.confirmPassword}
-          name="passwordConfirm"
-          rules={{ required: true }}
-          type="password"
-        />
-
-        <ControlledCheckbox
-          className={s.checkbox}
-          control={control}
-          disabled={disabled}
-          label={
-            <Typography asComponent="p" className={s.terms} variant="small">
-              I agree to the{' '}
-              <Typography
-                asComponent="a"
-                className={s.terms}
-                href={AuthRoutes.TERMS}
-                variant="smallLink"
-              >
-                Terms of Service{' '}
-              </Typography>
-              and{' '}
-              <Typography
-                asComponent="a"
-                className={s.terms}
-                href={AuthRoutes.PRIVACY}
-                variant="smallLink"
-              >
-                Privacy Policy
-              </Typography>
-            </Typography>
-          }
-          name="accept"
-          rules={{ required: true }}
-          type="button"
-        />
-
-        <Button disabled={disabled} fullWidth>
-          Sign Up
+    <Card asComponent="form" className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
+        Sign Up
+      </Typography>
+      <div className={s.formNetwork}>
+        <Button className={s.networkLink} variant="text">
+          <Google />
         </Button>
-        <div className={s.footer}>
-          <Typography className={s.footerText} textAlign="center">
-            Do you have an account?
+        <Button className={s.networkLink} variant="text">
+          <Github />
+        </Button>
+      </div>
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        disabled={disabled}
+        error={errors.username?.message}
+        label="Username"
+        name="username"
+        rules={{ required: true }}
+      />
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        disabled={disabled}
+        error={errors.email?.message}
+        label={t.label.email}
+        name="email"
+        rules={{ required: true }}
+        type="email"
+      />
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        disabled={disabled}
+        error={errors.password?.message}
+        label={t.label.password}
+        name="password"
+        rules={{ required: true }}
+        type="password"
+      />
+      <ControlledTextField
+        className={s.passwordConfirm}
+        control={control}
+        disabled={disabled}
+        error={errors.passwordConfirm?.message}
+        label={t.label.confirmPassword}
+        name="passwordConfirm"
+        rules={{ required: true }}
+        type="password"
+      />
+      <ControlledCheckbox
+        className={s.checkbox}
+        control={control}
+        disabled={disabled}
+        label={
+          <Typography variant="small">
+            I agree to the{' '}
+            <Typography asComponent={Link} href={AuthRoutes.TERMS} variant="smallLink">
+              Terms of Service{' '}
+            </Typography>
+            and{' '}
+            <Typography asComponent={Link} href={AuthRoutes.PRIVACY} variant="smallLink">
+              Privacy Policy
+            </Typography>
           </Typography>
-          <Button asComponent={Link} fullWidth href={AuthRoutes.SIGN_IN} variant="text">
-            Sign In
-          </Button>
-        </div>
-      </form>
+        }
+        name="accept"
+        rules={{ required: true }}
+        type="button"
+      />
+      <Button className={s.signUp} disabled={disabled} fullWidth>
+        Sign Up
+      </Button>
+      <Typography className={s.footerText} textAlign="center">
+        Do you have an account?
+      </Typography>
+      <Button asComponent={Link} fullWidth href={AuthRoutes.SIGN_IN} variant="text">
+        Sign In
+      </Button>
     </Card>
   )
 }

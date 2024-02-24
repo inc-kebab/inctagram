@@ -1,29 +1,19 @@
-.form {
-  display: flex;
-  flex-direction: column;
+@import '@/app/styles/mixins';
 
-  max-width: 378px;
-  margin: auto;
-  padding: 24px;
+.form {
+  width: 378px;
+  padding: 23px 24px 36px;
 }
 
 .formName {
-  margin-bottom: 20px;
+  margin-bottom: 13px;
 }
 
 .formNetwork {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-}
-
-.checkbox {
-  margin-bottom: 20px;
-}
-
-.terms {
-  font-size: 0.6rem;
+  margin-bottom: 24px;
 }
 
 .networkLink {
@@ -33,9 +23,44 @@
 }
 
 .input {
-  margin: 0 0 20px;
+  margin-bottom: 24px;
+}
+
+.passwordConfirm {
+  margin-bottom: 12px;
+}
+
+.checkbox {
+  margin-bottom: 12px;
+}
+
+.signUp {
+  margin-bottom: 18px;
 }
 
 .footerText {
-  margin: 24px 0 14px;
+  margin-bottom: 6px;
+}
+
+@include mobile-small {
+  .form {
+    width: 100%;
+    margin: 0;
+    padding: 17px 15px 0;
+
+    background-color: inherit;
+    border: none;
+  }
+
+  .formName {
+    margin-bottom: 19px;
+  }
+
+  .formNetwork {
+    margin-bottom: 12px;
+  }
+
+  .checkbox {
+    margin-bottom: 24px;
+  }
 }

@@ -4,6 +4,9 @@ import { ForgotPasswordForm } from './ForgotPassword'
 
 const meta = {
   argTypes: {
+    disabled: {
+      description: 'Disabled for form component',
+    },
     onSubmit: {
       action: 'Form sent',
       description:

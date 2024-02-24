@@ -37,64 +37,62 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
   })
 
   return (
-    <Card className={s.card}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Typography asComponent="h1" textAlign="center" variant="h1">
-          {t.pages.signIn.title}
-        </Typography>
-        <div className={s.formNetwork}>
-          <Button className={s.networkLink} variant="text">
-            <Google />
-          </Button>
-          <Button className={s.networkLink} variant="text">
-            <Github />
-          </Button>
-        </div>
-        <ControlledTextField
-          className={s.input}
-          control={control}
-          disabled={disabled}
-          error={errors.email?.message}
-          label={t.label.email}
-          name="email"
-          rules={{ required: true }}
-          type="email"
-        />
-        <ControlledTextField
-          className={s.input}
-          control={control}
-          disabled={disabled}
-          error={errors.password?.message}
-          label={t.label.password}
-          name="password"
-          rules={{ required: true }}
-          type="password"
-        />
-        <Typography
-          asComponent={Link}
-          className={s.forgotPassword}
-          href={AuthRoutes.FORGOT_PASSWORD}
-          textAlign="end"
-          variant="regular14"
-        >
-          {t.pages.signIn.forgotPassword}
-        </Typography>
-        <Button className={s.signInButton} disabled={disabled} fullWidth>
-          {t.button.signIn}
+    <Card asComponent="form" className={s.card} onSubmit={handleSubmit(onSubmit)}>
+      <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
+        {t.pages.signIn.title}
+      </Typography>
+      <div className={s.formNetwork}>
+        <Button className={s.networkLink} variant="text">
+          <Google />
         </Button>
-        <Typography className={s.signUpSuggestion} textAlign="center">
-          {t.pages.signIn.signUpSuggestion}
-        </Typography>
-        <Button
-          asComponent={Link}
-          className={s.signUpButton}
-          fullWidth
-          href={AuthRoutes.SIGN_UP}
-          variant="text"
-        >
-          {t.button.signUp}
+        <Button className={s.networkLink} variant="text">
+          <Github />
         </Button>
-      </form>
+      </div>
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        disabled={disabled}
+        error={errors.email?.message}
+        label={t.label.email}
+        name="email"
+        rules={{ required: true }}
+        type="email"
+      />
+      <ControlledTextField
+        className={s.input}
+        control={control}
+        disabled={disabled}
+        error={errors.password?.message}
+        label={t.label.password}
+        name="password"
+        rules={{ required: true }}
+        type="password"
+      />
+      <Typography
+        asComponent={Link}
+        className={s.forgotPassword}
+        href={AuthRoutes.FORGOT_PASSWORD}
+        textAlign="end"
+        variant="regular14"
+      >
+        {t.pages.signIn.forgotPassword}
+      </Typography>
+      <Button className={s.signInButton} disabled={disabled} fullWidth>
+        {t.button.signIn}
+      </Button>
+      <Typography className={s.signUpSuggestion} textAlign="center">
+        {t.pages.signIn.signUpSuggestion}
+      </Typography>
+      <Button
+        asComponent={Link}
+        className={s.signUpButton}
+        fullWidth
+        href={AuthRoutes.SIGN_UP}
+        variant="text"
+      >
+        {t.button.signUp}
+      </Button>
     </Card>
   )
 }

@@ -5,9 +5,14 @@
   padding: 23px 24px 36px;
 }
 
+.formName {
+  margin-bottom: 13px;
+}
+
 .formNetwork {
   display: flex;
   justify-content: center;
+  width: 100%;
   margin-top: 13px;
 }
 
@@ -47,6 +52,10 @@
 
     background-color: inherit;
     border: none;
+  }
+
+  .formName {
+    margin-bottom: 19px;
   }
 
   .formNetwork {
