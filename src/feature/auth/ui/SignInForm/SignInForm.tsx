@@ -39,7 +39,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
   return (
     <Card className={s.card}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
+        <Typography asComponent="h1" textAlign="center" variant="h1">
           {t.pages.signIn.title}
         </Typography>
         <div className={s.formNetwork}>
@@ -52,7 +52,6 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
         </div>
         <div className={s.inputs}>
           <ControlledTextField
-            className={s.input}
             control={control}
             disabled={disabled}
             error={errors.email?.message}
@@ -62,7 +61,6 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
             type="email"
           />
           <ControlledTextField
-            className={s.input}
             control={control}
             disabled={disabled}
             error={errors.password?.message}
