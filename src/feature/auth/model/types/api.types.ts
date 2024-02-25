@@ -21,10 +21,15 @@ export type LoginParams = {
 }
 export type ErrorType = {
   data: {
-    errorDescription: null | string
+    errorDescription: ErrorDescription[] | null
     message: string
     statusCode: number
     timestamp: string
   }
   status: number
+}
+
+type ErrorDescription = {
+  field: string
+  message: string
 }
