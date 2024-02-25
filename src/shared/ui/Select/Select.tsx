@@ -57,7 +57,9 @@ export const Select = forwardRef<Ref, SelectProps>(
                       value={option.value}
                     >
                       {option.icon && <SelectRadix.ItemText>{option.icon}</SelectRadix.ItemText>}
-                      <SelectRadix.ItemText>{option.name || option.value}</SelectRadix.ItemText>
+                      <SelectRadix.ItemText className={s.text}>
+                        <span className={s.text}>{option.name || option.value}</span>
+                      </SelectRadix.ItemText>
                     </SelectRadix.Item>
                   ))}
                 </SelectRadix.Group>
