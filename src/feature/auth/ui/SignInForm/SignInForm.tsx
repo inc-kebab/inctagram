@@ -1,3 +1,4 @@
+import { ComponentPropsWithoutRef } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
@@ -8,6 +9,7 @@ import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import Link from 'next/link'
 
 import s from './SignInForm.module.scss'
@@ -19,10 +21,13 @@ import {
 
 type SignInFormProps = {
   disabled?: boolean
+  error?: string
   onSubmit: (data: SignInFormValues) => void
-}
-export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
+} & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
+
+export const SignInForm = ({ className, disabled, error, onSubmit }: SignInFormProps) => {
   const { t } = useTranslation()
+
   const {
     control,
     formState: { errors, isValid },
@@ -37,7 +42,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
   })
 
   return (
-    <Card asComponent="form" className={s.card} onSubmit={handleSubmit(onSubmit)}>
+    <Card asComponent="form" className={clsx(s.card, className)} onSubmit={handleSubmit(onSubmit)}>
       <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
         {t.pages.signIn.title}
       </Typography>
@@ -53,7 +58,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
         className={s.input}
         control={control}
         disabled={disabled}
-        error={errors.email?.message}
+        error={errors.email?.message ?? error}
         label={t.label.email}
         name="email"
         rules={{ required: true }}
@@ -63,7 +68,7 @@ export const SignInForm = ({ disabled, onSubmit }: SignInFormProps) => {
         className={s.input}
         control={control}
         disabled={disabled}
-        error={errors.password?.message}
+        error={errors.password?.message ?? error}
         label={t.label.password}
         name="password"
         rules={{ required: true }}

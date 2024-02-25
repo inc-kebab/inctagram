@@ -1,13 +1,20 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { MeResponse } from '../model/types/api.types'
+import { LoginParams, MeResponse } from '../model/types/api.types'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    login: builder.mutation<void, LoginParams>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/login',
+      }),
+    }),
     me: builder.query<MeResponse, void>({
       query: () => ({ url: '/auth/me' }),
     }),
   }),
 })
 
-export const { useMeQuery } = authApi
+export const { useLoginMutation, useMeQuery } = authApi
