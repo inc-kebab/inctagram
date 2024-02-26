@@ -1,11 +1,28 @@
 import { ReactElement } from 'react'
 
+import { useLazyLoginGoogleQuery, useLoginMutation } from '@/feature/auth/api/auth-api'
 import { Page } from '@/shared/types/layout'
+import { Button } from '@/shared/ui/Button'
 import { PublicLayout } from '@/widgets/layout'
+import { GithubAuthButton, GoogleAuthButton } from '@/widgets/oauth'
 import Head from 'next/head'
 import Link from 'next/link'
 
 const Public: Page = () => {
+  const [login] = useLoginMutation()
+
+  const [googleLogin] = useLazyLoginGoogleQuery()
+
+  const handleLogin = () =>
+    login()
+      .unwrap()
+      .then(res => localStorage.setItem('access', res.accessToken))
+
+  const handleLoginGoogle = () =>
+    googleLogin()
+      .unwrap()
+      .then(res => localStorage.setItem('access', res.accessToken))
+
   return (
     <>
       <Head>
@@ -15,6 +32,10 @@ const Public: Page = () => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <main>
+        <GoogleAuthButton />
+        <GithubAuthButton />
+        <Button onClick={handleLogin}>Login</Button>
+        <Button onClick={handleLoginGoogle}>Google</Button>
         <ul>
           <li>
             <Link href="/home">home</Link>

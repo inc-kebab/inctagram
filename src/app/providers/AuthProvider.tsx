@@ -1,4 +1,4 @@
-import { PropsWithChildren, useLayoutEffect } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import { useMeQuery } from '@/feature/auth/api/auth-api'
@@ -8,11 +8,12 @@ import { useRouter } from 'next/router'
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter()
-  const { data, isLoading } = useMeQuery() //rtk query hook
+
+  const { data, isLoading } = useMeQuery()
 
   const isProtectedPage = !PublicRoutes.includes(router.pathname)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!isLoading && !data && isProtectedPage) {
       router.push(AppRoutes.MAIN)
       toast.warning('Please, sign in')
