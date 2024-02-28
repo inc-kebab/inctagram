@@ -4,10 +4,10 @@ import { Mutex } from 'async-mutex'
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://main.inctagram.fun/api/v1',
+  baseUrl: process.env.NEXT_PUBLIC_BACK_API_STAGE,
   credentials: 'include',
   prepareHeaders: headers => {
-    const accessToken = localStorage.getItem('access')
+    const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
@@ -40,7 +40,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         // set token to LS
         const data = refreshResult.data as { accessToken: string }
 
-        localStorage.setItem('access', data.accessToken)
+        localStorage.setItem('accessToken', data.accessToken)
 
         // retry the initial query
         result = await baseQuery(args, api, extraOptions)

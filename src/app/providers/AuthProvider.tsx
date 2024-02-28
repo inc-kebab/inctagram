@@ -1,27 +1,32 @@
 import { PropsWithChildren, useEffect } from 'react'
-import { toast } from 'react-toastify'
 
 import { useMeQuery } from '@/feature/auth/api/auth-api'
-import { AppRoutes, PublicRoutes } from '@/shared/const/routes'
+import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
 import { useRouter } from 'next/router'
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const router = useRouter()
+  const { asPath, pathname, push } = useRouter()
 
-  const { data, isLoading } = useMeQuery()
+  const { data, isError, isLoading } = useMeQuery()
 
-  const isProtectedPage = !PublicRoutes.includes(router.pathname)
+  const isPublicRoute = asPath.startsWith('/auth') || pathname === '/'
 
   useEffect(() => {
-    if (!isLoading && !data && isProtectedPage) {
-      router.push(AppRoutes.MAIN)
-      toast.warning('Please, sign in')
-    } else if (!isLoading && data && !isProtectedPage) {
-      router.push(AppRoutes.HOME)
-      toast.warning('You are already sign in')
+    if (!data && !isPublicRoute) {
+      void push(AuthRoutes.SIGN_IN)
     }
-  }, [isLoading, isProtectedPage, router, data])
+
+    if (data && isPublicRoute) {
+      void push(AppRoutes.HOME)
+    }
+  }, [data, isPublicRoute, push])
+
+  if (isError) {
+    void push(AuthRoutes.SIGN_IN)
+
+    return <></>
+  }
 
   return isLoading ? <Loader fullHeight /> : <>{children}</>
 }

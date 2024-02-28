@@ -8,14 +8,13 @@ import { AuthProvider } from '@/app/providers/AuthProvider'
 import { useLoader } from '@/shared/hooks/useLoader'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
-import { SessionProvider } from 'next-auth/react'
 
-import '@/app/styles/index.scss'
-import '@/app/styles/nprogress.scss'
+import 'react-toastify/dist/ReactToastify.css'
 import '@fontsource/inter/400.css'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
-import 'react-toastify/dist/ReactToastify.css'
+import '@/app/styles/nprogress.scss'
+import '@/app/styles/index.scss'
 
 type Props = AppProps & {
   Component: Page
@@ -30,10 +29,8 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <SessionProvider>
-          <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
-          <ToastProvider />
-        </SessionProvider>
+        <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+        <ToastProvider />
       </AuthProvider>
     </Provider>
   )
