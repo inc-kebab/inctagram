@@ -19,6 +19,12 @@ const SignIn: Page = () => {
   const logInHandler = (data: SignInFormValues) => {
     logIn(data).then(res => {
       if ('error' in res) {
+        const error = res.error
+
+        if ('error' in error) {
+          toast.error(error.error)
+        }
+
         const { data } = res.error as ErrorType
 
         if (data.message) {
