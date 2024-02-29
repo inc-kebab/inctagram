@@ -1,17 +1,19 @@
 import { PropsWithChildren, useEffect } from 'react'
 
-import { useMeQuery } from '@/feature/auth/api/auth-api'
+import { useMeQuery } from '@/feature/auth'
 import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
 import { useRouter } from 'next/router'
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const { asPath, pathname, push } = useRouter()
+  const { asPath, push } = useRouter()
 
-  const { data, isError, isLoading } = useMeQuery()
+  const { data, isLoading } = useMeQuery()
 
-  const isPublicRoute = asPath.startsWith('/auth') || pathname === '/'
+  // TODO profile - public, profile-settings - protect
+  const isPublicRoute = asPath.startsWith('/auth') || asPath === '/'
 
+  // TODO push to error page
   useEffect(() => {
     if (!data && !isPublicRoute) {
       void push(AuthRoutes.SIGN_IN)
@@ -21,12 +23,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       void push(AppRoutes.HOME)
     }
   }, [data, isPublicRoute, push])
-
-  if (isError) {
-    void push(AuthRoutes.SIGN_IN)
-
-    return <></>
-  }
 
   return isLoading ? <Loader fullHeight /> : <>{children}</>
 }

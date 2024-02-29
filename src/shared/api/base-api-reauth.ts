@@ -1,13 +1,14 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
+import { getCookie } from 'cookies-next'
 
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_BACK_API_STAGE,
+  baseUrl: process.env.NEXT_PUBLIC_BACKEND_API,
   credentials: 'include',
   prepareHeaders: headers => {
-    const accessToken = localStorage.getItem('accessToken')
+    const accessToken = getCookie('accessToken')
 
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
