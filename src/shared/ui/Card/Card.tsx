@@ -5,10 +5,7 @@ import clsx from 'clsx'
 
 import s from './Card.module.scss'
 
-type Props<T extends ElementType> = PolymorphComponentPropsWithRef<
-  T,
-  ComponentPropsWithoutRef<'div'>
->
+type Props<T extends ElementType> = PolymorphComponentPropsWithRef<T, ComponentPropsWithoutRef<T>>
 
 type CardComponent = <T extends ElementType = 'div'>(props: Props<T>) => ReactNode
 

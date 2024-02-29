@@ -4,7 +4,9 @@ import { z } from 'zod'
 export const SignUpSchema = (t: LocaleType) =>
   z
     .object({
-      accept: z.boolean().default(false),
+      accept: z.boolean().refine(value => value, {
+        message: t.validation.required,
+      }),
       email: z.string().email({ message: t.validation.emailVerification }).default(''),
       password: z
         .string()

@@ -1,0 +1,14 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: 378px;
+  padding: 30px 24px 36px;
+
+  button {
+    margin-top: 18px;
+  }
+
+  &:last-child {
+    align-items: end;
+  }
+}

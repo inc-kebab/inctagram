@@ -23,7 +23,7 @@ type Props = {
   hrefGithub: string
   hrefGoogle: string
   onSubmit: (data: SignUpSchemaType) => void
-} & Omit<ComponentPropsWithoutRef<'form'>, 'disabled' | 'onSubmit'>
+} & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 export type RefType = {
   reset: UseFormReset<SignUpSchemaType>
   setError: UseFormSetError<SignUpSchemaType>
