@@ -1,6 +1,6 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-import { getCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 
 const mutex = new Mutex()
 
@@ -41,7 +41,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         // set token to LS
         const data = refreshResult.data as { accessToken: string }
 
-        localStorage.setItem('accessToken', data.accessToken)
+        setCookie('accessToken', data.accessToken)
 
         // retry the initial query
         result = await baseQuery(args, api, extraOptions)
