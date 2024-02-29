@@ -1,0 +1,10 @@
+.recaptchaContainer {
+  display: grid;
+  place-items: center;
+}
+
+.errorText {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--danger-500);
+}
