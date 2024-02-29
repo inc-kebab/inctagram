@@ -1,35 +1,51 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useRef } from 'react'
+import { toast } from 'react-toastify'
 
 import { SignInForm } from '@/feature/auth'
 import { useLoginMutation } from '@/feature/auth/api/auth-api'
-import { ErrorType } from '@/feature/auth/model/types/api.types'
+import { ErrorDescription, ErrorType } from '@/feature/auth/model/types/api.types'
 import { SignInFormValues } from '@/feature/auth/model/utils/validators/signInValidationSchema'
-import { AppRoutes } from '@/shared/const/routes'
+import { RefType } from '@/feature/auth/ui/SignInForm/SignInForm'
 import { Page } from '@/shared/types/layout'
 import { AuthLayout } from '@/widgets/layout'
-import { useRouter } from 'next/router'
 
 import s from './SignIn.module.scss'
 
 const SignIn: Page = () => {
   const [logIn, { isLoading }] = useLoginMutation()
-  const [error, setError] = useState('')
-  const router = useRouter()
 
-  const logInHandler = async (data: SignInFormValues) => {
-    try {
-      await logIn(data).unwrap()
-      router.push(AppRoutes.HOME)
-      setError('')
-    } catch (err) {
-      const error = err as ErrorType
+  const ref = useRef<RefType>(null)
 
-      setError(error.data.message)
-    }
+  const logInHandler = (data: SignInFormValues) => {
+    logIn(data).then(res => {
+      if ('error' in res) {
+        const { data } = res.error as ErrorType
+
+        if (data.message) {
+          toast.error(data.message)
+        }
+        if (data.errorDescription) {
+          data.errorDescription.forEach(error => {
+            if (ref.current) {
+              ref.current.setError(error.field as keyof SignInFormValues, {
+                message: error.message,
+              })
+            }
+          })
+        }
+      }
+    })
   }
 
   return (
-    <SignInForm className={s.signIn} disabled={isLoading} error={error} onSubmit={logInHandler} />
+    <SignInForm
+      className={s.signIn}
+      disabled={isLoading}
+      hrefToLoginGithub={process.env.GITHUB_OAUTH2 || ''} // почему не видно переменной ?
+      hrefToLoginGoogle={process.env.GOOGLE_OAUTH2 || ''}
+      onSubmit={logInHandler}
+      ref={ref}
+    />
   )
 }
 

@@ -1,5 +1,5 @@
-import { ComponentPropsWithoutRef } from 'react'
-import { useForm } from 'react-hook-form'
+import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from 'react'
+import { UseFormReset, UseFormSetError, useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes } from '@/shared/const/routes'
@@ -19,85 +19,114 @@ import {
   signInValidationSchema,
 } from '../../model/utils/validators/signInValidationSchema'
 
-type SignInFormProps = {
+type Props = {
   disabled?: boolean
-  error?: string
+  hrefToLoginGithub: string
+  hrefToLoginGoogle: string
   onSubmit: (data: SignInFormValues) => void
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
-
-export const SignInForm = ({ className, disabled, error, onSubmit }: SignInFormProps) => {
-  const { t } = useTranslation()
-
-  const {
-    control,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm<SignInFormValues>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-    mode: 'onBlur',
-    resolver: zodResolver(signInValidationSchema(t)),
-  })
-
-  return (
-    <Card asComponent="form" className={clsx(s.card, className)} onSubmit={handleSubmit(onSubmit)}>
-      <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
-        {t.pages.signIn.title}
-      </Typography>
-      <div className={s.formNetwork}>
-        <Button className={s.networkLink} variant="text">
-          <Google />
-        </Button>
-        <Button className={s.networkLink} variant="text">
-          <Github />
-        </Button>
-      </div>
-      <ControlledTextField
-        className={s.input}
-        control={control}
-        disabled={disabled}
-        error={errors.email?.message ?? error}
-        label={t.label.email}
-        name="email"
-        rules={{ required: true }}
-        type="email"
-      />
-      <ControlledTextField
-        className={s.input}
-        control={control}
-        disabled={disabled}
-        error={errors.password?.message ?? error}
-        label={t.label.password}
-        name="password"
-        rules={{ required: true }}
-        type="password"
-      />
-      <Typography
-        asComponent={Link}
-        className={s.forgotPassword}
-        href={AuthRoutes.FORGOT_PASSWORD}
-        textAlign="end"
-        variant="regular14"
-      >
-        {t.pages.signIn.forgotPassword}
-      </Typography>
-      <Button className={s.signInButton} disabled={disabled || !isValid} fullWidth>
-        {t.button.signIn}
-      </Button>
-      <Typography className={s.signUpSuggestion} textAlign="center">
-        {t.pages.signIn.signUpSuggestion}
-      </Typography>
-      <Button
-        asComponent={Link}
-        className={s.signUpButton}
-        fullWidth
-        href={AuthRoutes.SIGN_UP}
-        variant="text"
-      >
-        {t.button.signUp}
-      </Button>
-    </Card>
-  )
+export type RefType = {
+  reset: UseFormReset<SignInFormValues>
+  setError: UseFormSetError<SignInFormValues>
 }
+
+export const SignInForm = forwardRef(
+  (
+    { className, disabled, hrefToLoginGithub, hrefToLoginGoogle, onSubmit, ...rest }: Props,
+    ref: Ref<RefType>
+  ) => {
+    const { t } = useTranslation()
+
+    const {
+      control,
+      formState: { errors, isValid },
+      handleSubmit,
+      reset,
+      setError,
+    } = useForm<SignInFormValues>({
+      defaultValues: {
+        email: '',
+        password: '',
+      },
+      mode: 'onBlur',
+      resolver: zodResolver(signInValidationSchema(t)),
+    })
+
+    useImperativeHandle(ref, () => ({ reset, setError }))
+
+    return (
+      <Card
+        asComponent="form"
+        className={clsx(s.card, className)}
+        onSubmit={handleSubmit(onSubmit)}
+        {...rest}
+      >
+        <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
+          {t.pages.signIn.title}
+        </Typography>
+        <div className={s.formNetwork}>
+          <Button
+            asComponent={Link}
+            className={s.networkLink}
+            href={hrefToLoginGoogle}
+            variant="text"
+          >
+            <Google />
+          </Button>
+          <Button
+            asComponent={Link}
+            className={s.networkLink}
+            href={hrefToLoginGithub}
+            variant="text"
+          >
+            <Github />
+          </Button>
+        </div>
+        <ControlledTextField
+          className={s.input}
+          control={control}
+          disabled={disabled}
+          error={errors.email?.message}
+          label={t.label.email}
+          name="email"
+          rules={{ required: true }}
+          type="email"
+        />
+        <ControlledTextField
+          className={s.input}
+          control={control}
+          disabled={disabled}
+          error={errors.password?.message}
+          label={t.label.password}
+          name="password"
+          rules={{ required: true }}
+          type="password"
+        />
+        <Typography
+          asComponent={Link}
+          className={s.forgotPassword}
+          href={AuthRoutes.FORGOT_PASSWORD}
+          textAlign="end"
+          variant="regular14"
+        >
+          {t.pages.signIn.forgotPassword}
+        </Typography>
+        <Button className={s.signInButton} disabled={disabled || !isValid} fullWidth>
+          {t.button.signIn}
+        </Button>
+        <Typography className={s.signUpSuggestion} textAlign="center">
+          {t.pages.signIn.signUpSuggestion}
+        </Typography>
+        <Button
+          asComponent={Link}
+          className={s.signUpButton}
+          fullWidth
+          href={AuthRoutes.SIGN_UP}
+          variant="text"
+        >
+          {t.button.signUp}
+        </Button>
+      </Card>
+    )
+  }
+)

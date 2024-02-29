@@ -29,7 +29,7 @@ export type ErrorType = {
   status: number
 }
 
-type ErrorDescription = {
+export type ErrorDescription = {
   field: string
   message: string
 }
