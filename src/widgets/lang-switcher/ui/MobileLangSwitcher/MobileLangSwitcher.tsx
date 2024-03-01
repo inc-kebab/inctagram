@@ -29,7 +29,7 @@ export const MobileLangSwitcher = ({ className }: Props) => {
       className={clsx(s.mobileRoot, className)}
       classNameTrigger={s.mobileTrigger}
       classNameViewport={s.mobileViewport}
-      defaultValue="ru"
+      defaultValue={locale || 'en'}
       onValueChange={changeLocale}
       options={SELECT_OPTIONS}
       pagination
