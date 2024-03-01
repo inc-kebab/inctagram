@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .header {
   position: sticky;
   z-index: 10;
@@ -39,4 +41,22 @@
 
 .register {
   margin-left: 1.5rem;
+}
+
+.lang {
+  display: block;
+}
+
+.langMobile {
+  display: none;
+}
+
+@include mobile-small {
+  .lang {
+    display: none;
+  }
+
+  .langMobile {
+    display: block;
+  }
 }

@@ -2,7 +2,7 @@ import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
-import { LangSwitcherSelect } from '@/widgets/lang-switcher'
+import { LangSwitcher, MobileLangSwitcher } from '@/widgets/lang-switcher'
 import Link from 'next/link'
 
 import s from './Header.module.scss'
@@ -27,7 +27,8 @@ export const Header = ({ isUnauthorized }: Props) => {
           Inctagram
         </Typography>
         <div className={s.actions}>
-          <LangSwitcherSelect />
+          <LangSwitcher className={s.lang} />
+          <MobileLangSwitcher className={s.langMobile} />
           {isUnauthorized && (
             <>
               <Button

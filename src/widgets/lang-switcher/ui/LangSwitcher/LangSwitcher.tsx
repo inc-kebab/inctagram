@@ -1,12 +1,18 @@
 import { RuIcon, UkIcon } from '@/shared/assets/icons/lang'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Select } from '@/shared/ui/Select'
-import { useRouter } from 'next/router'
+import clsx from 'clsx'
 
-import s from './LangSwitcherSelect.module.scss'
+import s from './LangSwitcher.module.scss'
 
-export const LangSwitcherSelect = () => {
-  const { asPath, locale, pathname, push, query } = useRouter()
+import { useLangSwitcher } from '../../model/hooks/useLangSwitcher'
+
+interface Props {
+  className?: string
+}
+
+export const LangSwitcher = ({ className }: Props) => {
+  const { changeLocale, locale } = useLangSwitcher()
 
   const { t } = useTranslation()
 
@@ -23,15 +29,9 @@ export const LangSwitcherSelect = () => {
     },
   ]
 
-  const changeLocale = (locale: string) => {
-    push({ pathname, query }, asPath, {
-      locale,
-    })
-  }
-
   return (
     <Select
-      className={s.root}
+      className={clsx(s.root, className)}
       defaultValue={locale || 'en'}
       onValueChange={changeLocale}
       options={SELECT_OPTIONS}

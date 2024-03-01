@@ -17,6 +17,7 @@ type Ref = ElementRef<typeof SelectRadix.Trigger>
 
 type SelectProps = {
   className?: string
+  classNameTrigger?: string
   classNameViewport?: string
   label?: string
   options: Options[]
@@ -26,19 +27,32 @@ type SelectProps = {
 
 export const Select = forwardRef<Ref, SelectProps>(
   (
-    { className, classNameViewport, label, options, pagination = false, placeholder, ...rest },
+    {
+      className,
+      classNameTrigger,
+      classNameViewport,
+      label,
+      options,
+      pagination = false,
+      placeholder,
+      ...rest
+    },
     ref
   ) => {
     const cNames = {
       item: clsx(s.item, pagination ? s.withPagination : s.withoutPagination),
       root: clsx(s.root, className),
-      trigger: clsx(s.trigger, pagination ? s.withPagination : s.withoutPagination),
+      trigger: clsx(
+        s.trigger,
+        pagination ? s.withPagination : s.withoutPagination,
+        classNameTrigger
+      ),
       viewport: clsx(s.viewport, classNameViewport),
     }
 
     return (
       <div className={cNames.root}>
-        <label className={s.label}>{label}</label>
+        {label && <label className={s.label}>{label}</label>}
         <SelectRadix.Root {...rest}>
           <SelectRadix.Trigger className={cNames.trigger} ref={ref}>
             <SelectRadix.Value placeholder={placeholder} />
@@ -57,9 +71,7 @@ export const Select = forwardRef<Ref, SelectProps>(
                       value={option.value}
                     >
                       {option.icon && <SelectRadix.ItemText>{option.icon}</SelectRadix.ItemText>}
-                      <SelectRadix.ItemText className={s.text}>
-                        <span className={s.text}>{option.name || option.value}</span>
-                      </SelectRadix.ItemText>
+                      {option.name && <SelectRadix.ItemText>{option.name}</SelectRadix.ItemText>}
                     </SelectRadix.Item>
                   ))}
                 </SelectRadix.Group>
