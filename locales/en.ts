@@ -54,6 +54,7 @@ export const en = {
     },
     forgotPassword: {
       description: 'Enter your email address and we will send you further instructions',
+      success: 'The link has been sent by email. \n If you don’t receive an email send link again',
       title: 'Forgot Password',
     },
     signIn: {
@@ -67,6 +68,8 @@ export const en = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
       },
+      modalBtn: 'OK',
+      modalText: 'We have sent a link to confirm your email to ',
       question: 'Do you have an account?',
       title: 'Sign Up',
     },

@@ -1,8 +1,6 @@
 import { LocaleType } from '@/../locales'
 import { z } from 'zod'
 
-export type ForgotPasswordFormValues = z.infer<ReturnType<typeof forgotPasswordSchema>>
-
 export const forgotPasswordSchema = (t: LocaleType) =>
   z.object({
     email: z
@@ -14,3 +12,5 @@ export const forgotPasswordSchema = (t: LocaleType) =>
       message: t.validation.required,
     }),
   })
+
+export type ForgotPasswordFormValues = z.infer<ReturnType<typeof forgotPasswordSchema>>

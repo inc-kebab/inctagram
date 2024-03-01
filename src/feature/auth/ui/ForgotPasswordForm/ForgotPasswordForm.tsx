@@ -1,38 +1,44 @@
-import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { ComponentPropsWithoutRef, ReactNode, Ref, forwardRef, useImperativeHandle } from 'react'
+import { UseFormReset, UseFormSetError, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
-import { Dialog } from '@/shared/ui/Dialog'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { Recaptcha } from '@/widgets/recaptcha/ui/Recaptcha/Recaptcha'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import Link from 'next/link'
 
+import style from '../../../../pages/auth/forgot-password/ForgotPassword.module.scss'
 import s from './ForgotPasswordForm.module.scss'
 
 import {
   ForgotPasswordFormValues,
   forgotPasswordSchema,
 } from '../../model/utils/validators/forgotPasswordValidationSchema'
+import success = toast.success
 
 export type ForgotPasswordProps = {
   disabled?: boolean
   onSubmit: (data: ForgotPasswordFormValues) => void
-  setDisabled: (disabled: boolean) => void
+  success?: boolean
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
+export type RefType = {
+  reset: UseFormReset<ForgotPasswordFormValues>
+  setError: UseFormSetError<ForgotPasswordFormValues>
+}
 export const ForgotPasswordForm = forwardRef(
-  ({ disabled, onSubmit, setDisabled }: ForgotPasswordProps, ref) => {
-    const [modal, setModal] = useState<boolean>(false)
-    const [email, setEmail] = useState<string>('')
+  ({ disabled, onSubmit, success }: ForgotPasswordProps, ref: Ref<RefType>) => {
     const { t } = useTranslation()
     const {
       control,
       formState: { errors, isValid },
       handleSubmit,
+      reset,
       setError,
     } = useForm<ForgotPasswordFormValues>({
       defaultValues: {
@@ -43,21 +49,21 @@ export const ForgotPasswordForm = forwardRef(
       resolver: zodResolver(forgotPasswordSchema(t)),
     })
 
-    useImperativeHandle(ref, () => ({ setEmail, setError, setModal }))
-
-    const modalHandler = () => {
-      setModal(!modal)
-      setDisabled(true)
-    }
+    useImperativeHandle(ref, () => ({ reset, setError }))
 
     return (
-      <Card asComponent="form" className={s.card} onSubmit={handleSubmit(onSubmit)}>
+      <Card
+        asComponent="form"
+        className={clsx(s.card, style.block)}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Typography textAlign="center" variant="h1">
           {t.pages.forgotPassword.title}
         </Typography>
         <ControlledTextField
           className={s.textField}
           control={control}
+          disabled={disabled}
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
@@ -66,6 +72,11 @@ export const ForgotPasswordForm = forwardRef(
         <Typography className={s.description} variant="regular14">
           {t.pages.forgotPassword.description}
         </Typography>
+        {success && (
+          <Typography className={s.success} variant="regular14">
+            {t.pages.forgotPassword.success}
+          </Typography>
+        )}
         <Button className={s.button} disabled={disabled || !isValid} fullWidth type="submit">
           {t.button.sendLink}
         </Button>
@@ -79,21 +90,6 @@ export const ForgotPasswordForm = forwardRef(
           {t.button.backToSignIn}
         </Button>
         <Recaptcha control={control} error={errors.recaptcha?.message} name="recaptcha" />
-        <Dialog
-          className={s.dialogContainer}
-          onOpenChange={() => setModal(!modal)}
-          open={modal}
-          title="Email sent"
-        >
-          <div className={s.modal}>
-            <Typography asComponent="p" className={s.modalMessage}>
-              {`We have sent a link to confirm your email to ${email}`}
-            </Typography>
-            <div className={s.modalBtn}>
-              <Button onClick={modalHandler}>OK</Button>
-            </div>
-          </div>
-        </Dialog>
       </Card>
     )
   }
