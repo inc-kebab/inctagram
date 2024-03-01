@@ -48,7 +48,7 @@ export const SignUpForm = forwardRef(
         username: '',
       },
       mode: 'onBlur',
-      // resolver: zodResolver(signUpSchema(t)),
+      resolver: zodResolver(signUpSchema(t)),
     })
 
     useImperativeHandle(ref, () => ({ reset, setError }))
@@ -100,7 +100,7 @@ export const SignUpForm = forwardRef(
           label={t.label.email}
           name="email"
           rules={{ required: true }}
-          // type="email"
+          type="email"
         />
         <ControlledTextField
           className={s.input}
