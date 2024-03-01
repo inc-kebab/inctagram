@@ -21,24 +21,10 @@ export type SignUpArgs = {
   username: string
 }
 
-type Email = {
-  email: string
-}
-
 export type ConfirmEmailArgs = {
   confirmationCode: string
 }
 
-export type ResendArgs = Email
+export type ResendArgs = Pick<SignUpArgs, 'email'>
 
-export type SignUpResponse = Email
-
-export type ResponseError = {
-  errorDescription: {
-    field: string
-    message: string
-  }[]
-  message: string
-  statusCode: number
-  timestamp: string
-}
+export type SignUpResponse = Pick<SignUpArgs, 'email'>

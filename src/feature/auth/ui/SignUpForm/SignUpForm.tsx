@@ -1,9 +1,10 @@
 import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from 'react'
-import { UseFormReset, UseFormSetError, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Trans } from '@/shared/ui/Trans'
@@ -16,23 +17,19 @@ import Link from 'next/link'
 
 import s from './SignUpForm.module.scss'
 
-import { SignUpSchema, SignUpSchemaType } from '../../model/utils/validators/signUpValidationSchema'
+import { SignUpFormValues, signUpSchema } from '../../model/utils/validators/signUpValidationSchema'
 
 type Props = {
   disabled?: boolean
   hrefGithub: string
   hrefGoogle: string
-  onSubmit: (data: SignUpSchemaType) => void
+  onSubmit: (data: SignUpFormValues) => void
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
-export type RefType = {
-  reset: UseFormReset<SignUpSchemaType>
-  setError: UseFormSetError<SignUpSchemaType>
-}
 
 export const SignUpForm = forwardRef(
   (
     { className, disabled, hrefGithub, hrefGoogle, onSubmit, ...props }: Props,
-    ref: Ref<RefType>
+    ref: Ref<UseFormRef<SignUpFormValues>>
   ) => {
     const { t } = useTranslation()
 
@@ -42,7 +39,7 @@ export const SignUpForm = forwardRef(
       handleSubmit,
       reset,
       setError,
-    } = useForm<SignUpSchemaType>({
+    } = useForm<SignUpFormValues>({
       defaultValues: {
         accept: false,
         email: '',
@@ -51,7 +48,7 @@ export const SignUpForm = forwardRef(
         username: '',
       },
       mode: 'onBlur',
-      resolver: zodResolver(SignUpSchema(t)),
+      // resolver: zodResolver(signUpSchema(t)),
     })
 
     useImperativeHandle(ref, () => ({ reset, setError }))
@@ -76,7 +73,13 @@ export const SignUpForm = forwardRef(
           >
             <Google />
           </Button>
-          <Button asComponent={Link} className={s.networkLink} href={hrefGithub} variant="text">
+          <Button
+            asComponent={Link}
+            className={s.networkLink}
+            href={hrefGithub}
+            type="button"
+            variant="text"
+          >
             <Github />
           </Button>
         </div>
@@ -97,7 +100,7 @@ export const SignUpForm = forwardRef(
           label={t.label.email}
           name="email"
           rules={{ required: true }}
-          type="email"
+          // type="email"
         />
         <ControlledTextField
           className={s.input}

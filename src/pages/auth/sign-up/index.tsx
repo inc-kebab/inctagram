@@ -1,35 +1,39 @@
 import { ReactElement, useRef, useState } from 'react'
 
-import { SignUpForm } from '@/feature/auth'
-import { useSignUpMutation } from '@/feature/auth/api/auth-api'
-import { SignUpSchemaType } from '@/feature/auth/model/utils/validators/signUpValidationSchema'
-import { RefType } from '@/feature/auth/ui/SignUpForm/SignUpForm'
+import { SignUpForm, SignUpFormValues, useSignUpMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
-import { DialogEmailSent } from '@/widgets/Dialogs/dialogEmailSent'
+import { DialogEmailSent } from '@/widgets/dialogs'
 import { AuthLayout } from '@/widgets/layout'
 
-import s from './sigUp.module.scss'
+import s from './SignUp.module.scss'
 
 export const SignUp: Page = () => {
-  const [signUp, { data, isLoading }] = useSignUpMutation()
   const [open, setOpen] = useState(false)
-  const ref = useRef<RefType>(null)
-  const onSubmitHandler = ({ accept, passwordConfirm, ...formData }: SignUpSchemaType) => {
+
+  const ref = useRef<UseFormRef<SignUpFormValues>>(null)
+
+  const [signUp, { data, isLoading }] = useSignUpMutation()
+
+  const handleSubmit = ({ accept, passwordConfirm, ...formData }: SignUpFormValues) => {
     signUp(formData).then(res => {
       if ('data' in res) {
         setOpen(true)
       }
       if ('error' in res && ref.current) {
-        const error = res.error
         const setError = ref.current.setError
 
-        handleErrorResponse<SignUpSchemaType>({ error, setError })
+        const errors = handleErrorResponse<SignUpFormValues>(res.error)
+
+        errors?.fieldErrors?.forEach(error => {
+          setError(error.field, { message: error.message })
+        })
       }
     })
   }
 
-  const onOpenChangeHandler = () => {
+  const handleChangeOpen = () => {
     setOpen(false)
     if (ref.current) {
       ref.current.reset()
@@ -38,13 +42,13 @@ export const SignUp: Page = () => {
 
   return (
     <>
-      <DialogEmailSent email={data?.email} onOpenChange={onOpenChangeHandler} open={open} />
+      <DialogEmailSent email={data?.email} onOpenChange={handleChangeOpen} open={open} />
       <SignUpForm
         className={s.signUpForm}
         disabled={isLoading}
-        hrefGithub="#"
-        hrefGoogle="#"
-        onSubmit={onSubmitHandler}
+        hrefGithub={process.env.NEXT_PUBLIC_GITHUB_OAUTH2!}
+        hrefGoogle={process.env.NEXT_PUBLIC_GOOGLE_OAUTH2!}
+        onSubmit={handleSubmit}
         ref={ref}
       />
     </>

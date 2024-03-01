@@ -1,4 +1,4 @@
-import img from '@/../public/assets/images/congratulations.png'
+import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
@@ -18,10 +18,17 @@ export const Congratulations = () => {
       <Typography textAlign="center" variant="regular16">
         {t.pages.congratulations.description}
       </Typography>
-      <Button asComponent={Link} className={s.button} href="/auth/sign-in">
+      <Button asComponent={Link} className={s.button} href={AuthRoutes.SIGN_IN}>
         {t.button.signIn}
       </Button>
-      <Image alt="Congratulation image" className={s.image} height={0} src={img} width={0} />
+      <Image
+        alt="Congratulation image"
+        className={s.image}
+        height={0}
+        sizes="473px"
+        src="/assets/images/congratulations.png"
+        width={0}
+      />
     </section>
   )
 }

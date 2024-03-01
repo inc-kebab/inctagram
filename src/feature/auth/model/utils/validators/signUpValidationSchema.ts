@@ -1,7 +1,8 @@
 import { LocaleType } from '@/../locales'
 import { PASSWORD_PATTERN, USERNAME_PATTERN } from '@/shared/const/regexs'
 import { z } from 'zod'
-export const SignUpSchema = (t: LocaleType) =>
+
+export const signUpSchema = (t: LocaleType) =>
   z
     .object({
       accept: z.boolean().refine(value => value, {
@@ -29,4 +30,4 @@ export const SignUpSchema = (t: LocaleType) =>
       path: ['passwordConfirm'],
     })
 
-export type SignUpSchemaType = z.infer<ReturnType<typeof SignUpSchema>>
+export type SignUpFormValues = z.infer<ReturnType<typeof signUpSchema>>
