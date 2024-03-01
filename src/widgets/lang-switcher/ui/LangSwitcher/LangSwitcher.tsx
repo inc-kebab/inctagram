@@ -19,12 +19,12 @@ export const LangSwitcher = ({ className }: Props) => {
   const SELECT_OPTIONS = [
     {
       icon: <RuIcon />,
-      name: t.lang.ru,
+      name: <span className={s.text}>{t.lang.ru}</span>,
       value: 'ru',
     },
     {
       icon: <UkIcon />,
-      name: t.lang.en,
+      name: <span className={s.text}>{t.lang.en}</span>,
       value: 'en',
     },
   ]
@@ -32,6 +32,7 @@ export const LangSwitcher = ({ className }: Props) => {
   return (
     <Select
       className={clsx(s.root, className)}
+      classNames={{ icon: s.icon, item: s.item, trigger: s.trigger }}
       defaultValue={locale || 'en'}
       onValueChange={changeLocale}
       options={SELECT_OPTIONS}
