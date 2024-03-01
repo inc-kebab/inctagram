@@ -1,9 +1,10 @@
 import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from 'react'
-import { UseFormReset, UseFormSetError, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
@@ -21,19 +22,15 @@ import {
 
 type Props = {
   disabled?: boolean
-  hrefToLoginGithub: string
-  hrefToLoginGoogle: string
+  hrefGithub: string
+  hrefGoogle: string
   onSubmit: (data: SignInFormValues) => void
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
-export type RefType = {
-  reset: UseFormReset<SignInFormValues>
-  setError: UseFormSetError<SignInFormValues>
-}
 
 export const SignInForm = forwardRef(
   (
-    { className, disabled, hrefToLoginGithub, hrefToLoginGoogle, onSubmit, ...rest }: Props,
-    ref: Ref<RefType>
+    { className, disabled, hrefGithub, hrefGoogle, onSubmit, ...props }: Props,
+    ref: Ref<UseFormRef<SignInFormValues>>
   ) => {
     const { t } = useTranslation()
 
@@ -59,26 +56,16 @@ export const SignInForm = forwardRef(
         asComponent="form"
         className={clsx(s.card, className)}
         onSubmit={handleSubmit(onSubmit)}
-        {...rest}
+        {...props}
       >
         <Typography asComponent="h1" className={s.formName} textAlign="center" variant="h1">
           {t.pages.signIn.title}
         </Typography>
         <div className={s.formNetwork}>
-          <Button
-            asComponent={Link}
-            className={s.networkLink}
-            href={hrefToLoginGoogle}
-            variant="text"
-          >
+          <Button asComponent={Link} className={s.networkLink} href={hrefGoogle} variant="text">
             <Google />
           </Button>
-          <Button
-            asComponent={Link}
-            className={s.networkLink}
-            href={hrefToLoginGithub}
-            variant="text"
-          >
+          <Button asComponent={Link} className={s.networkLink} href={hrefGithub} variant="text">
             <Github />
           </Button>
         </div>
