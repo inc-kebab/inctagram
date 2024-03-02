@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api/base-api'
+import { deleteCookie, setCookie } from 'cookies-next'
 
 import {
   ConfirmEmailArgs,
@@ -24,9 +25,9 @@ const authApi = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          // setCookie('accessToken', data.accessToken)
+          setCookie('accessToken', data.accessToken)
         } catch {
-          // deleteCookie('accessToken')
+          deleteCookie('accessToken')
         }
       },
       query: body => ({
