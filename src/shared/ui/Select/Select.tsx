@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
 import { ArrowIos } from '@/shared/assets/icons/common'
@@ -9,7 +8,7 @@ import s from './Select.module.scss'
 
 export interface Options {
   icon?: ReactNode
-  name?: string
+  name?: ReactNode
   value: string
 }
 
@@ -17,7 +16,7 @@ type Ref = ElementRef<typeof SelectRadix.Trigger>
 
 type SelectProps = {
   className?: string
-  classNameViewport?: string
+  classNames?: { icon?: string; item?: string; trigger?: string; viewport?: string }
   label?: string
   options: Options[]
   pagination?: boolean
@@ -25,25 +24,27 @@ type SelectProps = {
 } & ComponentPropsWithoutRef<typeof SelectRadix.Root>
 
 export const Select = forwardRef<Ref, SelectProps>(
-  (
-    { className, classNameViewport, label, options, pagination = false, placeholder, ...rest },
-    ref
-  ) => {
+  ({ className, classNames, label, options, pagination = false, placeholder, ...rest }, ref) => {
     const cNames = {
+      icon: clsx(s.icon, classNames?.icon),
       item: clsx(s.item, pagination ? s.withPagination : s.withoutPagination),
       root: clsx(s.root, className),
-      trigger: clsx(s.trigger, pagination ? s.withPagination : s.withoutPagination),
-      viewport: clsx(s.viewport, classNameViewport),
+      trigger: clsx(
+        s.trigger,
+        pagination ? s.withPagination : s.withoutPagination,
+        classNames?.trigger
+      ),
+      viewport: clsx(s.viewport, classNames?.viewport),
     }
 
     return (
       <div className={cNames.root}>
-        <label className={s.label}>{label}</label>
+        {label && <label className={s.label}>{label}</label>}
         <SelectRadix.Root {...rest}>
           <SelectRadix.Trigger className={cNames.trigger} ref={ref}>
             <SelectRadix.Value placeholder={placeholder} />
-            <SelectRadix.Icon>
-              <ArrowIos className={s.icon} />
+            <SelectRadix.Icon asChild>
+              <ArrowIos className={cNames.icon} />
             </SelectRadix.Icon>
           </SelectRadix.Trigger>
           <SelectRadix.Portal>
@@ -56,8 +57,12 @@ export const Select = forwardRef<Ref, SelectProps>(
                       key={option.value}
                       value={option.value}
                     >
-                      {option.icon && <SelectRadix.ItemText>{option.icon}</SelectRadix.ItemText>}
-                      <SelectRadix.ItemText>{option.name || option.value}</SelectRadix.ItemText>
+                      <SelectRadix.ItemText>
+                        <span className={s.text}>
+                          {option.icon}
+                          {option.name}
+                        </span>
+                      </SelectRadix.ItemText>
                     </SelectRadix.Item>
                   ))}
                 </SelectRadix.Group>
