@@ -1,4 +1,12 @@
-export { useMeQuery } from './api/auth-api'
+export {
+  useConfirmEmailMutation,
+  useLoginMutation,
+  useMeQuery,
+  useResendRegLinkMutation,
+  useSignUpMutation,
+} from './api/auth-api'
+export type { SignInFormValues } from './model/utils/validators/signInValidationSchema'
+export type { SignUpFormValues } from './model/utils/validators/signUpValidationSchema'
 export { Congratulations } from './ui/Congratulations/Congratulations'
 export { CreateNewPasswordForm } from './ui/CreateNewPasswordForm/CreateNewPasswordForm'
 export { EmailVerificationBlock } from './ui/EmailVerification/EmailVerification'
