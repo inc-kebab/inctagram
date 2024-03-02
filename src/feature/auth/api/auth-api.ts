@@ -1,17 +1,26 @@
 import { baseApi } from '@/shared/api/base-api'
 
 import {
+  CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
+  Email,
   LoginArgs,
   LoginResponse,
   MeResponse,
-  ResendArgs,
+  NewPasswordArgs,
+  RecoveryPasswordArgs,
   SignUpArgs,
-  SignUpResponse,
 } from '../model/types/api.types'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    checkRecoveryCode: builder.mutation<Email, CheckRecoveryCodeArgs>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/check-recovery-code',
+      }),
+    }),
     confirmEmail: builder.mutation<void, ConfirmEmailArgs>({
       query: confirmationCode => ({
         body: { confirmationCode },
@@ -38,14 +47,35 @@ const authApi = baseApi.injectEndpoints({
     me: builder.query<MeResponse, void>({
       query: () => ({ url: '/auth/me' }),
     }),
-    resendRegLink: builder.mutation<void, ResendArgs>({
+    newPassword: builder.mutation<void, NewPasswordArgs>({
+      query: data => ({
+        body: data,
+        method: 'POST',
+        url: '/auth/new-password',
+      }),
+    }),
+    recoveryPassword: builder.mutation<void, RecoveryPasswordArgs>({
+      query: data => ({
+        body: data,
+        method: 'POST',
+        url: '/auth/password-recovery',
+      }),
+    }),
+    resendRecoveryPassword: builder.mutation<void, Email>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/resend-recovery-code',
+      }),
+    }),
+    resendRegLink: builder.mutation<void, Email>({
       query: email => ({
         body: email,
         method: 'POST',
         url: '/auth/registration-email-resending',
       }),
     }),
-    signUp: builder.mutation<SignUpResponse, SignUpArgs>({
+    signUp: builder.mutation<Email, SignUpArgs>({
       query: body => ({
         body,
         method: 'POST',
@@ -56,9 +86,13 @@ const authApi = baseApi.injectEndpoints({
 })
 
 export const {
+  useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
   useLoginMutation,
   useMeQuery,
+  useNewPasswordMutation,
+  useRecoveryPasswordMutation,
+  useResendRecoveryPasswordMutation,
   useResendRegLinkMutation,
   useSignUpMutation,
 } = authApi
