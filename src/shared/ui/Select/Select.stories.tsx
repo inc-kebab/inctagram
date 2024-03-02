@@ -50,13 +50,22 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const options = [{ value: '100' }, { value: '70' }, { value: '50' }]
+const paginationOptions = [
+  { name: '100', value: '100' },
+  { name: '70', value: '70' },
+  { name: '50', value: '50' },
+]
+const defaultOptions = [
+  { name: 'Select-box1', value: 'Select-box1' },
+  { name: 'Select-box2', value: 'Select-box2' },
+  { name: 'Select-box3', value: 'Select-box3' },
+]
 
 export const Default: Story = {
   args: {
     defaultValue: 'Select-box1',
     label: 'Select-box',
-    options: [{ value: 'Select-box1' }, { value: 'Select-box2' }, { value: 'Select-box3' }],
+    options: defaultOptions,
   },
 }
 
@@ -65,7 +74,7 @@ export const Disabled: Story = {
     defaultValue: 'Select-box1',
     disabled: true,
     label: 'Select-box',
-    options: [{ value: 'Select-box1' }, { value: 'Select-box2' }, { value: 'Select-box3' }],
+    options: defaultOptions,
   },
 }
 
@@ -73,7 +82,7 @@ export const PaginationVersion: Story = {
   args: {
     defaultValue: '100',
     disabled: false,
-    options,
+    options: paginationOptions,
     pagination: true,
   },
   render: args => (
@@ -90,10 +99,12 @@ export const LangVersion: Story = {
     options: [
       {
         icon: <RuIcon />,
+        name: 'Russian',
         value: 'Russian',
       },
       {
         icon: <UkIcon />,
+        name: 'English',
         value: 'English',
       },
     ],
@@ -106,7 +117,7 @@ export const LangVersion: Story = {
 }
 
 export const Controlled: Story = {
-  args: { options },
+  args: { options: defaultOptions },
   render: args => {
     const [current, setCurrent] = useState<null | string>(null)
 
