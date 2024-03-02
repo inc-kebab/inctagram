@@ -4,6 +4,7 @@ import {
   ForgotPasswordForm,
   ForgotPasswordFormValues,
   useRecoveryPasswordMutation,
+  useResendRecoveryPasswordMutation,
 } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
@@ -20,12 +21,33 @@ const ForgotPassword: Page = () => {
   const [disabled, setDisabled] = useState(false)
 
   const [recoveryPassword, { isSuccess }] = useRecoveryPasswordMutation()
+  const [resendRecoveryPassword] = useResendRecoveryPasswordMutation()
+
+  const handleSubmitResend = (data: ForgotPasswordFormValues) => {
+    setDisabled(true)
+    resendRecoveryPassword({ email: data.email }).then(res => {
+      if ('data' in res) {
+        setModal(true)
+        setDisabled(false)
+      }
+      if ('error' in res && ref.current) {
+        const setError = ref.current.setError
+
+        const errors = handleErrorResponse<ForgotPasswordFormValues>(res.error)
+
+        errors?.fieldErrors?.forEach(error => {
+          setError(error.field, { message: error.message })
+        })
+      }
+    })
+  }
 
   const handleSubmit = (data: ForgotPasswordFormValues) => {
     setDisabled(true)
     recoveryPassword(data).then(res => {
       if ('data' in res) {
         setModal(true)
+        setDisabled(false)
       }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError
@@ -41,8 +63,6 @@ const ForgotPassword: Page = () => {
 
   const handleChangeOpen = () => {
     setModal(prev => !prev)
-    setDisabled(true)
-    ref.current?.reset()
   }
 
   return (
@@ -50,7 +70,7 @@ const ForgotPassword: Page = () => {
       <ForgotPasswordForm
         className={s.block}
         disabled={disabled}
-        onSubmit={handleSubmit}
+        onSubmit={isSuccess ? handleSubmitResend : handleSubmit}
         ref={ref}
         success={isSuccess}
       />

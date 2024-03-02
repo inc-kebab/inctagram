@@ -1,9 +1,11 @@
 export {
+  useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
   useLoginMutation,
   useMeQuery,
   useNewPasswordMutation,
   useRecoveryPasswordMutation,
+  useResendRecoveryPasswordMutation,
   useResendRegLinkMutation,
   useSignUpMutation,
 } from './api/auth-api'

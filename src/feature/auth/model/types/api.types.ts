@@ -45,5 +45,9 @@ export type SignUpResponse = Pick<SignUpArgs, 'email'>
 export type ConfirmEmailArgs = {
   confirmationCode: string
 }
+export type ResendRecoveryCodeArgs = Pick<SignUpArgs, 'email'>
+export type CheckRecoveryCodeArgs = {
+  recoveryCode: string
+}
 
 export type ResendArgs = Pick<SignUpArgs, 'email'>

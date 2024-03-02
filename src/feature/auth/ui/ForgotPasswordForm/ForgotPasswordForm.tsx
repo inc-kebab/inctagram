@@ -83,7 +83,7 @@ export const ForgotPasswordForm = forwardRef(
           </Typography>
         )}
         <Button className={s.button} disabled={disabled || !isValid} fullWidth type="submit">
-          {t.button.sendLink}
+          {success ? t.button.sendLinkAgain : t.button.sendLink}
         </Button>
         <Button
           asComponent={Link}
@@ -94,7 +94,9 @@ export const ForgotPasswordForm = forwardRef(
         >
           {t.button.backToSignIn}
         </Button>
-        <Recaptcha control={control} error={errors.recaptcha?.message} name="recaptcha" />
+        {!success && (
+          <Recaptcha control={control} error={errors.recaptcha?.message} name="recaptcha" />
+        )}
       </Card>
     )
   }

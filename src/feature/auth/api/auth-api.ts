@@ -1,6 +1,7 @@
 import { baseApi } from '@/shared/api/base-api'
 
 import {
+  CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
   LoginArgs,
   LoginResponse,
@@ -8,12 +9,20 @@ import {
   NewPasswordArgs,
   RecoveryPasswordArgs,
   ResendArgs,
+  ResendRecoveryCodeArgs,
   SignUpArgs,
   SignUpResponse,
 } from '../model/types/api.types'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeArgs>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/check-recovery-code',
+      }),
+    }),
     confirmEmail: builder.mutation<void, ConfirmEmailArgs>({
       query: confirmationCode => ({
         body: { confirmationCode },
@@ -54,6 +63,13 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/password-recovery',
       }),
     }),
+    resendRecoveryPassword: builder.mutation<void, ResendRecoveryCodeArgs>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/resend-recovery-code',
+      }),
+    }),
     resendRegLink: builder.mutation<void, ResendArgs>({
       query: email => ({
         body: email,
@@ -72,11 +88,13 @@ const authApi = baseApi.injectEndpoints({
 })
 
 export const {
+  useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
   useLoginMutation,
   useMeQuery,
   useNewPasswordMutation,
   useRecoveryPasswordMutation,
+  useResendRecoveryPasswordMutation,
   useResendRegLinkMutation,
   useSignUpMutation,
 } = authApi
