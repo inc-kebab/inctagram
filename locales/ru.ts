@@ -6,11 +6,13 @@ export const ru: LocaleType = {
   button: {
     backToSignIn: 'Страница входа',
     createNewPassword: 'Создать новый пароль',
+    no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
+    yes: 'Да',
   },
   label: {
     confirmPassword: 'Подтвердите пароль',
@@ -53,6 +55,9 @@ export const ru: LocaleType = {
     forgotPassword: {
       description: 'Введите свою почту и мы отправим вам инструкции по восстановлению пароля',
       title: 'Забыли пароль',
+    },
+    profile: {
+      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',

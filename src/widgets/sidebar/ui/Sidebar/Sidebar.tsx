@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Logout } from '@/shared/assets/icons/common'
-import { Button } from '@/shared/ui/Button'
+import { LogOut } from '@/feature/auth'
 import { usePathname } from 'next/navigation'
 
 import s from './Sidebar.module.scss'
@@ -29,9 +28,7 @@ export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
           return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
         })}
       </ul>
-      <Button className={s.logout} onClick={onLogout} startIcon={<Logout />} variant="text">
-        {buttonName || 'Logout'}
-      </Button>
+      <LogOut />
     </nav>
   )
 }

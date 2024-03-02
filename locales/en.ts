@@ -8,11 +8,13 @@ export const en = {
   button: {
     backToSignIn: 'Back to Sign In',
     createNewPassword: 'Create new password',
+    no: 'No',
     resendVerificationLink: 'Resend verification link',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
     signUp: 'Sign Up',
+    yes: 'Yes',
   },
   label: {
     confirmPassword: 'Confirm password',
@@ -55,6 +57,9 @@ export const en = {
     forgotPassword: {
       description: 'Enter your email address and we will send you further instructions',
       title: 'Forgot Password',
+    },
+    profile: {
+      logOutConfirmation: 'Are you really want to log out of your account?',
     },
     signIn: {
       forgotPassword: 'Forgot Password',
