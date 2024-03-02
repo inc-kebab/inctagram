@@ -88,7 +88,7 @@ const CreateNewPassword: Page = () => {
   ) : (
     <>
       <EmailVerificationBlock onResendLink={handleSubmitResend} />
-      <DialogEmailSent email={email} onOpenChange={() => setOpen(false)} open={open} />
+      <DialogEmailSent email={email} onOpenChange={setOpen} open={open} />
     </>
   )
 }

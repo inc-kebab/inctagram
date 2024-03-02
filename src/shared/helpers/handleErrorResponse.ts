@@ -1,27 +1,26 @@
-import { FieldValues } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-interface FieldError<T extends FieldValues> {
+interface FieldError<T extends Record<string, any>> {
   field: keyof T
   message: string
 }
 
-export interface ResponseError<T extends FieldValues> {
+export interface ResponseError<T extends Record<string, any>> {
   errorDescription?: FieldError<T>[]
   message?: string
   statusCode: number
   timestamp: string
 }
 
-interface CatchingData<T extends FieldValues> {
+interface CatchingData<T extends Record<string, any>> {
   error: null | string
   fieldErrors: FieldError<T>[] | null
 }
 
-export const handleErrorResponse = <T extends FieldValues>(
+export const handleErrorResponse = <T extends Record<string, any>>(
   error?: FetchBaseQueryError | SerializedError
 ): CatchingData<T> | undefined => {
   if (!error) {

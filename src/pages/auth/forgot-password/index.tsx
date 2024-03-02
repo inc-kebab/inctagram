@@ -11,24 +11,26 @@ import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { DialogEmailSent } from '@/widgets/dialogs'
 import { AuthLayout } from '@/widgets/layout'
+import { SerializedError } from '@reduxjs/toolkit'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 import s from './ForgotPassword.module.scss'
+
+type QueryPromiseResult = { data: void } | { error: FetchBaseQueryError | SerializedError }
 
 const ForgotPassword: Page = () => {
   const ref = useRef<UseFormRef<ForgotPasswordFormValues>>(null)
 
-  const [modal, setModal] = useState(false)
-  const [disabled, setDisabled] = useState(false)
+  const [open, setOpen] = useState(false)
 
-  const [recoveryPassword, { isSuccess }] = useRecoveryPasswordMutation()
-  const [resendRecoveryPassword] = useResendRecoveryPasswordMutation()
+  const [recoveryPassword, { isLoading: isRecoveryLoad, isSuccess }] = useRecoveryPasswordMutation()
+  const [resendRecoveryPassword, { isLoading: isResendRecoveryLoad }] =
+    useResendRecoveryPasswordMutation()
 
-  const handleSubmitResend = (data: ForgotPasswordFormValues) => {
-    setDisabled(true)
-    resendRecoveryPassword({ email: data.email }).then(res => {
+  const handlePromiseSubmit = (promise: Promise<QueryPromiseResult>) => {
+    promise.then(res => {
       if ('data' in res) {
-        setModal(true)
-        setDisabled(false)
+        setOpen(true)
       }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError
@@ -40,41 +42,26 @@ const ForgotPassword: Page = () => {
         })
       }
     })
+  }
+
+  const handleSubmitResend = (data: ForgotPasswordFormValues) => {
+    handlePromiseSubmit(resendRecoveryPassword({ email: data.email }))
   }
 
   const handleSubmit = (data: ForgotPasswordFormValues) => {
-    setDisabled(true)
-    recoveryPassword(data).then(res => {
-      if ('data' in res) {
-        setModal(true)
-        setDisabled(false)
-      }
-      if ('error' in res && ref.current) {
-        const setError = ref.current.setError
-
-        const errors = handleErrorResponse<ForgotPasswordFormValues>(res.error)
-
-        errors?.fieldErrors?.forEach(error => {
-          setError(error.field, { message: error.message })
-        })
-      }
-    })
-  }
-
-  const handleChangeOpen = () => {
-    setModal(prev => !prev)
+    handlePromiseSubmit(recoveryPassword(data))
   }
 
   return (
     <>
       <ForgotPasswordForm
         className={s.block}
-        disabled={disabled}
+        disabled={isRecoveryLoad || isResendRecoveryLoad}
         onSubmit={isSuccess ? handleSubmitResend : handleSubmit}
         ref={ref}
         success={isSuccess}
       />
-      <DialogEmailSent email={ref.current?.email} onOpenChange={handleChangeOpen} open={modal} />
+      <DialogEmailSent email={ref.current?.email} onOpenChange={setOpen} open={open} />
     </>
   )
 }
