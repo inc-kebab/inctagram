@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
-import { toast } from 'react-toastify'
 
+import { useLogoutMutation } from '@/feature/auth'
 import { Search, Trending } from '@/shared/assets/icons/common'
 import { Bookmark, Home, MessageCircle, Person, PlusSquare } from '@/shared/assets/icons/fill'
 import {
@@ -10,13 +10,19 @@ import {
   Person as PersonOutline,
   PlusSquare as PlusSquareOutline,
 } from '@/shared/assets/icons/outline'
+import { AppRoutes } from '@/shared/const/routes'
+import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Header } from '@/widgets/header'
 import { Sidebar } from '@/widgets/sidebar/ui/Sidebar/Sidebar'
+import { useRouter } from 'next/router'
 
 import s from './SidebarLayout.module.scss'
 
 export const SidebarLayout = ({ children }: PropsWithChildren) => {
+  const [logOut, { isLoading }] = useLogoutMutation()
+  const { push } = useRouter()
+
   const { t } = useTranslation()
 
   const SIDEBAR_ITEMS = [
@@ -65,16 +71,26 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
     },
   ]
 
+  const handleLogOut = () => {
+    logOut().then(res => {
+      if ('data' in res) {
+        void push(AppRoutes.MAIN)
+      }
+      if ('error' in res) {
+        handleErrorResponse(res.error)
+      }
+    })
+  }
+
   return (
     <>
       <Header />
       <div className={s.wrapper}>
         <Sidebar
           buttonName={t.layout.sidebar.logout}
+          isLoading={isLoading}
           items={SIDEBAR_ITEMS}
-          onLogout={() => {
-            toast.success('Call handler for Log Out')
-          }}
+          onLogOut={handleLogOut}
         />
         <main className={s.main}>{children}</main>
       </div>

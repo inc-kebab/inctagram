@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api/base-api'
+import { deleteCookie } from 'cookies-next'
 
 import {
   ConfirmEmailArgs,
@@ -36,6 +37,15 @@ const authApi = baseApi.injectEndpoints({
       }),
     }),
     logout: builder.mutation<void, void>({
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+          deleteCookie('accessToken')
+          dispatch(baseApi.util.resetApiState())
+        } catch (e) {
+          console.log(e)
+        }
+      },
       query: () => {
         return {
           method: 'POST',

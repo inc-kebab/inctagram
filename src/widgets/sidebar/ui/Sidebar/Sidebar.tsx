@@ -10,11 +10,12 @@ import { SidebarItem } from '../SidebarItem/SidebarItem'
 
 type Props = {
   buttonName?: string
+  isLoading: boolean
   items: SidebarElement[]
-  onLogout: () => void
+  onLogOut: () => void
 } & ComponentPropsWithoutRef<'aside'>
 
-export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
+export const Sidebar = ({ buttonName, isLoading, items, onLogOut, ...rest }: Props) => {
   const pathname = usePathname()
 
   return (
@@ -28,7 +29,7 @@ export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
           return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
         })}
       </ul>
-      <LogOut />
+      <LogOut isLoading={isLoading} onLogOut={onLogOut} />
     </nav>
   )
 }
