@@ -2,6 +2,8 @@ import { baseApi } from '@/shared/api/base-api'
 
 import {
   ConfirmEmailArgs,
+  LoginArgs,
+  LoginResponse,
   MeResponse,
   ResendArgs,
   SignUpArgs,
@@ -15,6 +17,22 @@ const authApi = baseApi.injectEndpoints({
         body: { confirmationCode },
         method: 'POST',
         url: '/auth/registration-confirmation',
+      }),
+    }),
+    login: builder.mutation<LoginResponse, LoginArgs>({
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+
+          // setCookie('accessToken', data.accessToken)
+        } catch {
+          // deleteCookie('accessToken')
+        }
+      },
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/auth/login',
       }),
     }),
     me: builder.query<MeResponse, void>({
@@ -37,5 +55,10 @@ const authApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useConfirmEmailMutation, useMeQuery, useResendRegLinkMutation, useSignUpMutation } =
-  authApi
+export const {
+  useConfirmEmailMutation,
+  useLoginMutation,
+  useMeQuery,
+  useResendRegLinkMutation,
+  useSignUpMutation,
+} = authApi

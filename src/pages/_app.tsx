@@ -8,17 +8,17 @@ import { AuthProvider } from '@/app/providers/AuthProvider'
 import { useLoader } from '@/shared/hooks/useLoader'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
+import { Inter } from 'next/font/google'
 
 import 'react-toastify/dist/ReactToastify.css'
-import '@fontsource/inter/400.css'
-import '@fontsource/inter/600.css'
-import '@fontsource/inter/700.css'
 import '@/app/styles/nprogress.scss'
 import '@/app/styles/index.scss'
 
 type Props = AppProps & {
   Component: Page
 }
+
+const inter = Inter({ subsets: ['latin', 'cyrillic'], weight: ['400', '600', '700'] })
 
 export default function App({ Component, pageProps }: Props) {
   useLoader()
@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+        <Layout>{getLayout(<Component className={inter.className} {...pageProps} />)}</Layout>
         <ToastProvider />
       </AuthProvider>
     </Provider>
