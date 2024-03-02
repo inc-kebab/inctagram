@@ -28,7 +28,8 @@ export const EmailVerificationBlock = ({ disabled, onResendLink }: Props) => {
         alt="Email verification"
         className={s.image}
         height={0}
-        src="/email-verification.svg"
+        sizes="473px"
+        src="/assets/images/email-verification.png"
         width={0}
       />
     </section>

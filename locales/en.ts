@@ -67,6 +67,8 @@ export const en = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
       },
+      modalBtn: 'OK',
+      modalText: 'We have sent a link to confirm your email to ',
       question: 'Do you have an account?',
       title: 'Sign Up',
     },
