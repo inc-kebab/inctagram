@@ -1,4 +1,5 @@
 export enum AuthRoutes {
+  CONFIRM_EMAIL = '/auth/confirm-email',
   CREATE_NEW_PASSWORD = '/auth/create-new-password',
   FORGOT_PASSWORD = '/auth/forgot-password',
   PASSWORD_RECOVERY = '/auth/password-recovery',
@@ -31,4 +32,5 @@ export const PublicRoutes: string[] = [
   AuthRoutes.FORGOT_PASSWORD,
   AuthRoutes.PASSWORD_RECOVERY,
   AuthRoutes.TERMS,
+  AuthRoutes.CONFIRM_EMAIL,
 ]

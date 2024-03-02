@@ -11,7 +11,7 @@ import { DialogClose } from './DialogClose'
 export type Props = {
   className?: string
   title?: string
-  trigger: ReactNode
+  trigger?: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixDialog.Root>
 
 export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>((props, ref) => {

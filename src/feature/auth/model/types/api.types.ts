@@ -23,3 +23,19 @@ export interface LoginArgs {
 export interface LoginResponse {
   accessToken: string
 }
+
+export type SignUpArgs = {
+  email: string
+  password: string
+  username: string
+}
+
+export type SignUpResponse = Pick<SignUpArgs, 'email'>
+
+export type ConfirmEmailArgs = {
+  confirmationCode: string
+}
+
+export type ResendArgs = Pick<SignUpArgs, 'email'>
+
+
