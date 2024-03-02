@@ -50,7 +50,7 @@ export const en = {
     emailVerification: {
       description:
         'Looks like the verification link has expired. Not to worry, we can send the link again',
-      title: 'Email verification link expired',
+      title: 'Verification link expired',
     },
     forgotPassword: {
       description: 'Enter your email address and we will send you further instructions',

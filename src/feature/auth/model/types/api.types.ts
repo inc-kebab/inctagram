@@ -10,17 +10,21 @@
  * }
  * */
 
+export interface Email {
+  email: string
+}
+
 export interface MeResponse {
   email: string
   id: number
 }
 
-export type RecoveryPasswordArgs = {
+export interface RecoveryPasswordArgs {
   email: string
   recaptcha: string
 }
 
-export type NewPasswordArgs = {
+export interface NewPasswordArgs {
   newPassword: string
   recoveryCode: string
 }
@@ -34,20 +38,16 @@ export interface LoginResponse {
   accessToken: string
 }
 
-export type SignUpArgs = {
+export interface SignUpArgs {
   email: string
   password: string
   username: string
 }
 
-export type SignUpResponse = Pick<SignUpArgs, 'email'>
-
-export type ConfirmEmailArgs = {
+export interface ConfirmEmailArgs {
   confirmationCode: string
 }
-export type ResendRecoveryCodeArgs = Pick<SignUpArgs, 'email'>
-export type CheckRecoveryCodeArgs = {
+
+export interface CheckRecoveryCodeArgs {
   recoveryCode: string
 }
-
-export type ResendArgs = Pick<SignUpArgs, 'email'>

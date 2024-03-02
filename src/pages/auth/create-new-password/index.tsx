@@ -21,24 +21,21 @@ import s from './CreateNewPassword.module.scss'
 
 const CreateNewPassword: Page = () => {
   const ref = useRef<UseFormRef<CreateNewPasswordFormValues>>(null)
-  const [disabled, setDisabled] = useState(false)
   const [open, setOpen] = useState(false)
 
   const router = useRouter()
 
-  const [newPassword] = useNewPasswordMutation()
-  const [checkRecoveryCode, { isLoading, isSuccess }] = useCheckRecoveryCodeMutation()
+  const [createNewPassword, { isLoading: isCreateNewPasswordLoad }] = useNewPasswordMutation()
+  const [checkRecoveryCode, { data, isLoading }] = useCheckRecoveryCodeMutation()
   const [resendRecoveryPassword] = useResendRecoveryPasswordMutation()
 
   const recoveryCode = router.query.code as string
   const email = router.query.email as string
 
   const handleSubmitResend = () => {
-    setDisabled(true)
     resendRecoveryPassword({ email }).then(res => {
       if ('data' in res) {
         setOpen(true)
-        setDisabled(false)
       }
       if ('error' in res) {
         handleErrorResponse(res.error)
@@ -52,9 +49,7 @@ const CreateNewPassword: Page = () => {
       recoveryCode,
     }
 
-    setDisabled(true)
-    newPassword(newData).then(res => {
-      setDisabled(false)
+    createNewPassword(newData).then(res => {
       if ('data' in res && ref.current) {
         ref.current.reset()
         router.push(AuthRoutes.SIGN_IN)
@@ -83,10 +78,10 @@ const CreateNewPassword: Page = () => {
     return <Loader fullHeight />
   }
 
-  return isSuccess ? (
+  return data ? (
     <CreateNewPasswordForm
       className={s.block}
-      disabled={disabled}
+      disabled={isCreateNewPasswordLoad}
       onSubmit={handleSubmit}
       ref={ref}
     />

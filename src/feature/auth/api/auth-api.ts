@@ -3,20 +3,18 @@ import { baseApi } from '@/shared/api/base-api'
 import {
   CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
+  Email,
   LoginArgs,
   LoginResponse,
   MeResponse,
   NewPasswordArgs,
   RecoveryPasswordArgs,
-  ResendArgs,
-  ResendRecoveryCodeArgs,
   SignUpArgs,
-  SignUpResponse,
 } from '../model/types/api.types'
 
 const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeArgs>({
+    checkRecoveryCode: builder.mutation<Email, CheckRecoveryCodeArgs>({
       query: body => ({
         body,
         method: 'POST',
@@ -63,21 +61,21 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/password-recovery',
       }),
     }),
-    resendRecoveryPassword: builder.mutation<void, ResendRecoveryCodeArgs>({
+    resendRecoveryPassword: builder.mutation<void, Email>({
       query: body => ({
         body,
         method: 'POST',
         url: '/auth/resend-recovery-code',
       }),
     }),
-    resendRegLink: builder.mutation<void, ResendArgs>({
+    resendRegLink: builder.mutation<void, Email>({
       query: email => ({
         body: email,
         method: 'POST',
         url: '/auth/registration-email-resending',
       }),
     }),
-    signUp: builder.mutation<SignUpResponse, SignUpArgs>({
+    signUp: builder.mutation<Email, SignUpArgs>({
       query: body => ({
         body,
         method: 'POST',

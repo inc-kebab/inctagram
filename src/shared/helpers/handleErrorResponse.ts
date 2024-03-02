@@ -55,9 +55,7 @@ export const handleErrorResponse = <T extends FieldValues>(
 
       const errorMsg = `${error.status} - ${errorData.message || 'Request error'}`
 
-      if (error.status !== 400) {
-        toast.error(errorMsg)
-      }
+      toast.error(errorMsg)
 
       return {
         error: errorMsg,
