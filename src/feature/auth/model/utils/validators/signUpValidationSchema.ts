@@ -22,7 +22,7 @@ export const signUpSchema = (t: LocaleType) =>
         .trim()
         .regex(USERNAME_PATTERN, { message: t.validation.userNameVerification })
         .min(6, t.validation.minLength6)
-        .max(20, t.validation.maxLength20)
+        .max(30, t.validation.maxLength20)
         .default(''),
     })
     .refine(data => data.password === data.passwordConfirm && data.passwordConfirm.length > 0, {

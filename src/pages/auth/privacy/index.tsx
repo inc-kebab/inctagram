@@ -1,5 +1,6 @@
 import { ReactElement, memo } from 'react'
 
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { BackToPage } from '@/shared/ui/BackToPage'
 import { Typography } from '@/shared/ui/Typography'
@@ -9,6 +10,8 @@ import { useRouter } from 'next/router'
 import s from './Privacy.module.scss'
 
 const Privacy: Page = memo(() => {
+  const { t } = useTranslation()
+
   const router = useRouter()
 
   const handleNavigateToPrevPage = () => router.back()
@@ -18,65 +21,49 @@ const Privacy: Page = memo(() => {
       <BackToPage
         className={s.link}
         onNavigate={handleNavigateToPrevPage}
-        title="Back to Sign Up"
+        title={t.button.backToSignUp}
       />
       <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
-        Privacy Policy
+        {t.pages.privacy.title}
       </Typography>
       <Typography asComponent="h2" className={s.subTitle} variant="h2">
-        Your Privacy Matters to Us
+        {t.pages.privacy.mattersTitle}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        We value your privacy and strive to protect it when you use our Inctagram application. This
-        privacy policy describes how we collect, use, disclose, and safeguard your personal data.
-        Please read this policy carefully to understand how we handle your information.
+        {t.pages.privacy.matters}
       </Typography>
       <Typography asComponent="h2" className={s.subTitle} variant="h2">
-        Collection and Use of Personal Data
+        {t.pages.privacy.collectionDataTitle}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        We collect certain personal data that you provide to us when registering and using our
-        application. This data may include your name, email address, profile photos, and other
-        information necessary for using Inctagram.
+        {t.pages.privacy.collectionData1}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        We use your personal data to provide and improve our services, including personalizing
-        content, communicating with you, ensuring security, and preventing fraud. We may also use
-        anonymous and aggregated data for analysis and statistics.
+        {t.pages.privacy.collectionData2}
       </Typography>
       <Typography asComponent="h2" className={s.subTitle} variant="h2">
-        Disclosure of Personal Data
+        {t.pages.privacy.disclosureDataTitle}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        We do not disclose your personal data to third parties without your consent, except as
-        required by law or in cases necessary for providing our services or protecting our rights.
-        We may disclose your data to our partners, agents, or service providers who work on our
-        behalf and according to our instructions.
+        {t.pages.privacy.disclosureData}
       </Typography>
       <Typography asComponent="h2" className={s.subTitle} variant="h2">
-        Protection of Personal Data
+        {t.pages.privacy.protectionDataTitle}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        We take security measures to protect your personal data from unauthorized access, use, or
-        disclosure. We use technical, administrative, and physical security measures to safeguard
-        your data.
+        {t.pages.privacy.protectionData}
       </Typography>
       <Typography asComponent="h2" className={s.subTitle} variant="h2">
-        Links to Third-Party Websites
+        {t.pages.privacy.linksTitle}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        Our application may contain links to third-party websites or services that are not
-        controlled by us. We are not responsible for the privacy and security of information
-        collected by these third-party sites or services. It is recommended to review the privacy
-        policy of these third-party resources before providing them with your personal data.
+        {t.pages.privacy.links}
       </Typography>
       <Typography asComponent="h2" className={s.subTitle} variant="h2">
-        Changes to the Privacy Policy
+        {t.pages.privacy.changesTitle}
       </Typography>
       <Typography className={s.text} variant="regular14">
-        We reserve the right to make changes to our privacy policy. In the event of significant
-        changes, we will notify you by posting the updated privacy policy on our website or sending
-        you email notifications.
+        {t.pages.privacy.changes}
       </Typography>
     </div>
   )
