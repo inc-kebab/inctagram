@@ -37,5 +37,3 @@ export type ConfirmEmailArgs = {
 }
 
 export type ResendArgs = Pick<SignUpArgs, 'email'>
-
-
