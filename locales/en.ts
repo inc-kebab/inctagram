@@ -7,6 +7,7 @@
 export const en = {
   button: {
     backToSignIn: 'Back to Sign In',
+    backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     resendVerificationLink: 'Resend verification link',
     sendLink: 'Send Link',
@@ -71,6 +72,59 @@ export const en = {
       modalText: 'We have sent a link to confirm your email to ',
       question: 'Do you have an account?',
       title: 'Sign Up',
+    },
+    terms: {
+      changes: '5. Changes to the Terms',
+      changes1:
+        '5.1 Inctagram reserves the right to make changes to these terms of use at its discretion. We ' +
+        'will notify you of such changes and provide an opportunity to review the updated terms.',
+      changes2:
+        '5.2 Continued use of Inctagram after changes to the terms of use indicates your agreement ' +
+        'with the updated terms.',
+      intellect: '3. Intellectual Property',
+      intellect1:
+        '3.1 Inctagram and all related materials, including logos, designs, texts, graphics, and other elements, ' +
+        'are the property of Inctagram or its licensors and are protected by copyright and other intellectual property laws.',
+      intellect2:
+        '3.2 By using Inctagram, you do not acquire any rights to use our intellectual property ' +
+        'without our explicit permission.',
+      liability: '4. Liability',
+      liability1:
+        '4.1 Inctagram is not responsible for the content posted or shared by users. We do not ' +
+        'guarantee the accuracy, completeness, or reliability of such content.',
+      liability2:
+        '4.2 Inctagram is not liable for any damages caused to you or third parties as a result of ' +
+        'using our application.',
+      liability3:
+        '4.3 You use Inctagram at your own risk. We do not guarantee that our application will work ' +
+        'without errors or interruptions.',
+      registration: '1. Registration and account',
+      registration1:
+        '1.1 To use Inctagram, you need to create an account. You must provide accurate information ' +
+        'during registration and keep this information up to date.',
+      registration2:
+        '1.2 You are responsible for the security of your account and password. Do not share your ' +
+        'account credentials with third parties or allow them to use your account.',
+      registration3:
+        '1.3 You agree not to create multiple accounts or use other users accounts without their permission.',
+      rules: '2. Rules of Use',
+      rules1:
+        '2.1 When using Inctagram, you agree to comply with all applicable laws and codes of conduct.',
+      rules2:
+        '2.2 Posting illegal, offensive, indecent, or harmful content is prohibited. You are ' +
+        'responsible for the content you post or share through our application.',
+      rules3:
+        '2.3 Violating the privacy of other users is prohibited. Do not publish personal information ' +
+        'of others without their permission.',
+      rules4: '2.4 Using Inctagram for spamming or sending unwanted messages is prohibited.',
+      rules5:
+        '2.5 We reserve the right to remove any content or account that violates our terms of use or ' +
+        'may harm other users.',
+      title: 'Terms of Service',
+      welcome:
+        'Welcome to Inctagram! Please read our terms of use before using our social networking app. ' +
+        'By using our application, you agree to our terms and commit to abide by them. If you do not ' +
+        'agree with our terms, please do not use our application.',
     },
   },
   validation: {
