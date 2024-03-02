@@ -1,5 +1,3 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-
 import { baseApi } from '@/shared/api/base-api'
 import { configureStore } from '@reduxjs/toolkit'
 

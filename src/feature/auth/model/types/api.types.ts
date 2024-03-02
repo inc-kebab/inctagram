@@ -10,26 +10,16 @@
  * }
  * */
 
-export type MeResponse = {
+export interface MeResponse {
   email: string
   id: number
 }
 
-export type LoginParams = {
+export interface LoginArgs {
   email: string
   password: string
 }
-export type ErrorType = {
-  data: {
-    errorDescription: ErrorDescription[] | null
-    message: string
-    statusCode: number
-    timestamp: string
-  }
-  status: number
-}
 
-export type ErrorDescription = {
-  field: string
-  message: string
+export interface LoginResponse {
+  accessToken: string
 }

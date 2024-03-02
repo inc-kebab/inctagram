@@ -1,8 +1,6 @@
 import { ReactElement, useRef } from 'react'
 
-import { SignInForm } from '@/feature/auth'
-import { useLoginMutation } from '@/feature/auth/api/auth-api'
-import { SignInFormValues } from '@/feature/auth/model/utils/validators/signInValidationSchema'
+import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
@@ -11,12 +9,12 @@ import { AuthLayout } from '@/widgets/layout'
 import s from './SignIn.module.scss'
 
 const SignIn: Page = () => {
-  const [logIn, { isLoading }] = useLoginMutation()
+  const [signIn, { isLoading }] = useLoginMutation()
 
   const ref = useRef<UseFormRef<SignInFormValues>>(null)
 
-  const logInHandler = (data: SignInFormValues) => {
-    logIn(data).then(res => {
+  const handleSignIn = (data: SignInFormValues) => {
+    signIn(data).then(res => {
       if ('error' in res && ref.current) {
         const setError = ref.current.setError
 
@@ -35,7 +33,7 @@ const SignIn: Page = () => {
       disabled={isLoading}
       hrefGithub={process.env.NEXT_PUBLIC_GITHUB_OAUTH2!}
       hrefGoogle={process.env.NEXT_PUBLIC_GOOGLE_OAUTH2!}
-      onSubmit={logInHandler}
+      onSubmit={handleSignIn}
       ref={ref}
     />
   )
