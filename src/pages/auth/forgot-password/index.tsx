@@ -1,10 +1,12 @@
 import { ReactElement, useRef, useState } from 'react'
 
-import { ForgotPasswordForm } from '@/feature/auth'
-import { useRecoveryPasswordMutation } from '@/feature/auth/api/auth-api'
-import { ForgotPasswordFormValues } from '@/feature/auth/model/utils/validators/forgotPasswordValidationSchema'
-import { RefType } from '@/feature/auth/ui/ForgotPasswordForm/ForgotPasswordForm'
+import {
+  ForgotPasswordForm,
+  ForgotPasswordFormValues,
+  useRecoveryPasswordMutation,
+} from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { DialogEmailSent } from '@/widgets/dialogs'
 import { AuthLayout } from '@/widgets/layout'
@@ -12,20 +14,18 @@ import { AuthLayout } from '@/widgets/layout'
 import s from './ForgotPassword.module.scss'
 
 const ForgotPassword: Page = () => {
-  const ref = useRef<RefType>(null)
-  const [modal, setModal] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>('')
-  const [success, setSuccess] = useState<boolean>(false)
-  const [disabled, setDisabled] = useState<boolean>(false)
-  const [recoveryPassword] = useRecoveryPasswordMutation()
+  const ref = useRef<UseFormRef<ForgotPasswordFormValues>>(null)
 
-  const onSubmit = (data: ForgotPasswordFormValues) => {
+  const [modal, setModal] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+
+  const [recoveryPassword, { isSuccess }] = useRecoveryPasswordMutation()
+
+  const handleSubmit = (data: ForgotPasswordFormValues) => {
     setDisabled(true)
     recoveryPassword(data).then(res => {
       if ('data' in res) {
-        setEmail(data.email)
         setModal(true)
-        setSuccess(true)
       }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError
@@ -39,8 +39,8 @@ const ForgotPassword: Page = () => {
     })
   }
 
-  const modalHandler = () => {
-    setModal(!modal)
+  const handleChangeOpen = () => {
+    setModal(prev => !prev)
     setDisabled(true)
     ref.current?.reset()
   }
@@ -50,11 +50,11 @@ const ForgotPassword: Page = () => {
       <ForgotPasswordForm
         className={s.block}
         disabled={disabled}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         ref={ref}
-        success={success}
+        success={isSuccess}
       />
-      <DialogEmailSent email={email} onOpenChange={modalHandler} open={modal} />
+      <DialogEmailSent email={ref.current?.email} onOpenChange={handleChangeOpen} open={modal} />
     </>
   )
 }

@@ -1,25 +1,23 @@
-import { ComponentPropsWithoutRef, ReactNode, Ref, forwardRef, useImperativeHandle } from 'react'
-import { UseFormReset, UseFormSetError, useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
+import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
-import { Recaptcha } from '@/widgets/recaptcha/ui/Recaptcha/Recaptcha'
+import { Recaptcha } from '@/widgets/recaptcha'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import Link from 'next/link'
 
-import style from '../../../../pages/auth/forgot-password/ForgotPassword.module.scss'
 import s from './ForgotPasswordForm.module.scss'
 
 import {
   ForgotPasswordFormValues,
   forgotPasswordSchema,
 } from '../../model/utils/validators/forgotPasswordValidationSchema'
-import success = toast.success
 
 export type ForgotPasswordProps = {
   disabled?: boolean
@@ -27,16 +25,17 @@ export type ForgotPasswordProps = {
   success?: boolean
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
-export type RefType = {
-  reset: UseFormReset<ForgotPasswordFormValues>
-  setError: UseFormSetError<ForgotPasswordFormValues>
-}
 export const ForgotPasswordForm = forwardRef(
-  ({ disabled, onSubmit, success }: ForgotPasswordProps, ref: Ref<RefType>) => {
+  (
+    { className, disabled, onSubmit, success, ...rest }: ForgotPasswordProps,
+    ref: Ref<UseFormRef<ForgotPasswordFormValues>>
+  ) => {
     const { t } = useTranslation()
+
     const {
       control,
       formState: { errors, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
@@ -49,13 +48,19 @@ export const ForgotPasswordForm = forwardRef(
       resolver: zodResolver(forgotPasswordSchema(t)),
     })
 
-    useImperativeHandle(ref, () => ({ reset, setError }))
+    useImperativeHandle(ref, () => ({
+      email: getValues('email'),
+      recaptcha: getValues('recaptcha'),
+      reset,
+      setError,
+    }))
 
     return (
       <Card
         asComponent="form"
-        className={clsx(s.card, style.block)}
+        className={clsx(s.card, className)}
         onSubmit={handleSubmit(onSubmit)}
+        {...rest}
       >
         <Typography textAlign="center" variant="h1">
           {t.pages.forgotPassword.title}

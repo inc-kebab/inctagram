@@ -2,9 +2,13 @@ export {
   useConfirmEmailMutation,
   useLoginMutation,
   useMeQuery,
+  useNewPasswordMutation,
+  useRecoveryPasswordMutation,
   useResendRegLinkMutation,
   useSignUpMutation,
 } from './api/auth-api'
+export type { CreateNewPasswordFormValues } from './model/utils/validators/createNewPasswordSchema'
+export type { ForgotPasswordFormValues } from './model/utils/validators/forgotPasswordValidationSchema'
 export type { SignInFormValues } from './model/utils/validators/signInValidationSchema'
 export type { SignUpFormValues } from './model/utils/validators/signUpValidationSchema'
 export { Congratulations } from './ui/Congratulations/Congratulations'

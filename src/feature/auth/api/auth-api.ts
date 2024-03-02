@@ -5,11 +5,11 @@ import {
   LoginArgs,
   LoginResponse,
   MeResponse,
+  NewPasswordArgs,
+  RecoveryPasswordArgs,
   ResendArgs,
   SignUpArgs,
   SignUpResponse,
-  NewPassword,
-  RecoveryPassword
 } from '../model/types/api.types'
 
 const authApi = baseApi.injectEndpoints({
@@ -40,21 +40,21 @@ const authApi = baseApi.injectEndpoints({
     me: builder.query<MeResponse, void>({
       query: () => ({ url: '/auth/me' }),
     }),
-    newPassword: builder.mutation<unknown, NewPassword>({
+    newPassword: builder.mutation<void, NewPasswordArgs>({
       query: data => ({
         body: data,
         method: 'POST',
         url: '/auth/new-password',
       }),
     }),
-    recoveryPassword: builder.mutation<unknown, RecoveryPassword>({
+    recoveryPassword: builder.mutation<void, RecoveryPasswordArgs>({
       query: data => ({
         body: data,
         method: 'POST',
         url: '/auth/password-recovery',
       }),
     }),
-     resendRegLink: builder.mutation<void, ResendArgs>({
+    resendRegLink: builder.mutation<void, ResendArgs>({
       query: email => ({
         body: email,
         method: 'POST',
@@ -75,8 +75,8 @@ export const {
   useConfirmEmailMutation,
   useLoginMutation,
   useMeQuery,
+  useNewPasswordMutation,
+  useRecoveryPasswordMutation,
   useResendRegLinkMutation,
   useSignUpMutation,
-  useNewPasswordMutation,
-  useRecoveryPasswordMutation
 } = authApi

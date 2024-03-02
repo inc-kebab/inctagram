@@ -5,9 +5,10 @@ import {
   forwardRef,
   useImperativeHandle,
 } from 'react'
-import { UseFormReset, UseFormSetError, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { Typography } from '@/shared/ui/Typography'
@@ -16,7 +17,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 
 import s from './CreateNewPasswordForm.module.scss'
-import style from '@/pages/auth/create-new-password/CreateNewPassword.module.scss'
 
 import {
   CreateNewPasswordFormValues,
@@ -28,13 +28,11 @@ type Props = {
   onSubmit: (values: CreateNewPasswordFormValues) => void
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
-export type RefType = {
-  reset: UseFormReset<CreateNewPasswordFormValues>
-  setError: UseFormSetError<CreateNewPasswordFormValues>
-}
-
 export const CreateNewPasswordForm = forwardRef(
-  ({ disabled, onSubmit }: Props, ref: Ref<RefType>) => {
+  (
+    { className, disabled, onSubmit, ...rest }: Props,
+    ref: Ref<UseFormRef<CreateNewPasswordFormValues>>
+  ) => {
     const { t } = useTranslation()
 
     const {
@@ -52,19 +50,14 @@ export const CreateNewPasswordForm = forwardRef(
       resolver: zodResolver(createNewPasswordSchema(t)),
     })
 
-    const onKeydownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-        handleSubmit(onSubmit)()
-      }
-    }
-
     useImperativeHandle(ref, () => ({ reset, setError }))
 
     return (
       <Card
         asComponent="form"
-        className={clsx(s.card, style.block)}
+        className={clsx(s.card, className)}
         onSubmit={handleSubmit(onSubmit)}
+        {...rest}
       >
         <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
           {t.pages.createNewPassword.title}
@@ -85,7 +78,6 @@ export const CreateNewPasswordForm = forwardRef(
           error={errors?.confirmPassword?.message}
           label={t.label.confirmPassword}
           name="confirmPassword"
-          onKeyDown={onKeydownHandler}
           type="password"
         />
         <Typography className={s.limitations} variant="regular14">

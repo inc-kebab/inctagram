@@ -1,6 +1,8 @@
 import ReCAPTCHA from 'react-google-recaptcha'
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
+import { useRouter } from 'next/router'
+
 import s from './Recaptcha.module.scss'
 
 type Props = {
@@ -16,6 +18,8 @@ export const Recaptcha = <T extends FieldValues>({
   error,
   name,
 }: ControlledRecaptchaProps<T>) => {
+  const { locale } = useRouter()
+
   const {
     field: { onChange },
   } = useController({
@@ -26,9 +30,9 @@ export const Recaptcha = <T extends FieldValues>({
   return (
     <div className={s.recaptchaContainer}>
       <ReCAPTCHA
-        hl="en-GB"
+        hl={locale || 'en'}
         onChange={onChange}
-        sitekey="6Ldfw4IpAAAAAHgNgsniOZBWxLctU5f7143jjndt"
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY!}
         size="normal"
         theme="dark"
       />

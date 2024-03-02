@@ -15,24 +15,14 @@ export interface MeResponse {
   id: number
 }
 
-export type RecoveryPassword = {
+export type RecoveryPasswordArgs = {
   email: string
   recaptcha: string
 }
 
-export type NewPassword = {
+export type NewPasswordArgs = {
   newPassword: string
   recoveryCode: string
-}
-
-export type ResponseError = {
-  errorDescription: {
-    field: string
-    message: string
-  }[]
-  message: string
-  statusCode: number
-  timestamp: string
 }
 
 export interface LoginArgs {
