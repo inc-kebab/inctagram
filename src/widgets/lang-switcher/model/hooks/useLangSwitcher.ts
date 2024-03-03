@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 
 export const useLangSwitcher = () => {
-  const { asPath, locale, pathname, push, query } = useRouter()
+  const { asPath, locale, pathname, query, replace } = useRouter()
 
   const changeLocale = (locale: string) => {
-    void push({ pathname, query }, asPath, {
+    void replace({ pathname, query }, asPath, {
       locale,
     })
   }

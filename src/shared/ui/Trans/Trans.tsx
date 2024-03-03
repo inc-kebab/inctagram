@@ -1,10 +1,10 @@
-import { FC, Fragment } from 'react'
+import { FC, Fragment, ReactNode } from 'react'
 
 const tagsRegex = /(<\d+>[^<>]*<\/\d+>)/
 const openCloseTagRegex = /<(\d+)>([^<>]*)<\/(\d+)>/
 
 type TransType = {
-  tags?: Record<string, (str: string) => JSX.Element>
+  tags?: Record<string, (str: string) => ReactNode>
   text: string
 }
 
