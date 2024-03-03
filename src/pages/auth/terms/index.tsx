@@ -1,4 +1,4 @@
-import { ReactElement, memo } from 'react'
+import { memo } from 'react'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
@@ -93,8 +93,12 @@ const Terms: Page = memo(() => {
   )
 })
 
-Terms.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+Terms.getLayout = (page, t) => {
+  return (
+    <AuthLayout description={t.pages.terms.metaDescription} title={t.pages.terms.metaTitle}>
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default Terms

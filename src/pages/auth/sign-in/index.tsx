@@ -1,4 +1,4 @@
-import { ReactElement, useRef } from 'react'
+import { useRef } from 'react'
 
 import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
@@ -39,8 +39,12 @@ const SignIn: Page = () => {
   )
 }
 
-SignIn.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+SignIn.getLayout = (page, t) => {
+  return (
+    <AuthLayout description={t.pages.signIn.metaDescription} title={t.pages.signIn.metaTitle}>
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default SignIn

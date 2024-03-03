@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import {
   ForgotPasswordForm,
@@ -66,8 +66,15 @@ const ForgotPassword: Page = () => {
   )
 }
 
-ForgotPassword.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+ForgotPassword.getLayout = (page, t) => {
+  return (
+    <AuthLayout
+      description={t.pages.forgotPassword.metaDescription}
+      title={t.pages.forgotPassword.metaTitle}
+    >
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default ForgotPassword

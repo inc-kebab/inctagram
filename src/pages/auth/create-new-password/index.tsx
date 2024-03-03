@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import {
   CreateNewPasswordForm,
@@ -26,8 +26,9 @@ const CreateNewPassword: Page = () => {
   const router = useRouter()
 
   const [createNewPassword, { isLoading: isCreateNewPasswordLoad }] = useNewPasswordMutation()
-  const [checkRecoveryCode, { data, isLoading }] = useCheckRecoveryCodeMutation()
-  const [resendRecoveryPassword] = useResendRecoveryPasswordMutation()
+  const [checkRecoveryCode, { data, isLoading: isCheckCodeLoading }] =
+    useCheckRecoveryCodeMutation()
+  const [resendRecoveryPassword, { isLoading: isResendLoad }] = useResendRecoveryPasswordMutation()
 
   const recoveryCode = router.query.code as string
   const email = router.query.email as string
@@ -74,7 +75,7 @@ const CreateNewPassword: Page = () => {
     })
   }, [])
 
-  if (isLoading) {
+  if (isCheckCodeLoading) {
     return <Loader fullHeight />
   }
 
@@ -87,14 +88,21 @@ const CreateNewPassword: Page = () => {
     />
   ) : (
     <>
-      <EmailVerificationBlock onResendLink={handleSubmitResend} />
+      <EmailVerificationBlock disabled={isResendLoad || open} onResendLink={handleSubmitResend} />
       <DialogEmailSent email={email} onOpenChange={setOpen} open={open} />
     </>
   )
 }
 
-CreateNewPassword.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+CreateNewPassword.getLayout = (page, t) => {
+  return (
+    <AuthLayout
+      description={t.pages.createNewPassword.metaDescription}
+      title={t.pages.createNewPassword.metaTitle}
+    >
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default CreateNewPassword

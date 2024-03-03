@@ -43,12 +43,20 @@ export const en = {
     },
   },
   pages: {
+    confirmEmail: {
+      metaDescription:
+        'Confirm your email address to access your new account and start enjoying all its benefits.',
+      metaTitle: 'Email confirmation',
+    },
     congratulations: {
       description: 'Your email has been confirmed',
       title: 'Congratulations!',
     },
     createNewPassword: {
       description: 'Your password must be between 6 and 20 characters',
+      metaDescription:
+        'Create a new password to restore access to your account and continue to use all its features.',
+      metaTitle: 'Create new password',
       title: 'Create new password',
     },
     emailVerification: {
@@ -58,8 +66,14 @@ export const en = {
     },
     forgotPassword: {
       description: 'Enter your email address and we will send you further instructions',
+      metaDescription:
+        "Forgot your password? Don't worry, we will help you restore access to your account and continue to use all its features.",
+      metaTitle: 'Forgot Password',
       success: 'The link has been sent by email. \n If you don’t receive an email send link again',
       title: 'Forgot Password',
+    },
+    main: {
+      metaTitle: 'Main',
     },
     privacy: {
       changes:
@@ -93,6 +107,9 @@ export const en = {
         'privacy policy describes how we collect, use, disclose, and safeguard your personal data. ' +
         'Please read this policy carefully to understand how we handle your information.',
       mattersTitle: 'Your Privacy Matters to Us',
+      metaDescription:
+        'Protect your privacy and find out how we use and protect your personal data.',
+      metaTitle: 'Privacy Policy',
       protectionData:
         'We take security measures to protect your personal data from unauthorized access, use, or ' +
         'disclosure. We use technical, administrative, and physical security measures to safeguard ' +
@@ -105,6 +122,8 @@ export const en = {
     },
     signIn: {
       forgotPassword: 'Forgot Password',
+      metaDescription: 'Log in to your account to access personalized features and content.',
+      metaTitle: 'Sign In',
       signUpSuggestion: 'Don’t have an account?',
       title: 'Sign In',
     },
@@ -114,6 +133,9 @@ export const en = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
       },
+      metaDescription:
+        'Create an account to start using our services and receive exclusive benefits.',
+      metaTitle: 'Sign Up',
       modalBtn: 'OK',
       modalText: 'We have sent a link to confirm your email to ',
       question: 'Do you have an account?',
@@ -144,6 +166,9 @@ export const en = {
       liability3:
         '4.3 You use Inctagram at your own risk. We do not guarantee that our application will work ' +
         'without errors or interruptions.',
+      metaDescription:
+        'Please read our terms of use to understand your rights and obligations when using our services.',
+      metaTitle: 'Terms of Service',
       registration: '1. Registration and account',
       registration1:
         '1.1 To use Inctagram, you need to create an account. You must provide accurate information ' +

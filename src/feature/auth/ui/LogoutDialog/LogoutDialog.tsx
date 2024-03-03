@@ -9,12 +9,12 @@ import { ConfirmDialog } from '@/widgets/dialogs'
 import s from './LogoutDialog.module.scss'
 
 type Props = {
-  isLoading: boolean
+  disabled?: boolean
   onLogout: () => void
 }
 
-export const LogoutDialog = ({ isLoading, onLogout }: Props) => {
-  const [open, setOpen] = useState<boolean>(false)
+export const LogoutDialog = ({ disabled, onLogout }: Props) => {
+  const [open, setOpen] = useState(false)
 
   const { t } = useTranslation()
 
@@ -24,7 +24,7 @@ export const LogoutDialog = ({ isLoading, onLogout }: Props) => {
     <ConfirmDialog
       confirmCallback={onLogout}
       content={`${t.pages.profile.logOutConfirmation} ${data?.email}`}
-      disabled={isLoading}
+      disabled={disabled}
       onOpenChange={setOpen}
       open={open}
       title={t.layout.sidebar.logout}

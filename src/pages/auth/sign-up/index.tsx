@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { SignUpForm, SignUpFormValues, useSignUpMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
@@ -33,11 +33,9 @@ export const SignUp: Page = () => {
     })
   }
 
-  const handleChangeOpen = () => {
-    setOpen(false)
-    if (ref.current) {
-      ref.current.reset()
-    }
+  const handleChangeOpen = (open: boolean) => {
+    setOpen(open)
+    ref.current?.reset()
   }
 
   return (
@@ -55,8 +53,12 @@ export const SignUp: Page = () => {
   )
 }
 
-SignUp.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+SignUp.getLayout = (page, t) => {
+  return (
+    <AuthLayout description={t.pages.signUp.metaDescription} title={t.pages.signUp.metaTitle}>
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default SignUp

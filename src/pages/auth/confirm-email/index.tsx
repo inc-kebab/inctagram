@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Congratulations,
@@ -15,19 +15,16 @@ import { useRouter } from 'next/router'
 
 const ConfirmEmail: Page = () => {
   const [open, setOpen] = useState(false)
-  const [disabled, setDisabled] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
 
   const { query } = useRouter()
 
   const [confirmEmail, { data, isLoading: isConfirmLoad }] = useConfirmEmailMutation()
-  const [resendLink] = useResendRegLinkMutation()
+  const [resendLink, { isLoading: isResendLoad }] = useResendRegLinkMutation()
 
   const email = query.email as string
   const confirmationCode = query.code as string
 
   const handleResendLink = () => {
-    setDisabled(true)
     resendLink({ email }).then(res => {
       if ('data' in res) {
         setOpen(true)
@@ -37,21 +34,15 @@ const ConfirmEmail: Page = () => {
     })
   }
 
-  const handleOpenChange = () => {
-    setOpen(false)
-    setDisabled(true)
-  }
-
   useEffect(() => {
     confirmEmail({ confirmationCode }).then(res => {
       if ('error' in res) {
         handleErrorResponse(res.error)
       }
-      setIsLoading(false)
     })
   }, [])
 
-  if (isLoading || isConfirmLoad) {
+  if (isConfirmLoad) {
     return <Loader fullHeight />
   }
 
@@ -59,14 +50,21 @@ const ConfirmEmail: Page = () => {
     <Congratulations />
   ) : (
     <>
-      <DialogEmailSent email={email} onOpenChange={handleOpenChange} open={open} />
-      <EmailVerificationBlock disabled={disabled} onResendLink={handleResendLink} />
+      <DialogEmailSent email={email} onOpenChange={setOpen} open={open} />
+      <EmailVerificationBlock disabled={isResendLoad || open} onResendLink={handleResendLink} />
     </>
   )
 }
 
-ConfirmEmail.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+ConfirmEmail.getLayout = (page, t) => {
+  return (
+    <AuthLayout
+      description={t.pages.confirmEmail.metaDescription}
+      title={t.pages.confirmEmail.metaTitle}
+    >
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default ConfirmEmail

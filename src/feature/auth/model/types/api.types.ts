@@ -51,4 +51,3 @@ export interface ConfirmEmailArgs {
 export interface CheckRecoveryCodeArgs {
   recoveryCode: string
 }
-
