@@ -33,11 +33,9 @@ export const SignUp: Page = () => {
     })
   }
 
-  const handleChangeOpen = () => {
-    setOpen(false)
-    if (ref.current) {
-      ref.current.reset()
-    }
+  const handleChangeOpen = (open: boolean) => {
+    setOpen(open)
+    ref.current?.reset()
   }
 
   return (

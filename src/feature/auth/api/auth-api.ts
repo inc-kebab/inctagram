@@ -23,8 +23,8 @@ const authApi = baseApi.injectEndpoints({
       }),
     }),
     confirmEmail: builder.mutation<void, ConfirmEmailArgs>({
-      query: confirmationCode => ({
-        body: { confirmationCode },
+      query: body => ({
+        body,
         method: 'POST',
         url: '/auth/registration-confirmation',
       }),

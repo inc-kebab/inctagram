@@ -29,7 +29,7 @@ export const Sidebar = ({ buttonName, isLoading, items, onLogout, ...rest }: Pro
           return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
         })}
       </ul>
-      <LogoutDialog isLoading={isLoading} onLogout={onLogout} />
+      <LogoutDialog disabled={isLoading} onLogout={onLogout} />
     </nav>
   )
 }
