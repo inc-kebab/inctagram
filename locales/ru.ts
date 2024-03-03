@@ -7,13 +7,16 @@ export const ru: LocaleType = {
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
+    no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
+    yes: 'Да',
   },
   label: {
+    confirmAction: 'Подствердите действие',
     confirmPassword: 'Подтвердите пароль',
     email: 'Электронная почта',
     newPassword: 'Новый пароль',
@@ -95,6 +98,9 @@ export const ru: LocaleType = {
         'для защиты ваших данных.',
       protectionDataTitle: 'Защита личных данных',
       title: 'Политика конфиденциальности',
+    },
+    profile: {
+      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',

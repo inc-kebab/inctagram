@@ -45,6 +45,23 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/login',
       }),
     }),
+    logout: builder.mutation<void, void>({
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled
+          deleteCookie('accessToken')
+          dispatch(baseApi.util.resetApiState())
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      query: () => {
+        return {
+          method: 'POST',
+          url: 'auth/logout',
+        }
+      },
+    }),
     me: builder.query<MeResponse, void>({
       query: () => ({ url: '/auth/me' }),
     }),
@@ -90,6 +107,7 @@ export const {
   useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
   useLoginMutation,
+  useLogoutMutation,
   useMeQuery,
   useNewPasswordMutation,
   useRecoveryPasswordMutation,

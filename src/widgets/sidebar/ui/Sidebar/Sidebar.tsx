@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Logout } from '@/shared/assets/icons/common'
-import { Button } from '@/shared/ui/Button'
+import { LogoutDialog } from '@/feature/auth'
 import { usePathname } from 'next/navigation'
 
 import s from './Sidebar.module.scss'
@@ -11,11 +10,12 @@ import { SidebarItem } from '../SidebarItem/SidebarItem'
 
 type Props = {
   buttonName?: string
+  isLoading: boolean
   items: SidebarElement[]
   onLogout: () => void
 } & ComponentPropsWithoutRef<'aside'>
 
-export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
+export const Sidebar = ({ buttonName, isLoading, items, onLogout, ...rest }: Props) => {
   const pathname = usePathname()
 
   return (
@@ -29,9 +29,7 @@ export const Sidebar = ({ buttonName, items, onLogout, ...rest }: Props) => {
           return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
         })}
       </ul>
-      <Button className={s.logout} onClick={onLogout} startIcon={<Logout />} variant="text">
-        {buttonName || 'Logout'}
-      </Button>
+      <LogoutDialog isLoading={isLoading} onLogout={onLogout} />
     </nav>
   )
 }

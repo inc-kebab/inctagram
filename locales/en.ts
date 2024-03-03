@@ -9,13 +9,16 @@ export const en = {
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
+    no: 'No',
     resendVerificationLink: 'Resend verification link',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
     signUp: 'Sign Up',
+    yes: 'Yes',
   },
   label: {
+    confirmAction: 'Confirm action',
     confirmPassword: 'Confirm password',
     email: 'Email',
     newPassword: 'New Password',
@@ -96,6 +99,9 @@ export const en = {
         'your data.',
       protectionDataTitle: 'Protection of Personal Data',
       title: 'Privacy Policy',
+    },
+    profile: {
+      logOutConfirmation: 'Are you really want to log out of your account?',
     },
     signIn: {
       forgotPassword: 'Forgot Password',
