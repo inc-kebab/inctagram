@@ -12,6 +12,9 @@ const meta = {
       description:
         'Is used to pass a handler function that will be called when the form is submitted',
     },
+    success: {
+      description: 'Flag for hide recaptcha when response return success status',
+    },
   },
   component: ForgotPasswordForm,
   parameters: {

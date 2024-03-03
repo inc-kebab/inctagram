@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/react'
+import { Provider } from 'react-redux'
 
 import '@/app/styles/index.scss'
+import { store } from '../src/app'
 
 const preview: Preview = {
   parameters: {
@@ -25,6 +27,13 @@ const preview: Preview = {
       ],
     },
   },
+  decorators: [
+    Story => (
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    ),
+  ],
 }
 
 export default preview
