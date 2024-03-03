@@ -10,7 +10,7 @@ import { SidebarItem } from '../SidebarItem/SidebarItem'
 
 type Props = {
   buttonName?: string
-  isLoading: boolean
+  isLoading?: boolean
   items: SidebarElement[]
   onLogout: () => void
 } & ComponentPropsWithoutRef<'aside'>
