@@ -1,5 +1,6 @@
 import { ReactElement, memo } from 'react'
 
+import { LocaleType } from '@/../locales'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { BackToPage } from '@/shared/ui/BackToPage'
@@ -93,8 +94,12 @@ const Terms: Page = memo(() => {
   )
 })
 
-Terms.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+Terms.getLayout = (page: ReactElement, t: LocaleType) => {
+  return (
+    <AuthLayout description={t.pages.terms.metaDescription} title={t.pages.terms.metaTitle}>
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default Terms

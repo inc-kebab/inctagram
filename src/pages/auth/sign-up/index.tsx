@@ -1,5 +1,6 @@
 import { ReactElement, useRef, useState } from 'react'
 
+import { LocaleType } from '@/../locales'
 import { SignUpForm, SignUpFormValues, useSignUpMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
@@ -53,8 +54,12 @@ export const SignUp: Page = () => {
   )
 }
 
-SignUp.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+SignUp.getLayout = (page: ReactElement, t: LocaleType) => {
+  return (
+    <AuthLayout description={t.pages.signUp.metaDescription} title={t.pages.signUp.metaTitle}>
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default SignUp

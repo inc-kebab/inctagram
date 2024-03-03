@@ -1,5 +1,6 @@
 import { ReactElement, useRef, useState } from 'react'
 
+import { LocaleType } from '@/../locales'
 import {
   ForgotPasswordForm,
   ForgotPasswordFormValues,
@@ -66,8 +67,15 @@ const ForgotPassword: Page = () => {
   )
 }
 
-ForgotPassword.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+ForgotPassword.getLayout = (page: ReactElement, t: LocaleType) => {
+  return (
+    <AuthLayout
+      description={t.pages.forgotPassword.metaDescription}
+      title={t.pages.forgotPassword.metaTitle}
+    >
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default ForgotPassword

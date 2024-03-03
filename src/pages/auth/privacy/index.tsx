@@ -1,5 +1,6 @@
 import { ReactElement, memo } from 'react'
 
+import { LocaleType } from '@/../locales'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { BackToPage } from '@/shared/ui/BackToPage'
@@ -69,8 +70,12 @@ const Privacy: Page = memo(() => {
   )
 })
 
-Privacy.getLayout = (page: ReactElement) => {
-  return <AuthLayout>{page}</AuthLayout>
+Privacy.getLayout = (page: ReactElement, t: LocaleType) => {
+  return (
+    <AuthLayout description={t.pages.privacy.metaDescription} title={t.pages.privacy.metaTitle}>
+      {page}
+    </AuthLayout>
+  )
 }
 
 export default Privacy
