@@ -22,12 +22,12 @@ import s from './CreateNewPassword.module.scss'
 const CreateNewPassword: Page = () => {
   const ref = useRef<UseFormRef<CreateNewPasswordFormValues>>(null)
   const [open, setOpen] = useState(false)
+  const [showLoader, setShowLoader] = useState(true)
 
   const router = useRouter()
 
   const [createNewPassword, { isLoading: isCreateNewPasswordLoad }] = useNewPasswordMutation()
-  const [checkRecoveryCode, { data, isLoading: isCheckCodeLoading }] =
-    useCheckRecoveryCodeMutation()
+  const [checkRecoveryCode, { data }] = useCheckRecoveryCodeMutation()
   const [resendRecoveryPassword, { isLoading: isResendLoad }] = useResendRecoveryPasswordMutation()
 
   const recoveryCode = router.query.code as string
@@ -72,10 +72,11 @@ const CreateNewPassword: Page = () => {
       if ('error' in res) {
         handleErrorResponse(res.error)
       }
+      setShowLoader(false)
     })
   }, [])
 
-  if (isCheckCodeLoading) {
+  if (showLoader) {
     return <Loader fullHeight />
   }
 

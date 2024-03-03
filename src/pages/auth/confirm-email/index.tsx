@@ -15,10 +15,11 @@ import { useRouter } from 'next/router'
 
 const ConfirmEmail: Page = () => {
   const [open, setOpen] = useState(false)
+  const [showLoader, setShowLoader] = useState(true)
 
   const { query } = useRouter()
 
-  const [confirmEmail, { data, isLoading: isConfirmLoad }] = useConfirmEmailMutation()
+  const [confirmEmail, { data }] = useConfirmEmailMutation()
   const [resendLink, { isLoading: isResendLoad }] = useResendRegLinkMutation()
 
   const email = query.email as string
@@ -39,10 +40,11 @@ const ConfirmEmail: Page = () => {
       if ('error' in res) {
         handleErrorResponse(res.error)
       }
+      setShowLoader(false)
     })
   }, [])
 
-  if (isConfirmLoad) {
+  if (showLoader) {
     return <Loader fullHeight />
   }
 

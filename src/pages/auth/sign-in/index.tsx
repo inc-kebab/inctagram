@@ -1,20 +1,27 @@
 import { useRef } from 'react'
 
 import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
+import { AuthRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { AuthLayout } from '@/widgets/layout'
+import { useRouter } from 'next/router'
 
 import s from './SignIn.module.scss'
 
 const SignIn: Page = () => {
-  const [signIn, { isLoading }] = useLoginMutation()
-
   const ref = useRef<UseFormRef<SignInFormValues>>(null)
+
+  const { replace } = useRouter()
+
+  const [signIn, { isLoading }] = useLoginMutation()
 
   const handleSignIn = (data: SignInFormValues) => {
     signIn(data).then(res => {
+      if ('data' in res) {
+        void replace(AuthRoutes.REDIRECT + '/credentials')
+      }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError
 
