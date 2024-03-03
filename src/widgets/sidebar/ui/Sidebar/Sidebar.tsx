@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { LogOut } from '@/feature/auth'
+import { LogoutDialog } from '@/feature/auth'
 import { usePathname } from 'next/navigation'
 
 import s from './Sidebar.module.scss'
@@ -12,10 +12,10 @@ type Props = {
   buttonName?: string
   isLoading: boolean
   items: SidebarElement[]
-  onLogOut: () => void
+  onLogout: () => void
 } & ComponentPropsWithoutRef<'aside'>
 
-export const Sidebar = ({ buttonName, isLoading, items, onLogOut, ...rest }: Props) => {
+export const Sidebar = ({ buttonName, isLoading, items, onLogout, ...rest }: Props) => {
   const pathname = usePathname()
 
   return (
@@ -29,7 +29,7 @@ export const Sidebar = ({ buttonName, isLoading, items, onLogOut, ...rest }: Pro
           return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
         })}
       </ul>
-      <LogOut isLoading={isLoading} onLogOut={onLogOut} />
+      <LogoutDialog isLoading={isLoading} onLogout={onLogout} />
     </nav>
   )
 }

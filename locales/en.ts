@@ -17,6 +17,7 @@ export const en = {
     yes: 'Yes',
   },
   label: {
+    confirmAction: 'Confirm action',
     confirmPassword: 'Confirm password',
     email: 'Email',
     newPassword: 'New Password',

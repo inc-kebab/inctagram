@@ -15,6 +15,7 @@ export const ru: LocaleType = {
     yes: 'Да',
   },
   label: {
+    confirmAction: 'Подствердите действие',
     confirmPassword: 'Подтвердите пароль',
     email: 'Электронная почта',
     newPassword: 'Новый пароль',
