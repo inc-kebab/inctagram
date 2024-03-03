@@ -6,10 +6,10 @@ export type MetaProps = {
   description?: string
   ogImageSrc?: string
   ogUrl?: string
-  title: string
+  title?: string
 } & PropsWithChildren
 
-export const Meta = ({ children, description, ogImageSrc, ogUrl, title }: MetaProps) => {
+export const Meta = ({ children, description, ogImageSrc, ogUrl, title = 'Page' }: MetaProps) => {
   return (
     <>
       <Head>
