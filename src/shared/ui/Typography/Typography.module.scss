@@ -1,0 +1,100 @@
+@import '@/app/styles/mixins';
+
+.typography {
+  user-select: none;
+  margin: 0;
+}
+
+.large {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-l);
+}
+
+.h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
+}
+
+.h2 {
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.h3 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-m);
+}
+
+.regular16 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
+
+.regularBold16 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.regular14 {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
+
+.regularMedium14 {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-m);
+}
+
+.regularBold14 {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.small {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+}
+
+.smallSemiBold {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-s);
+}
+
+.regularLink {
+  cursor: pointer;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+
+.smallLink {
+  cursor: pointer;
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+  color: var(--primary-500);
+  text-decoration: underline;
+}
+
+@include mobile-small {
+  .h1 {
+    font-size: var(--font-size-l);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-m);
+  }
+}

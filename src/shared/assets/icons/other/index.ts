@@ -1,0 +1,7 @@
+export { default as Facebook } from './facebook.svg'
+export { default as Github } from './github.svg'
+export { default as Google } from './google.svg'
+export { default as Paid } from './paid.svg'
+export { default as Paypal } from './paypal.svg'
+export { default as Recaptcha } from './recaptcha.svg'
+export { default as Stripe } from './stripe.svg'

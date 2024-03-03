@@ -1,60 +1,16 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import { Page } from '@/shared/types/layout'
+import { PublicLayout } from '@/widgets/layout'
 
-const Home = () => {
+const Public: Page = () => {
   return (
     <>
-      <Head>
-        <title>Inctagram</title>
-        <meta content="Inctagram" name="description" />
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link href="/favicon.ico" rel="icon" />
-      </Head>
-      <main>
-        <ul>
-          <li>
-            <Link href="/">home</Link>
-          </li>
-          <li>
-            <Link href="/auth/sign-in">sign-in</Link>
-          </li>
-          <li>
-            <Link href="/auth/sign-up">sign-up</Link>
-          </li>
-          <li>
-            <Link href="/auth/terms">terms</Link>
-          </li>
-          <li>
-            <Link href="/auth/privacy">privacy</Link>
-          </li>
-          <li>
-            <Link href="/auth/forgot-password">forgot-password</Link>
-          </li>
-          <li>
-            <Link href="/auth/password-recovery">password-recovery</Link>
-          </li>
-          <li>
-            <Link href="/auth/create-new-password">create-new-password</Link>
-          </li>
-          <li>
-            <Link href="/favorites">favorites</Link>
-          </li>
-          <li>
-            <Link href="/messenger">messenger</Link>
-          </li>
-          <li>
-            <Link href="/profile">profile</Link>
-          </li>
-          <li>
-            <Link href="/search">search</Link>
-          </li>
-          <li>
-            <Link href="/statistics">statistics</Link>
-          </li>
-        </ul>
-      </main>
+      <main>POSTS LIST</main>
     </>
   )
 }
 
-export default Home
+Public.getLayout = (page, t) => {
+  return <PublicLayout title={t.pages.main.metaTitle}>{page}</PublicLayout>
+}
+
+export default Public

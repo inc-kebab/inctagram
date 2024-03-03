@@ -1,0 +1,34 @@
+:root {
+  // colors
+  --toastify-color-info: var(--primary-900);
+  --toastify-color-success: var(--success-900);
+  --toastify-color-warning: var(--warning-900);
+  --toastify-color-error: var(--danger-900);
+
+  // size
+  --toastify-toast-min-height: 3rem;
+  --toastify-toast-width: 24.25rem;
+
+  // font
+  --toastify-font-family: 'Inter', sans-serif;
+}
+
+.Toastify__toast {
+  box-sizing: border-box;
+  padding: 0.75rem 1.5rem;
+  line-height: var(--line-height-m);
+  border-radius: 2px;
+}
+
+.Toastify__toast-body {
+  margin: 0;
+  padding: 0;
+}
+
+.Toastify__toast--error {
+  border: 1px solid var(--danger-500);
+}
+
+.Toastify__toast--success {
+  border: 1px solid var(--success-500, #14cc70);
+}

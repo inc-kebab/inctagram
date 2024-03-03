@@ -1,1 +1,0 @@
-export { useLoader } from './useLoader'

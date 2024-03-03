@@ -1,0 +1,66 @@
+@import '@/app/styles/mixins';
+
+.form {
+  width: 378px;
+  padding: 23px 24px 36px;
+}
+
+.formName {
+  margin-bottom: 13px;
+}
+
+.formNetwork {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.networkLink {
+  margin: 0 30px;
+  padding: 0;
+  outline-style: none;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.passwordConfirm {
+  margin-bottom: 12px;
+}
+
+.checkbox {
+  margin-bottom: 12px;
+}
+
+.signUp {
+  margin-bottom: 18px;
+}
+
+.footerText {
+  margin-bottom: 6px;
+}
+
+@include mobile-small {
+  .form {
+    width: 100%;
+    margin: 0;
+    padding: 17px 15px 0;
+
+    background-color: inherit;
+    border: none;
+  }
+
+  .formName {
+    margin-bottom: 19px;
+  }
+
+  .formNetwork {
+    margin-bottom: 12px;
+  }
+
+  .checkbox {
+    margin-bottom: 24px;
+  }
+}

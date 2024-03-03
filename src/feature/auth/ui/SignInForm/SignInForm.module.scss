@@ -1,0 +1,72 @@
+@import '@/app/styles/mixins';
+
+.card {
+  width: 378px;
+  padding: 23px 24px 36px;
+}
+
+.formName {
+  margin-bottom: 13px;
+}
+
+.formNetwork {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 13px;
+}
+
+.networkLink {
+  margin: 0 30px;
+  padding: 0;
+  outline-style: none;
+}
+
+.input {
+  margin-top: 24px;
+}
+
+.forgotPassword {
+  display: block;
+  margin-top: 36px;
+  color: var(--light-900);
+}
+
+.signInButton {
+  margin-top: 24px;
+}
+
+.signUpSuggestion {
+  margin-top: 18px;
+}
+
+.signUpButton {
+  margin-top: 6px;
+}
+
+@include mobile-small {
+  .card {
+    width: 100%;
+    margin: 0;
+    padding: 17px 15px 0;
+
+    background-color: inherit;
+    border: none;
+  }
+
+  .formName {
+    margin-bottom: 19px;
+  }
+
+  .formNetwork {
+    margin-top: 19px;
+  }
+
+  .forgotPassword {
+    margin-top: 6px;
+  }
+
+  .signInButton {
+    margin-top: 66px;
+  }
+}

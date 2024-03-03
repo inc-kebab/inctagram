@@ -1,0 +1,51 @@
+@import '@/app/styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 35px;
+  margin-bottom: 19px;
+}
+
+.button {
+  order: 1;
+  width: 182px;
+  margin-top: 54px;
+}
+
+.image {
+  order: 2;
+
+  width: 100%;
+  min-width: 330px;
+  max-width: 473px;
+  height: auto;
+  margin-top: 72px;
+}
+
+@include mobile-small {
+  .wrapper {
+    padding: 0 15px;
+  }
+
+  .title {
+    margin-top: 17px;
+    margin-bottom: 13px;
+  }
+
+  .image {
+    order: 1;
+    margin-top: 66px;
+  }
+
+  .button {
+    order: 2;
+    width: 100%;
+    margin-top: 46px;
+  }
+}
