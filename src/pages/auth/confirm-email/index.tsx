@@ -1,6 +1,5 @@
-import { ReactElement, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { LocaleType } from '@/../locales'
 import {
   Congratulations,
   EmailVerificationBlock,
@@ -57,7 +56,7 @@ const ConfirmEmail: Page = () => {
   )
 }
 
-ConfirmEmail.getLayout = (page: ReactElement, t: LocaleType) => {
+ConfirmEmail.getLayout = (page, t) => {
   return (
     <AuthLayout
       description={t.pages.confirmEmail.metaDescription}

@@ -1,6 +1,5 @@
-import { ReactElement, useRef } from 'react'
+import { useRef } from 'react'
 
-import { LocaleType } from '@/../locales'
 import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
@@ -40,7 +39,7 @@ const SignIn: Page = () => {
   )
 }
 
-SignIn.getLayout = (page: ReactElement, t: LocaleType) => {
+SignIn.getLayout = (page, t) => {
   return (
     <AuthLayout description={t.pages.signIn.metaDescription} title={t.pages.signIn.metaTitle}>
       {page}

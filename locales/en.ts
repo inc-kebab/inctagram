@@ -72,6 +72,9 @@ export const en = {
       success: 'The link has been sent by email. \n If you don’t receive an email send link again',
       title: 'Forgot Password',
     },
+    main: {
+      metaTitle: 'Main',
+    },
     privacy: {
       changes:
         'We reserve the right to make changes to our privacy policy. In the event of significant ' +

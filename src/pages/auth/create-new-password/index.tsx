@@ -1,6 +1,5 @@
-import { ReactElement, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { LocaleType } from '@/../locales'
 import {
   CreateNewPasswordForm,
   CreateNewPasswordFormValues,
@@ -95,7 +94,7 @@ const CreateNewPassword: Page = () => {
   )
 }
 
-CreateNewPassword.getLayout = (page: ReactElement, t: LocaleType) => {
+CreateNewPassword.getLayout = (page, t) => {
   return (
     <AuthLayout
       description={t.pages.createNewPassword.metaDescription}
