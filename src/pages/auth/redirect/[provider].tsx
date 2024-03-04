@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useMeQuery } from '@/feature/auth/api/auth-api'
-import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
+import { AppRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
 import { setCookie } from 'cookies-next'
 import { useSearchParams } from 'next/navigation'
@@ -27,7 +27,7 @@ const RedirectProvider = () => {
       if (data) {
         void replace(AppRoutes.HOME)
       } else {
-        void replace(AuthRoutes.SIGN_IN)
+        void replace(AppRoutes.MAIN)
       }
     }
   }, [query.provider, data, params, replace])

@@ -47,7 +47,7 @@ export const SignUpForm = forwardRef(
         passwordConfirm: '',
         username: '',
       },
-      mode: 'onBlur',
+      mode: 'onTouched',
       resolver: zodResolver(signUpSchema(t)),
     })
 
