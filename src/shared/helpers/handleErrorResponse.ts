@@ -20,6 +20,16 @@ interface CatchingData<T extends Record<string, any>> {
   fieldErrors: FieldError<T>[] | null
 }
 
+const getValidError = <T extends Record<string, any>>(errorData: ResponseError<T>) => {
+  let errorMsg = errorData.message || 'Server error: error message was not received'
+
+  if (errorMsg === 'Http Exception') {
+    errorMsg = errorData.errorDescription?.[0].message || 'Http Exception'
+  }
+
+  return errorMsg
+}
+
 export const handleErrorResponse = <T extends Record<string, any>>(
   error?: FetchBaseQueryError | SerializedError
 ): CatchingData<T> | undefined => {
@@ -52,7 +62,9 @@ export const handleErrorResponse = <T extends Record<string, any>>(
     case 'data' in error: {
       const errorData = error.data as ResponseError<T>
 
-      const errorMsg = `${error.status} - ${errorData.message || 'Request error'}`
+      const validErrorMsg = getValidError(errorData)
+
+      const errorMsg = `${error.status} - ${validErrorMsg}`
 
       toast.error(errorMsg)
 
