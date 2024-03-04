@@ -44,7 +44,7 @@ export const ForgotPasswordForm = forwardRef(
         email: '',
         recaptcha: '',
       },
-      mode: 'onBlur',
+      mode: 'onTouched',
       resolver: zodResolver(forgotPasswordSchema(t)),
     })
 

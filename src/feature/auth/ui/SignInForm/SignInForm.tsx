@@ -45,7 +45,7 @@ export const SignInForm = forwardRef(
         email: '',
         password: '',
       },
-      mode: 'onBlur',
+      mode: 'onTouched',
       resolver: zodResolver(signInValidationSchema(t)),
     })
 

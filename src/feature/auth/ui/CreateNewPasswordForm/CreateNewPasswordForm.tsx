@@ -46,7 +46,7 @@ export const CreateNewPasswordForm = forwardRef(
         confirmPassword: '',
         password: '',
       },
-      mode: 'onBlur',
+      mode: 'onTouched',
       resolver: zodResolver(createNewPasswordSchema(t)),
     })
 
