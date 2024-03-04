@@ -19,7 +19,7 @@ const ConfirmEmail: Page = () => {
 
   const { query } = useRouter()
 
-  const [confirmEmail, { data }] = useConfirmEmailMutation()
+  const [confirmEmail, { isSuccess }] = useConfirmEmailMutation()
   const [resendLink, { isLoading: isResendLoad }] = useResendRegLinkMutation()
 
   const email = query.email as string
@@ -48,7 +48,7 @@ const ConfirmEmail: Page = () => {
     return <Loader fullHeight />
   }
 
-  return data ? (
+  return isSuccess ? (
     <Congratulations />
   ) : (
     <>
