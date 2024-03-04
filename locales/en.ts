@@ -205,9 +205,10 @@ export const en = {
     minLength6: 'Minimum 6 characters for password',
     passwordMismatch: 'The passwords must match',
     passwordVerification:
-      'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      'The password must contain at least 1 capital letter and 1 special character',
     required: 'Required field',
-    userNameVerification: 'Username must contain:\n' + '0-9; A-Z; a-z; _ ; -',
+    userNameVerification:
+      'Username can contain letters (uppercase and lowercase), numbers, and the characters "_" and "-"',
   },
 }
 
