@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import s from './TextArea.module.scss'
 
-type TextAreaProps = {
+export type TextAreaProps = {
   classNameTextArea?: string
   error?: string
   label?: string
