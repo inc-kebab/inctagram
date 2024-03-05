@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
+import { ControlledTextArea } from '@/shared/ui_controlled/ControlledTextArea'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
@@ -66,12 +67,14 @@ export const EditProfileForm = ({ className, disabled, onSubmit, userData }: Pro
         label={t.label.lastName}
         name="lastName"
       />
-      <ControlledTextField
+      <ControlledTextArea
         control={control}
         disabled={disabled}
         error={errors.aboutMe?.message}
         label={t.label.aboutMe}
         name="aboutMe"
+        resize="none"
+        rows={3}
       />
       <Button className={s.submit} type="submit">
         {t.button.save}

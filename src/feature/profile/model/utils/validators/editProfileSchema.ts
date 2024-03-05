@@ -11,13 +11,13 @@ export const editProfileSchema = (t: LocaleType) =>
       .string()
       .trim()
       .regex(NAME_PATTERN, { message: t.validation.nameVerification('First name') })
-      .min(6, t.validation.minLength(1))
+      .min(1, t.validation.minLength(1))
       .max(20, t.validation.maxLength(50)),
     lastName: z
       .string()
       .trim()
       .regex(NAME_PATTERN, { message: t.validation.nameVerification('Last name') })
-      .min(6, t.validation.minLength(1))
+      .min(1, t.validation.minLength(1))
       .max(30, t.validation.maxLength(50)),
     userName: z
       .string()
