@@ -13,15 +13,11 @@ type Props = {
 
 export const Radio = ({ className, disabled, label, ...rest }: Props) => {
   return (
-    <Typography
-      asComponent="label"
-      className={clsx(s.labelWrapper, { [s.disabled]: disabled }, className)}
-      variant="regular16"
-    >
+    <label className={clsx(s.labelWrapper, { [s.disabled]: disabled }, className)}>
       <RadixRadio.Item className={s.item} disabled={disabled} {...rest}>
         <RadixRadio.Indicator className={s.indicator} />
       </RadixRadio.Item>
       {label}
-    </Typography>
+    </label>
   )
 }

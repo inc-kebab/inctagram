@@ -2,6 +2,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  line-height: var(--line-height-m);
 
   &.disabled {
     cursor: default;
@@ -14,8 +15,8 @@
 
   position: relative;
 
-  width: 1rem;
-  height: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
   margin-right: 0.75rem;
 
   background-color: transparent;
@@ -79,8 +80,8 @@
 
     display: block;
 
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.6rem;
+    height: 0.6rem;
 
     background-color: var(--light-500);
     border-radius: 50%;
