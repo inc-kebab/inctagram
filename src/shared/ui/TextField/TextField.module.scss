@@ -18,6 +18,10 @@
   &:disabled {
     color: var(--dark-100);
   }
+
+  &:focus {
+    outline: 2px solid var(--primary-500);
+  }
 }
 
 .searchIcon {

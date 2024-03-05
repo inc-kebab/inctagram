@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const LangSwitcher = ({ className }: Props) => {
-  const { changeLocale, locale } = useLangSwitcher()
+  const { changeLocale, defaultLocale, locale } = useLangSwitcher()
 
   const { t } = useTranslation()
 
@@ -33,7 +33,7 @@ export const LangSwitcher = ({ className }: Props) => {
     <Select
       className={clsx(s.root, className)}
       classNames={{ icon: s.icon, item: s.item, trigger: s.trigger }}
-      defaultValue={locale || 'en'}
+      defaultValue={locale || defaultLocale}
       onValueChange={changeLocale}
       options={SELECT_OPTIONS}
     />
