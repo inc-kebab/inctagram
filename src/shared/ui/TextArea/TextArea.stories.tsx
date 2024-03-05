@@ -4,11 +4,19 @@ import { TextArea } from './TextArea'
 
 const meta: Meta<typeof TextArea> = {
   argTypes: {
+    classNameTextArea: {
+      description:
+        'The classNameTextArea prop allows you to apply a custom styles directly to the native textarea component.',
+    },
     error: {
       description: 'String describing the error',
     },
     label: {
       description: 'Label',
+    },
+    resize: {
+      description:
+        'The resize property controls the ability to resize the textarea element. It accepts the following values:',
     },
   },
   component: TextArea,

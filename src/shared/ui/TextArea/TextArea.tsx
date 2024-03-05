@@ -8,10 +8,14 @@ type TextAreaProps = {
   classNameTextArea?: string
   error?: string
   label?: string
+  resize?: 'both' | 'horizontal' | 'none' | 'vertical'
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, classNameTextArea, disabled, error, label, id = label, ...props }, ref) => {
+  (
+    { className, classNameTextArea, disabled, error, label, id = label, resize = 'both', ...props },
+    ref
+  ) => {
     const classes = {
       container: clsx(s.container, className),
       label: clsx(s.label, { [s.disabled]: disabled }),
@@ -30,6 +34,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           disabled={disabled}
           id={id}
           ref={ref}
+          style={{ resize: resize }}
           {...props}
         ></textarea>
         {error && <span className={s.errorSpan}>{error}</span>}
