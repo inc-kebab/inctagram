@@ -34,7 +34,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           disabled={disabled}
           id={id}
           ref={ref}
-          style={{ resize: resize }}
+          style={{ resize: resize, ...props.style }}
           {...props}
         ></textarea>
         {error && <span className={s.errorSpan}>{error}</span>}
