@@ -18,8 +18,9 @@
   color: var(--light-900);
 
   background-color: var(--dark-500);
-  border: 1px solid var(--dark-100);
+  border: none;
   border-radius: 2px;
+  outline: 1px solid var(--dark-100);
 
   transition:
     color 0.3s,
@@ -31,18 +32,21 @@
 
   &:focus-visible {
     color: var(--light-100);
-    border: 1px solid var(--primary-700);
-    outline: none;
+    outline: 2px solid var(--primary-500);
   }
 
   &:active:not(:disabled) {
     color: var(--light-100);
-    border: 1px solid var(--light-100);
+    outline: 1px solid var(--light-100);
   }
 
   &.error {
     color: var(--light-100);
     border-color: var(--danger-500);
+  }
+
+  &:hover:not(:disabled, :focus-visible, .error) {
+    outline: 1px solid var(--light-900);
   }
 }
 
