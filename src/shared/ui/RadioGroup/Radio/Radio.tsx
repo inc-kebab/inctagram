@@ -1,6 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import * as RadixRadio from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 
@@ -13,8 +12,6 @@ type Props = {
 } & Omit<ComponentPropsWithoutRef<typeof RadixRadio.Item>, 'asChild'>
 
 export const Radio = ({ className, disabled, label, ...rest }: Props) => {
-  const { t } = useTranslation()
-
   return (
     <Typography
       asComponent="label"
