@@ -1,21 +1,19 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
+import { TextField } from '@/shared/ui/TextField'
 import { ControlledTextArea } from '@/shared/ui_controlled/ControlledTextArea'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
-import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 
 import s from './EditProfileForm.module.scss'
 
-import {
-  EditProfileFormValues,
-  editProfileSchema,
-} from '../../model/utils/validators/editProfileSchema'
+import { useEditProfileForm } from '../../model/hooks/useEditProfileForm'
+import { EditProfileFormValues } from '../../model/utils/validators/editProfileSchema'
 
 type Props = {
   disabled?: boolean
@@ -27,24 +25,8 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
   ({ className, disabled, onSubmit, userData, ...rest }, ref) => {
     const { t } = useTranslation()
 
-    const {
-      control,
-      formState: { errors, isValid },
-      handleSubmit,
-      reset,
-      setError,
-    } = useForm<EditProfileFormValues>({
-      defaultValues: {
-        aboutMe: userData?.aboutMe || '',
-        birthDate: userData?.birthDate || '',
-        city: userData?.city || '',
-        firstName: userData?.firstName || '',
-        lastName: userData?.lastName || '',
-        userName: userData?.userName || '',
-      },
-      mode: 'onTouched',
-      resolver: zodResolver(editProfileSchema(t)),
-    })
+    const { changeCityRef, control, errors, handleSubmit, isValid, reset, setError } =
+      useEditProfileForm(userData, t)
 
     useImperativeHandle(ref, () => ({ reset, setError }))
 
@@ -75,6 +57,20 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.lastName?.message}
           label={t.label.lastName}
           name="lastName"
+        />
+        <Controller
+          control={control}
+          name="city"
+          render={({ field }) => (
+            <TextField
+              disabled={disabled}
+              error={errors.city?.message}
+              label={t.label.city}
+              {...field}
+              placeholder=""
+              ref={changeCityRef}
+            />
+          )}
         />
         <ControlledTextArea
           control={control}
