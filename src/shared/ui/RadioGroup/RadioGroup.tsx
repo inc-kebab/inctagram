@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
 import * as RadixRadioGroup from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
@@ -9,7 +9,7 @@ import { Radio } from './Radio'
 
 export interface RadioOption {
   disabled?: boolean
-  label: string
+  label: ReactNode
   value: string
 }
 
@@ -22,7 +22,7 @@ export const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Root>, Ra
     const { className, options, ...rest } = props
 
     return (
-      <RadixRadioGroup.Root className={clsx(s.radioGroup, className)} {...rest} ref={ref}>
+      <RadixRadioGroup.Root className={clsx(s.root, className)} {...rest} ref={ref}>
         {options?.map((el, index) => <Radio key={index} {...el} />)}
       </RadixRadioGroup.Root>
     )
