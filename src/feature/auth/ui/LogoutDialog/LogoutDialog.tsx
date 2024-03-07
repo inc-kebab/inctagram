@@ -20,10 +20,20 @@ export const LogoutDialog = ({ disabled, onLogout }: Props) => {
 
   const { data } = useMeQuery()
 
+  const emailContent: string | undefined = `"${data?.email}"`
+
+  const textContent: React.JSX.Element = (
+    <div>
+      {t.pages.profile.logOutConfirmation}
+      <br />
+      <span className={s.email}>{emailContent}</span>?
+    </div>
+  )
+
   return (
     <ConfirmDialog
       confirmCallback={onLogout}
-      content={`${t.pages.profile.logOutConfirmation} ${data?.email}`}
+      content={textContent}
       disabled={disabled}
       onOpenChange={setOpen}
       open={open}
