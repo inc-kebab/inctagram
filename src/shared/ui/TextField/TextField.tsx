@@ -65,7 +65,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         </label>
         <div className={s.inputWrapper}>
           <input
-            autoComplete={type === 'email' ? 'email' : undefined}
             className={classes.input}
             disabled={disabled}
             id={id}

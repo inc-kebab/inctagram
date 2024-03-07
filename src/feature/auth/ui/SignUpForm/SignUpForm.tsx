@@ -84,6 +84,7 @@ export const SignUpForm = forwardRef(
           </Button>
         </div>
         <ControlledTextField
+          autoComplete="username"
           className={s.input}
           control={control}
           disabled={disabled}
@@ -93,6 +94,7 @@ export const SignUpForm = forwardRef(
           rules={{ required: true }}
         />
         <ControlledTextField
+          autoComplete="email"
           className={s.input}
           control={control}
           disabled={disabled}
@@ -103,6 +105,7 @@ export const SignUpForm = forwardRef(
           type="email"
         />
         <ControlledTextField
+          autoComplete="new-password"
           className={s.input}
           control={control}
           disabled={disabled}
@@ -113,6 +116,7 @@ export const SignUpForm = forwardRef(
           type="password"
         />
         <ControlledTextField
+          autoComplete="new-password"
           className={s.passwordConfirm}
           control={control}
           disabled={disabled}
