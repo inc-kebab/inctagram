@@ -68,7 +68,7 @@ export const ForgotPasswordForm = forwardRef(
         <ControlledTextField
           className={s.textField}
           control={control}
-          disabled={disabled}
+          disabled={disabled || success}
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
