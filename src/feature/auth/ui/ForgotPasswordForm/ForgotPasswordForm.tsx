@@ -66,6 +66,7 @@ export const ForgotPasswordForm = forwardRef(
           {t.pages.forgotPassword.title}
         </Typography>
         <ControlledTextField
+          autoComplete="email"
           className={s.textField}
           control={control}
           disabled={disabled || success}

@@ -70,6 +70,7 @@ export const SignInForm = forwardRef(
           </Button>
         </div>
         <ControlledTextField
+          autoComplete="email"
           className={s.input}
           control={control}
           disabled={disabled}
@@ -80,6 +81,7 @@ export const SignInForm = forwardRef(
           type="email"
         />
         <ControlledTextField
+          autoComplete="current-password"
           className={s.input}
           control={control}
           disabled={disabled}
