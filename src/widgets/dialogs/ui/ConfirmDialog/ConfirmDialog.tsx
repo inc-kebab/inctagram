@@ -38,13 +38,11 @@ export const ConfirmDialog = ({
       <div className={s.dialog}>
         {content}
         <div className={s.actions}>
-          <Button disabled={disabled} onClick={confirmCallback}>
+          <Button disabled={disabled} onClick={confirmCallback} variant="outline">
             {t.button.yes}
           </Button>
           <DialogClose>
-            <Button disabled={disabled} variant="outline">
-              {t.button.no}
-            </Button>
+            <Button disabled={disabled}>{t.button.no}</Button>
           </DialogClose>
         </div>
       </div>

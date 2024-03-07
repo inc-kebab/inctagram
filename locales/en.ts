@@ -118,7 +118,7 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      logOutConfirmation: 'Are you really want to log out of your account?',
+      logOutConfirmation: 'Are you really want to log out of your account',
     },
     signIn: {
       forgotPassword: 'Forgot Password',

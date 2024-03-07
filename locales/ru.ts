@@ -117,7 +117,7 @@ export const ru: LocaleType = {
       title: 'Политика конфиденциальности',
     },
     profile: {
-      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
+      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',
