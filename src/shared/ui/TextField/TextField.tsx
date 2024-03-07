@@ -65,7 +65,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         </label>
         <div className={s.inputWrapper}>
           <input
-            autoComplete={type === 'email' ? 'email' : undefined}
             className={classes.input}
             disabled={disabled}
             id={id}
@@ -80,11 +79,11 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {type === 'password' &&
             (isVisible ? (
               <button className={s.rightBtn} disabled={disabled} onClick={onVisible} type="button">
-                <EyeOff />
+                <Eye />
               </button>
             ) : (
               <button className={s.rightBtn} disabled={disabled} onClick={onVisible} type="button">
-                <Eye />
+                <EyeOff />
               </button>
             ))}
           {type === 'search' && value && (

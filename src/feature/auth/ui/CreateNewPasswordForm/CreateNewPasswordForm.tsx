@@ -46,7 +46,7 @@ export const CreateNewPasswordForm = forwardRef(
         confirmPassword: '',
         password: '',
       },
-      mode: 'onBlur',
+      mode: 'onTouched',
       resolver: zodResolver(createNewPasswordSchema(t)),
     })
 
@@ -63,6 +63,7 @@ export const CreateNewPasswordForm = forwardRef(
           {t.pages.createNewPassword.title}
         </Typography>
         <ControlledTextField
+          autoComplete="new-password"
           className={s.firstTextField}
           control={control}
           disabled={disabled}
@@ -72,6 +73,7 @@ export const CreateNewPasswordForm = forwardRef(
           type="password"
         />
         <ControlledTextField
+          autoComplete="new-password"
           className={s.secondTextField}
           control={control}
           disabled={disabled}

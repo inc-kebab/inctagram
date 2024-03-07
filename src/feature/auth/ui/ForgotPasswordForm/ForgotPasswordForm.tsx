@@ -44,7 +44,7 @@ export const ForgotPasswordForm = forwardRef(
         email: '',
         recaptcha: '',
       },
-      mode: 'onBlur',
+      mode: 'onTouched',
       resolver: zodResolver(forgotPasswordSchema(t)),
     })
 
@@ -66,9 +66,10 @@ export const ForgotPasswordForm = forwardRef(
           {t.pages.forgotPassword.title}
         </Typography>
         <ControlledTextField
+          autoComplete="email"
           className={s.textField}
           control={control}
-          disabled={disabled}
+          disabled={disabled || success}
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
