@@ -9,6 +9,7 @@ export const ru: LocaleType = {
     createNewPassword: 'Создать новый пароль',
     no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
+    selectFromComputer: 'Выбрать с Компьютера',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
@@ -117,6 +118,7 @@ export const ru: LocaleType = {
       title: 'Политика конфиденциальности',
     },
     profile: {
+      addProfilePhoto: 'Добавить фото профиля',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
     },
@@ -198,6 +200,8 @@ export const ru: LocaleType = {
     },
   },
   validation: {
+    avatarSize: 'Ошибка! Размер фотографии должен быть меньше 10 МБ!',
+    avatarType: 'Ошибка! Формат загруженной фотографии должен быть PNG или JPEG.',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
     maxLength20: 'Максимальное количество символов 20',
