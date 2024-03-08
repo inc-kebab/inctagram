@@ -11,6 +11,7 @@ export const en = {
     createNewPassword: 'Create new password',
     no: 'No',
     resendVerificationLink: 'Resend verification link',
+    selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
@@ -118,6 +119,7 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
+      addProfilePhoto: 'Add a Profile Photo',
       logOutConfirmation: 'Are you really want to log out of your account?',
     },
     signIn: {
@@ -199,6 +201,8 @@ export const en = {
     },
   },
   validation: {
+    avatarSize: 'Error! Photo size must be less than 10 MB!',
+    avatarType: 'Error! The format of the uploaded photo must be PNG and JPEG',
     emailVerification: 'The email must match the format example@example.com',
     invalidCredentials: 'The email or password are incorrect. Try again please',
     maxLength20: 'Maximum 20 characters for password',

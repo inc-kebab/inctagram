@@ -1,9 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { StoryObj } from '@storybook/react'
 
 import { Notification } from '@/shared/ui/Notification/Notification'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    error: { description: 'Error description' },
+    success: { description: 'Success description' },
+  },
   component: Notification,
   tags: ['autodocs'],
   title: 'shared/Notifcation',
@@ -12,4 +15,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const NotificationWithError: Story = {
+  args: {
+    error:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut ',
+  },
+}
+
+export const NotificationWithSuccess: Story = {
+  args: {
+    success:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut ',
+  },
+}
