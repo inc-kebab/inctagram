@@ -117,6 +117,7 @@ export const ru: LocaleType = {
       title: 'Политика конфиденциальности',
     },
     profile: {
+      deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
     },
     signIn: {
