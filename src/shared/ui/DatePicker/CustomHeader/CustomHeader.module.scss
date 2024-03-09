@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 24px;
+
+  background-color: var(--dark-500);
+}
+
+.date {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > .button {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    background-color: var(--dark-100);
+    border-radius: 50%;
+  }
+}

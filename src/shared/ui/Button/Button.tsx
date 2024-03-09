@@ -10,7 +10,7 @@ type CustomProps = {
   endIcon?: ReactNode
   fullWidth?: boolean
   startIcon?: ReactNode
-  variant?: 'outline' | 'primary' | 'secondary' | 'text'
+  variant?: 'outline' | 'primary' | 'secondary' | 'text' | 'transparent'
 }
 
 type Props<T extends ElementType> = PolymorphComponentPropsWithRef<T, CustomProps>
