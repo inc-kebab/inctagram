@@ -3,7 +3,7 @@ import { baseApi } from '@/shared/api/base-api'
 
 const profileApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    addAvatar: builder.mutation<void, AddAvatarResponse>({
+    addAvatar: builder.mutation<AddAvatarResponse, FormData>({
       query: body => ({
         body,
         method: 'POST',

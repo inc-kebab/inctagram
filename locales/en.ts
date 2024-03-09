@@ -11,6 +11,7 @@ export const en = {
     createNewPassword: 'Create new password',
     no: 'No',
     resendVerificationLink: 'Resend verification link',
+    save: 'Save',
     selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',

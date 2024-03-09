@@ -9,6 +9,7 @@ export const ru: LocaleType = {
     createNewPassword: 'Создать новый пароль',
     no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
+    save: 'Сохранить',
     selectFromComputer: 'Выбрать с Компьютера',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
