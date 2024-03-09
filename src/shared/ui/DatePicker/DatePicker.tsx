@@ -20,7 +20,7 @@ export type DatePickerProps<WithRange extends boolean | undefined = undefined> =
   placeholder?: string
 } & Pick<
   ReactDatePickerProps<WithRange>,
-  'endDate' | 'maxDate' | 'onChange' | 'selected' | 'selectsRange' | 'startDate'
+  'endDate' | 'id' | 'maxDate' | 'onChange' | 'selected' | 'selectsRange' | 'startDate'
 >
 
 const dateFormat: string = 'dd/MM/yyyy'
