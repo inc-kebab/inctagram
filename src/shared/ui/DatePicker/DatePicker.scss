@@ -1,0 +1,98 @@
+$day-width: 36px;
+
+.react-datepicker {
+  padding: 16px 24px;
+
+  background-color: var(--dark-500);
+  border: none;
+  border-radius: 2px;
+  outline: 1px solid var(--dark-100);
+
+  &__triangle {
+    display: none;
+  }
+
+  &-wrapper {
+    width: 100%;
+  }
+
+  &__header {
+    width: calc($day-width * 7);
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+
+  &__day-names {
+    display: grid;
+    grid-template: 1fr / repeat(7, 1fr);
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  &__day-name {
+    display: block;
+    align-self: end;
+
+    width: unset;
+    margin: 0;
+
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-m);
+    color: var(--light-900);
+  }
+
+  &__month {
+    margin: 0;
+  }
+
+  &__day {
+    width: $day-width;
+    height: $day-width;
+    margin: 0;
+
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-l);
+    color: var(--light-100);
+
+    transition: all 0.2s linear;
+
+    &:hover {
+      background-color: var(--primary-900);
+      border-radius: unset;
+    }
+
+    &--selected,
+    &--keyboard-selected {
+      background-color: var(--primary-900);
+      border-radius: 50%;
+    }
+
+    &--in-range {
+      background-color: var(--primary-900);
+      border-radius: unset;
+    }
+
+    &--in-selecting-range {
+      border-radius: unset;
+    }
+
+    &--outside-month {
+      pointer-events: none;
+      color: var(--light-900);
+    }
+
+    &--weekend {
+      color: var(--danger-300);
+    }
+
+    &--disabled {
+      pointer-events: none;
+      color: var(--light-900);
+    }
+
+    &--today {
+      font-size: var(--font-size-l);
+    }
+  }
+}

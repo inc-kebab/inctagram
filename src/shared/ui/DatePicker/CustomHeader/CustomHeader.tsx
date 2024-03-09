@@ -6,15 +6,28 @@ import { getMonth, getYear } from 'date-fns'
 
 import s from './CustomHeader.module.scss'
 
-type CustomHeaderType = {
-  months: string[]
-}
+const months: string[] = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
 
-export const CustomHeader = (
-  props: Pick<ReactDatePickerCustomHeaderProps, 'date' | 'decreaseMonth' | 'increaseMonth'> &
-    CustomHeaderType
-) => {
-  const { date, decreaseMonth, increaseMonth, months } = props
+type CustomHeaderProps = Pick<
+  ReactDatePickerCustomHeaderProps,
+  'date' | 'decreaseMonth' | 'increaseMonth'
+>
+
+export const CustomHeader = (props: CustomHeaderProps) => {
+  const { date, decreaseMonth, increaseMonth } = props
 
   return (
     <div className={s.header}>
@@ -26,13 +39,13 @@ export const CustomHeader = (
           className={s.button}
           onClick={decreaseMonth}
           startIcon={<ChevronLeft />}
-          variant="transparent"
+          variant="text"
         />
         <Button
           className={s.button}
           onClick={increaseMonth}
           startIcon={<ChevronRight />}
-          variant="transparent"
+          variant="text"
         />
       </div>
     </div>
