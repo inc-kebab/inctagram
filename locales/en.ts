@@ -124,7 +124,7 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      logOutConfirmation: 'Are you really want to log out of your account?',
+      logOutConfirmation: 'Are you really want to log out of your account',
     },
     signIn: {
       forgotPassword: 'Forgot Password',
@@ -205,6 +205,8 @@ export const en = {
     },
   },
   validation: {
+    ageMin: 'A user under 13 cannot create a profile',
+    dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
     invalidCredentials: 'The email or password are incorrect. Try again please',
     maxLength: (len: number) => `Maximum ${len} characters`,

@@ -1,0 +1,94 @@
+.calendar {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  color: var(--light-900);
+}
+
+.disabled {
+  color: var(--dark-100);
+}
+
+.errorText {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--danger-500);
+}
+
+.textField {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+  color: var(--light-900);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 6px 42px 6px 12px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  color: var(--light-900);
+
+  background: var(--dark-500);
+  border: none;
+  border-radius: 2px;
+  outline: 1px solid var(--dark-100);
+
+  transition:
+    color 0.3s,
+    outline-color 0.3s;
+
+  &:-webkit-autofill {
+    transition: all 5000s ease-in-out 0s;
+  }
+
+  &.error {
+    color: var(--light-100);
+    outline: 1px solid var(--danger-500);
+
+    & + .calendar {
+      color: var(--danger-500);
+    }
+  }
+
+  &:disabled {
+    color: var(--dark-100);
+
+    & + .calendar {
+      color: var(--dark-100);
+    }
+  }
+
+  &:focus-visible {
+    color: var(--light-100);
+    background-color: var(--dark-500);
+
+    & + .calendar {
+      color: var(--light-100);
+    }
+  }
+
+  &:active:not(:disabled) {
+    color: var(--light-100);
+    outline: 1px solid var(--light-100);
+
+    & + .calendar {
+      color: var(--light-100);
+    }
+  }
+
+  &:hover:not(:disabled, :focus-visible, .error) {
+    outline: 1px solid var(--light-900);
+  }
+}

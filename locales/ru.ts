@@ -123,7 +123,7 @@ export const ru: LocaleType = {
       title: 'Политика конфиденциальности',
     },
     profile: {
-      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
+      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',
@@ -203,6 +203,8 @@ export const ru: LocaleType = {
     },
   },
   validation: {
+    ageMin: 'Создание профиля пользователями младше 13 лет не допускается',
+    dateOfBirthMax: 'Дата рождения не может быть позже текущей даты',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
     maxLength: (len: number) => `Максимальное количество символов ${len}`,
