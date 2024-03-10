@@ -15,6 +15,7 @@ const ProfileSettings: Page = () => {
         onSubmit={(data: EditProfileFormValues) => {
           console.log({
             ...data,
+            aboutMe: data.aboutMe || undefined,
             birthDate: data.birthDate ? format(data.birthDate, 'dd-MM-yyyy') : undefined,
             city: data.city || undefined,
           })
