@@ -1,14 +1,29 @@
+import { RootState } from '@/app/store/store'
 import { baseApi } from '@/shared/api/base-api'
 
-import { GetProfileResponse } from '../model/types/profile.types'
-import { EditProfileFormValues } from '../model/utils/validators/editProfileSchema'
+import { GetProfileResponse, UpdateProfileArgs } from '../model/types/profile.types'
 
-const authApi = baseApi.injectEndpoints({
+const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
     getMyProfile: builder.query<GetProfileResponse, void>({
       query: () => ({ url: '/profile' }),
     }),
-    updateProfile: builder.mutation<void, EditProfileFormValues>({
+    updateProfile: builder.mutation<void, UpdateProfileArgs>({
+      invalidatesTags: ['profile'],
+      onQueryStarted: async (
+        { aboutMe, birthDate, city, firstname, lastname, username },
+        { dispatch, getState, queryFulfilled }
+      ) => {
+        const {
+          profile: { profile },
+        } = getState() as RootState
+
+        const result = dispatch(
+          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
+            Object.assign(draft, { profile })
+          })
+        )
+      },
       query: body => ({
         body,
         method: 'PUT',
@@ -18,4 +33,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetMyProfileQuery, useUpdateProfileMutation } = authApi
+export const { useGetMyProfileQuery, useUpdateProfileMutation } = profileAPI

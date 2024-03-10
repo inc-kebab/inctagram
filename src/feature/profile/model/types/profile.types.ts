@@ -28,3 +28,11 @@ export type GetProfileResponse = {
   lastName: string
   userName: string
 }
+export type UpdateProfileArgs = {
+  aboutMe?: string
+  birthDate?: string
+  city?: string
+  firstname: string
+  lastname: string
+  username: string
+}

@@ -1,11 +1,11 @@
 import { ReactElement } from 'react'
 
-import ProfileSettings from '@/pages/profile/settings'
+import GeneralInformation from '@/feature/profile/ui/GeneralInformation/GeneralInformation'
 import { Page } from '@/shared/types/layout'
 import { SidebarLayout } from '@/widgets/layout'
 
 const Profile: Page = () => {
-  return <ProfileSettings />
+  return <GeneralInformation />
 }
 
 Profile.getLayout = (page: ReactElement) => {
