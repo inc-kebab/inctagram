@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { Nullable } from '@/shared/types'
+import { addDays, format } from 'date-fns'
 
 import { DatePicker } from './DatePicker'
 
@@ -49,6 +50,13 @@ export const WithLabel: Story = {
   },
 }
 
+export const WithMaxDate: Story = {
+  args: {
+    maxDate: new Date(),
+    placeholder,
+  },
+}
+
 export const WithError: Story = {
   args: {
     error: (
@@ -75,15 +83,9 @@ export const Controlled: Story = {
       setDate(date)
     }
 
-    const day = date?.getDate()
-    const month = (date?.getMonth() || 0) + 1
-    const year = date?.getFullYear()
-
-    const str = `${day}/${month}/${year}`
-
     return (
       <div>
-        <span>Selected date: {str}</span>
+        <span>Selected date: {date && format(date, 'dd/MM/yyyy')}</span>
         <DatePicker onChange={onChange} selected={date} />
       </div>
     )
@@ -101,22 +103,11 @@ export const ControlledRange: Story = {
       setEndDate(end)
     }
 
-    const startday = startDate?.getDate()
-    const startmonth = (startDate?.getMonth() || 0) + 1
-    const startyear = startDate?.getFullYear()
-
-    const str1 = `${startday}/${startmonth}/${startyear}`
-
-    const endday = endDate?.getDate()
-    const endmonth = (endDate?.getMonth() || 0) + 1
-    const endyear = endDate?.getFullYear()
-
-    const str2 = endday ? `${endday}/${endmonth}/${endyear}` : undefined
-
     return (
       <div>
         <span>
-          Selected range date: {str1} - {str2 || ''}
+          Selected range date: {startDate && format(startDate, 'dd/MM/yyyy')} -{' '}
+          {endDate && format(endDate, 'dd/MM/yyyy')}
         </span>
         <DatePicker<true>
           endDate={endDate}

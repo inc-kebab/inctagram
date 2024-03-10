@@ -34,5 +34,13 @@
 
     background-color: var(--dark-100);
     border-radius: 50%;
+
+    &:hover {
+      background-color: var(--light-900);
+    }
+
+    &:active {
+      background-color: var(--light-100);
+    }
   }
 }

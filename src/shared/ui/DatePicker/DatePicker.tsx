@@ -2,9 +2,6 @@ import { ReactNode } from 'react'
 import * as React from 'react'
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 
-import clsx from 'clsx'
-import { addDays } from 'date-fns'
-
 import 'react-datepicker/dist/react-datepicker.css'
 import './DatePicker.scss'
 
@@ -13,33 +10,37 @@ import s from './DatePicker.module.scss'
 import { CustomHeader } from './CustomHeader/CustomHeader'
 import { CustomInput } from './CustomInput/CustomInput'
 
-export type DatePickerProps<WithRange extends boolean | undefined = undefined> = {
+type NeedDatePickerProps =
+  | 'dateFormat'
+  | 'endDate'
+  | 'id'
+  | 'maxDate'
+  | 'onChange'
+  | 'selected'
+  | 'selectsRange'
+  | 'startDate'
+
+export type DatePickerProps<Range extends boolean | undefined = undefined> = {
   className?: string
   error?: ReactNode
   label?: string
   placeholder?: string
-} & Pick<
-  ReactDatePickerProps<WithRange>,
-  'endDate' | 'id' | 'maxDate' | 'onChange' | 'selected' | 'selectsRange' | 'startDate'
->
+} & Pick<ReactDatePickerProps<Range>, NeedDatePickerProps>
 
-const dateFormat: string = 'dd/MM/yyyy'
-
-export const DatePicker = <WithRange extends boolean | undefined = undefined>({
+export const DatePicker = <Range extends boolean | undefined = undefined>({
+  dateFormat = 'dd/MM/yyyy',
   error,
   label,
-  maxDate,
   placeholder,
   ...rest
-}: DatePickerProps<WithRange>) => {
+}: DatePickerProps<Range>) => {
   return (
     <div className={s.root}>
       <ReactDatePicker
-        calendarClassName={clsx(s.datePicker, error && s.error)}
+        calendarClassName={s.datePicker}
         calendarStartDay={1}
         customInput={<CustomInput error={error} label={label} />}
         dateFormat={dateFormat}
-        maxDate={maxDate && addDays(maxDate, 0)}
         placeholderText={placeholder}
         popperPlacement="bottom-start"
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
