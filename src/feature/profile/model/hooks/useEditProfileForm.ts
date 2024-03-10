@@ -19,12 +19,12 @@ export const useEditProfileForm = (userData: any, t: LocaleType) => {
     setValue,
   } = useForm<EditProfileFormValues>({
     defaultValues: {
-      aboutMe: userData?.aboutMe || '',
-      birthDate: userData?.birthDate || '',
-      city: userData?.city || '',
-      firstName: userData?.firstName || '',
-      lastName: userData?.lastName || '',
-      userName: userData?.userName || '',
+      aboutMe: userData?.aboutMe || undefined,
+      birthDate: userData?.birthDate || null,
+      city: userData?.city || undefined,
+      firstname: userData?.firstName || '',
+      lastname: userData?.lastName || '',
+      username: userData?.userName || '',
     },
     mode: 'onTouched',
     resolver: zodResolver(editProfileSchema(t)),

@@ -1,14 +1,17 @@
-import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useEffect, useImperativeHandle } from 'react'
 import { Controller } from 'react-hook-form'
 
+import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Card } from '@/shared/ui/Card'
 import { TextField } from '@/shared/ui/TextField'
+import { ControlledDatePicker } from '@/shared/ui_controlled/ControlledDatePicker'
 import { ControlledTextArea } from '@/shared/ui_controlled/ControlledTextArea'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 import s from './EditProfileForm.module.scss'
 
@@ -40,23 +43,46 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
         <ControlledTextField
           control={control}
           disabled={disabled}
-          error={errors.userName?.message}
+          error={errors.username?.message}
           label={t.label.userName}
-          name="userName"
+          name="username"
         />
         <ControlledTextField
           control={control}
           disabled={disabled}
-          error={errors.firstName?.message}
+          error={errors.firstname?.message}
           label={t.label.firstName}
-          name="firstName"
+          name="firstname"
         />
         <ControlledTextField
           control={control}
           disabled={disabled}
-          error={errors.lastName?.message}
+          error={errors.lastname?.message}
           label={t.label.lastName}
-          name="lastName"
+          name="lastname"
+        />
+        <ControlledDatePicker
+          control={control}
+          disabled={disabled}
+          error={
+            errors.birthDate?.message && (
+              <>
+                {errors.birthDate?.message}.
+                <Link
+                  href={{
+                    pathname: AuthRoutes.PRIVACY,
+                    query: { sender: 'profile' },
+                  }}
+                >
+                  {' '}
+                  {t.pages.privacy.title}
+                </Link>
+              </>
+            )
+          }
+          label={t.label.birthDate}
+          maxDate={new Date()}
+          name="birthDate"
         />
         <Controller
           control={control}

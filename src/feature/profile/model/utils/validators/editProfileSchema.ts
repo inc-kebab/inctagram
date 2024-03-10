@@ -4,22 +4,38 @@ import { z } from 'zod'
 
 export const editProfileSchema = (t: LocaleType) =>
   z.object({
-    aboutMe: z.string().trim().max(200, t.validation.maxLength(200)),
-    birthDate: z.string().trim(),
-    city: z.string().trim(),
-    firstName: z
+    aboutMe: z.string().trim().max(200, t.validation.maxLength(200)).optional(),
+    birthDate: z
+      .date()
+      .nullable()
+      .refine(
+        birthDate => {
+          if (!birthDate) {
+            return true
+          }
+          if (birthDate) {
+            const date = new Date(birthDate)
+            const userAge = new Date().getFullYear() - date.getFullYear()
+
+            return userAge >= 13
+          }
+        },
+        { message: t.validation.ageMin }
+      ),
+    city: z.string().trim().optional(),
+    firstname: z
       .string()
       .trim()
       .regex(NAME_PATTERN, { message: t.validation.nameVerification('First name') })
       .min(1, t.validation.minLength(1))
       .max(20, t.validation.maxLength(50)),
-    lastName: z
+    lastname: z
       .string()
       .trim()
       .regex(NAME_PATTERN, { message: t.validation.nameVerification('Last name') })
       .min(1, t.validation.minLength(1))
       .max(30, t.validation.maxLength(50)),
-    userName: z
+    username: z
       .string()
       .trim()
       .regex(USERNAME_PATTERN, { message: t.validation.userNameVerification })
