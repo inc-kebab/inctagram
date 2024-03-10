@@ -8,8 +8,8 @@ export const createNewPasswordSchema = (t: LocaleType) =>
       confirmPassword: z.string().default(''),
       password: z
         .string()
-        .min(6, t.validation.minLength6)
-        .max(20, t.validation.maxLength20)
+        .min(6, t.validation.minLength(6))
+        .max(20, t.validation.maxLength(20))
         .regex(PASSWORD_PATTERN, {
           message: t.validation.passwordVerification,
         })

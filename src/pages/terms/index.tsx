@@ -21,7 +21,7 @@ const Terms: Page = memo(() => {
       <BackToPage
         className={s.link}
         onNavigate={handleNavigateToPrevPage}
-        title={t.button.backToSignUp}
+        title={router.query.sender ? t.button.back : t.button.backToSignUp}
       />
       <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">
         {t.pages.terms.title}

@@ -4,11 +4,13 @@ import { LocaleType } from './en'
 
 export const ru: LocaleType = {
   button: {
+    back: 'Вернуться',
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
     no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
+    save: 'Сохранить изменения',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
@@ -16,9 +18,14 @@ export const ru: LocaleType = {
     yes: 'Да',
   },
   label: {
+    aboutMe: 'Обо мне',
+    birthDate: 'Дата рождения',
+    city: 'Город',
     confirmAction: 'Подствердите действие',
     confirmPassword: 'Подтвердите пароль',
     email: 'Электронная почта',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
     newPassword: 'Новый пароль',
     password: 'Пароль',
     reCaptcha: 'Я не робот',
@@ -197,16 +204,18 @@ export const ru: LocaleType = {
     },
   },
   validation: {
-    ageMin: 'Создание профиля пользователями младше 13 лет не допускается',
+    ageMin: 'Создание профиля пользователями младше 13 лет не допускается ',
     dateOfBirthMax: 'Дата рождения не может быть позже текущей даты',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
-    maxLength20: 'Максимальное количество символов 20',
-    minLength6: 'Минимальное количество символов 6',
+    maxLength: (len: number) => `Максимальное количество символов ${len}`,
+    minLength: (len: number) => `Минимальное количество символов ${len}`,
+    nameVerification: (field: string) =>
+      `${field} может содержать только буквы (заглавные и строчные)`,
     passwordMismatch: 'Пароли должны совпадать',
     passwordVerification: 'Пароль должен содержать минимум 1 заглавную букву, спец. символ и цифру',
     required: 'Обязательное поле',
     userNameVerification:
-      'Имя пользователя может содержать буквы (заглавные и строчные), цифры и символы "_" и "-"',
+      'Имя пользователя может содержать только буквы (заглавные и строчные), цифры и символы "_" и "-"',
   },
 }
