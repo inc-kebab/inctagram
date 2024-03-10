@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { Nullable } from '@/shared/types'
-import { addDays, format } from 'date-fns'
+import { format } from 'date-fns'
 
 import { DatePicker } from './DatePicker'
 
@@ -155,7 +155,7 @@ export const ControlledRange: Story = {
           Selected range date: {startDate && format(startDate, 'dd/MM/yyyy')} -{' '}
           {endDate && format(endDate, 'dd/MM/yyyy')}
         </span>
-        <DatePicker<true>
+        <DatePicker
           endDate={endDate}
           onChange={onChange}
           selected={startDate}

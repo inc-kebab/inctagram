@@ -39,12 +39,14 @@ export const CustomHeader = (props: CustomHeaderProps) => {
           className={s.button}
           onClick={decreaseMonth}
           startIcon={<ChevronLeft />}
+          type="button"
           variant="text"
         />
         <Button
           className={s.button}
           onClick={increaseMonth}
           startIcon={<ChevronRight />}
+          type="button"
           variant="text"
         />
       </div>

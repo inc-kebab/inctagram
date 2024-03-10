@@ -23,5 +23,14 @@ export const ControlledDatePicker = <T extends FieldValues>({
     shouldUnregister,
   })
 
-  return <DatePicker id={name} onChange={onChange} selected={value} {...rest} {...field} />
+  return (
+    <DatePicker
+      id={name}
+      onChange={onChange}
+      selected={value}
+      startDate={value}
+      {...rest}
+      {...field}
+    />
+  )
 }
