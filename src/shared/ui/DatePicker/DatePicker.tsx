@@ -12,6 +12,7 @@ import { CustomInput } from './CustomInput/CustomInput'
 
 type NeedDatePickerProps =
   | 'dateFormat'
+  | 'disabled'
   | 'endDate'
   | 'id'
   | 'maxDate'

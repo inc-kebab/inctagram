@@ -16,6 +16,10 @@ const meta = {
       control: false,
       description: 'Needed date format for show in input. Default `dd/MM/yyyy`',
     },
+    disabled: {
+      control: 'boolean',
+      description: 'Standard prop',
+    },
     endDate: {
       control: false,
       description: 'End date for `range mode`. Type `Date`',
@@ -74,6 +78,13 @@ const placeholder = 'Select you date...'
 
 export const Default: Story = {
   args: {
+    placeholder,
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
     placeholder,
   },
 }
