@@ -16,6 +16,7 @@ const ProfileSettings: Page = () => {
           console.log({
             ...data,
             birthDate: data.birthDate ? format(data.birthDate, 'dd-MM-yyyy') : undefined,
+            city: data.city || undefined,
           })
         }}
       />

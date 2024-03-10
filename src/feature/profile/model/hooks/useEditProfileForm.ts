@@ -21,7 +21,7 @@ export const useEditProfileForm = (userData: any, t: LocaleType) => {
     defaultValues: {
       aboutMe: userData?.aboutMe || undefined,
       birthDate: userData?.birthDate || null,
-      city: userData?.city || undefined,
+      city: userData?.city || '',
       firstname: userData?.firstName || '',
       lastname: userData?.lastName || '',
       username: userData?.userName || '',
