@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ForwardedRef, ReactNode, forwardRef } from 'react'
 import * as React from 'react'
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 
@@ -28,27 +28,26 @@ export type DatePickerProps<Range extends boolean | undefined = undefined> = {
   placeholder?: string
 } & Pick<ReactDatePickerProps<Range>, NeedDatePickerProps>
 
-export const DatePicker = <Range extends boolean | undefined = undefined>({
-  dateFormat = 'dd/MM/yyyy',
-  error,
-  label,
-  placeholder,
-  ...rest
-}: DatePickerProps<Range>) => {
-  return (
-    <div className={s.root}>
-      <ReactDatePicker
-        calendarClassName={s.datePicker}
-        calendarStartDay={1}
-        customInput={<CustomInput error={error} label={label} />}
-        dateFormat={dateFormat}
-        placeholderText={placeholder}
-        popperPlacement="bottom-start"
-        renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-          <CustomHeader date={date} decreaseMonth={decreaseMonth} increaseMonth={increaseMonth} />
-        )}
-        {...rest}
-      />
-    </div>
-  )
-}
+export const DatePicker = forwardRef(
+  <Range extends boolean | undefined = undefined>(
+    { dateFormat = 'dd/MM/yyyy', error, label, placeholder, ...rest }: DatePickerProps<Range>,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
+    return (
+      <div className={s.root}>
+        <ReactDatePicker
+          calendarClassName={s.datePicker}
+          calendarStartDay={1}
+          customInput={<CustomInput error={error} label={label} ref={ref} />}
+          dateFormat={dateFormat}
+          placeholderText={placeholder}
+          popperPlacement="bottom-start"
+          renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
+            <CustomHeader date={date} decreaseMonth={decreaseMonth} increaseMonth={increaseMonth} />
+          )}
+          {...rest}
+        />
+      </div>
+    )
+  }
+)
