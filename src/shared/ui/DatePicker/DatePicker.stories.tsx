@@ -8,7 +8,51 @@ import { addDays, format } from 'date-fns'
 import { DatePicker } from './DatePicker'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    className: {
+      control: false,
+    },
+    dateFormat: {
+      control: false,
+      description: 'Needed date format for show in input. Default `dd/MM/yyyy`',
+    },
+    endDate: {
+      control: false,
+      description: 'End date for `range mode`. Type `Date`',
+    },
+    error: {
+      control: 'text',
+      description: 'Error content',
+    },
+    label: {
+      control: 'text',
+      description: 'Text above input',
+    },
+    maxDate: {
+      control: 'date',
+      description: 'Limiter. Type `Date`',
+    },
+    onChange: {
+      action: 'Date changed!',
+      description: 'Callback for control current value.',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Standard placeholder input prop',
+    },
+    selected: {
+      control: 'date',
+      description: 'Selected date for show in input',
+    },
+    selectsRange: {
+      control: 'boolean',
+      description: 'Flag for de/activate `range mode`. Type `Date`',
+    },
+    startDate: {
+      control: false,
+      description: 'Start date for `range mode`. Type `Date`',
+    },
+  },
   component: DatePicker,
   parameters: {
     docs: {
@@ -31,15 +75,6 @@ const placeholder = 'Select you date...'
 export const Default: Story = {
   args: {
     placeholder,
-  },
-}
-
-export const DefaultFullScreen: Story = {
-  args: {
-    placeholder,
-  },
-  parameters: {
-    layout: 'fullscreen',
   },
 }
 
