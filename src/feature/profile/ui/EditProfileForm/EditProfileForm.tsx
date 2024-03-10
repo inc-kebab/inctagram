@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useEffect, useImperativeHandle } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { Controller } from 'react-hook-form'
 
 import { AuthRoutes } from '@/shared/const/routes'
@@ -32,6 +32,15 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
       useEditProfileForm(userData, t)
 
     useImperativeHandle(ref, () => ({ reset, setError }))
+
+    const LinkForPrivacy = (
+      <Link
+        className={s.link}
+        href={{ pathname: AuthRoutes.PRIVACY, query: { sender: 'profile' } }}
+      >
+        {t.pages.privacy.title}
+      </Link>
+    )
 
     return (
       <Card
@@ -67,16 +76,8 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={
             errors.birthDate?.message && (
               <>
-                {errors.birthDate?.message}.
-                <Link
-                  href={{
-                    pathname: AuthRoutes.PRIVACY,
-                    query: { sender: 'profile' },
-                  }}
-                >
-                  {' '}
-                  {t.pages.privacy.title}
-                </Link>
+                {errors.birthDate?.message}
+                {LinkForPrivacy}
               </>
             )
           }

@@ -6,6 +6,7 @@
 
 export const en = {
   button: {
+    back: 'Back',
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
@@ -205,7 +206,7 @@ export const en = {
     },
   },
   validation: {
-    ageMin: 'A user under 13 cannot create a profile',
+    ageMin: 'A user under 13 cannot create a profile ',
     dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
     invalidCredentials: 'The email or password are incorrect. Try again please',

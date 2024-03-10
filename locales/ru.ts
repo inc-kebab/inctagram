@@ -4,6 +4,7 @@ import { LocaleType } from './en'
 
 export const ru: LocaleType = {
   button: {
+    back: 'Вернуться',
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
@@ -203,7 +204,7 @@ export const ru: LocaleType = {
     },
   },
   validation: {
-    ageMin: 'Создание профиля пользователями младше 13 лет не допускается',
+    ageMin: 'Создание профиля пользователями младше 13 лет не допускается ',
     dateOfBirthMax: 'Дата рождения не может быть позже текущей даты',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
