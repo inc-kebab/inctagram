@@ -197,6 +197,8 @@ export const ru: LocaleType = {
     },
   },
   validation: {
+    ageMin: 'Создание профиля пользователями младше 13 лет не допускается',
+    dateOfBirthMax: 'Дата рождения не может быть позже текущей даты',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
     maxLength20: 'Максимальное количество символов 20',

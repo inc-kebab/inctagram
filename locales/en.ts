@@ -199,6 +199,8 @@ export const en = {
     },
   },
   validation: {
+    ageMin: 'A user under 13 cannot create a profile',
+    dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
     invalidCredentials: 'The email or password are incorrect. Try again please',
     maxLength20: 'Maximum 20 characters for password',
