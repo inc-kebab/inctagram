@@ -11,15 +11,6 @@
   color: var(--dark-100);
 }
 
-.error {
-  color: var(--light-100);
-  outline: 1px solid var(--danger-500);
-
-  & + .calendar {
-    color: var(--danger-500);
-  }
-}
-
 .errorText {
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
@@ -60,6 +51,15 @@
 
   &:-webkit-autofill {
     transition: all 5000s ease-in-out 0s;
+  }
+
+  &.error {
+    color: var(--light-100);
+    outline: 1px solid var(--danger-500);
+
+    & + .calendar {
+      color: var(--danger-500);
+    }
   }
 
   &:disabled {
