@@ -20,9 +20,11 @@ export const CustomInput = forwardRef<HTMLInputElement, Props>(
 
     return (
       <div className={classes.textField}>
-        <label className={classes.label} htmlFor={id}>
-          {label}
-        </label>
+        {label && (
+          <label className={classes.label} htmlFor={id}>
+            {label}
+          </label>
+        )}
         <div className={s.inputWrapper}>
           <input className={classes.input} disabled={disabled} id={id} ref={ref} {...props} />
           <Calendar className={s.calendar} />
