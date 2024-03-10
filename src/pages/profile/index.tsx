@@ -1,10 +1,11 @@
 import { ReactElement } from 'react'
 
+import ProfileSettings from '@/pages/profile/settings'
 import { Page } from '@/shared/types/layout'
 import { SidebarLayout } from '@/widgets/layout'
 
 const Profile: Page = () => {
-  return <div>Profile page</div>
+  return <ProfileSettings />
 }
 
 Profile.getLayout = (page: ReactElement) => {
