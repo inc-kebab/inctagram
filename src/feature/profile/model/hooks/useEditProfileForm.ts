@@ -1,11 +1,12 @@
+import { useMemo } from 'react'
 import { usePlacesWidget } from 'react-google-autocomplete'
 import { useForm } from 'react-hook-form'
 
 import { LocaleType } from '@/../locales'
-import { GetProfileResponse } from '@/feature/profile/model/types/profile.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
+import { GetProfileResponse } from '../types/profile.types'
 import { EditProfileFormValues, editProfileSchema } from '../utils/validators/editProfileSchema'
 
 export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: LocaleType) => {
@@ -19,14 +20,18 @@ export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: 
     setError,
     setValue,
   } = useForm<EditProfileFormValues>({
-    defaultValues: {
-      aboutMe: userData?.aboutMe || undefined,
-      birthDate: userData?.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
-      city: userData?.city || '',
-      firstname: userData?.firstName || '',
-      lastname: userData?.lastName || '',
-      username: userData?.userName || '',
-    },
+    defaultValues: useMemo(() => {
+      console.log('call memo', userData?.username || '')
+
+      return {
+        aboutMe: userData?.aboutMe || undefined,
+        birthDate: userData?.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
+        city: userData?.city || '',
+        firstname: userData?.firstName || '',
+        lastname: userData?.lastName || '',
+        username: userData?.username || '',
+      }
+    }, [userData]),
     mode: 'onTouched',
     resolver: zodResolver(editProfileSchema(t)),
   })

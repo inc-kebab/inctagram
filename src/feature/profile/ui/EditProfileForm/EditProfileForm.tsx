@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { Controller } from 'react-hook-form'
 
-import { GetProfileResponse } from '@/feature/profile/model/types/profile.types'
 import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
@@ -17,6 +16,7 @@ import Link from 'next/link'
 import s from './EditProfileForm.module.scss'
 
 import { useEditProfileForm } from '../../model/hooks/useEditProfileForm'
+import { GetProfileResponse } from '../../model/types/profile.types'
 import { EditProfileFormValues } from '../../model/utils/validators/editProfileSchema'
 
 type Props = {

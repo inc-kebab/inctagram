@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import GeneralInformation from '@/feature/profile/ui/GeneralInformation/GeneralInformation'
+import { GeneralInformation } from '@/feature/profile'
 import { Page } from '@/shared/types/layout'
 import { SidebarLayout } from '@/widgets/layout'
 

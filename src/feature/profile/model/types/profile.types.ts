@@ -26,7 +26,7 @@ export type GetProfileResponse = {
   firstName: string
   id: number
   lastName: string
-  userName: string
+  username: string
 }
 export type UpdateProfileArgs = {
   aboutMe?: string
