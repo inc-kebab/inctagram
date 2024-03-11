@@ -205,6 +205,12 @@ export const en = {
         'agree with our terms, please do not use our application.',
     },
   },
+  tabs: {
+    devices: 'Devices',
+    general: 'General information',
+    management: 'Account management',
+    payments: 'My payments',
+  },
   validation: {
     ageMin: 'A user under 13 cannot create a profile ',
     dateOfBirthMax: 'Date of birth cannot be greater than the current date',

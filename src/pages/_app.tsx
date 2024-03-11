@@ -10,9 +10,9 @@ import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
 import { Inter } from 'next/font/google'
 
-import '@/app/styles/index.scss'
 import '@/app/styles/nprogress.scss'
 import 'react-toastify/dist/ReactToastify.css'
+import '@/app/styles/index.scss'
 
 type Props = AppProps & {
   Component: Page
