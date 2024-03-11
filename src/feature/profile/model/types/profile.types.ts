@@ -18,14 +18,14 @@ export type Avatars = {
 }
 
 export type GetProfileResponse = {
-  aboutMe: string
+  aboutMe: null | string
   avatars: Avatars
-  city: string
+  birthDate: null | string
+  city: null | string
   createdAt: string
-  dateOfBirth: string
-  firstName: string
+  firstName: null | string
   id: number
-  lastName: string
+  lastName: null | string
   username: string
 }
 export type UpdateProfileArgs = {

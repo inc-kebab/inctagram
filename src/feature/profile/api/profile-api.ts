@@ -5,6 +5,7 @@ import { GetProfileResponse, UpdateProfileArgs } from '../model/types/profile.ty
 const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
     getMyProfile: builder.query<GetProfileResponse, void>({
+      providesTags: ['profile'],
       query: () => ({ url: '/profile' }),
     }),
     updateProfile: builder.mutation<void, UpdateProfileArgs>({
@@ -16,9 +17,9 @@ const profileAPI = baseApi.injectEndpoints({
         const result = dispatch(
           profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
             if (draft) {
-              draft.aboutMe = aboutMe as string
-              draft.dateOfBirth = birthDate
-              draft.city = city as string
+              draft.aboutMe = aboutMe || null
+              draft.birthDate = birthDate
+              draft.city = city || null
               draft.firstName = firstname
               draft.lastName = lastname
               draft.username = username
