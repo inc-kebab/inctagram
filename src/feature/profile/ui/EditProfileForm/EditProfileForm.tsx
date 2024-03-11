@@ -30,18 +30,9 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
     const { t } = useTranslation()
 
     const { changeCityRef, control, errors, handleSubmit, isValid, reset, setError } =
-      useEditProfileForm(userData, t)
+      useEditProfileForm(t, userData)
 
     useImperativeHandle(ref, () => ({ reset, setError }))
-
-    const LinkForPrivacy = (
-      <Link
-        className={s.link}
-        href={{ pathname: AuthRoutes.PRIVACY, query: { sender: 'profile' } }}
-      >
-        {t.pages.privacy.title}
-      </Link>
-    )
 
     return (
       <Card
@@ -78,7 +69,13 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
             errors.birthDate?.message && (
               <>
                 {errors.birthDate?.message}
-                {LinkForPrivacy}
+                <Link
+                  className={s.link}
+                  href={{ pathname: AuthRoutes.PRIVACY, query: { sender: 'profile' } }}
+                  target="_blank"
+                >
+                  {t.pages.privacy.title}
+                </Link>
               </>
             )
           }

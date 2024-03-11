@@ -1,17 +1,3 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  justify-content: center;
-
-  background-color: transparent;
-  border: none;
-}
-
-.link {
-  text-decoration: underline;
-}
-
-.submit {
-  align-self: flex-end;
+.root {
+  padding: 24px 0;
 }

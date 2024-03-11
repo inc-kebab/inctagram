@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form'
 
 import { LocaleType } from '@/../locales'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { parse } from 'date-fns'
 import { useRouter } from 'next/router'
 
 import { GetProfileResponse } from '../types/profile.types'
 import { EditProfileFormValues, editProfileSchema } from '../utils/validators/editProfileSchema'
 
-export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: LocaleType) => {
+export const useEditProfileForm = (t: LocaleType, userData?: GetProfileResponse) => {
   const { defaultLocale, locale } = useRouter()
 
   const {
@@ -22,7 +23,7 @@ export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: 
   } = useForm<EditProfileFormValues>({
     defaultValues: {
       aboutMe: '',
-      birthDate: undefined,
+      birthDate: null,
       city: '',
       firstname: '',
       lastname: '',
@@ -55,7 +56,7 @@ export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: 
     if (userData) {
       reset({
         aboutMe: userData.aboutMe || '',
-        birthDate: userData.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
+        birthDate: userData.birthDate ? parse(userData.birthDate, 'dd-MM-yyyy', new Date()) : null,
         city: userData.city || '',
         firstname: userData.firstName || '',
         lastname: userData.lastName || '',
