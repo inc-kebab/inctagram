@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect } from 'react'
 import { usePlacesWidget } from 'react-google-autocomplete'
 import { useForm } from 'react-hook-form'
 
@@ -20,18 +20,14 @@ export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: 
     setError,
     setValue,
   } = useForm<EditProfileFormValues>({
-    defaultValues: useMemo(() => {
-      console.log('call memo', userData?.username || '')
-
-      return {
-        aboutMe: userData?.aboutMe || undefined,
-        birthDate: userData?.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
-        city: userData?.city || '',
-        firstname: userData?.firstName || '',
-        lastname: userData?.lastName || '',
-        username: userData?.username || '',
-      }
-    }, [userData]),
+    defaultValues: {
+      aboutMe: '',
+      birthDate: undefined,
+      city: '',
+      firstname: '',
+      lastname: '',
+      username: '',
+    },
     mode: 'onTouched',
     resolver: zodResolver(editProfileSchema(t)),
   })
@@ -54,6 +50,19 @@ export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: 
       fields: ['name', 'address_components'],
     },
   })
+
+  useEffect(() => {
+    if (userData) {
+      reset({
+        aboutMe: userData.aboutMe || '',
+        birthDate: userData.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
+        city: userData.city || '',
+        firstname: userData.firstName || '',
+        lastname: userData.lastName || '',
+        username: userData.username || '',
+      })
+    }
+  }, [reset, userData])
 
   return { changeCityRef, control, errors, handleSubmit, isValid, reset, setError }
 }
