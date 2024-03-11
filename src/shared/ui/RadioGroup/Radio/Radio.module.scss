@@ -1,0 +1,93 @@
+.labelWrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  line-height: var(--line-height-m);
+
+  &.disabled {
+    cursor: default;
+    color: var(--light-900);
+  }
+}
+
+.item {
+  cursor: pointer;
+
+  position: relative;
+
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+
+  background-color: transparent;
+  border: 2px solid var(--light-500);
+  border-radius: 50%;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 2.25rem;
+    height: 2.25rem;
+
+    background-color: transparent;
+    border-radius: 50%;
+
+    transition: background-color 0.2s linear;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:hover::before {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active::before {
+    background-color: var(--light-900);
+  }
+
+  &:focus-visible::before {
+    background-color: var(--color-dark-700);
+  }
+
+  &[data-disabled] {
+    cursor: default;
+    border-color: var(--light-900);
+  }
+
+  &[data-disabled]:hover::before {
+    background-color: transparent;
+  }
+}
+
+.indicator {
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: block;
+
+    width: 0.6rem;
+    height: 0.6rem;
+
+    background-color: var(--light-500);
+    border-radius: 50%;
+  }
+
+  &[data-disabled]::after {
+    background-color: var(--light-900);
+  }
+}

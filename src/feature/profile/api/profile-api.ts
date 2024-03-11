@@ -1,7 +1,8 @@
-import { AddAvatarResponse } from '@/feature/profile/model/types/profile.types'
 import { baseApi } from '@/shared/api/base-api'
 
-const profileApi = baseApi.injectEndpoints({
+import { GetProfileResponse, UpdateProfileArgs } from '../model/types/profile.types'
+
+const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
     addAvatar: builder.mutation<AddAvatarResponse, FormData>({
       async onQueryStarted(
@@ -10,7 +11,7 @@ const profileApi = baseApi.injectEndpoints({
       ) {
         let avatar
         const patchResult = dispatch(
-          profileApi.util.updateQueryData('getAvatar', undefined, (draft: any) => {
+          profileAPI.util.updateQueryData('getAvatar', undefined, (draft: any) => {
             const avatarFile = args.get('file')
 
             if (draft && avatarFile instanceof File) {
@@ -44,13 +45,16 @@ const profileApi = baseApi.injectEndpoints({
         url: '/profile',
       }),
     }),
+    getMyProfile: builder.query<GetProfileResponse, void>({
+      query: () => ({ url: '/profile' }),
+    }),
     removeAvatar: builder.mutation<void, void>({
       async onQueryStarted(
         _,
         { dispatch, queryFulfilled }: { dispatch: any; queryFulfilled: any }
       ) {
         const patchResult = dispatch(
-          profileApi.util.updateQueryData('getAvatar', _, (draft: any) => {
+          profileAPI.util.updateQueryData('getAvatar', _, (draft: any) => {
             if (draft) {
               draft.avatars = {
                 avatar: {
@@ -72,8 +76,44 @@ const profileApi = baseApi.injectEndpoints({
         url: '/profile/avatar',
       }),
     }),
+    updateProfile: builder.mutation<void, UpdateProfileArgs>({
+      invalidatesTags: ['profile'],
+      onQueryStarted: async (
+        { aboutMe, birthDate, city, firstname, lastname, username },
+        { dispatch, queryFulfilled }
+      ) => {
+        const result = dispatch(
+          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
+            if (draft) {
+              draft.aboutMe = aboutMe as string
+              draft.dateOfBirth = birthDate
+              draft.city = city as string
+              draft.firstName = firstname
+              draft.lastName = lastname
+              draft.username = username
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch {
+          result.undo()
+        }
+      },
+      query: body => ({
+        body,
+        method: 'PUT',
+        url: '/profile',
+      }),
+    }),
   }),
-  // overrideExisting: true,
 })
 
-export const { useAddAvatarMutation, useGetAvatarQuery, useRemoveAvatarMutation } = profileApi
+export const {
+  useAddAvatarMutation,
+  useGetAvatarQuery,
+  useGetMyProfileQuery,
+  useRemoveAvatarMutation,
+  useUpdateProfileMutation,
+} = profileAPI

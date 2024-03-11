@@ -6,12 +6,13 @@
 
 export const en = {
   button: {
+    back: 'Back',
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     no: 'No',
     resendVerificationLink: 'Resend verification link',
-    save: 'Save',
+    save: 'Save changes',
     selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
@@ -20,9 +21,14 @@ export const en = {
     yes: 'Yes',
   },
   label: {
+    aboutMe: 'About me',
+    birthDate: 'Date of Birth',
+    city: 'City',
     confirmAction: 'Confirm action',
     confirmPassword: 'Confirm password',
     email: 'Email',
+    firstName: 'First Name',
+    lastName: 'Last Name',
     newPassword: 'New Password',
     password: 'Password',
     reCaptcha: 'I’m not a robot',
@@ -205,16 +211,20 @@ export const en = {
   validation: {
     avatarSize: 'Error! Photo size must be less than 10 MB!',
     avatarType: 'Error! The format of the uploaded photo must be PNG and JPEG',
+    ageMin: 'A user under 13 cannot create a profile ',
+    dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
     invalidCredentials: 'The email or password are incorrect. Try again please',
-    maxLength20: 'Maximum 20 characters for password',
-    minLength6: 'Minimum 6 characters for password',
+    maxLength: (len: number) => `Maximum ${len} characters`,
+    minLength: (len: number) => `Minimum ${len} characters`,
+    nameVerification: (field: string) =>
+      `${field} can contain only letters (uppercase and lowercase)`,
     passwordMismatch: 'The passwords must match',
     passwordVerification:
       'The password must contain at least 1 capital letter, a special character and a number',
     required: 'Required field',
     userNameVerification:
-      'Username can contain letters (uppercase and lowercase), numbers, and the characters "_" and "-"',
+      'Username can contain only letters (uppercase and lowercase), numbers, and the characters "_" and "-"',
   },
 }
 

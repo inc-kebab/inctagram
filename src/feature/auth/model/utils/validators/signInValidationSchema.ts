@@ -8,8 +8,8 @@ export const signInValidationSchema = (t: LocaleType) =>
     password: z
       .string()
       .trim()
-      .min(6, t.validation.minLength6)
-      .max(20, t.validation.maxLength20)
+      .min(6, t.validation.minLength(6))
+      .max(20, t.validation.maxLength(20))
       .regex(PASSWORD_PATTERN, t.validation.passwordVerification)
       .default(''),
   })

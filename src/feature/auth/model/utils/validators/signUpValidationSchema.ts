@@ -12,8 +12,8 @@ export const signUpSchema = (t: LocaleType) =>
       password: z
         .string()
         .trim()
-        .min(6, t.validation.minLength6)
-        .max(20, t.validation.maxLength20)
+        .min(6, t.validation.minLength(6))
+        .max(20, t.validation.maxLength(20))
         .regex(PASSWORD_PATTERN, t.validation.passwordVerification)
         .default(''),
       passwordConfirm: z.string().default(''),
@@ -21,8 +21,8 @@ export const signUpSchema = (t: LocaleType) =>
         .string()
         .trim()
         .regex(USERNAME_PATTERN, { message: t.validation.userNameVerification })
-        .min(6, t.validation.minLength6)
-        .max(30, t.validation.maxLength20)
+        .min(6, t.validation.minLength(6))
+        .max(30, t.validation.maxLength(30))
         .default(''),
     })
     .refine(data => data.password === data.passwordConfirm && data.passwordConfirm.length > 0, {
