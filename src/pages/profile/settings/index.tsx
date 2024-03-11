@@ -1,26 +1,15 @@
 import { ReactElement } from 'react'
 
-import { EditProfileForm } from '@/feature/profile'
-import { EditProfileFormValues } from '@/feature/profile/model/utils/validators/editProfileSchema'
+import { GeneralInformation } from '@/feature/profile'
 import { Page } from '@/shared/types/layout'
 import { SidebarLayout } from '@/widgets/layout'
-import { format } from 'date-fns'
 
 import s from './ProfileSettings.module.scss'
 
 const ProfileSettings: Page = () => {
   return (
     <div className={s.root}>
-      <EditProfileForm
-        onSubmit={(data: EditProfileFormValues) => {
-          console.log({
-            ...data,
-            aboutMe: data.aboutMe || undefined,
-            birthDate: data.birthDate ? format(data.birthDate, 'dd-MM-yyyy') : undefined,
-            city: data.city || undefined,
-          })
-        }}
-      />
+      <GeneralInformation />
     </div>
   )
 }

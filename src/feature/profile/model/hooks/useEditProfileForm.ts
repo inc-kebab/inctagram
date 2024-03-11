@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { usePlacesWidget } from 'react-google-autocomplete'
 import { useForm } from 'react-hook-form'
 
@@ -5,9 +6,10 @@ import { LocaleType } from '@/../locales'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
+import { GetProfileResponse } from '../types/profile.types'
 import { EditProfileFormValues, editProfileSchema } from '../utils/validators/editProfileSchema'
 
-export const useEditProfileForm = (userData: any, t: LocaleType) => {
+export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: LocaleType) => {
   const { defaultLocale, locale } = useRouter()
 
   const {
@@ -19,12 +21,12 @@ export const useEditProfileForm = (userData: any, t: LocaleType) => {
     setValue,
   } = useForm<EditProfileFormValues>({
     defaultValues: {
-      aboutMe: userData?.aboutMe || undefined,
-      birthDate: userData?.birthDate || null,
-      city: userData?.city || '',
-      firstname: userData?.firstName || '',
-      lastname: userData?.lastName || '',
-      username: userData?.userName || '',
+      aboutMe: '',
+      birthDate: undefined,
+      city: '',
+      firstname: '',
+      lastname: '',
+      username: '',
     },
     mode: 'onTouched',
     resolver: zodResolver(editProfileSchema(t)),
@@ -48,6 +50,19 @@ export const useEditProfileForm = (userData: any, t: LocaleType) => {
       fields: ['name', 'address_components'],
     },
   })
+
+  useEffect(() => {
+    if (userData) {
+      reset({
+        aboutMe: userData.aboutMe || '',
+        birthDate: userData.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
+        city: userData.city || '',
+        firstname: userData.firstName || '',
+        lastname: userData.lastName || '',
+        username: userData.username || '',
+      })
+    }
+  }, [reset, userData])
 
   return { changeCityRef, control, errors, handleSubmit, isValid, reset, setError }
 }

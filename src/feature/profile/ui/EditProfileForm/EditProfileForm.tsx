@@ -16,12 +16,13 @@ import Link from 'next/link'
 import s from './EditProfileForm.module.scss'
 
 import { useEditProfileForm } from '../../model/hooks/useEditProfileForm'
+import { GetProfileResponse } from '../../model/types/profile.types'
 import { EditProfileFormValues } from '../../model/utils/validators/editProfileSchema'
 
 type Props = {
   disabled?: boolean
   onSubmit: (data: EditProfileFormValues) => void
-  userData?: any
+  userData?: GetProfileResponse
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Props>(
