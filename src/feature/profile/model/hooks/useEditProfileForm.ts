@@ -2,12 +2,13 @@ import { usePlacesWidget } from 'react-google-autocomplete'
 import { useForm } from 'react-hook-form'
 
 import { LocaleType } from '@/../locales'
+import { GetProfileResponse } from '@/feature/profile/model/types/profile.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
 import { EditProfileFormValues, editProfileSchema } from '../utils/validators/editProfileSchema'
 
-export const useEditProfileForm = (userData: any, t: LocaleType) => {
+export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: LocaleType) => {
   const { defaultLocale, locale } = useRouter()
 
   const {
@@ -20,7 +21,7 @@ export const useEditProfileForm = (userData: any, t: LocaleType) => {
   } = useForm<EditProfileFormValues>({
     defaultValues: {
       aboutMe: userData?.aboutMe || undefined,
-      birthDate: userData?.birthDate || null,
+      birthDate: userData?.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
       city: userData?.city || '',
       firstname: userData?.firstName || '',
       lastname: userData?.lastName || '',

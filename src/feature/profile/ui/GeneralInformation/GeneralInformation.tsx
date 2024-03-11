@@ -39,6 +39,7 @@ const GeneralInformation: Page = () => {
           })
         }}
         ref={ref}
+        userData={data}
       />
     </div>
   )

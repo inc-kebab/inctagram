@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { Controller } from 'react-hook-form'
 
+import { GetProfileResponse } from '@/feature/profile/model/types/profile.types'
 import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
@@ -21,7 +22,7 @@ import { EditProfileFormValues } from '../../model/utils/validators/editProfileS
 type Props = {
   disabled?: boolean
   onSubmit: (data: EditProfileFormValues) => void
-  userData?: any
+  userData?: GetProfileResponse
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Props>(

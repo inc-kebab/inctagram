@@ -1,4 +1,3 @@
-import { RootState } from '@/app/store/store'
 import { baseApi } from '@/shared/api/base-api'
 
 import { GetProfileResponse, UpdateProfileArgs } from '../model/types/profile.types'
@@ -12,12 +11,8 @@ const profileAPI = baseApi.injectEndpoints({
       invalidatesTags: ['profile'],
       onQueryStarted: async (
         { aboutMe, birthDate, city, firstname, lastname, username },
-        { dispatch, getState, queryFulfilled }
+        { dispatch, queryFulfilled }
       ) => {
-        const {
-          profile: { profile },
-        } = getState() as RootState
-
         const result = dispatch(
           profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
             if (draft) {
