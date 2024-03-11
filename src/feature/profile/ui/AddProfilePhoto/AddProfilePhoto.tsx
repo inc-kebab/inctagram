@@ -1,4 +1,6 @@
-import { AddProfilePhotoDialog } from '@/feature/profile'
+import { useState } from 'react'
+
+import { DeletePhotoDialog } from '@/feature/profile'
 import Close from '@/shared/assets/icons/common/close.svg'
 import ImageIcon from '@/shared/assets/icons/fill/image.svg'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -9,16 +11,25 @@ import s from './AddProfilePhoto.module.scss'
 
 type Props = {
   avaUrlFromServer?: string
+  disabled?: boolean
+  onDeletePhoto: () => void
   onOpenAddDialog: () => void
-  onOpenDeleteDialog: () => void
 }
 
 export const AddProfilePhoto = ({
   avaUrlFromServer,
+  disabled,
+  onDeletePhoto,
   onOpenAddDialog,
-  onOpenDeleteDialog,
 }: Props) => {
   const { t } = useTranslation()
+
+  const [open, setOpen] = useState(false)
+
+  const handleDeletePhoto = () => {
+    setOpen(false)
+    onDeletePhoto()
+  }
 
   return (
     <div className={s.container}>
@@ -32,14 +43,17 @@ export const AddProfilePhoto = ({
               src={avaUrlFromServer}
               width={192}
             />
-            <Button
-              asComponent="button"
-              className={s.deleteAvatar}
-              onClick={onOpenDeleteDialog}
-              variant="text"
-            >
-              <Close className={s.closeIcon} viewBox="0 0 24 24" />
-            </Button>
+            <DeletePhotoDialog
+              confirmCallback={handleDeletePhoto}
+              disabled={disabled}
+              open={open}
+              setOpen={setOpen}
+              trigger={
+                <Button className={s.deleteAvatar} variant="text">
+                  <Close className={s.closeIcon} viewBox="0 0 24 24" />
+                </Button>
+              }
+            />
           </div>
         ) : (
           <div className={s.iconWrapper}>

@@ -1,34 +1,29 @@
-import { useState } from 'react'
-
-import { CropperPhoto, InputPhoto } from '@/feature/profile'
+import { CroppedArea, CropperPhoto, InputPhoto } from '@/feature/profile'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
 
 import s from './AddProfilePhotoDialog.module.scss'
 
 type Props = {
-  // addAvatar: (data: FormData) => Promise<any>
-  addAvatarHandler: (size: any) => void
   avatarUrl: string
   disabled: boolean
-  isSuccess: boolean
   onAvatarUrl: (url: string) => void
   onOpenChange: (open: boolean) => void
+  onSetCroppedArea: (size: CroppedArea) => void
   open: boolean
 }
 
 export const AddProfilePhotoDialog = ({
-  addAvatarHandler,
   avatarUrl,
-  isSuccess,
   onAvatarUrl,
   onOpenChange,
+  onSetCroppedArea,
   open,
   ...rest
 }: Props) => {
   const { t } = useTranslation()
 
-  const onSetAvatar = (file: File) => {
+  const handleSetPhoto = (file: File) => {
     onAvatarUrl(URL.createObjectURL(file))
   }
 
@@ -40,9 +35,9 @@ export const AddProfilePhotoDialog = ({
       title={t.pages.profile.addProfilePhoto}
     >
       {avatarUrl ? (
-        <CropperPhoto addAvatarHandler={addAvatarHandler} avatarUrl={avatarUrl} {...rest} />
+        <CropperPhoto avatarUrl={avatarUrl} onSetCroppedArea={onSetCroppedArea} {...rest} />
       ) : (
-        <InputPhoto setPhoto={onSetAvatar} />
+        <InputPhoto setPhoto={handleSetPhoto} />
       )}
     </Dialog>
   )

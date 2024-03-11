@@ -1,24 +1,35 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { GetProfileResponse, UpdateProfileArgs } from '../model/types/profile.types'
+import {
+  AddAvatarResponse,
+  GetProfileResponse,
+  UpdateProfileArgs,
+} from '../model/types/profile.types'
 
 const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
     addAvatar: builder.mutation<AddAvatarResponse, FormData>({
-      async onQueryStarted(
-        args,
-        { dispatch, queryFulfilled }: { dispatch: any; queryFulfilled: Promise<any> }
-      ) {
+      // invalidatesTags: ['profile'],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
         let avatar
         const patchResult = dispatch(
-          profileAPI.util.updateQueryData('getAvatar', undefined, (draft: any) => {
+          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
             const avatarFile = args.get('file')
 
-            if (draft && avatarFile instanceof File) {
+            if (avatarFile instanceof File) {
               avatar = URL.createObjectURL(avatarFile)
               draft.avatars = {
                 avatar: {
+                  fileSize: avatarFile.size,
+                  height: 300,
                   url: URL.createObjectURL(avatarFile),
+                  width: 300,
+                },
+                thumbnail: {
+                  fileSize: avatarFile.size,
+                  height: 300,
+                  url: URL.createObjectURL(avatarFile),
+                  width: 300,
                 },
               }
             }
@@ -39,28 +50,17 @@ const profileAPI = baseApi.injectEndpoints({
         url: '/profile/avatar',
       }),
     }),
-    getAvatar: builder.query<void, void>({
-      query: () => ({
-        method: 'GET',
-        url: '/profile',
-      }),
-    }),
     getMyProfile: builder.query<GetProfileResponse, void>({
+      providesTags: ['profile'],
       query: () => ({ url: '/profile' }),
     }),
     removeAvatar: builder.mutation<void, void>({
-      async onQueryStarted(
-        _,
-        { dispatch, queryFulfilled }: { dispatch: any; queryFulfilled: any }
-      ) {
+      invalidatesTags: ['profile'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
-          profileAPI.util.updateQueryData('getAvatar', _, (draft: any) => {
+          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
             if (draft) {
-              draft.avatars = {
-                avatar: {
-                  url: null,
-                },
-              }
+              draft.avatars = null
             }
           })
         )
@@ -112,7 +112,6 @@ const profileAPI = baseApi.injectEndpoints({
 
 export const {
   useAddAvatarMutation,
-  useGetAvatarQuery,
   useGetMyProfileQuery,
   useRemoveAvatarMutation,
   useUpdateProfileMutation,

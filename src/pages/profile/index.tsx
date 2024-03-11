@@ -3,51 +3,40 @@ import { ReactElement, useState } from 'react'
 import {
   AddProfilePhoto,
   AddProfilePhotoDialog,
-  DeletePhotoDialog,
+  CroppedArea,
+  getCroppedImg,
   useAddAvatarMutation,
-  useGetAvatarQuery,
+  useGetMyProfileQuery,
   useRemoveAvatarMutation,
 } from '@/feature/profile'
-import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { Page } from '@/shared/types/layout'
 import { SidebarLayout } from '@/widgets/layout'
 
 const Profile: Page = () => {
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
   const [openAddDialog, setOpenAddDialog] = useState(false)
   const [avatarUrl, setAvatarUrl] = useState('')
 
-  const [removeAvatar, { isLoading: isRemoveLoad, isSuccess: isRemoveSuccess }] =
-    useRemoveAvatarMutation()
-  const [addAvatar, { isLoading, isSuccess: isAddSuccess }] = useAddAvatarMutation()
-  const { data: profile } = useGetAvatarQuery()
-  const avaUrlFromServer = profile?.avatars?.avatar.url
-  const handleOpenAdd = () => {
-    setOpenAddDialog(prev => !prev)
-  }
-  const handleOpenDelete = () => setOpenDeleteDialog(prev => !prev)
+  const { data: profile } = useGetMyProfileQuery()
+
+  const [removeAvatar, { isLoading: isRemoveLoad }] = useRemoveAvatarMutation()
+  const [addAvatar, { isLoading }] = useAddAvatarMutation()
+
+  const handleOpenAdd = () => setOpenAddDialog(prev => !prev)
 
   const handleRemove = () => {
-    setOpenDeleteDialog(prev => !prev)
     removeAvatar().then(res => {
       if ('error' in res) {
-        setOpenDeleteDialog(prev => !prev)
         handleErrorResponse(res.error)
       }
     })
   }
 
-  const addAvatarHandler = (croppedAreaPixels: {
-    height: number
-    width: number
-    x: number
-    y: number
-  }) => {
+  const handleChangeAvatar = (croppedAreaPixels: CroppedArea) => {
     if (croppedAreaPixels) {
       getCroppedImg({ crop: croppedAreaPixels, fileName: 'file', imageSrc: avatarUrl }).then(
         res => {
-          addAvatar(res as FormData).then(response => {
+          addAvatar(res).then(response => {
             if ('error' in response) {
               handleErrorResponse(response.error)
             }
@@ -57,31 +46,25 @@ const Profile: Page = () => {
     }
   }
 
-  const openChangeHandler = () => {
-    setOpenAddDialog(prev => !prev)
+  const handleChangeOpen = (open: boolean) => {
+    setOpenAddDialog(open)
     setAvatarUrl('')
   }
 
   return (
     <div>
       <AddProfilePhoto
-        avaUrlFromServer={avaUrlFromServer}
-        onOpenAddDialog={handleOpenAdd}
-        onOpenDeleteDialog={handleOpenDelete}
-      />
-      <DeletePhotoDialog
-        confirmCallback={handleRemove}
+        avaUrlFromServer={profile?.avatars?.avatar?.url}
         disabled={isRemoveLoad}
-        open={openDeleteDialog}
-        setOpen={setOpenDeleteDialog}
+        onDeletePhoto={handleRemove}
+        onOpenAddDialog={handleOpenAdd}
       />
       <AddProfilePhotoDialog
-        addAvatarHandler={addAvatarHandler}
         avatarUrl={avatarUrl}
         disabled={isLoading}
-        isSuccess={isAddSuccess}
         onAvatarUrl={setAvatarUrl}
-        onOpenChange={openChangeHandler}
+        onOpenChange={handleChangeOpen}
+        onSetCroppedArea={handleChangeAvatar}
         open={openAddDialog}
       />
     </div>

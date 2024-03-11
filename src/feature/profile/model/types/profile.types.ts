@@ -1,27 +1,8 @@
-export interface ThumbnailItem {
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
-
 export type Avatar = {
   fileSize: number
   height: number
   url: string
   width: number
-}
-
-export interface AvatarItem {
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
-
-export interface AddAvatarResponse {
-  avatar: AvatarItem
-  thumbnail: ThumbnailItem
 }
 
 export type CroppedArea = {
@@ -31,14 +12,14 @@ export type CroppedArea = {
   y: number
 }
 
-export type Avatars = {
-  avatar: Avatar
-  thumbnail: Thumbnail
+export type AddAvatarResponse = {
+  avatar: Avatar | null
+  thumbnail: Avatar | null
 }
 
 export type GetProfileResponse = {
   aboutMe: string
-  avatars: Avatars
+  avatars: AddAvatarResponse | null
   city: string
   createdAt: string
   dateOfBirth: string

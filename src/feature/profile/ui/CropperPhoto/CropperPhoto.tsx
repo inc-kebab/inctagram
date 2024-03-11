@@ -1,35 +1,39 @@
 import { useState } from 'react'
 import Cropper from 'react-easy-crop'
 
-import { CroppedArea } from '@/feature/profile/model/types/profile.types'
-import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { CroppedArea } from '@/feature/profile'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 
 import s from './CropperPhoto.module.scss'
 
+type Crop = { x: number; y: number }
+
 type Props = {
-  addAvatarHandler: (size: any) => void
   avatarUrl: string
   disabled: boolean
+  onSetCroppedArea: (size: CroppedArea) => void
 }
 
-export const CropperPhoto = ({ addAvatarHandler, avatarUrl, disabled }: Props) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
+export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) => {
+  const [crop, setCrop] = useState<Crop>({ x: 0, y: 0 })
+
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
+
   const [zoom, setZoom] = useState(1)
+
   const { t } = useTranslation()
 
-  const onCropComplete = (
-    croppedArea: { x: number; y: number },
-    croppedAreaPixels: CroppedArea
-  ) => {
+  const handleCropComplete = (_: Crop, croppedAreaPixels: CroppedArea) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
 
-  const someFn = () => addAvatarHandler(croppedAreaPixels)
+  const handleSetCroppedArea = () => {
+    if (croppedAreaPixels) {
+      onSetCroppedArea(croppedAreaPixels)
+    }
+  }
 
   return (
     <div className={s.cropperContainer}>
@@ -41,14 +45,14 @@ export const CropperPhoto = ({ addAvatarHandler, avatarUrl, disabled }: Props) =
           image={avatarUrl}
           objectFit="cover"
           onCropChange={setCrop}
-          onCropComplete={onCropComplete}
+          onCropComplete={handleCropComplete}
           onZoomChange={setZoom}
           showGrid={false}
           zoom={zoom}
         />
       </div>
       <DialogClose>
-        <Button disabled={disabled} onClick={someFn}>
+        <Button disabled={disabled} onClick={handleSetCroppedArea}>
           {t.button.save}
         </Button>
       </DialogClose>

@@ -8,7 +8,7 @@ type Params = {
   imageSrc: string
 }
 
-export const getCroppedImg = ({ crop, fileName, imageSrc }: Params) => {
+export const getCroppedImg = ({ crop, fileName, imageSrc }: Params): Promise<FormData> => {
   return new Promise((resolve, reject) => {
     const image = new Image()
 

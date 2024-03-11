@@ -1,13 +1,16 @@
+import { ReactNode } from 'react'
+
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { ConfirmDialog } from '@/widgets/dialogs'
 
 type Props = {
   confirmCallback: () => void
-  disabled: boolean
+  disabled?: boolean
   open: boolean
   setOpen: (open: boolean) => void
+  trigger: ReactNode
 }
-export const DeletePhotoDialog = ({ confirmCallback, disabled, open, setOpen }: Props) => {
+export const DeletePhotoDialog = ({ confirmCallback, disabled, open, setOpen, trigger }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -17,6 +20,7 @@ export const DeletePhotoDialog = ({ confirmCallback, disabled, open, setOpen }: 
       disabled={disabled}
       onOpenChange={() => setOpen(!open)}
       open={open}
+      trigger={trigger}
     />
   )
 }
