@@ -1,8 +1,9 @@
-import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from 'react'
+import { ComponentPropsWithoutRef, Ref, forwardRef, useEffect, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes } from '@/shared/const/routes'
+import { useResetValues } from '@/shared/hooks/useResetValues'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -31,14 +32,16 @@ export const SignUpForm = forwardRef(
     { className, disabled, hrefGithub, hrefGoogle, onSubmit, ...props }: Props,
     ref: Ref<UseFormRef<SignUpFormValues>>
   ) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
     const {
       control,
       formState: { errors, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
+      setValue,
     } = useForm<SignUpFormValues>({
       defaultValues: {
         accept: false,
@@ -50,6 +53,8 @@ export const SignUpForm = forwardRef(
       mode: 'onTouched',
       resolver: zodResolver(signUpSchema(t)),
     })
+
+    useResetValues<SignUpFormValues>({ errors, getValues, locale, setValue })
 
     useImperativeHandle(ref, () => ({ reset, setError }))
 
