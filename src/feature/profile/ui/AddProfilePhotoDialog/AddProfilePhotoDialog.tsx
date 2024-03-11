@@ -7,35 +7,40 @@ import { Dialog } from '@/shared/ui/Dialog'
 import s from './AddProfilePhotoDialog.module.scss'
 
 type Props = {
-  addAvatar: (data: FormData) => void
+  // addAvatar: (data: FormData) => Promise<any>
+  addAvatarHandler: (size: any) => void
+  avatarUrl: string
   disabled: boolean
   isSuccess: boolean
+  onAvatarUrl: (url: string) => void
   onOpenChange: (open: boolean) => void
   open: boolean
 }
 
-export const AddProfilePhotoDialog = ({ isSuccess, onOpenChange, open, ...rest }: Props) => {
+export const AddProfilePhotoDialog = ({
+  addAvatarHandler,
+  avatarUrl,
+  isSuccess,
+  onAvatarUrl,
+  onOpenChange,
+  open,
+  ...rest
+}: Props) => {
   const { t } = useTranslation()
-  const [avatarUrl, setAvatarUrl] = useState('')
-
-  const openChangeHandler = (open: boolean) => {
-    onOpenChange(open)
-    setAvatarUrl('')
-  }
 
   const onSetAvatar = (file: File) => {
-    setAvatarUrl(URL.createObjectURL(file))
+    onAvatarUrl(URL.createObjectURL(file))
   }
 
   return (
     <Dialog
       className={s.dialog}
-      onOpenChange={openChangeHandler}
-      open={!isSuccess || open}
+      onOpenChange={onOpenChange}
+      open={open}
       title={t.pages.profile.addProfilePhoto}
     >
       {avatarUrl ? (
-        <CropperPhoto avatarUrl={avatarUrl} {...rest} />
+        <CropperPhoto addAvatarHandler={addAvatarHandler} avatarUrl={avatarUrl} {...rest} />
       ) : (
         <InputPhoto setPhoto={onSetAvatar} />
       )}

@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
 
 type Params = {
@@ -38,7 +40,7 @@ export const getCroppedImg = ({ crop, fileName, imageSrc }: Params) => {
 
       canvas.toBlob(blob => {
         if (!blob) {
-          console.error('Ошибка при создании blob')
+          toast.error('Ошибка при создании blob')
           reject(new Error('Ошибка при создании blob'))
 
           return
@@ -51,7 +53,7 @@ export const getCroppedImg = ({ crop, fileName, imageSrc }: Params) => {
     }
 
     image.onerror = error => {
-      console.error('Ошибка при загрузке картинки:', error)
+      toast.error('Ошибка при загрузке картинки:')
       reject(error)
     }
   })

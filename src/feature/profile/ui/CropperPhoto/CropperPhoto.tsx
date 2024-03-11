@@ -3,32 +3,24 @@ import Cropper from 'react-easy-crop'
 
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
 import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
+import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
+import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 
 import s from './CropperPhoto.module.scss'
 
 type Props = {
-  addAvatar: (data: FormData) => void
+  addAvatarHandler: (size: any) => void
   avatarUrl: string
   disabled: boolean
 }
 
-export const CropperPhoto = ({ addAvatar, avatarUrl, disabled }: Props) => {
+export const CropperPhoto = ({ addAvatarHandler, avatarUrl, disabled }: Props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
   const [zoom, setZoom] = useState(1)
   const { t } = useTranslation()
-
-  const addAvatarHandler = () => {
-    if (croppedAreaPixels) {
-      getCroppedImg({ crop: croppedAreaPixels, fileName: 'file', imageSrc: avatarUrl })
-        .then(res => {
-          addAvatar(res as FormData)
-        })
-        .catch(e => console.log(e))
-    }
-  }
 
   const onCropComplete = (
     croppedArea: { x: number; y: number },
@@ -36,6 +28,8 @@ export const CropperPhoto = ({ addAvatar, avatarUrl, disabled }: Props) => {
   ) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
+
+  const someFn = () => addAvatarHandler(croppedAreaPixels)
 
   return (
     <div className={s.cropperContainer}>
@@ -53,9 +47,11 @@ export const CropperPhoto = ({ addAvatar, avatarUrl, disabled }: Props) => {
           zoom={zoom}
         />
       </div>
-      <Button disabled={disabled} onClick={addAvatarHandler}>
-        {t.button.save}
-      </Button>
+      <DialogClose>
+        <Button disabled={disabled} onClick={someFn}>
+          {t.button.save}
+        </Button>
+      </DialogClose>
     </div>
   )
 }

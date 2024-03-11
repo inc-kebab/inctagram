@@ -1,6 +1,7 @@
 import { AddProfilePhotoDialog } from '@/feature/profile'
 import Close from '@/shared/assets/icons/common/close.svg'
 import ImageIcon from '@/shared/assets/icons/fill/image.svg'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import Image from 'next/image'
 
@@ -17,6 +18,8 @@ export const AddProfilePhoto = ({
   onOpenAddDialog,
   onOpenDeleteDialog,
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className={s.container}>
       <div className={s.circle}>
@@ -45,7 +48,7 @@ export const AddProfilePhoto = ({
         )}
       </div>
       <Button asComponent="button" onClick={onOpenAddDialog} variant="outline">
-        Add a Profile Photo
+        {t.pages.profile.addProfilePhoto}
       </Button>
     </div>
   )

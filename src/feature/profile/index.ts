@@ -1,4 +1,4 @@
-export { useAddAvatarMutation, useRemoveAvatarMutation } from './api/profile-api'
+export { useAddAvatarMutation, useGetAvatarQuery, useRemoveAvatarMutation } from './api/profile-api'
 export { avatarSchema } from './model/utils/validators/addAvatar'
 export { AddProfilePhoto } from './ui/AddProfilePhoto/AddProfilePhoto'
 
