@@ -21,7 +21,7 @@ const profileAPI = baseApi.injectEndpoints({
               draft.city = city as string
               draft.firstName = firstname
               draft.lastName = lastname
-              draft.userName = username
+              draft.username = username
             }
           })
         )
