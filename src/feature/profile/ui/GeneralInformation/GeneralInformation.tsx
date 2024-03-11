@@ -25,7 +25,7 @@ const GeneralInformation: Page = () => {
         onSubmit={(data: EditProfileFormValues) => {
           updateProfile({
             ...data,
-            birthDate: data.birthDate ? format(data.birthDate, 'dd-MM-yyyy') : undefined,
+            birthDate: format(data.birthDate, 'dd-MM-yyyy'),
           }).then(res => {
             if ('error' in res && ref.current) {
               const setError = ref.current.setError

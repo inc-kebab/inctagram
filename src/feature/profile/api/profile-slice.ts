@@ -3,15 +3,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { UpdateProfileArgs } from '../model/types/profile.types'
 
 type Profile = {
-  profile: UpdateProfileArgs
+  profile: UpdateProfileArgs | null
 }
 
 const initialState: Profile = {
-  profile: {
-    firstname: '',
-    lastname: '',
-    username: '',
-  },
+  profile: null,
 }
 
 const slice = createSlice({

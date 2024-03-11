@@ -30,7 +30,7 @@ export type GetProfileResponse = {
 }
 export type UpdateProfileArgs = {
   aboutMe?: string
-  birthDate?: string
+  birthDate: string
   city?: string
   firstname: string
   lastname: string

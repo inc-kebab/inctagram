@@ -20,9 +20,22 @@ const profileAPI = baseApi.injectEndpoints({
 
         const result = dispatch(
           profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
-            Object.assign(draft, { profile })
+            if (draft) {
+              draft.aboutMe = aboutMe as string
+              draft.dateOfBirth = birthDate
+              draft.city = city as string
+              draft.firstName = firstname
+              draft.lastName = lastname
+              draft.userName = username
+            }
           })
         )
+
+        try {
+          await queryFulfilled
+        } catch {
+          result.undo()
+        }
       },
       query: body => ({
         body,
