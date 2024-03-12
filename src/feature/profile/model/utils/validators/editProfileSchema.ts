@@ -7,8 +7,17 @@ export const editProfileSchema = (t: LocaleType) =>
     aboutMe: z
       .string()
       .trim()
-      .regex(ABOUT_PATTERN, { message: t.validation.aboutMeVerification })
       .max(200, t.validation.maxLength(200))
+      .refine(
+        text => {
+          if (!text) {
+            return true
+          } else {
+            return ABOUT_PATTERN.test(text)
+          }
+        },
+        { message: t.validation.aboutMeVerification }
+      )
       .optional(),
     birthDate: z
       .date()

@@ -24,13 +24,13 @@ const profileAPI = baseApi.injectEndpoints({
               if (avatarFile instanceof File) {
                 avatar = URL.createObjectURL(avatarFile)
                 draft.avatars = {
-                  avatar: {
+                  'avatar-medium': {
                     fileSize: avatarFile.size,
                     height: 300,
                     url: URL.createObjectURL(avatarFile),
                     width: 300,
                   },
-                  thumbnail: {
+                  'avatar-thumbnail': {
                     fileSize: avatarFile.size,
                     height: 300,
                     url: URL.createObjectURL(avatarFile),
