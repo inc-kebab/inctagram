@@ -1,17 +1,9 @@
-.form {
+.root {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  justify-content: center;
-
-  background-color: transparent;
-  border: none;
+  gap: 40px;
 }
 
-.link {
-  text-decoration: underline;
-}
-
-.submit {
-  align-self: flex-end;
+.photo {
+  flex-shrink: 0;
+  width: 240px;
 }

@@ -1,2 +1,2 @@
-export { EditProfileForm } from './ui/EditProfileForm/EditProfileForm'
+export { useGetMyProfileQuery } from './api/profile-api'
 export { GeneralInformation } from './ui/GeneralInformation/GeneralInformation'

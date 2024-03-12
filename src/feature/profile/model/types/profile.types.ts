@@ -5,21 +5,21 @@ export type Avatar = {
   width: number
 }
 
-export type Thumbnail = {
-  fileSize: number
+export type CroppedArea = {
   height: number
-  url: string
   width: number
+  x: number
+  y: number
 }
 
-export type Avatars = {
-  avatar: Avatar
-  thumbnail: Thumbnail
+export type AddAvatarResponse = {
+  avatar: Avatar | null
+  thumbnail: Avatar | null
 }
 
 export type GetProfileResponse = {
   aboutMe: string
-  avatars: Avatars
+  avatars: AddAvatarResponse | null
   city: string
   createdAt: string
   dateOfBirth: string
