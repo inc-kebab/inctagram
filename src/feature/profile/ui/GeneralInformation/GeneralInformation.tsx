@@ -11,7 +11,7 @@ export const GeneralInformation = () => {
   const { data } = useGetMyProfileQuery()
 
   const { handleUpdateProfile, isLoading, updateProfileRef } = useUpdateProfile()
-  const { handleUpdatePhoto, isUpdateLoading } = useChangePhotoProfile()
+  const { handleUpdatePhoto, isUpdateLoading, isUpdateSuccess } = useChangePhotoProfile()
   const { handleRemovePhoto, isRemoveLoading } = useRemovePhotoProfile()
 
   return (
@@ -21,6 +21,7 @@ export const GeneralInformation = () => {
         className={s.photo}
         disabledDelete={isRemoveLoading}
         disabledUpdate={isUpdateLoading}
+        isSuccessUpdate={isUpdateSuccess}
         onDeletePhoto={handleRemovePhoto}
         onUpdatePhoto={handleUpdatePhoto}
       />

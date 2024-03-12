@@ -1,7 +1,7 @@
 import { PropsWithChildren, useLayoutEffect } from 'react'
 
 import { useMeQuery } from '@/feature/auth'
-import { AppRoutes } from '@/shared/const/routes'
+import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
@@ -12,20 +12,22 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const { isLoading } = useMeQuery()
 
   // TODO profile - public, profile-settings - protect
-  const isPublicRoute = asPath.startsWith('/auth') || asPath === '/'
+  const isNoAuthRoute = asPath.startsWith('/auth') || asPath === '/'
+
+  const isPublicRoute = asPath.startsWith(AuthRoutes.PRIVACY) || asPath.startsWith(AuthRoutes.TERMS)
 
   const token = getCookie('accessToken')
 
   // TODO push to error page
   useLayoutEffect(() => {
-    if (!token && !isPublicRoute) {
+    if (!token && !isNoAuthRoute && !isPublicRoute && asPath === 'profile/settings') {
       void push(AppRoutes.MAIN)
     }
 
-    if (token && isPublicRoute) {
+    if (token && isNoAuthRoute && !isPublicRoute) {
       void push(AppRoutes.HOME)
     }
-  }, [token, isPublicRoute, push])
+  }, [token, isNoAuthRoute, push, isPublicRoute])
 
   return isLoading ? <Loader fullHeight /> : <>{children}</>
 }

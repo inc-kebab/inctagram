@@ -33,8 +33,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'storage.yandexcloud.net',
-        port: '',
-        pathname: '/kebab-inctagram/media/**/**/**',
+        pathname: '/kebab-inctagram/media/users/**',
       },
     ],
   },

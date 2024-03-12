@@ -30,7 +30,9 @@ export const ru: LocaleType = {
     newPassword: 'Новый пароль',
     password: 'Пароль',
     reCaptcha: 'Я не робот',
+    successUpdateProfile: 'Ваши настройки сохранены!',
     userName: 'Имя пользователя',
+    warningUpdateProfile: 'Высокая нагрузка. Замена изображения может занять до нескольких минут.',
   },
   lang: {
     en: 'Английский',

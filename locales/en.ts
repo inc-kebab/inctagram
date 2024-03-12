@@ -32,7 +32,9 @@ export const en = {
     newPassword: 'New Password',
     password: 'Password',
     reCaptcha: 'I’m not a robot',
+    successUpdateProfile: 'Your settings are saved!',
     userName: 'Username',
+    warningUpdateProfile: 'High load. It may take up to several minutes to replace the image.',
   },
   lang: {
     en: 'English',
