@@ -1,15 +1,83 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { GetProfileResponse, UpdateProfileArgs } from '../model/types/profile.types'
+import {
+  AddAvatarResponse,
+  GetProfileResponse,
+  UpdateProfileArgs,
+} from '../model/types/profile.types'
 
 const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
+    changeProfilePhoto: builder.mutation<AddAvatarResponse, FormData>({
+      // invalidatesTags: ['profile'],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        let avatar
+        const patchResult = dispatch(
+          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
+            const avatarFile = args.get('file')
+
+            if (avatarFile instanceof File) {
+              avatar = URL.createObjectURL(avatarFile)
+              draft.avatars = {
+                avatar: {
+                  fileSize: avatarFile.size,
+                  height: 300,
+                  url: URL.createObjectURL(avatarFile),
+                  width: 300,
+                },
+                thumbnail: {
+                  fileSize: avatarFile.size,
+                  height: 300,
+                  url: URL.createObjectURL(avatarFile),
+                  width: 300,
+                },
+              }
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch (err) {
+          patchResult.undo()
+        } finally {
+          avatar && URL.revokeObjectURL(avatar)
+        }
+      },
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/profile/avatar',
+      }),
+    }),
     getMyProfile: builder.query<GetProfileResponse, void>({
       providesTags: ['profile'],
       query: () => ({ url: '/profile' }),
     }),
-    updateProfile: builder.mutation<void, UpdateProfileArgs>({
+    removeProfilePhoto: builder.mutation<void, void>({
       invalidatesTags: ['profile'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
+            if (draft) {
+              draft.avatars = null
+            }
+          })
+        )
+
+        try {
+          await queryFulfilled
+        } catch (err) {
+          patchResult.undo()
+        }
+      },
+      query: () => ({
+        method: 'DELETE',
+        url: '/profile/avatar',
+      }),
+    }),
+    updateProfile: builder.mutation<void, UpdateProfileArgs>({
+      // invalidatesTags: ['profile'],
       onQueryStarted: async (
         { aboutMe, birthDate, city, firstname, lastname, username },
         { dispatch, queryFulfilled }
@@ -42,4 +110,9 @@ const profileAPI = baseApi.injectEndpoints({
   }),
 })
 
-export const { useGetMyProfileQuery, useUpdateProfileMutation } = profileAPI
+export const {
+  useChangeProfilePhotoMutation,
+  useGetMyProfileQuery,
+  useRemoveProfilePhotoMutation,
+  useUpdateProfileMutation,
+} = profileAPI

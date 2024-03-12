@@ -13,6 +13,7 @@ export const en = {
     no: 'No',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
+    selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
@@ -125,7 +126,9 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      logOutConfirmation: 'Are you really want to log out of your account',
+      addProfilePhoto: 'Add a Profile Photo',
+      deleteProfilePhoto: 'Are you sure you want to delete the photo?',
+      logOutConfirmation: 'Are you really want to log out of your account?',
     },
     signIn: {
       forgotPassword: 'Forgot Password',
@@ -213,8 +216,12 @@ export const en = {
   },
   validation: {
     ageMin: 'A user under 13 cannot create a profile ',
+    avatarSize: 'Photo size must be less than 10 MB!',
+    avatarType: 'The format of the uploaded photo must be PNG and JPEG',
     dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
+    error: 'Error!',
+    imgLoad: 'Error when creating or uploading an image',
     invalidCredentials: 'The email or password are incorrect. Try again please',
     maxLength: (len: number) => `Maximum ${len} characters`,
     minLength: (len: number) => `Minimum ${len} characters`,
