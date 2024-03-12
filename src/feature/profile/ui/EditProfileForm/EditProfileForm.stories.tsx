@@ -47,11 +47,14 @@ export const Completed: Story = {
   args: {
     userData: {
       aboutMe: 'About me description',
+      avatars: null,
       birthDate: '01-01-2000',
       city: 'Arzamas',
-      firstName: 'John',
-      lastName: 'Smith',
-      userName: 'johnthebestname12',
+      createdAt: '',
+      firstname: 'John',
+      id: 1,
+      lastname: 'Smith',
+      username: 'johnthebestname12',
     },
   },
 }

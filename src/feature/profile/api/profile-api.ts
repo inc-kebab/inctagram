@@ -90,8 +90,8 @@ const profileAPI = baseApi.injectEndpoints({
               draft.aboutMe = aboutMe || null
               draft.birthDate = birthDate
               draft.city = city || null
-              draft.firstName = firstname
-              draft.lastName = lastname
+              draft.firstname = firstname
+              draft.lastname = lastname
               draft.username = username
             }
           })
