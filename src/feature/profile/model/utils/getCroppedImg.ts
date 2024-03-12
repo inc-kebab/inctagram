@@ -1,14 +1,17 @@
 import { toast } from 'react-toastify'
 
+import { LocaleType } from '@/../locales'
+
 import { CroppedArea } from '../types/profile.types'
 
 type Params = {
   crop: CroppedArea
   fileName: string
   imageSrc: string
+  t: LocaleType
 }
 
-export const getCroppedImg = ({ crop, fileName, imageSrc }: Params): Promise<FormData> => {
+export const getCroppedImg = ({ crop, fileName, imageSrc, t }: Params): Promise<FormData> => {
   return new Promise((resolve, reject) => {
     const image = new Image()
 
@@ -40,8 +43,8 @@ export const getCroppedImg = ({ crop, fileName, imageSrc }: Params): Promise<For
 
       canvas.toBlob(blob => {
         if (!blob) {
-          toast.error('Ошибка при создании blob')
-          reject(new Error('Ошибка при создании blob'))
+          toast.error(t.validation.imgLoad)
+          reject(new Error(t.validation.imgLoad))
 
           return
         }
@@ -53,8 +56,8 @@ export const getCroppedImg = ({ crop, fileName, imageSrc }: Params): Promise<For
     }
 
     image.onerror = error => {
-      toast.error('Ошибка при загрузке картинки:')
-      reject(error)
+      toast.error(t.validation.imgLoad)
+      reject(new Error(t.validation.imgLoad))
     }
   })
 }

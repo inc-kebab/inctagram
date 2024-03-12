@@ -50,7 +50,7 @@ export const ProfilePhoto = ({
 
   const handleUpdatePhoto = (cropArea: CroppedArea) => {
     if (cropArea) {
-      getCroppedImg({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl }).then(res =>
+      getCroppedImg({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl, t }).then(res =>
         onUpdatePhoto(res)
       )
     }

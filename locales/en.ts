@@ -209,11 +209,12 @@ export const en = {
     },
   },
   validation: {
+    ageMin: 'A user under 13 cannot create a profile ',
     avatarSize: 'Error! Photo size must be less than 10 MB!',
     avatarType: 'Error! The format of the uploaded photo must be PNG and JPEG',
-    ageMin: 'A user under 13 cannot create a profile ',
     dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
+    imgLoad: 'Error when creating or uploading an image',
     invalidCredentials: 'The email or password are incorrect. Try again please',
     maxLength: (len: number) => `Maximum ${len} characters`,
     minLength: (len: number) => `Minimum ${len} characters`,
