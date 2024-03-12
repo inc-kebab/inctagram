@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import clsx from 'clsx'
 
 import s from './Notification.module.scss'
@@ -18,12 +19,14 @@ type Props = {
 
 export const Notification = ({ className, error, success }: Props) => {
   const finallyClass = clsx(s.notification, { [s.error]: error }, className)
+  const { t } = useTranslation()
 
   return (
     <div className={finallyClass}>
       {error ? (
         <>
-          <span className={s.titleError}>Error!</span> <span>{error}</span>
+          <span className={s.titleError}>{t.validation.error}</span>
+          <span>{error}</span>
         </>
       ) : (
         success

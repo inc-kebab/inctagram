@@ -65,6 +65,7 @@ export const ProfilePhoto = ({
               alt="profile avatar"
               className={s.avatar}
               height={192}
+              priority
               src={avaUrlFromServer}
               width={192}
             />

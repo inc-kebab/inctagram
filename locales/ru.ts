@@ -125,7 +125,7 @@ export const ru: LocaleType = {
       title: 'Политика конфиденциальности',
     },
     profile: {
-      addProfilePhoto: 'Добавить фото профиля',
+      addProfilePhoto: 'Добавить фото',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
     },
@@ -208,10 +208,11 @@ export const ru: LocaleType = {
   },
   validation: {
     ageMin: 'Создание профиля пользователями младше 13 лет не допускается ',
-    avatarSize: 'Ошибка! Размер фотографии должен быть меньше 10 МБ!',
-    avatarType: 'Ошибка! Формат загруженной фотографии должен быть PNG или JPEG.',
+    avatarSize: 'Размер фотографии должен быть меньше 10 МБ!',
+    avatarType: 'Формат загруженной фотографии должен быть PNG или JPEG.',
     dateOfBirthMax: 'Дата рождения не может быть позже текущей даты',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
+    error: 'Ошибка!',
     imgLoad: 'Ошибка при создании или загрузке картинки',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
     maxLength: (len: number) => `Максимальное количество символов ${len}`,
