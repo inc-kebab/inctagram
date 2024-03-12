@@ -6,11 +6,14 @@
 
 export const en = {
   button: {
+    back: 'Back',
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     no: 'No',
     resendVerificationLink: 'Resend verification link',
+    save: 'Save changes',
+    selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
@@ -18,13 +21,20 @@ export const en = {
     yes: 'Yes',
   },
   label: {
+    aboutMe: 'About me',
+    birthDate: 'Date of Birth',
+    city: 'City',
     confirmAction: 'Confirm action',
     confirmPassword: 'Confirm password',
     email: 'Email',
+    firstName: 'First Name',
+    lastName: 'Last Name',
     newPassword: 'New Password',
     password: 'Password',
     reCaptcha: 'I’m not a robot',
+    successUpdateProfile: 'Your settings are saved!',
     userName: 'Username',
+    warningUpdateProfile: 'High load. It may take up to several minutes to replace the image.',
   },
   lang: {
     en: 'English',
@@ -118,7 +128,9 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      logOutConfirmation: 'Are you really want to log out of your account',
+      addProfilePhoto: 'Add a Profile Photo',
+      deleteProfilePhoto: 'Are you sure you want to delete the photo?',
+      logOutConfirmation: 'Are you really want to log out of your account?',
     },
     signIn: {
       forgotPassword: 'Forgot Password',
@@ -198,17 +210,33 @@ export const en = {
         'agree with our terms, please do not use our application.',
     },
   },
+  tabs: {
+    devices: 'Devices',
+    general: 'General information',
+    management: 'Account management',
+    payments: 'My payments',
+  },
   validation: {
+    aboutMeVerification:
+      'About me can contain only letters "a-z" "а-я" (uppercase and lowercase), special characters and a numbers',
+    ageMin: 'A user under 13 cannot create a profile ',
+    avatarSize: 'Photo size must be less than 10 MB!',
+    avatarType: 'The format of the uploaded photo must be PNG and JPEG',
+    dateOfBirthMax: 'Date of birth cannot be greater than the current date',
     emailVerification: 'The email must match the format example@example.com',
+    error: 'Error!',
+    imgLoad: 'Error when creating or uploading an image',
     invalidCredentials: 'The email or password are incorrect. Try again please',
-    maxLength20: 'Maximum 20 characters for password',
-    minLength6: 'Minimum 6 characters for password',
+    maxLength: (len: number) => `Maximum ${len} characters`,
+    minLength: (len: number) => `Minimum ${len} characters`,
+    nameVerification: (field: string) =>
+      `${field} can contain only letters (uppercase and lowercase)`,
     passwordMismatch: 'The passwords must match',
     passwordVerification:
       'The password must contain at least 1 capital letter, a special character and a number',
     required: 'Required field',
     userNameVerification:
-      'Username can contain letters (uppercase and lowercase), numbers, and the characters "_" and "-"',
+      'Username can contain only letters "a-z" (uppercase and lowercase), numbers, and the characters "_" and "-"',
   },
 }
 

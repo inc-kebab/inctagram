@@ -28,6 +28,15 @@ const nextConfig = {
     locales: ["en", "ru"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.yandexcloud.net',
+        pathname: '/kebab-inctagram/media/users/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

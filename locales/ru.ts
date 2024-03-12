@@ -4,11 +4,14 @@ import { LocaleType } from './en'
 
 export const ru: LocaleType = {
   button: {
+    back: 'Вернуться',
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
     no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
+    save: 'Сохранить изменения',
+    selectFromComputer: 'Выбрать с Компьютера',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
@@ -16,13 +19,20 @@ export const ru: LocaleType = {
     yes: 'Да',
   },
   label: {
+    aboutMe: 'Обо мне',
+    birthDate: 'Дата рождения',
+    city: 'Город',
     confirmAction: 'Подствердите действие',
     confirmPassword: 'Подтвердите пароль',
     email: 'Электронная почта',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
     newPassword: 'Новый пароль',
     password: 'Пароль',
     reCaptcha: 'Я не робот',
+    successUpdateProfile: 'Ваши настройки сохранены!',
     userName: 'Имя пользователя',
+    warningUpdateProfile: 'Высокая нагрузка. Замена изображения может занять до нескольких минут.',
   },
   lang: {
     en: 'Английский',
@@ -117,7 +127,9 @@ export const ru: LocaleType = {
       title: 'Политика конфиденциальности',
     },
     profile: {
-      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
+      addProfilePhoto: 'Добавить фото',
+      deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
+      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',
@@ -196,15 +208,31 @@ export const ru: LocaleType = {
         'Если вы не согласны с нашими условиями, пожалуйста, не используйте наше приложение.',
     },
   },
+  tabs: {
+    devices: 'Устройства',
+    general: 'Общая информация',
+    management: 'Управление аккаунтом',
+    payments: 'Мои платежи',
+  },
   validation: {
+    aboutMeVerification:
+      'Информация может содержать только буквы "a-z", "а-я" (заглавные и строчные), специальные символы и цифры',
+    ageMin: 'Создание профиля пользователями младше 13 лет не допускается ',
+    avatarSize: 'Размер фотографии должен быть меньше 10 МБ!',
+    avatarType: 'Формат загруженной фотографии должен быть PNG или JPEG.',
+    dateOfBirthMax: 'Дата рождения не может быть позже текущей даты',
     emailVerification: 'Почта должна соответствовать формату example@example.com',
+    error: 'Ошибка!',
+    imgLoad: 'Ошибка при создании или загрузке картинки',
     invalidCredentials: 'Введенные email или пароль неверны. Пожалуйста, попробуйте еще раз',
-    maxLength20: 'Максимальное количество символов 20',
-    minLength6: 'Минимальное количество символов 6',
+    maxLength: (len: number) => `Максимальное количество символов ${len}`,
+    minLength: (len: number) => `Минимальное количество символов ${len}`,
+    nameVerification: (field: string) =>
+      `${field} может содержать только буквы (заглавные и строчные)`,
     passwordMismatch: 'Пароли должны совпадать',
     passwordVerification: 'Пароль должен содержать минимум 1 заглавную букву, спец. символ и цифру',
     required: 'Обязательное поле',
     userNameVerification:
-      'Имя пользователя может содержать буквы (заглавные и строчные), цифры и символы "_" и "-"',
+      'Имя пользователя может содержать только буквы "a-z" (заглавные и строчные), цифры и символы "_" и "-"',
   },
 }

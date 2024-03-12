@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+
+  width: 100%;
+
+  background-color: transparent;
+  border: none;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.submit {
+  align-self: flex-end;
+}
+
+.field {
+  & label {
+    &::after {
+      content: '*';
+      color: var(--danger-500);
+    }
+  }
+}
