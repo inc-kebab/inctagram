@@ -17,11 +17,18 @@ const Profile: Page = () => {
 
   return (
     <div>
+      <div>
+        <img alt="" src={data?.avatars?.avatar?.url} />
+      </div>
       <div>username {data?.username}</div>
       <div>firstName {data?.firstName}</div>
       <div>lastName {data?.lastName}</div>
       <div>aboutMe {data?.aboutMe}</div>
-      <Button asComponent={Link} href={AppRoutes.PROFILE_SETTINGS} variant="secondary">
+      <Button
+        asComponent={Link}
+        href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
+        variant="secondary"
+      >
         Profile settings
       </Button>
     </div>
