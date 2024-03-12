@@ -30,7 +30,7 @@ export type DatePickerProps<Range extends boolean | undefined = undefined> = {
 
 export const DatePicker = forwardRef(
   <Range extends boolean | undefined = undefined>(
-    { dateFormat = 'dd/MM/yyyy', error, label, placeholder, ...rest }: DatePickerProps<Range>,
+    { dateFormat = 'dd.MM.yyyy', error, label, placeholder, ...rest }: DatePickerProps<Range>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (

@@ -42,6 +42,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
         {...rest}
       >
         <ControlledTextField
+          className={s.field}
           control={control}
           disabled={disabled}
           error={errors.username?.message}
@@ -49,6 +50,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           name="username"
         />
         <ControlledTextField
+          className={s.field}
           control={control}
           disabled={disabled}
           error={errors.firstname?.message}
@@ -56,6 +58,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           name="firstname"
         />
         <ControlledTextField
+          className={s.field}
           control={control}
           disabled={disabled}
           error={errors.lastname?.message}
@@ -63,6 +66,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           name="lastname"
         />
         <ControlledDatePicker
+          className={s.field}
           control={control}
           disabled={disabled}
           error={

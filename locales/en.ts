@@ -217,6 +217,8 @@ export const en = {
     payments: 'My payments',
   },
   validation: {
+    aboutMeVerification:
+      'About me can contain only letters "a-z" "а-я" (uppercase and lowercase), special characters and a numbers',
     ageMin: 'A user under 13 cannot create a profile ',
     avatarSize: 'Photo size must be less than 10 MB!',
     avatarType: 'The format of the uploaded photo must be PNG and JPEG',
@@ -234,7 +236,7 @@ export const en = {
       'The password must contain at least 1 capital letter, a special character and a number',
     required: 'Required field',
     userNameVerification:
-      'Username can contain only letters (uppercase and lowercase), numbers, and the characters "_" and "-"',
+      'Username can contain only letters "a-z" (uppercase and lowercase), numbers, and the characters "_" and "-"',
   },
 }
 

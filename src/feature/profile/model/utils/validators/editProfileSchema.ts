@@ -1,10 +1,15 @@
 import { LocaleType } from '@/../locales'
-import { NAME_PATTERN, USERNAME_PATTERN } from '@/shared/const/regexs'
+import { ABOUT_PATTERN, NAME_PATTERN, USERNAME_PATTERN } from '@/shared/const/regexs'
 import { z } from 'zod'
 
 export const editProfileSchema = (t: LocaleType) =>
   z.object({
-    aboutMe: z.string().trim().max(200, t.validation.maxLength(200)).optional(),
+    aboutMe: z
+      .string()
+      .trim()
+      .regex(ABOUT_PATTERN, { message: t.validation.aboutMeVerification })
+      .max(200, t.validation.maxLength(200))
+      .optional(),
     birthDate: z
       .date()
       .nullable()
