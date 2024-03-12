@@ -23,9 +23,9 @@ export type GetProfileResponse = {
   birthDate: string
   city: null | string
   createdAt: string
-  firstName: null | string
+  firstname: null | string
   id: number
-  lastName: null | string
+  lastname: null | string
   username: string
 }
 

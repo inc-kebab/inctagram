@@ -58,8 +58,8 @@ export const useEditProfileForm = (t: LocaleType, userData?: GetProfileResponse)
         aboutMe: userData.aboutMe || '',
         birthDate: userData.birthDate ? parse(userData.birthDate, 'dd-MM-yyyy', new Date()) : null,
         city: userData.city || '',
-        firstname: userData.firstName || '',
-        lastname: userData.lastName || '',
+        firstname: userData.firstname || '',
+        lastname: userData.lastname || '',
         username: userData.username || '',
       })
     }
