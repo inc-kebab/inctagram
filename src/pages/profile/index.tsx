@@ -18,8 +18,8 @@ const Profile: Page = () => {
   return (
     <div>
       <div>username {data?.username}</div>
-      <div>firstName {data?.firstName}</div>
-      <div>lastName {data?.lastName}</div>
+      <div>firstName {data?.firstname}</div>
+      <div>lastName {data?.lastname}</div>
       <div>aboutMe {data?.aboutMe}</div>
       <Button asComponent={Link} href={AppRoutes.PROFILE_SETTINGS} variant="secondary">
         Profile settings

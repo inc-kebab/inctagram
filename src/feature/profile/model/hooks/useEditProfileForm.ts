@@ -55,10 +55,10 @@ export const useEditProfileForm = (userData: GetProfileResponse | undefined, t: 
     if (userData) {
       reset({
         aboutMe: userData.aboutMe || '',
-        birthDate: userData.dateOfBirth ? new Date(userData.dateOfBirth) : undefined,
+        birthDate: userData.birthDate ? new Date(userData.birthDate) : undefined,
         city: userData.city || '',
-        firstname: userData.firstName || '',
-        lastname: userData.lastName || '',
+        firstname: userData.firstname || '',
+        lastname: userData.lastname || '',
         username: userData.username || '',
       })
     }

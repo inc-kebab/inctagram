@@ -20,12 +20,13 @@ export type AddAvatarResponse = {
 export type GetProfileResponse = {
   aboutMe: string
   avatars: AddAvatarResponse | null
+  birthDate: string
   city: string
+
   createdAt: string
-  dateOfBirth: string
-  firstName: string
+  firstname: string
   id: number
-  lastName: string
+  lastname: string
   username: string
 }
 export type UpdateProfileArgs = {

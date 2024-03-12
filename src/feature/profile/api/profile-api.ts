@@ -86,10 +86,10 @@ const profileAPI = baseApi.injectEndpoints({
           profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
             if (draft) {
               draft.aboutMe = aboutMe as string
-              draft.dateOfBirth = birthDate
+              draft.birthDate = birthDate
               draft.city = city as string
-              draft.firstName = firstname
-              draft.lastName = lastname
+              draft.firstname = firstname
+              draft.lastname = lastname
               draft.username = username
             }
           })
