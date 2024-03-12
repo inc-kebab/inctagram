@@ -34,7 +34,7 @@ export const useEditProfileForm = (t: LocaleType, userData?: GetProfileResponse)
   })
 
   const { ref: changeCityRef } = usePlacesWidget<HTMLInputElement>({
-    apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API,
+    apiKey: process.env.NEXT_PUBLIC_GOOGLE,
     inputAutocompleteValue: 'country',
     language: locale || defaultLocale,
     onPlaceSelected: place => {
