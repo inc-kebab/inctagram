@@ -12,7 +12,7 @@ const Profile: Page = () => {
   const { data, isLoading } = useGetMyProfileQuery()
 
   if (isLoading) {
-    return <Loader />
+    return <Loader fullHeight />
   }
 
   return (
