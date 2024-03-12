@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { Controller } from 'react-hook-form'
 
-import { AuthRoutes } from '@/shared/const/routes'
+import { GeneralRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -71,7 +71,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
                 {errors.birthDate?.message}
                 <Link
                   className={s.link}
-                  href={{ pathname: AuthRoutes.PRIVACY, query: { sender: 'profile' } }}
+                  href={{ pathname: GeneralRoutes.PRIVACY, query: { sender: 'profile' } }}
                   target="_blank"
                 >
                   {t.pages.privacy.title}

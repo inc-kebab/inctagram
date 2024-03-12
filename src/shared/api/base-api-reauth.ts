@@ -41,7 +41,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         // set token to LS
         const data = refreshResult.data as { accessToken: string }
 
-        setCookie('accessToken', data.accessToken)
+        setCookie('accessToken', data.accessToken, { maxAge: 30 * 60 }) // 30min
 
         // retry the initial query
         result = await baseQuery(args, api, extraOptions)

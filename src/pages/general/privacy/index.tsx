@@ -16,13 +16,15 @@ const Privacy: Page = memo(() => {
 
   const handleNavigateToPrevPage = () => router.back()
 
+  const shouldShowBackBtn = router.query.sender !== 'profile'
+
   return (
     <div className={s.wrapper}>
-      {!router.query.sender && (
+      {shouldShowBackBtn && (
         <BackToPage
           className={s.link}
           onNavigate={handleNavigateToPrevPage}
-          title={t.button.backToSignUp}
+          title={router.query.sender === 'signup' ? t.button.backToSignUp : t.button.back}
         />
       )}
       <Typography asComponent="h1" className={s.title} textAlign="center" variant="h1">

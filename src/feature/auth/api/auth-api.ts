@@ -34,7 +34,7 @@ const authApi = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          setCookie('accessToken', data.accessToken)
+          setCookie('accessToken', data.accessToken, { maxAge: 30 * 60 }) // 30min
         } catch {
           deleteCookie('accessToken')
         }

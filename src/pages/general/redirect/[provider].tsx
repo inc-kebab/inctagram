@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useMeQuery } from '@/feature/auth/api/auth-api'
 import { AppRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
-import { setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -16,21 +16,25 @@ const RedirectProvider = () => {
 
   useEffect(() => {
     if (query.provider) {
+      let token
+
       if (query.provider !== 'credentials') {
-        const token = params?.get('code')
+        token = params?.get('code')
 
         if (token) {
-          setCookie('accessToken', token)
+          setCookie('accessToken', token, { maxAge: 30 * 60 }) // 30min
         }
+      } else {
+        token = getCookie('accessToken')
       }
 
-      if (data) {
-        void replace(AppRoutes.HOME)
+      if (token) {
+        void replace(AppRoutes.PROFILE)
       } else {
         void replace(AppRoutes.MAIN)
       }
     }
-  }, [query.provider, data, params, replace])
+  }, [query.provider, params, replace])
 
   return <Loader fullHeight />
 }

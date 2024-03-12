@@ -9,9 +9,7 @@ import { format } from 'date-fns'
 import { useUpdateProfileMutation } from '../../api/profile-api'
 import { EditProfileFormValues } from '../utils/validators/editProfileSchema'
 
-export const useUpdateProfile = () => {
-  const { t } = useTranslation()
-
+export const useUpdateProfile = (successMsg?: string) => {
   const [updateProfile, { isLoading }] = useUpdateProfileMutation()
 
   const updateProfileRef = useRef<UseFormRef<EditProfileFormValues>>(null)
@@ -30,7 +28,7 @@ export const useUpdateProfile = () => {
           setError(error.field, { message: error.message })
         })
       } else {
-        toast.success(t.label.successUpdateProfile)
+        toast.success(successMsg)
       }
     })
   }

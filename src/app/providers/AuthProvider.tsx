@@ -1,7 +1,7 @@
 import { PropsWithChildren, useLayoutEffect } from 'react'
 
 import { useMeQuery } from '@/feature/auth'
-import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
+import { AppRoutes, GeneralRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/router'
@@ -16,7 +16,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const isProtectProfilePage = asPath === 'profile/settings'
 
-  const isPublicRoute = asPath.startsWith(AuthRoutes.PRIVACY) || asPath.startsWith(AuthRoutes.TERMS)
+  const isPublicRoute =
+    asPath.startsWith(GeneralRoutes.PRIVACY) || asPath.startsWith(GeneralRoutes.TERMS)
 
   const token = getCookie('accessToken')
 

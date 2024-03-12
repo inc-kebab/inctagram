@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from '
 import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
-import { AuthRoutes } from '@/shared/const/routes'
+import { AuthRoutes, GeneralRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -135,12 +135,20 @@ export const SignUpForm = forwardRef(
               <Trans
                 tags={{
                   '1': () => (
-                    <Typography asComponent={Link} href={AuthRoutes.TERMS} variant="smallLink">
+                    <Typography
+                      asComponent={Link}
+                      href={{ pathname: GeneralRoutes.TERMS, query: { sender: 'signup' } }}
+                      variant="smallLink"
+                    >
                       {t.pages.signUp.agreement.terms}
                     </Typography>
                   ),
                   '2': () => (
-                    <Typography asComponent={Link} href={AuthRoutes.PRIVACY} variant="smallLink">
+                    <Typography
+                      asComponent={Link}
+                      href={{ pathname: GeneralRoutes.PRIVACY, query: { sender: 'signup' } }}
+                      variant="smallLink"
+                    >
                       {t.pages.signUp.agreement.privacy}
                     </Typography>
                   ),

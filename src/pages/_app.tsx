@@ -31,10 +31,8 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <ErrorBoundary>
-        <AuthProvider>
-          <Layout>{getLayout(<Component className={inter.className} {...pageProps} />, t)}</Layout>
-          <ToastProvider />
-        </AuthProvider>
+        <Layout>{getLayout(<Component className={inter.className} {...pageProps} />, t)}</Layout>
+        <ToastProvider />
       </ErrorBoundary>
     </Provider>
   )

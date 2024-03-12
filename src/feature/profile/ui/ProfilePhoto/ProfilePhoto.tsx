@@ -74,7 +74,7 @@ export const ProfilePhoto = ({
               className={s.avatar}
               height={192}
               priority
-              src={`${avaUrlFromServer}?cache=${new Date().getTime()}`}
+              src={avaUrlFromServer}
               width={192}
             />
             <DeletePhotoDialog
