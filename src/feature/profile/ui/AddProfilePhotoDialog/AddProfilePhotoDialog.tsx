@@ -1,16 +1,22 @@
-import { CroppedArea, CropperPhoto, InputPhoto } from '@/feature/profile'
+import { ReactNode } from 'react'
+
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
 
 import s from './AddProfilePhotoDialog.module.scss'
 
+import { CroppedArea } from '../../model/types/profile.types'
+import { CropperPhoto } from '../CropperPhoto/CropperPhoto'
+import { InputPhoto } from '../InputPhoto/InputPhoto'
+
 type Props = {
   avatarUrl: string
-  disabled: boolean
+  disabled?: boolean
   onAvatarUrl: (url: string) => void
   onOpenChange: (open: boolean) => void
   onSetCroppedArea: (size: CroppedArea) => void
   open: boolean
+  trigger: ReactNode
 }
 
 export const AddProfilePhotoDialog = ({
@@ -19,6 +25,7 @@ export const AddProfilePhotoDialog = ({
   onOpenChange,
   onSetCroppedArea,
   open,
+  trigger,
   ...rest
 }: Props) => {
   const { t } = useTranslation()
@@ -33,6 +40,7 @@ export const AddProfilePhotoDialog = ({
       onOpenChange={onOpenChange}
       open={open}
       title={t.pages.profile.addProfilePhoto}
+      trigger={trigger}
     >
       {avatarUrl ? (
         <CropperPhoto avatarUrl={avatarUrl} onSetCroppedArea={onSetCroppedArea} {...rest} />

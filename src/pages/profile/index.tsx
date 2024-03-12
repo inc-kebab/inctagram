@@ -1,72 +1,29 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 
-import {
-  AddProfilePhoto,
-  AddProfilePhotoDialog,
-  CroppedArea,
-  getCroppedImg,
-  useAddAvatarMutation,
-  useGetMyProfileQuery,
-  useRemoveAvatarMutation,
-} from '@/feature/profile'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { useGetMyProfileQuery } from '@/feature/profile'
+import { AppRoutes } from '@/shared/const/routes'
 import { Page } from '@/shared/types/layout'
+import { Button } from '@/shared/ui/Button'
+import { Loader } from '@/shared/ui/Loader'
 import { SidebarLayout } from '@/widgets/layout'
+import Link from 'next/link'
 
 const Profile: Page = () => {
-  const [openAddDialog, setOpenAddDialog] = useState(false)
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const { data, isLoading } = useGetMyProfileQuery()
 
-  const { data: profile } = useGetMyProfileQuery()
-
-  const [removeAvatar, { isLoading: isRemoveLoad }] = useRemoveAvatarMutation()
-  const [addAvatar, { isLoading }] = useAddAvatarMutation()
-
-  const handleOpenAdd = () => setOpenAddDialog(prev => !prev)
-
-  const handleRemove = () => {
-    removeAvatar().then(res => {
-      if ('error' in res) {
-        handleErrorResponse(res.error)
-      }
-    })
-  }
-
-  const handleChangeAvatar = (croppedAreaPixels: CroppedArea) => {
-    if (croppedAreaPixels) {
-      getCroppedImg({ crop: croppedAreaPixels, fileName: 'file', imageSrc: avatarUrl }).then(
-        res => {
-          addAvatar(res).then(response => {
-            if ('error' in response) {
-              handleErrorResponse(response.error)
-            }
-          })
-        }
-      )
-    }
-  }
-
-  const handleChangeOpen = (open: boolean) => {
-    setOpenAddDialog(open)
-    setAvatarUrl('')
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
     <div>
-      <AddProfilePhoto
-        avaUrlFromServer={profile?.avatars?.avatar?.url}
-        disabled={isRemoveLoad}
-        onDeletePhoto={handleRemove}
-        onOpenAddDialog={handleOpenAdd}
-      />
-      <AddProfilePhotoDialog
-        avatarUrl={avatarUrl}
-        disabled={isLoading}
-        onAvatarUrl={setAvatarUrl}
-        onOpenChange={handleChangeOpen}
-        onSetCroppedArea={handleChangeAvatar}
-        open={openAddDialog}
-      />
+      <div>username {data?.username}</div>
+      <div>firstName {data?.firstName}</div>
+      <div>lastName {data?.lastName}</div>
+      <div>aboutMe {data?.aboutMe}</div>
+      <Button asComponent={Link} href={AppRoutes.PROFILE_SETTINGS} variant="secondary">
+        Profile settings
+      </Button>
     </div>
   )
 }

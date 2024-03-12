@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { CroppedArea } from '@/feature/profile/model/types/profile.types'
+import { CroppedArea } from '../types/profile.types'
 
 type Params = {
   crop: CroppedArea

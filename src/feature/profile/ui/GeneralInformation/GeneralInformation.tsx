@@ -1,43 +1,35 @@
-import { useRef } from 'react'
-
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
-import { UseFormRef } from '@/shared/types/form'
-import { format } from 'date-fns'
-
 import s from './GeneralInformation.module.scss'
 
-import { useGetMyProfileQuery, useUpdateProfileMutation } from '../../api/profile-api'
-import { EditProfileFormValues } from '../../model/utils/validators/editProfileSchema'
+import { useGetMyProfileQuery } from '../../api/profile-api'
+import { useChangePhotoProfile } from '../../model/hooks/useChangePhotoProfile'
+import { useRemovePhotoProfile } from '../../model/hooks/useRemovePhotoProfile'
+import { useUpdateProfile } from '../../model/hooks/useUpdateProfile'
 import { EditProfileForm } from '../EditProfileForm/EditProfileForm'
+import { ProfilePhoto } from '../ProfilePhoto/ProfilePhoto'
 
 export const GeneralInformation = () => {
   const { data } = useGetMyProfileQuery()
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation()
 
-  console.log('data', data)
-
-  const ref = useRef<UseFormRef<EditProfileFormValues>>(null)
-
-  const handleSubmit = (data: EditProfileFormValues) => {
-    updateProfile({
-      ...data,
-      birthDate: format(data.birthDate, 'dd-MM-yyyy'),
-    }).then(res => {
-      if ('error' in res && ref.current) {
-        const setError = ref.current.setError
-
-        const errors = handleErrorResponse<EditProfileFormValues>(res.error)
-
-        errors?.fieldErrors?.forEach(error => {
-          setError(error.field, { message: error.message })
-        })
-      }
-    })
-  }
+  const { handleUpdateProfile, isLoading, updateProfileRef } = useUpdateProfile()
+  const { handleUpdatePhoto, isUpdateLoading } = useChangePhotoProfile()
+  const { handleRemovePhoto, isRemoveLoading } = useRemovePhotoProfile()
 
   return (
     <div className={s.root}>
-      <EditProfileForm disabled={isLoading} onSubmit={handleSubmit} ref={ref} userData={data} />
+      <ProfilePhoto
+        avaUrlFromServer={data?.avatars?.avatar?.url}
+        className={s.photo}
+        disabledDelete={isRemoveLoading}
+        disabledUpdate={isUpdateLoading}
+        onDeletePhoto={handleRemovePhoto}
+        onUpdatePhoto={handleUpdatePhoto}
+      />
+      <EditProfileForm
+        disabled={isLoading}
+        onSubmit={handleUpdateProfile}
+        ref={updateProfileRef}
+        userData={data}
+      />
     </div>
   )
 }

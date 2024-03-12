@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { avatarSchema } from '@/feature/profile'
 import { Image as ImageSvg } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
@@ -9,6 +8,8 @@ import { Notification } from '@/shared/ui/Notification'
 import clsx from 'clsx'
 
 import s from './InputPhoto.module.scss'
+
+import { avatarSchema } from '../../model/utils/validators/addAvatar'
 
 type Props = {
   setPhoto: (photo: File) => void

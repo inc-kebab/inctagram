@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import Cropper from 'react-easy-crop'
 
-import { CroppedArea } from '@/feature/profile'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 
 import s from './CropperPhoto.module.scss'
 
+import { CroppedArea } from '../../model/types/profile.types'
+
 type Crop = { x: number; y: number }
 
 type Props = {
   avatarUrl: string
-  disabled: boolean
+  disabled?: boolean
   onSetCroppedArea: (size: CroppedArea) => void
 }
 
@@ -37,6 +38,7 @@ export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) =
 
   return (
     <div className={s.cropperContainer}>
+      <div title="Use the mouse wheel to zoom out/Increasing the size">x{zoom}</div>
       <div className={s.cropperWindow}>
         <Cropper
           aspect={1}

@@ -8,7 +8,7 @@ import {
 
 const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
-    addAvatar: builder.mutation<AddAvatarResponse, FormData>({
+    changeProfilePhoto: builder.mutation<AddAvatarResponse, FormData>({
       // invalidatesTags: ['profile'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         let avatar
@@ -54,7 +54,7 @@ const profileAPI = baseApi.injectEndpoints({
       providesTags: ['profile'],
       query: () => ({ url: '/profile' }),
     }),
-    removeAvatar: builder.mutation<void, void>({
+    removeProfilePhoto: builder.mutation<void, void>({
       invalidatesTags: ['profile'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
@@ -77,7 +77,7 @@ const profileAPI = baseApi.injectEndpoints({
       }),
     }),
     updateProfile: builder.mutation<void, UpdateProfileArgs>({
-      invalidatesTags: ['profile'],
+      // invalidatesTags: ['profile'],
       onQueryStarted: async (
         { aboutMe, birthDate, city, firstname, lastname, username },
         { dispatch, queryFulfilled }
@@ -111,8 +111,8 @@ const profileAPI = baseApi.injectEndpoints({
 })
 
 export const {
-  useAddAvatarMutation,
+  useChangeProfilePhotoMutation,
   useGetMyProfileQuery,
-  useRemoveAvatarMutation,
+  useRemoveProfilePhotoMutation,
   useUpdateProfileMutation,
 } = profileAPI
