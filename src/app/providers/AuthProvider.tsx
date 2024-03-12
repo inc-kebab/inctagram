@@ -14,13 +14,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // TODO profile - public, profile-settings - protect
   const isNoAuthRoute = asPath.startsWith('/auth') || asPath === '/'
 
+  const isProtectProfilePage = asPath === 'profile/settings'
+
   const isPublicRoute = asPath.startsWith(AuthRoutes.PRIVACY) || asPath.startsWith(AuthRoutes.TERMS)
 
   const token = getCookie('accessToken')
 
   // TODO push to error page
   useLayoutEffect(() => {
-    if (!token && !isNoAuthRoute && !isPublicRoute && asPath === 'profile/settings') {
+    if (!token && !isNoAuthRoute && !isPublicRoute && isProtectProfilePage) {
       void push(AppRoutes.MAIN)
     }
 
