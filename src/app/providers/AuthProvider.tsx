@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     if (token && isNoAuthRoute && !isPublicRoute) {
       void push(AppRoutes.HOME)
     }
-  }, [token, isNoAuthRoute, push, isPublicRoute])
+  }, [token, isNoAuthRoute, push, isPublicRoute, isProtectProfilePage])
 
   return isLoading ? <Loader fullHeight /> : <>{children}</>
 }
