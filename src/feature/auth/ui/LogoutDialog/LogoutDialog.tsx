@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useMeQuery } from '@/feature/auth'
 import { Logout } from '@/shared/assets/icons/common'
@@ -20,13 +20,11 @@ export const LogoutDialog = ({ disabled, onLogout }: Props) => {
 
   const { data } = useMeQuery()
 
-  const emailContent: string | undefined = `"${data?.email}"`
-
   const textContent: React.JSX.Element = (
     <div>
       {t.pages.profile.logOutConfirmation}
       <br />
-      <span className={s.email}>{emailContent}</span>?
+      <span className={s.email}>{data?.email}</span>?
     </div>
   )
 
