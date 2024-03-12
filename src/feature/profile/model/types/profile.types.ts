@@ -13,21 +13,22 @@ export type CroppedArea = {
 }
 
 export type AddAvatarResponse = {
-  avatar: Avatar | null
-  thumbnail: Avatar | null
+  'avatar-medium': Avatar | null
+  'avatar-thumbnail': Avatar | null
 }
 
 export type GetProfileResponse = {
-  aboutMe: string
+  aboutMe: null | string
   avatars: AddAvatarResponse | null
-  city: string
+  birthDate: string
+  city: null | string
   createdAt: string
-  dateOfBirth: string
-  firstName: string
+  firstname: null | string
   id: number
-  lastName: string
+  lastname: null | string
   username: string
 }
+
 export type UpdateProfileArgs = {
   aboutMe?: string
   birthDate: string

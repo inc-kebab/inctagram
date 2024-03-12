@@ -1,0 +1,42 @@
+.ProfileInfo {
+  display: flex;
+  gap: 38px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 200px;
+  height: 200px;
+
+  background-color: var(--dark-500);
+  border-radius: 50%;
+}
+
+.image {
+  width: 42px;
+  height: 42px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.name {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}

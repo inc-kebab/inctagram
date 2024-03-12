@@ -14,7 +14,7 @@ const meta = {
     },
     dateFormat: {
       control: false,
-      description: 'Needed date format for show in input. Default `dd/MM/yyyy`',
+      description: 'Needed date format for show in input. Default `dd.MM.yyyy`',
     },
     disabled: {
       control: 'boolean',

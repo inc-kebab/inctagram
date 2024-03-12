@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { Controller } from 'react-hook-form'
 
-import { AuthRoutes } from '@/shared/const/routes'
+import { GeneralRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -30,18 +30,9 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
     const { t } = useTranslation()
 
     const { changeCityRef, control, errors, handleSubmit, isValid, reset, setError } =
-      useEditProfileForm(userData, t)
+      useEditProfileForm(t, userData)
 
     useImperativeHandle(ref, () => ({ reset, setError }))
-
-    const LinkForPrivacy = (
-      <Link
-        className={s.link}
-        href={{ pathname: AuthRoutes.PRIVACY, query: { sender: 'profile' } }}
-      >
-        {t.pages.privacy.title}
-      </Link>
-    )
 
     return (
       <Card
@@ -51,6 +42,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
         {...rest}
       >
         <ControlledTextField
+          className={s.field}
           control={control}
           disabled={disabled}
           error={errors.username?.message}
@@ -58,6 +50,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           name="username"
         />
         <ControlledTextField
+          className={s.field}
           control={control}
           disabled={disabled}
           error={errors.firstname?.message}
@@ -65,6 +58,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           name="firstname"
         />
         <ControlledTextField
+          className={s.field}
           control={control}
           disabled={disabled}
           error={errors.lastname?.message}
@@ -72,13 +66,20 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           name="lastname"
         />
         <ControlledDatePicker
+          className={s.field}
           control={control}
           disabled={disabled}
           error={
             errors.birthDate?.message && (
               <>
                 {errors.birthDate?.message}
-                {LinkForPrivacy}
+                <Link
+                  className={s.link}
+                  href={{ pathname: GeneralRoutes.PRIVACY, query: { sender: 'profile' } }}
+                  target="_blank"
+                >
+                  {t.pages.privacy.title}
+                </Link>
               </>
             )
           }

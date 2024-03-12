@@ -3,7 +3,8 @@ import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useChangeProfilePhotoMutation } from '../../api/profile-api'
 
 export const useChangePhotoProfile = () => {
-  const [updatePhoto, { isLoading: isUpdateLoading }] = useChangeProfilePhotoMutation()
+  const [updatePhoto, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
+    useChangeProfilePhotoMutation()
 
   const handleUpdatePhoto = (data: FormData) => {
     updatePhoto(data).then(response => {
@@ -13,5 +14,5 @@ export const useChangePhotoProfile = () => {
     })
   }
 
-  return { handleUpdatePhoto, isUpdateLoading }
+  return { handleUpdatePhoto, isUpdateLoading, isUpdateSuccess }
 }

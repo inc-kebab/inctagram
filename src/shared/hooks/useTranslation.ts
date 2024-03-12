@@ -11,7 +11,7 @@ export const useTranslation = () => {
     const localeCookie = getCookie('NEXT_LOCALE')
 
     if (!localeCookie) {
-      setCookie('NEXT_LOCALE', router.locale, { maxAge: 100 * 365 * 24 * 60 * 60 })
+      setCookie('NEXT_LOCALE', router.locale, { maxAge: 100 * 365 * 24 * 60 * 60 }) // 1year
     }
   }, [])
 

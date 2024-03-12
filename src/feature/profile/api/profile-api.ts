@@ -9,37 +9,39 @@ import {
 const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
     changeProfilePhoto: builder.mutation<AddAvatarResponse, FormData>({
-      // invalidatesTags: ['profile'],
+      invalidatesTags: ['profile'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         let avatar
-        const patchResult = dispatch(
-          profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
-            const avatarFile = args.get('file')
-
-            if (avatarFile instanceof File) {
-              avatar = URL.createObjectURL(avatarFile)
-              draft.avatars = {
-                avatar: {
-                  fileSize: avatarFile.size,
-                  height: 300,
-                  url: URL.createObjectURL(avatarFile),
-                  width: 300,
-                },
-                thumbnail: {
-                  fileSize: avatarFile.size,
-                  height: 300,
-                  url: URL.createObjectURL(avatarFile),
-                  width: 300,
-                },
-              }
-            }
-          })
-        )
+        let patchResult
 
         try {
           await queryFulfilled
+
+          patchResult = dispatch(
+            profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
+              const avatarFile = args.get('file')
+
+              if (avatarFile instanceof File) {
+                avatar = URL.createObjectURL(avatarFile)
+                draft.avatars = {
+                  'avatar-medium': {
+                    fileSize: avatarFile.size,
+                    height: 300,
+                    url: URL.createObjectURL(avatarFile),
+                    width: 300,
+                  },
+                  'avatar-thumbnail': {
+                    fileSize: avatarFile.size,
+                    height: 300,
+                    url: URL.createObjectURL(avatarFile),
+                    width: 300,
+                  },
+                }
+              }
+            })
+          )
         } catch (err) {
-          patchResult.undo()
+          patchResult && patchResult.undo()
         } finally {
           avatar && URL.revokeObjectURL(avatar)
         }
@@ -55,7 +57,7 @@ const profileAPI = baseApi.injectEndpoints({
       query: () => ({ url: '/profile' }),
     }),
     removeProfilePhoto: builder.mutation<void, void>({
-      invalidatesTags: ['profile'],
+      // invalidatesTags: ['profile'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
           profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
@@ -85,9 +87,9 @@ const profileAPI = baseApi.injectEndpoints({
         const result = dispatch(
           profileAPI.util.updateQueryData('getMyProfile', undefined, draft => {
             if (draft) {
-              draft.aboutMe = aboutMe as string
-              draft.dateOfBirth = birthDate
-              draft.city = city as string
+              draft.aboutMe = aboutMe || null
+              draft.birthDate = birthDate
+              draft.city = city || null
               draft.firstName = firstname
               draft.lastName = lastname
               draft.username = username

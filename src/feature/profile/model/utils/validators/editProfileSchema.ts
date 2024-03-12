@@ -1,24 +1,40 @@
 import { LocaleType } from '@/../locales'
-import { NAME_PATTERN, USERNAME_PATTERN } from '@/shared/const/regexs'
+import { ABOUT_PATTERN, NAME_PATTERN, USERNAME_PATTERN } from '@/shared/const/regexs'
 import { z } from 'zod'
 
 export const editProfileSchema = (t: LocaleType) =>
   z.object({
-    aboutMe: z.string().trim().max(200, t.validation.maxLength(200)).optional(),
-    birthDate: z.date().refine(
-      birthDate => {
-        if (!birthDate) {
-          return true
-        }
-        if (birthDate) {
-          const date = new Date(birthDate)
-          const userAge = new Date().getFullYear() - date.getFullYear()
+    aboutMe: z
+      .string()
+      .trim()
+      .max(200, t.validation.maxLength(200))
+      .refine(
+        text => {
+          if (!text) {
+            return true
+          } else {
+            return ABOUT_PATTERN.test(text)
+          }
+        },
+        { message: t.validation.aboutMeVerification }
+      )
+      .optional(),
+    birthDate: z
+      .date()
+      .nullable()
+      .refine(
+        birthDate => {
+          if (!birthDate) {
+            return false
+          } else {
+            const date = new Date(birthDate)
+            const userAge = new Date().getFullYear() - date.getFullYear()
 
-          return userAge >= 13
-        }
-      },
-      { message: t.validation.ageMin }
-    ),
+            return userAge >= 13
+          }
+        },
+        { message: t.validation.ageMin }
+      ),
     city: z.string().trim().optional(),
     firstname: z
       .string()

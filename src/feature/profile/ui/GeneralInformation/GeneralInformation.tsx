@@ -1,3 +1,5 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
+
 import s from './GeneralInformation.module.scss'
 
 import { useGetMyProfileQuery } from '../../api/profile-api'
@@ -8,19 +10,24 @@ import { EditProfileForm } from '../EditProfileForm/EditProfileForm'
 import { ProfilePhoto } from '../ProfilePhoto/ProfilePhoto'
 
 export const GeneralInformation = () => {
+  const { t } = useTranslation()
+
   const { data } = useGetMyProfileQuery()
 
-  const { handleUpdateProfile, isLoading, updateProfileRef } = useUpdateProfile()
-  const { handleUpdatePhoto, isUpdateLoading } = useChangePhotoProfile()
+  const { handleUpdateProfile, isLoading, updateProfileRef } = useUpdateProfile(
+    t.label.successUpdateProfile
+  )
+  const { handleUpdatePhoto, isUpdateLoading, isUpdateSuccess } = useChangePhotoProfile()
   const { handleRemovePhoto, isRemoveLoading } = useRemovePhotoProfile()
 
   return (
     <div className={s.root}>
       <ProfilePhoto
-        avaUrlFromServer={data?.avatars?.avatar?.url}
+        avaUrlFromServer={data?.avatars?.['avatar-medium']?.url}
         className={s.photo}
         disabledDelete={isRemoveLoading}
         disabledUpdate={isUpdateLoading}
+        isSuccessUpdate={isUpdateSuccess}
         onDeletePhoto={handleRemovePhoto}
         onUpdatePhoto={handleUpdatePhoto}
       />

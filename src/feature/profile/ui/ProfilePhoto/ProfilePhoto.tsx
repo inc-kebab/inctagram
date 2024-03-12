@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Close from '@/shared/assets/icons/common/close.svg'
 import ImageIcon from '@/shared/assets/icons/fill/image.svg'
@@ -19,6 +19,7 @@ type Props = {
   className?: string
   disabledDelete?: boolean
   disabledUpdate?: boolean
+  isSuccessUpdate?: boolean
   onDeletePhoto: () => void
   onUpdatePhoto: (data: FormData) => void
 }
@@ -28,6 +29,7 @@ export const ProfilePhoto = ({
   className,
   disabledDelete,
   disabledUpdate,
+  isSuccessUpdate,
   onDeletePhoto,
   onUpdatePhoto,
 }: Props) => {
@@ -55,6 +57,12 @@ export const ProfilePhoto = ({
       )
     }
   }
+
+  useEffect(() => {
+    if (isSuccessUpdate) {
+      setOpenAdd(false)
+    }
+  }, [isSuccessUpdate])
 
   return (
     <div className={clsx(s.container, className)}>

@@ -3,7 +3,6 @@ import Cropper from 'react-easy-crop'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
-import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 
 import s from './CropperPhoto.module.scss'
 
@@ -53,11 +52,9 @@ export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) =
           zoom={zoom}
         />
       </div>
-      <DialogClose>
-        <Button disabled={disabled} onClick={handleSetCroppedArea}>
-          {t.button.save}
-        </Button>
-      </DialogClose>
+      <Button disabled={disabled} onClick={handleSetCroppedArea}>
+        {t.button.save}
+      </Button>
     </div>
   )
 }
