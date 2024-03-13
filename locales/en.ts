@@ -18,7 +18,12 @@ export const en = {
     sendLinkAgain: 'Send Link Again',
     signIn: 'Sign In',
     signUp: 'Sign Up',
+    simple_save: 'Save',
     yes: 'Yes',
+  },
+  fields: {
+    firstName: 'First name',
+    lastName: 'Last name',
   },
   label: {
     aboutMe: 'About me',

@@ -16,7 +16,12 @@ export const ru: LocaleType = {
     sendLinkAgain: 'Отправить ссылку повторно',
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
+    simple_save: 'Сохранить',
     yes: 'Да',
+  },
+  fields: {
+    firstName: 'Имя',
+    lastName: 'Фамилия',
   },
   label: {
     aboutMe: 'Обо мне',

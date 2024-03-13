@@ -39,20 +39,20 @@ export const editProfileSchema = (t: LocaleType) =>
     firstname: z
       .string()
       .trim()
-      .regex(NAME_PATTERN, { message: t.validation.nameVerification('First name') })
       .min(1, t.validation.minLength(1))
+      .regex(NAME_PATTERN, { message: t.validation.nameVerification(t.fields.firstName) })
       .max(20, t.validation.maxLength(50)),
     lastname: z
       .string()
       .trim()
-      .regex(NAME_PATTERN, { message: t.validation.nameVerification('Last name') })
       .min(1, t.validation.minLength(1))
+      .regex(NAME_PATTERN, { message: t.validation.nameVerification(t.fields.lastName) })
       .max(30, t.validation.maxLength(50)),
     username: z
       .string()
       .trim()
-      .regex(USERNAME_PATTERN, { message: t.validation.userNameVerification })
       .min(6, t.validation.minLength(6))
+      .regex(USERNAME_PATTERN, { message: t.validation.userNameVerification })
       .max(30, t.validation.maxLength(30)),
   })
 

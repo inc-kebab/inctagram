@@ -30,7 +30,13 @@ export type DatePickerProps<Range extends boolean | undefined = undefined> = {
 
 export const DatePicker = forwardRef(
   <Range extends boolean | undefined = undefined>(
-    { dateFormat = 'dd.MM.yyyy', error, label, placeholder, ...rest }: DatePickerProps<Range>,
+    {
+      dateFormat = ['dd.MM.yyyy', 'dd-MM-yyyy', 'dd/MM/yyyy'],
+      error,
+      label,
+      placeholder,
+      ...rest
+    }: DatePickerProps<Range>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -46,6 +52,7 @@ export const DatePicker = forwardRef(
             <CustomHeader date={date} decreaseMonth={decreaseMonth} increaseMonth={increaseMonth} />
           )}
           {...rest}
+          autoComplete="off"
         />
       </div>
     )
