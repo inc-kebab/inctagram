@@ -26,7 +26,14 @@ export const CustomInput = forwardRef<HTMLInputElement, Props>(
           </label>
         )}
         <div className={s.inputWrapper}>
-          <input className={classes.input} disabled={disabled} id={id} ref={ref} {...props} />
+          <input
+            className={classes.input}
+            disabled={disabled}
+            id={id}
+            ref={ref}
+            {...props}
+            autoComplete="off"
+          />
           <Calendar className={s.calendar} />
         </div>
         {error && <span className={s.errorText}>{error}</span>}

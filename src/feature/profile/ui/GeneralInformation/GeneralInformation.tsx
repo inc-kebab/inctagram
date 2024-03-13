@@ -12,7 +12,7 @@ import { ProfilePhoto } from '../ProfilePhoto/ProfilePhoto'
 export const GeneralInformation = () => {
   const { t } = useTranslation()
 
-  const { data } = useGetMyProfileQuery()
+  const { data, isLoading: isGetProfileLoad } = useGetMyProfileQuery()
 
   const { handleUpdateProfile, isLoading, updateProfileRef } = useUpdateProfile(
     t.label.successUpdateProfile
@@ -32,7 +32,7 @@ export const GeneralInformation = () => {
         onUpdatePhoto={handleUpdatePhoto}
       />
       <EditProfileForm
-        disabled={isLoading}
+        disabled={isLoading || isGetProfileLoad}
         onSubmit={handleUpdateProfile}
         ref={updateProfileRef}
         userData={data}

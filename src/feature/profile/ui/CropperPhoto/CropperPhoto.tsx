@@ -52,8 +52,8 @@ export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) =
           zoom={zoom}
         />
       </div>
-      <Button disabled={disabled} onClick={handleSetCroppedArea}>
-        {t.button.save}
+      <Button className={s.save} disabled={disabled} onClick={handleSetCroppedArea}>
+        {t.button.simple_save}
       </Button>
     </div>
   )
