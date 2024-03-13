@@ -96,6 +96,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
               error={errors.city?.message}
               label={t.label.city}
               {...field}
+              autoComplete="off"
               placeholder=""
               ref={changeCityRef}
             />
