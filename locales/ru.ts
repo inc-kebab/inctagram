@@ -134,7 +134,7 @@ export const ru: LocaleType = {
     profile: {
       addProfilePhoto: 'Добавить фото',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
-      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта?',
+      logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',
