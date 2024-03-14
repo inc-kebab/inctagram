@@ -1,6 +1,8 @@
 @import '@/app/styles/mixins';
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: 378px;
   padding: 23px 24px 36px;
 }
@@ -13,7 +15,6 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 13px;
 }
 
 .networkLink {
@@ -27,8 +28,8 @@
 }
 
 .forgotPassword {
-  float: right;
   display: block;
+  align-self: end;
   margin-top: 36px;
   color: var(--light-900);
 }
@@ -42,6 +43,7 @@
 }
 
 .signUpButton {
+  align-self: center;
   margin-top: 6px;
 }
 

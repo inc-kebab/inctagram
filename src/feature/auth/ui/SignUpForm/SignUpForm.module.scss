@@ -1,6 +1,8 @@
 @import '@/app/styles/mixins';
 
 .form {
+  display: flex;
+  flex-direction: column;
   width: 378px;
   padding: 23px 24px 36px;
 }
@@ -36,6 +38,10 @@
 
 .signUp {
   margin-bottom: 18px;
+}
+
+.link {
+  align-self: center;
 }
 
 .footerText {

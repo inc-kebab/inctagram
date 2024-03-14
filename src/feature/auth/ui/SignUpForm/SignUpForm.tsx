@@ -165,7 +165,7 @@ export const SignUpForm = forwardRef(
         <Typography className={s.footerText} textAlign="center">
           {t.pages.signUp.question}
         </Typography>
-        <Button asComponent={Link} fullWidth href={AuthRoutes.SIGN_IN} variant="text">
+        <Button asComponent={Link} className={s.link} href={AuthRoutes.SIGN_IN} variant="text">
           {t.button.signIn}
         </Button>
       </Card>

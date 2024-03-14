@@ -36,13 +36,15 @@ const ConfirmEmail: Page = () => {
   }
 
   useEffect(() => {
-    confirmEmail({ confirmationCode }).then(res => {
-      if ('error' in res) {
-        handleErrorResponse(res.error)
-      }
-      setShowLoader(false)
-    })
-  }, [])
+    if (confirmationCode) {
+      confirmEmail({ confirmationCode }).then(res => {
+        if ('error' in res) {
+          handleErrorResponse(res.error)
+        }
+        setShowLoader(false)
+      })
+    }
+  }, [confirmationCode, confirmEmail])
 
   if (showLoader) {
     return <Loader fullHeight />
