@@ -133,6 +133,7 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
+      addPhoto: 'Add Photo',
       addProfilePhoto: 'Add a Profile Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',

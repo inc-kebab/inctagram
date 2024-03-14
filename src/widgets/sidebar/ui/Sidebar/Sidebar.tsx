@@ -26,7 +26,15 @@ export const Sidebar = ({ buttonName, isLoading, items, onLogout, ...rest }: Pro
 
           const isActive = pathname === itemPath
 
-          return <SidebarItem isActive={isActive} isLastGroupItem={i === 4} item={el} key={i} />
+          return (
+            <SidebarItem
+              isActive={isActive}
+              isLastGroupItem={i === 4}
+              isLink={el.href !== ''}
+              item={el}
+              key={i}
+            />
+          )
         })}
       </ul>
       <LogoutDialog disabled={isLoading} onLogout={onLogout} />

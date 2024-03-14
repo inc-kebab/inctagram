@@ -9,6 +9,34 @@
   }
 }
 
+.button {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  padding: 0;
+  color: inherit;
+
+  &:focus-visible {
+    border-radius: 2px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: var(--dark-100);
+  }
+
+  &.full {
+    gap: 0.75rem;
+  }
+
+  &.active {
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-500);
+  }
+}
+
 .link {
   display: flex;
   align-items: center;
