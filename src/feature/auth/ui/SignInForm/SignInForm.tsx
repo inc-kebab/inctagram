@@ -109,7 +109,6 @@ export const SignInForm = forwardRef(
         <Button
           asComponent={Link}
           className={s.signUpButton}
-          fullWidth
           href={AuthRoutes.SIGN_UP}
           variant="text"
         >
