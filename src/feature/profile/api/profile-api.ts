@@ -9,7 +9,7 @@ import {
 const profileAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
     changeProfilePhoto: builder.mutation<AddAvatarResponse, FormData>({
-      invalidatesTags: ['profile'],
+      invalidatesTags: (_, error) => (error ? [] : ['profile']),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         let avatar
         let patchResult
