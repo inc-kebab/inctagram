@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -89,14 +90,19 @@ export const ForgotPasswordForm = forwardRef(
         <Button
           asComponent={Link}
           className={s.link}
-          href="/auth/sign-in"
+          href={AuthRoutes.SIGN_IN}
           type="button"
           variant="text"
         >
           {t.button.backToSignIn}
         </Button>
         {!success && (
-          <Recaptcha control={control} error={errors.recaptcha?.message} name="recaptcha" />
+          <Recaptcha
+            className={s.recaptcha}
+            control={control}
+            error={errors.recaptcha?.message}
+            name="recaptcha"
+          />
         )}
       </Card>
     )

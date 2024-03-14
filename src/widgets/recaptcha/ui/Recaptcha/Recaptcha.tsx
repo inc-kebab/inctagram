@@ -1,11 +1,13 @@
 import ReCAPTCHA from 'react-google-recaptcha'
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
+import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
 import s from './Recaptcha.module.scss'
 
 type Props = {
+  className?: string
   error?: string
   onChange?: (key: null | string) => void
 }
@@ -14,6 +16,7 @@ export type ControlledRecaptchaProps<T extends FieldValues> = UseControllerProps
   Omit<Props, 'id'>
 
 export const Recaptcha = <T extends FieldValues>({
+  className,
   control,
   error,
   name,
@@ -28,7 +31,7 @@ export const Recaptcha = <T extends FieldValues>({
   })
 
   return (
-    <div className={s.recaptchaContainer}>
+    <div className={clsx(s.recaptchaContainer, className)}>
       <ReCAPTCHA
         hl={locale || 'en'}
         onChange={onChange}
