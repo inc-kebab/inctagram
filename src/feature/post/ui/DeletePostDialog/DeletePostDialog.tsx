@@ -8,20 +8,18 @@ type Props = {
   disabled?: boolean
   open: boolean
   setOpen: (open: boolean) => void
-  trigger: ReactNode
+  trigger?: ReactNode
 }
-export const DeletePhotoDialog = ({ confirmCallback, disabled, open, setOpen, trigger }: Props) => {
+
+export const DeletePostDialog = ({ setOpen, ...props }: Props) => {
   const { t } = useTranslation()
 
   return (
     <ConfirmDialog
-      confirmCallback={confirmCallback}
-      content={t.pages.profile.deleteProfilePhoto}
-      disabled={disabled}
+      content={t.pages.post.deletePostQuestion}
       onOpenChange={() => setOpen(!open)}
-      open={open}
-      title={t.pages.profile.deletePhoto}
-      trigger={trigger}
-    />
+      title={t.pages.post.deletePost}
+      {...props}
+    ></ConfirmDialog>
   )
 }

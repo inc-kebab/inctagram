@@ -90,6 +90,10 @@ export const en = {
     main: {
       metaTitle: 'Main',
     },
+    post: {
+      deletePost: 'Delete Post',
+      deletePostQuestion: 'Are you sure you want to delete this post?',
+    },
     privacy: {
       changes:
         'We reserve the right to make changes to our privacy policy. In the event of significant ' +
@@ -134,6 +138,7 @@ export const en = {
     },
     profile: {
       addProfilePhoto: 'Add a Profile Photo',
+      deletePhoto: 'Delete Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
     },

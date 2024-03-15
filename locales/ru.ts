@@ -27,7 +27,7 @@ export const ru: LocaleType = {
     aboutMe: 'Обо мне',
     birthDate: 'Дата рождения',
     city: 'Город',
-    confirmAction: 'Подствердите действие',
+    confirmAction: 'Подтвердите действие',
     confirmPassword: 'Подтвердите пароль',
     email: 'Электронная почта',
     firstName: 'Имя',
@@ -89,6 +89,10 @@ export const ru: LocaleType = {
     main: {
       metaTitle: 'Главная',
     },
+    post: {
+      deletePost: 'Удалить пост',
+      deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
+    },
     privacy: {
       changes:
         'Мы оставляем за собой право вносить изменения в нашу политику конфиденциальности. ' +
@@ -133,6 +137,7 @@ export const ru: LocaleType = {
     },
     profile: {
       addProfilePhoto: 'Добавить фото',
+      deletePhoto: 'Удалить фото',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
     },
