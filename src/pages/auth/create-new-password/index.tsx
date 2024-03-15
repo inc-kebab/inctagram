@@ -68,13 +68,15 @@ const CreateNewPassword: Page = () => {
   }
 
   useEffect(() => {
-    checkRecoveryCode({ recoveryCode }).then(res => {
-      if ('error' in res) {
-        handleErrorResponse(res.error)
-      }
-      setShowLoader(false)
-    })
-  }, [])
+    if (recoveryCode) {
+      checkRecoveryCode({ recoveryCode }).then(res => {
+        if ('error' in res) {
+          handleErrorResponse(res.error)
+        }
+        setShowLoader(false)
+      })
+    }
+  }, [recoveryCode, checkRecoveryCode])
 
   if (showLoader) {
     return <Loader fullHeight />

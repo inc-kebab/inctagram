@@ -3,6 +3,7 @@ import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import { LangSwitcher } from '@/widgets/lang-switcher'
+import clsx from 'clsx'
 import Link from 'next/link'
 
 import s from './Header.module.scss'
@@ -16,7 +17,7 @@ export const Header = ({ isUnauthorized }: Props) => {
 
   return (
     <header className={s.header}>
-      <div className={s.content}>
+      <div className={clsx('main_container', s.content)}>
         <Typography
           asComponent={Link}
           className={s.logo}
