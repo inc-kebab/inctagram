@@ -5,8 +5,8 @@ import { AppRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Header } from '@/widgets/header'
-import { getSidebarItems } from '@/widgets/sidebar/model/utils/getSidebarItems'
-import { Sidebar } from '@/widgets/sidebar/ui/Sidebar/Sidebar'
+import { Sidebar, getSidebarItems } from '@/widgets/sidebar'
+import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
 import s from './SidebarLayout.module.scss'
@@ -32,7 +32,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Header />
-      <div className={s.wrapper}>
+      <div className={clsx('main_container', s.wrapper)}>
         <Sidebar
           buttonName={t.layout.sidebar.logout}
           isLoading={isLoading}

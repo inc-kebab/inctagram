@@ -40,3 +40,21 @@ body {
 
   background-color: var(--dark-700);
 }
+
+* {
+  scrollbar-color: var(--primary-500) var(--dark-500);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--dark-500);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary-500);
+}

@@ -17,7 +17,7 @@ const Profile: Page = () => {
 
   return (
     <ProfileInfo
-      className={s.root}
+      className={s.info}
       userData={{
         aboutMe: data?.aboutMe,
         avatar: data?.avatars?.['avatar-medium']?.url,
