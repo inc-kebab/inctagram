@@ -8,7 +8,7 @@ import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import s from './ConfirmDialog.module.scss'
 
 interface Props {
-  confirmCallback: () => void
+  confirmCallback?: () => void
   content: ReactNode
   disabled?: boolean
   onOpenChange: (open: boolean) => void
