@@ -22,13 +22,14 @@ import {
 
 export type ForgotPasswordProps = {
   disabled?: boolean
+  isError?: boolean
+  isSuccess?: boolean
   onSubmit: (data: ForgotPasswordFormValues) => void
-  success?: boolean
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const ForgotPasswordForm = forwardRef(
   (
-    { className, disabled, onSubmit, success, ...rest }: ForgotPasswordProps,
+    { className, disabled, isError, isSuccess, onSubmit, ...rest }: ForgotPasswordProps,
     ref: Ref<UseFormRef<ForgotPasswordFormValues>>
   ) => {
     const { t } = useTranslation()
@@ -70,7 +71,7 @@ export const ForgotPasswordForm = forwardRef(
           autoComplete="email"
           className={s.textField}
           control={control}
-          disabled={disabled || success}
+          disabled={disabled || isSuccess}
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
@@ -79,13 +80,18 @@ export const ForgotPasswordForm = forwardRef(
         <Typography className={s.description} variant="regular14">
           {t.pages.forgotPassword.description}
         </Typography>
-        {success && (
+        {isSuccess && (
           <Typography className={s.success} variant="regular14">
             {t.pages.forgotPassword.success}
           </Typography>
         )}
-        <Button className={s.button} disabled={disabled || !isValid} fullWidth type="submit">
-          {success ? t.button.sendLinkAgain : t.button.sendLink}
+        <Button
+          className={s.button}
+          disabled={disabled || !isValid || !!errors?.email?.message}
+          fullWidth
+          type="submit"
+        >
+          {isSuccess ? t.button.sendLinkAgain : t.button.sendLink}
         </Button>
         <Button
           asComponent={Link}
@@ -96,11 +102,12 @@ export const ForgotPasswordForm = forwardRef(
         >
           {t.button.backToSignIn}
         </Button>
-        {!success && (
+        {!isSuccess && (
           <Recaptcha
             className={s.recaptcha}
             control={control}
             error={errors.recaptcha?.message}
+            isError={isError}
             name="recaptcha"
           />
         )}

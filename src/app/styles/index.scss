@@ -2,3 +2,9 @@
 @forward 'typography';
 @forward 'boilerplate';
 @forward 'toastify';
+
+.main_container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
