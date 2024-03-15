@@ -23,7 +23,8 @@ const ForgotPassword: Page = () => {
 
   const [open, setOpen] = useState(false)
 
-  const [recoveryPassword, { isLoading: isRecoveryLoad, isSuccess }] = useRecoveryPasswordMutation()
+  const [recoveryPassword, { isError, isLoading: isRecoveryLoad, isSuccess }] =
+    useRecoveryPasswordMutation()
   const [resendRecoveryPassword, { isLoading: isResendRecoveryLoad }] =
     useResendRecoveryPasswordMutation()
 
@@ -57,9 +58,10 @@ const ForgotPassword: Page = () => {
       <ForgotPasswordForm
         className={s.block}
         disabled={isRecoveryLoad || isResendRecoveryLoad}
+        isError={isError}
+        isSuccess={isSuccess}
         onSubmit={isSuccess ? handleSubmitResend : handleSubmit}
         ref={ref}
-        success={isSuccess}
       />
       <DialogEmailSent email={ref.current?.email} onOpenChange={setOpen} open={open} />
     </>
