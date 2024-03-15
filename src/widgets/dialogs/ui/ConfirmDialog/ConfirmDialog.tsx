@@ -36,7 +36,7 @@ export const ConfirmDialog = ({
       trigger={trigger}
     >
       <div className={s.dialog}>
-        {content}
+        <div className={s.content}>{content}</div>
         <div className={s.actions}>
           <Button disabled={disabled} onClick={confirmCallback} variant="outline">
             {t.button.yes}

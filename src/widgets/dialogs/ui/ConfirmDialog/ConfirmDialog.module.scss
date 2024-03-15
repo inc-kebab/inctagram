@@ -3,16 +3,17 @@
   flex-direction: column;
 
   width: 100%;
-  max-width: 378px;
+  max-width: 438px;
   padding: 30px 24px 36px;
+}
 
-  &:last-child {
-    align-items: end;
-  }
+.content {
+  align-self: start;
+  margin-bottom: 30px;
 }
 
 .actions {
   display: flex;
   gap: 24px;
-  margin-top: 30px;
+  align-self: end;
 }
