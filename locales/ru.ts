@@ -19,6 +19,22 @@ export const ru: LocaleType = {
     simple_save: 'Сохранить',
     yes: 'Да',
   },
+  dates: {
+    month: {
+      April: 'Апрель',
+      August: 'Август',
+      December: 'Декабрь',
+      February: 'Февраль',
+      January: 'Январь',
+      July: 'Июль',
+      June: 'Июнь',
+      March: 'Март',
+      May: 'Май',
+      November: 'Ноябрь',
+      October: 'Октябрь',
+      September: 'Сентябрь',
+    },
+  },
   fields: {
     firstName: 'Имя',
     lastName: 'Фамилия',

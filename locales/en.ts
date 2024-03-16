@@ -21,6 +21,22 @@ export const en = {
     simple_save: 'Save',
     yes: 'Yes',
   },
+  dates: {
+    month: {
+      April: 'April',
+      August: 'August',
+      December: 'December',
+      February: 'February',
+      January: 'January',
+      July: 'July',
+      June: 'June',
+      March: 'March',
+      May: 'May',
+      November: 'November',
+      October: 'October',
+      September: 'September',
+    },
+  },
   fields: {
     firstName: 'First name',
     lastName: 'Last name',
