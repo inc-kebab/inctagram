@@ -4,6 +4,15 @@
   justify-content: center;
 }
 
+.containerHeight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+
 .fullHeight {
-  height: calc(100vh - var(--header-height));
+  height: 100vh;
 }
