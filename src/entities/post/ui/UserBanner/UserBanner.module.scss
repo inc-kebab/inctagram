@@ -1,0 +1,15 @@
+.userBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px;
+
+  background-color: var(--dark-300);
+}
+
+.userInfo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}

@@ -1,5 +1,5 @@
-import ImageIcon from '@/shared/assets/icons/fill/image.svg'
 import { AppRoutes } from '@/shared/const/routes'
+import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import clsx from 'clsx'
@@ -18,20 +18,7 @@ interface Props {
 export const ProfileInfo = ({ className, userData }: Props) => {
   return (
     <div className={clsx(s.ProfileInfo, className)}>
-      {userData?.avatar ? (
-        <Image
-          alt="profile avatar"
-          className={s.avatar}
-          height={200}
-          priority
-          src={userData?.avatar}
-          width={200}
-        />
-      ) : (
-        <div className={s.iconWrapper}>
-          <ImageIcon className={s.image} />
-        </div>
-      )}
+      <Avatar avatarUrl={userData?.avatar} circle wrapperSize={200} />
       <div className={s.info}>
         <div className={s.name}>
           <Typography asComponent="h2" variant="h1">
