@@ -1,5 +1,3 @@
-import { ReactElement } from 'react'
-
 import { ProfileInfo } from '@/entities/profile'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { Page } from '@/shared/types/layout'
@@ -27,8 +25,12 @@ const Profile: Page = () => {
   )
 }
 
-Profile.getLayout = (page: ReactElement) => {
-  return <SidebarLayout>{page}</SidebarLayout>
+Profile.getLayout = (page, t) => {
+  return (
+    <SidebarLayout description={t.pages.profile.metaDescription} title={t.pages.profile.metaTitle}>
+      {page}
+    </SidebarLayout>
+  )
 }
 
 export default Profile
