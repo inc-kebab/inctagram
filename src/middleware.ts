@@ -23,9 +23,9 @@ export function middleware(req: NextRequest) {
 
   if (!token && !isPublicRoute && !isGeneralRoute) {
     if (isNeedChangeRouteLocale) {
-      return NextResponse.redirect(new URL(`/${localeCookie}${AppRoutes.MAIN}?${params}`, req.url))
+      return NextResponse.redirect(new URL(`/${localeCookie}${AppRoutes.MAIN}`, req.url))
     } else {
-      return NextResponse.redirect(new URL(`${AppRoutes.MAIN}?${params}`, req.url))
+      return NextResponse.redirect(new URL(`${AppRoutes.MAIN}`, req.url))
     }
   }
 
