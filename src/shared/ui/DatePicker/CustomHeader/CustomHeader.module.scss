@@ -1,19 +1,14 @@
 .header {
   display: flex;
+  gap: 5px;
   align-items: center;
   justify-content: space-between;
 
   margin-bottom: 12px;
-  padding: 0 6px;
+
+  color: var(--light-100);
 
   background-color: var(--dark-500);
-}
-
-.date {
-  font-size: var(--font-size-m);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-m);
-  color: var(--light-100);
 }
 
 .buttons {
@@ -28,8 +23,8 @@
     align-items: center;
     justify-content: center;
 
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     padding: 8px;
 
     background-color: var(--dark-100);
@@ -43,4 +38,21 @@
       background-color: var(--light-100);
     }
   }
+}
+
+// select year
+.select {
+  font-weight: var(--font-weight-bold);
+  background-color: var(--dark-500);
+  outline: none;
+
+  &.year {
+    max-width: 60px;
+  }
+}
+
+.viewport {
+  overflow-y: auto;
+  height: 100%;
+  max-height: 8rem;
 }
