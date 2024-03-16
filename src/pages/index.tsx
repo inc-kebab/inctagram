@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 const Public: Page = () => {
   const [loading, setLoading] = useState(true)
 
-  const { replace } = useRouter()
+  const { push } = useRouter()
 
   const { data } = useMeQuery()
 
@@ -18,11 +18,11 @@ const Public: Page = () => {
 
   useEffect(() => {
     if (data) {
-      void replace('/home')
+      void push('/home')
     } else {
       setLoading(false)
     }
-  }, [data, replace])
+  }, [data, push])
 
   if (loading) {
     return <Loader fullHeight />
