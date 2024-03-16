@@ -21,6 +21,22 @@ export const en = {
     simple_save: 'Save',
     yes: 'Yes',
   },
+  dates: {
+    month: {
+      April: 'April',
+      August: 'August',
+      December: 'December',
+      February: 'February',
+      January: 'January',
+      July: 'July',
+      June: 'June',
+      March: 'March',
+      May: 'May',
+      November: 'November',
+      October: 'October',
+      September: 'September',
+    },
+  },
   fields: {
     firstName: 'First name',
     lastName: 'Last name',
@@ -136,6 +152,14 @@ export const en = {
       addProfilePhoto: 'Add a Profile Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
+      metaDescription:
+        'Discover detailed information about users, their interests, skills and experience.',
+      metaTitle: 'Profile',
+    },
+    profileSettings: {
+      metaDescription:
+        'Customize your profile to suit your needs. Update your information, add a profile photo. Make your profile unique and informative to stand out and attract attention.',
+      metaTitle: 'Profile settings',
     },
     signIn: {
       forgotPassword: 'Forgot Password',

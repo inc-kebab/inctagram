@@ -4,6 +4,7 @@ import { useLogoutMutation } from '@/feature/auth'
 import { AppRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Meta, MetaProps } from '@/shared/seo/Meta'
 import { Header } from '@/widgets/header'
 import { Sidebar, getSidebarItems } from '@/widgets/sidebar'
 import clsx from 'clsx'
@@ -11,7 +12,9 @@ import { useRouter } from 'next/router'
 
 import s from './SidebarLayout.module.scss'
 
-export const SidebarLayout = ({ children }: PropsWithChildren) => {
+type Props = PropsWithChildren & Omit<MetaProps, 'children'>
+
+export const SidebarLayout = ({ children, ...rest }: Props) => {
   const { push } = useRouter()
 
   const [logout, { isLoading }] = useLogoutMutation()
@@ -30,7 +33,7 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <>
+    <Meta {...rest}>
       <Header />
       <div className={clsx('main_container', s.wrapper)}>
         <Sidebar
@@ -41,6 +44,6 @@ export const SidebarLayout = ({ children }: PropsWithChildren) => {
         />
         <main className={s.main}>{children}</main>
       </div>
-    </>
+    </Meta>
   )
 }
