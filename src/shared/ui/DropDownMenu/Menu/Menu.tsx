@@ -5,10 +5,12 @@ import clsx from 'clsx'
 
 import s from './Menu.module.scss'
 
-type MenuProps = { trigger: ReactNode } & ComponentPropsWithoutRef<typeof RadixDropdown.Content>
+type MenuProps = {
+  trigger: ReactNode
+} & Omit<ComponentPropsWithoutRef<typeof RadixDropdown.Content>, 'asChild'>
 
 export const Menu = forwardRef<ElementRef<typeof RadixDropdown.Content>, MenuProps>(
-  ({ asChild, children, className, trigger, ...rest }, ref) => {
+  ({ children, className, trigger, ...rest }, ref) => {
     return (
       <RadixDropdown.Root>
         <RadixDropdown.Trigger asChild>{trigger}</RadixDropdown.Trigger>

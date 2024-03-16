@@ -32,6 +32,12 @@ const meta = {
   },
   component: Dropdown.Menu,
   parameters: {
+    docs: {
+      description: {
+        component:
+          'Displays a menu to the user—such as a set of actions or functions—triggered by a button.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],
