@@ -1,0 +1,69 @@
+.cropperContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cropperWindow {
+  position: relative;
+  width: 100%;
+  height: 503px;
+}
+
+.save {
+  position: absolute;
+  top: 19px;
+  right: 36px;
+  margin: 0;
+  padding: 0;
+}
+
+.imagesArrayBtn {
+  position: absolute;
+  bottom: 11px;
+  right: 11px;
+  margin: 0;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(#171717, 0.5);
+
+  .isOpenIcon {
+    color: var(--primary-500);
+  }
+
+  &:hover {
+    background-color: var(--dark-500);
+  }
+}
+
+.miniPhotosWrapper {
+  background-color: rgba(#171717, 0.8);
+  height: 106px;
+  position: absolute;
+  bottom: 49px;
+  right: 11px;
+  border-radius: 2px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+
+  .miniPhoto {
+    position: relative;
+
+    .deleteBtn {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(#171717, 0.8);
+      right: 2px;
+      top: 2px;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+    }
+
+    .addPhotoBtn {
+      cursor: pointer;
+    }
+  }
+}

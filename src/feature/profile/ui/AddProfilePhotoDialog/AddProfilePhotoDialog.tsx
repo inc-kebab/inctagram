@@ -1,11 +1,9 @@
 import { ReactNode } from 'react'
 
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
 
 import s from './AddProfilePhotoDialog.module.scss'
 
-import { LocaleType } from '../../../../../locales'
 import { CroppedArea } from '../../model/types/profile.types'
 import { CropperPhoto } from '../CropperPhoto/CropperPhoto'
 import { InputPhoto } from '../InputPhoto/InputPhoto'
@@ -31,8 +29,6 @@ export const AddProfilePhotoDialog = ({
   trigger,
   ...rest
 }: Props) => {
-  const { t } = useTranslation()
-
   const handleSetPhoto = (file: File) => {
     onAvatarUrl(URL.createObjectURL(file))
   }

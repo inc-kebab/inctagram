@@ -2,9 +2,9 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { useAddImages } from '@/feature/posts/model/hooks/useAddImages'
+import { AddPostPhotoDialog } from '@/feature/posts/ui/AddPostPhotoDialog/AddPostPhotoDialog'
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
 import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
-import { AddProfilePhotoDialog } from '@/feature/profile/ui/AddProfilePhotoDialog/AddProfilePhotoDialog'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import clsx from 'clsx'
@@ -31,11 +31,12 @@ export const SidebarItem = ({
   ...rest
 }: Props) => {
   const { t } = useTranslation()
-  const [avatarUrl, setAvatarUrl] = useState('')
-  const { handleAddPhoto, isUpdateLoading, isUpdateSuccess } = useAddImages()
+  const [imageURL, setImageURL] = useState('')
+  const { arr, handleAddPhoto } = useAddImages()
+
   const handleUpdatePhoto = (cropArea: CroppedArea) => {
     if (cropArea) {
-      getCroppedImg({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl, t }).then(res =>
+      getCroppedImg({ crop: cropArea, fileName: 'file', imageSrc: imageURL, t }).then(res =>
         handleAddPhoto(res)
       )
     }
@@ -56,11 +57,12 @@ export const SidebarItem = ({
           <span className={s.title}>{item.title}</span>
         </Link>
       ) : (
-        <AddProfilePhotoDialog
-          avatarUrl={avatarUrl}
-          onAvatarUrl={setAvatarUrl}
+        <AddPostPhotoDialog
+          arr={arr}
+          imageURL={imageURL}
+          onImageURL={setImageURL}
           onSetCroppedArea={handleUpdatePhoto}
-          title={t.pages.profile.addPhoto}
+          title={imageURL.length === 0 ? t.pages.profile.addPhoto : t.pages.profile.cropping}
           trigger={
             <Button
               className={clsx(s.button, {
@@ -73,6 +75,7 @@ export const SidebarItem = ({
               <span className={s.title}>{item.title}</span>
             </Button>
           }
+          variant={imageURL.length === 0 ? 'profile' : 'post'}
         />
       )}
     </li>

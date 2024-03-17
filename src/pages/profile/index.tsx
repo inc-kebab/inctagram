@@ -14,7 +14,6 @@ const Profile: Page = () => {
   const { data: posts } = useGetMyPostsQuery(null)
 
   console.log('posts', posts)
-  console.log('data', data)
 
   if (isLoading) {
     return <Loader fullHeight />
@@ -32,7 +31,13 @@ const Profile: Page = () => {
       />
       <hr />
       {/*отображение постов в виде картинок*/}
-      <div>{posts?.items.map(item => <img key={item.id} src={item.images[0].url} />)}</div>
+      <div>
+        {posts?.items.map(item => {
+          console.log('item.images', item.images)
+
+          return <img alt="" key={item.id} src={item.images[0].url} />
+        })}
+      </div>
     </>
   )
 }

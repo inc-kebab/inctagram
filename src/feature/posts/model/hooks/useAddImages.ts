@@ -1,18 +1,21 @@
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { useState } from 'react'
 
 import { useAddImagesMutation } from '../../api/posts-api'
 
 export const useAddImages = () => {
-  const [updatePhoto, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
-    useAddImagesMutation()
+  // const [addImages, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
+  //   useAddImagesMutation()
 
-  const handleAddPhoto = (data: FormData[]) => {
-    updatePhoto(data).then(response => {
-      if ('error' in response) {
-        handleErrorResponse(response.error)
-      }
-    })
+  const [arr, setArr] = useState<string[]>([])
+  const handleAddPhoto = (data: FormData) => {
+    const file = data.get('file') as Blob | null
+
+    if (file) {
+      const imageURL = URL.createObjectURL(file)
+
+      setArr(prev => [...prev, imageURL])
+    }
   }
 
-  return { handleAddPhoto, isUpdateLoading, isUpdateSuccess }
+  return { arr, handleAddPhoto }
 }

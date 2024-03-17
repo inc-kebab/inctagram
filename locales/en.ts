@@ -10,6 +10,7 @@ export const en = {
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
+    next: 'Next',
     no: 'No',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
@@ -135,6 +136,7 @@ export const en = {
     profile: {
       addPhoto: 'Add Photo',
       addProfilePhoto: 'Add a Profile Photo',
+      cropping: 'Cropping',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
     },

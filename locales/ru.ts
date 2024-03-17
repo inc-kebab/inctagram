@@ -8,6 +8,7 @@ export const ru: LocaleType = {
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
+    next: 'Далее',
     no: 'Нет',
     resendVerificationLink: 'Отправить повторное подтверждение',
     save: 'Сохранить изменения',
@@ -134,6 +135,7 @@ export const ru: LocaleType = {
     profile: {
       addPhoto: 'Добавить фото',
       addProfilePhoto: 'Добавить фото',
+      cropping: 'Обрезка',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
     },
