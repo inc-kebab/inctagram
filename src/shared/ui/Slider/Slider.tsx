@@ -9,17 +9,10 @@ type Props = Omit<ComponentPropsWithoutRef<typeof RadixSlider.Root>, 'asChild'>
 
 export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>(
   (props: Props, ref) => {
-    const { className, disabled, onValueChange, value, ...rest } = props
+    const { className, ...rest } = props
 
     return (
-      <RadixSlider.Root
-        className={clsx(s.sliderRoot, className)}
-        disabled={disabled}
-        onValueChange={onValueChange}
-        ref={ref}
-        value={value}
-        {...rest}
-      >
+      <RadixSlider.Root className={clsx(s.sliderRoot, className)} {...rest}>
         <RadixSlider.Track className={s.sliderTrack}>
           <RadixSlider.Range className={s.sliderRange} />
         </RadixSlider.Track>
