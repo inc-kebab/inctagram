@@ -7,6 +7,7 @@ export const useChangePhotoProfile = () => {
     useChangeProfilePhotoMutation()
 
   const handleUpdatePhoto = (data: FormData) => {
+    console.log('avatar(FormData)', Object.fromEntries(data))
     updatePhoto(data).then(response => {
       if ('error' in response) {
         handleErrorResponse(response.error)

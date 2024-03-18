@@ -22,7 +22,6 @@ type Props = {
 }
 
 export const AddPostPhotoDialog = ({
-  arr,
   imageURL,
   onImageURL,
   onOpenChange,
@@ -49,7 +48,6 @@ export const AddPostPhotoDialog = ({
     >
       {imageURL ? (
         <CropperPost
-          arr={arr}
           cropShape="rect"
           imageURL={imageURL}
           onSetCroppedArea={onSetCroppedArea}

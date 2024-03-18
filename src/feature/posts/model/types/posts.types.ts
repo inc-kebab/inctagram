@@ -11,7 +11,7 @@ type Item = {
   username: string
 }
 
-type Image = {
+export type Image = {
   fileSize: number
   height: number
   uploadId: string
@@ -47,7 +47,7 @@ export type CreatePostResponse = {
   updatedAt: string
   username: string
 }
-export type CratePostParams = {
+export type CreatePostParams = {
   description: string
   images: string[]
 }

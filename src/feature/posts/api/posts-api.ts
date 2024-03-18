@@ -2,7 +2,7 @@ import { baseApi } from '@/shared/api/base-api'
 
 import {
   AddImagesResponse,
-  CratePostParams,
+  CreatePostParams,
   CreatePostResponse,
   GetPostsResponse,
   PostsParams,
@@ -10,19 +10,22 @@ import {
 
 const postsAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
-    addImages: builder.mutation<AddImagesResponse, any>({
+    addImages: builder.mutation<AddImagesResponse, FormData>({
       query: body => ({
         body,
         method: 'POST',
         url: '/posts/images',
       }),
     }),
-    createPost: builder.mutation<CreatePostResponse, CratePostParams>({
+    createPost: builder.mutation<CreatePostResponse, CreatePostParams>({
       query: body => ({
         body,
         method: 'POST',
         url: '/posts',
       }),
+    }),
+    deleteImage: builder.mutation<void, string>({
+      query: imageId => ({ method: 'DELETE', url: `/posts/images/${imageId}` }),
     }),
     getMyPosts: builder.query<GetPostsResponse, PostsParams>({
       query: () => ({ url: '/posts' }),
@@ -30,4 +33,4 @@ const postsAPI = baseApi.injectEndpoints({
   }),
 })
 
-export const { useAddImagesMutation, useGetMyPostsQuery } = postsAPI
+export const { useAddImagesMutation, useDeleteImageMutation, useGetMyPostsQuery } = postsAPI

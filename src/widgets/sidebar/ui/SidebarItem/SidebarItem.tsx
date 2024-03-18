@@ -32,11 +32,11 @@ export const SidebarItem = ({
 }: Props) => {
   const { t } = useTranslation()
   const [imageURL, setImageURL] = useState('')
-  const { arr, handleAddPhoto } = useAddImages()
+  const { handleAddPhoto } = useAddImages()
 
   const handleUpdatePhoto = (cropArea: CroppedArea) => {
     if (cropArea) {
-      getCroppedImg({ crop: cropArea, fileName: 'file', imageSrc: imageURL, t }).then(res =>
+      getCroppedImg({ crop: cropArea, fileName: 'files', imageSrc: imageURL, t }).then(res =>
         handleAddPhoto(res)
       )
     }
@@ -58,7 +58,6 @@ export const SidebarItem = ({
         </Link>
       ) : (
         <AddPostPhotoDialog
-          arr={arr}
           imageURL={imageURL}
           onImageURL={setImageURL}
           onSetCroppedArea={handleUpdatePhoto}

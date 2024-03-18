@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Cropper from 'react-easy-crop'
 
+import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
 import { avatarSchema } from '@/feature/profile/model/utils/validators/addAvatar'
 import { Close } from '@/shared/assets/icons/common/index'
@@ -14,10 +15,12 @@ import Image from 'next/image'
 
 import s from './CropperPost.module.scss'
 
+import { useDeleteImageMutation } from '../../api/posts-api'
+import { postsActions } from '../../api/posts-slice'
+
 type Crop = { x: number; y: number }
 
 type Props = {
-  arr?: string[]
   cropShape?: 'rect' | 'round'
   disabled?: boolean
   imageURL: string
@@ -26,19 +29,20 @@ type Props = {
 }
 
 export const CropperPost = ({
-  arr,
   cropShape,
   disabled,
   imageURL,
   onSetCroppedArea,
   setPhoto,
 }: Props) => {
+  const arr = useAppSelector(state => state.posts.images)
+  const dispatch = useAppDispatch()
+  const [deleteImage] = useDeleteImageMutation()
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0 })
   const [isOpen, setIsOpen] = useState(false)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
   const [error, setError] = useState('')
   const [zoom, setZoom] = useState(1)
-
   const { t } = useTranslation()
 
   const handleCropComplete = (_: Crop, croppedAreaPixels: CroppedArea) => {
@@ -49,6 +53,10 @@ export const CropperPost = ({
     if (croppedAreaPixels) {
       onSetCroppedArea(croppedAreaPixels)
     }
+  }
+  const handleDeleteImage = (uploadId: string) => {
+    deleteImage(uploadId)
+    dispatch(postsActions.removeImage(uploadId))
   }
 
   return (
@@ -79,14 +87,15 @@ export const CropperPost = ({
       {isOpen && (
         <div className={s.miniPhotosWrapper}>
           {arr &&
-            arr.map((str, i) => (
-              <div className={s.miniPhoto} key={i + str}>
+            arr.map(img => (
+              <div className={s.miniPhoto} key={img.imageURL}>
                 <Button
                   className={s.deleteBtn}
+                  onClick={() => handleDeleteImage(img.uploadId)}
                   startIcon={<Close color="white" height={13} width={13} />}
                   variant="text"
                 />
-                <Image alt="" height={80} src={str} width={80} />
+                <Image alt="" height={80} src={img.imageURL} width={80} />
               </div>
             ))}
           <InputFile

@@ -1,21 +1,29 @@
-import { useState } from 'react'
+import { useAppDispatch } from '@/app/store/store'
 
 import { useAddImagesMutation } from '../../api/posts-api'
+import { postsActions } from '../../api/posts-slice'
 
 export const useAddImages = () => {
-  // const [addImages, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
-  //   useAddImagesMutation()
+  const dispatch = useAppDispatch()
 
-  const [arr, setArr] = useState<string[]>([])
-  const handleAddPhoto = (data: FormData) => {
-    const file = data.get('file') as Blob | null
+  const [addImages, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
+    useAddImagesMutation()
 
-    if (file) {
+  const handleAddPhoto = async (formData: FormData) => {
+    // console.log('formData', Object.fromEntries(formData))
+    const response = await addImages(formData)
+    const file = formData.get('files') as Blob | null
+
+    if (file && 'data' in response) {
       const imageURL = URL.createObjectURL(file)
 
-      setArr(prev => [...prev, imageURL])
+      console.log({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
+
+      dispatch(
+        postsActions.addImage({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
+      )
     }
   }
 
-  return { arr, handleAddPhoto }
+  return { handleAddPhoto, isUpdateLoading, isUpdateSuccess }
 }

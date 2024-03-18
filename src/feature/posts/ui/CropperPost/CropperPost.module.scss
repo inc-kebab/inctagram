@@ -48,6 +48,10 @@
   display: flex;
   gap: 12px;
 
+  .addPhotoBtn {
+    cursor: pointer;
+  }
+
   .miniPhoto {
     position: relative;
 
@@ -60,10 +64,6 @@
       margin: 0;
       padding: 0;
       position: absolute;
-    }
-
-    .addPhotoBtn {
-      cursor: pointer;
     }
   }
 }
