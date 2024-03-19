@@ -5,7 +5,7 @@ import { LocaleType } from '@/../locales'
 import { CroppedArea } from '../types/profile.types'
 
 type Params = {
-  crop: CroppedArea
+  crop?: CroppedArea
   fileName: string
   imageSrc: string
   t: LocaleType
@@ -21,24 +21,33 @@ export const getCroppedImg = ({ crop, fileName, imageSrc, t }: Params): Promise<
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
 
-      const scaleX = image.naturalWidth / image.width
-      const scaleY = image.naturalHeight / image.height
+      if (!crop) {
+        canvas.width = image.naturalWidth
+        canvas.height = image.naturalHeight
 
-      canvas.width = crop.width
-      canvas.height = crop.height
+        if (ctx) {
+          ctx.drawImage(image, 0, 0)
+        }
+      } else {
+        const scaleX = image.naturalWidth / image.width
+        const scaleY = image.naturalHeight / image.height
 
-      if (ctx) {
-        ctx.drawImage(
-          image,
-          crop.x * scaleX,
-          crop.y * scaleY,
-          crop.width * scaleX,
-          crop.height * scaleY,
-          0,
-          0,
-          crop.width,
-          crop.height
-        )
+        canvas.width = crop.width
+        canvas.height = crop.height
+
+        if (ctx) {
+          ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+          )
+        }
       }
 
       canvas.toBlob(blob => {

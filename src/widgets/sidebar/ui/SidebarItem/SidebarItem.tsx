@@ -31,15 +31,15 @@ export const SidebarItem = ({
   ...rest
 }: Props) => {
   const { t } = useTranslation()
-  const [imageURL, setImageURL] = useState('')
+  const [imageURLArray, setImageURLArray] = useState<string[]>([])
   const { handleAddPhoto } = useAddImages()
 
-  const handleUpdatePhoto = (cropArea: CroppedArea) => {
-    if (cropArea) {
+  const handleUpdatePhoto = (cropArea?: CroppedArea) => {
+    imageURLArray.map(imageURL =>
       getCroppedImg({ crop: cropArea, fileName: 'files', imageSrc: imageURL, t }).then(res =>
         handleAddPhoto(res)
       )
-    }
+    )
   }
 
   return (
@@ -58,10 +58,10 @@ export const SidebarItem = ({
         </Link>
       ) : (
         <AddPostPhotoDialog
-          imageURL={imageURL}
-          onImageURL={setImageURL}
+          imageURLArray={imageURLArray}
+          onImageURL={setImageURLArray}
           onSetCroppedArea={handleUpdatePhoto}
-          title={imageURL.length === 0 ? t.pages.profile.addPhoto : t.pages.profile.cropping}
+          title={imageURLArray.length === 0 ? t.pages.profile.addPhoto : t.pages.profile.cropping}
           trigger={
             <Button
               className={clsx(s.button, {
@@ -74,7 +74,7 @@ export const SidebarItem = ({
               <span className={s.title}>{item.title}</span>
             </Button>
           }
-          variant={imageURL.length === 0 ? 'profile' : 'post'}
+          variant={imageURLArray.length === 0 ? 'profile' : 'post'}
         />
       )}
     </li>

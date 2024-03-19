@@ -11,7 +11,7 @@ import { DialogClose } from './DialogClose'
 
 export type Props = {
   className?: string
-  handleBackBtn?: (url: string) => void
+  handleBackBtn?: (imageURLArray: string[]) => void
   title?: string
   trigger?: ReactNode
   variant?: 'post' | 'profile'
@@ -30,7 +30,7 @@ export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>(
             <div className={s.title}>
               <Button
                 className={s.arrowBtn}
-                onClick={() => handleBackBtn?.('')}
+                onClick={() => handleBackBtn?.([])}
                 startIcon={<ArrowIos height={24} width={24} />}
                 variant="text"
               />

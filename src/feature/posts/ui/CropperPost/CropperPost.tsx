@@ -15,7 +15,7 @@ type Props = {
   cropShape?: 'rect' | 'round'
   disabled?: boolean
   imageURL: string
-  onSetCroppedArea: (size: CroppedArea) => void
+  onSetCroppedArea: (croppedArea?: CroppedArea) => void
   setPhoto: (photo: File) => void
 }
 
@@ -41,6 +41,9 @@ export const CropperPost = ({
   const handleSetCroppedArea = () => {
     if (croppedAreaPixels) {
       onSetCroppedArea(croppedAreaPixels)
+      console.log(croppedAreaPixels)
+    } else {
+      onSetCroppedArea()
     }
   }
 

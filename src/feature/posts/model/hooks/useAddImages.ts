@@ -18,7 +18,6 @@ export const useAddImages = () => {
       const imageURL = URL.createObjectURL(file)
 
       // console.log({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
-
       dispatch(
         postsActions.addImage({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
       )

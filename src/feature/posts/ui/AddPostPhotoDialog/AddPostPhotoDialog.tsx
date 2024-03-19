@@ -11,10 +11,10 @@ import { CropperPost } from '../CropperPost/CropperPost'
 type Props = {
   arr?: string[]
   disabled?: boolean
-  imageURL: string
-  onImageURL: (url: string) => void
+  imageURLArray: string[]
+  onImageURL: (imageURLArray: string[]) => void
   onOpenChange?: (open: boolean) => void
-  onSetCroppedArea: (size: CroppedArea) => void
+  onSetCroppedArea: (croppedArea?: CroppedArea) => void
   open?: boolean
   title?: string
   trigger: ReactNode
@@ -22,7 +22,7 @@ type Props = {
 }
 
 export const AddPostPhotoDialog = ({
-  imageURL,
+  imageURLArray,
   onImageURL,
   onOpenChange,
   onSetCroppedArea,
@@ -33,7 +33,7 @@ export const AddPostPhotoDialog = ({
   ...rest
 }: Props) => {
   const handleSetPhoto = (file: File) => {
-    onImageURL(URL.createObjectURL(file))
+    onImageURL([...imageURLArray, URL.createObjectURL(file)])
   }
 
   return (
@@ -46,10 +46,11 @@ export const AddPostPhotoDialog = ({
       trigger={trigger}
       variant={variant}
     >
-      {imageURL ? (
+      {imageURLArray.length > 0 ? (
+        /* применить слайдер    imageURL={imageURLArray} */
         <CropperPost
           cropShape="rect"
-          imageURL={imageURL}
+          imageURL={imageURLArray[0]}
           onSetCroppedArea={onSetCroppedArea}
           setPhoto={handleSetPhoto}
           {...rest}
