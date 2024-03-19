@@ -106,6 +106,17 @@ export const en = {
     main: {
       metaTitle: 'Main',
     },
+    post: {
+      editInfoModal: {
+        message:
+          'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+        title: 'Close Post',
+      },
+      editPostModal: {
+        acceptBtn: 'Save changes',
+        areaLabel: 'Add publication descriptions',
+      },
+    },
     privacy: {
       changes:
         'We reserve the right to make changes to our privacy policy. In the event of significant ' +

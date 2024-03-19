@@ -1,7 +1,10 @@
+import { LocaleType } from '@/../locales'
 import { z } from 'zod'
 
-import { LocaleType } from '../../../../../../locales'
-
 export const editPostSchema = (t: LocaleType) => {
-  return z.string().min(0).max(500)
+  return z.object({
+    description: z.string().trim().max(200, t.validation.maxLength(200)),
+  })
 }
+
+export type EditPostFormValues = z.infer<ReturnType<typeof editPostSchema>>
