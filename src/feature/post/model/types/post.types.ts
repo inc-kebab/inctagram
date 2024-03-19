@@ -5,5 +5,4 @@ export type EditPostArgs = {
 
 export type AdditionalRefProps = {
   isDirty: boolean
-  onOpen: (open: boolean) => void
 }
