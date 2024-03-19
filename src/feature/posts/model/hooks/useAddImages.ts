@@ -17,7 +17,7 @@ export const useAddImages = () => {
     if (file && 'data' in response) {
       const imageURL = URL.createObjectURL(file)
 
-      console.log({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
+      // console.log({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
 
       dispatch(
         postsActions.addImage({ imageURL: imageURL, uploadId: response.data.images[0].uploadId })
