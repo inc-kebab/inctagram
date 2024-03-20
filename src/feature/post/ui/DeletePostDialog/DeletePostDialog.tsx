@@ -17,9 +17,9 @@ export const DeletePostDialog = ({ setOpen, ...props }: Props) => {
   return (
     <ConfirmDialog
       content={t.pages.post.deletePostQuestion}
-      onOpenChange={() => setOpen(!open)}
+      onOpenChange={setOpen}
       title={t.pages.post.deletePost}
       {...props}
-    ></ConfirmDialog>
+    />
   )
 }
