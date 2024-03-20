@@ -1,6 +1,13 @@
 import { ReactNode } from 'react'
 
 import { Dialog } from '@/shared/ui/Dialog'
+import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 import s from './AddPostPhotoDialog.module.scss'
 
@@ -47,14 +54,28 @@ export const AddPostPhotoDialog = ({
       variant={variant}
     >
       {imageURLArray.length > 0 ? (
-        /* применить слайдер    imageURL={imageURLArray} */
-        <CropperPost
-          cropShape="rect"
-          imageURL={imageURLArray[0]}
-          onSetCroppedArea={onSetCroppedArea}
-          setPhoto={handleSetPhoto}
-          {...rest}
-        />
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          navigation
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={swiper => console.log(swiper)}
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          slidesPerView={1}
+          spaceBetween={50}
+        >
+          {imageURLArray.map((imageURL, i) => (
+            <SwiperSlide key={imageURL + i}>
+              <CropperPost
+                cropShape="rect"
+                imageURL={imageURL}
+                onSetCroppedArea={onSetCroppedArea}
+                setPhoto={handleSetPhoto}
+                {...rest}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       ) : (
         <InputPhoto setPhoto={handleSetPhoto} />
       )}
