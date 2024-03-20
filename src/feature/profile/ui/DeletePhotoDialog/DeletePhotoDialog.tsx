@@ -20,6 +20,7 @@ export const DeletePhotoDialog = ({ confirmCallback, disabled, open, setOpen, tr
       disabled={disabled}
       onOpenChange={() => setOpen(!open)}
       open={open}
+      title={t.pages.profile.deletePhoto}
       trigger={trigger}
     />
   )

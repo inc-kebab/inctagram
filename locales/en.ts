@@ -107,6 +107,8 @@ export const en = {
       metaTitle: 'Main',
     },
     post: {
+      deletePost: 'Delete Post',
+      deletePostQuestion: 'Are you sure you want to delete this post?',
       editInfoModal: {
         message:
           'Do you really want to finish editing? If you close the changes you have made will not be saved.',
@@ -161,6 +163,7 @@ export const en = {
     },
     profile: {
       addProfilePhoto: 'Add a Profile Photo',
+      deletePhoto: 'Delete Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
       metaDescription:
