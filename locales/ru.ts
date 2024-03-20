@@ -19,6 +19,22 @@ export const ru: LocaleType = {
     simple_save: 'Сохранить',
     yes: 'Да',
   },
+  dates: {
+    month: {
+      April: 'Апрель',
+      August: 'Август',
+      December: 'Декабрь',
+      February: 'Февраль',
+      January: 'Январь',
+      July: 'Июль',
+      June: 'Июнь',
+      March: 'Март',
+      May: 'Май',
+      November: 'Ноябрь',
+      October: 'Октябрь',
+      September: 'Сентябрь',
+    },
+  },
   fields: {
     firstName: 'Имя',
     lastName: 'Фамилия',
@@ -92,6 +108,15 @@ export const ru: LocaleType = {
     post: {
       deletePost: 'Удалить пост',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
+      editInfoModal: {
+        message:
+          'Вы действительно хотите завершить редактирование? Если вы закроете, внесенные вами изменения не сохранятся.',
+        title: 'Закрыть сообщение',
+      },
+      editPostModal: {
+        acceptBtn: 'Сохранить изменения',
+        areaLabel: 'Добавьте описания публикаций',
+      },
     },
     privacy: {
       changes:
@@ -140,6 +165,14 @@ export const ru: LocaleType = {
       deletePhoto: 'Удалить фото',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
+      metaDescription:
+        'Откройте для себя подробную информацию о пользователях, их интересах, навыках и опыте.',
+      metaTitle: 'Профиль',
+    },
+    profileSettings: {
+      metaDescription:
+        'Настройте свой профиль, чтобы он соответствовал вашим потребностям. Обновите свою информацию, добавьте фото профиля. Сделайте свой профиль уникальным и информативным, чтобы выделиться и привлечь внимание.',
+      metaTitle: 'Настройки профиля',
     },
     signIn: {
       forgotPassword: 'Забыли пароль',

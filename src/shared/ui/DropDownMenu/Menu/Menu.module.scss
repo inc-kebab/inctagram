@@ -1,0 +1,77 @@
+.content {
+  will-change: transform, opacity;
+
+  position: relative;
+  z-index: 200;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-100);
+  border-radius: 2px;
+
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+  &[data-side='top'] {
+    animation-name: slide-down-and-fade;
+  }
+
+  &[data-side='right'] {
+    animation-name: slide-left-and-fade;
+  }
+
+  &[data-side='bottom'] {
+    animation-name: slide-up-and-fade;
+  }
+
+  &[data-side='left'] {
+    animation-name: slide-right-and-fade;
+  }
+}
+
+@keyframes slide-up-and-fade {
+  from {
+    transform: translateY(2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-right-and-fade {
+  from {
+    transform: translateX(-2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down-and-fade {
+  from {
+    transform: translateY(-2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left-and-fade {
+  from {
+    transform: translateX(2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

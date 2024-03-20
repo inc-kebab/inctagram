@@ -1,6 +1,8 @@
 import { ForwardedRef, ReactNode, forwardRef } from 'react'
-import * as React from 'react'
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
+
+import { enUS, ru } from 'date-fns/locale'
+import { useRouter } from 'next/router'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './DatePicker.scss'
@@ -9,7 +11,6 @@ import s from './DatePicker.module.scss'
 
 import { CustomHeader } from './CustomHeader/CustomHeader'
 import { CustomInput } from './CustomInput/CustomInput'
-
 type NeedDatePickerProps =
   | 'dateFormat'
   | 'disabled'
@@ -39,17 +40,25 @@ export const DatePicker = forwardRef(
     }: DatePickerProps<Range>,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const { locale } = useRouter()
+
     return (
       <div className={s.root}>
         <ReactDatePicker
-          calendarClassName={s.datePicker}
           calendarStartDay={1}
           customInput={<CustomInput error={error} label={label} ref={ref} />}
           dateFormat={dateFormat}
+          locale={locale === 'ru' ? ru : enUS}
           placeholderText={placeholder}
-          popperPlacement="bottom-start"
-          renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-            <CustomHeader date={date} decreaseMonth={decreaseMonth} increaseMonth={increaseMonth} />
+          popperPlacement="top-start"
+          renderCustomHeader={({ changeMonth, changeYear, date, decreaseMonth, increaseMonth }) => (
+            <CustomHeader
+              changeMonth={changeMonth}
+              changeYear={changeYear}
+              date={date}
+              decreaseMonth={decreaseMonth}
+              increaseMonth={increaseMonth}
+            />
           )}
           {...rest}
           autoComplete="off"

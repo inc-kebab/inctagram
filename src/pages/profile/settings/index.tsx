@@ -62,8 +62,15 @@ const ProfileSettings: Page = () => {
   )
 }
 
-ProfileSettings.getLayout = (page: ReactElement) => {
-  return <SidebarLayout>{page}</SidebarLayout>
+ProfileSettings.getLayout = (page, t) => {
+  return (
+    <SidebarLayout
+      description={t.pages.profileSettings.metaDescription}
+      title={t.pages.profileSettings.metaTitle}
+    >
+      {page}
+    </SidebarLayout>
+  )
 }
 
 export default ProfileSettings

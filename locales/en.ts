@@ -21,6 +21,22 @@ export const en = {
     simple_save: 'Save',
     yes: 'Yes',
   },
+  dates: {
+    month: {
+      April: 'April',
+      August: 'August',
+      December: 'December',
+      February: 'February',
+      January: 'January',
+      July: 'July',
+      June: 'June',
+      March: 'March',
+      May: 'May',
+      November: 'November',
+      October: 'October',
+      September: 'September',
+    },
+  },
   fields: {
     firstName: 'First name',
     lastName: 'Last name',
@@ -93,6 +109,15 @@ export const en = {
     post: {
       deletePost: 'Delete Post',
       deletePostQuestion: 'Are you sure you want to delete this post?',
+      editInfoModal: {
+        message:
+          'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+        title: 'Close Post',
+      },
+      editPostModal: {
+        acceptBtn: 'Save changes',
+        areaLabel: 'Add publication descriptions',
+      },
     },
     privacy: {
       changes:
@@ -141,6 +166,14 @@ export const en = {
       deletePhoto: 'Delete Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
+      metaDescription:
+        'Discover detailed information about users, their interests, skills and experience.',
+      metaTitle: 'Profile',
+    },
+    profileSettings: {
+      metaDescription:
+        'Customize your profile to suit your needs. Update your information, add a profile photo. Make your profile unique and informative to stand out and attract attention.',
+      metaTitle: 'Profile settings',
     },
     signIn: {
       forgotPassword: 'Forgot Password',

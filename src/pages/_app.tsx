@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { Fragment } from 'react'
 import { Provider } from 'react-redux'
 
-import { AuthProvider, ErrorBoundary, store } from '@/app'
+import { ErrorBoundary, store } from '@/app'
 import { useLoader } from '@/shared/hooks/useLoader'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
