@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 24px 24px;
+}
+
+.area {
+  display: flex;
+  flex-direction: column;
+}
+
+.valueLength {
+  align-self: end;
+  padding: 5px 0;
+  color: var(--light-900);
+  text-decoration: none;
+}
+
+.btn {
+  align-self: end;
+}
