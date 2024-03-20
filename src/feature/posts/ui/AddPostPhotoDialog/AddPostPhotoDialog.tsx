@@ -1,19 +1,18 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { Dialog } from '@/shared/ui/Dialog'
-import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+// @ts-ignore
+import { Splide, SplideSlide } from '@splidejs/react-splide'
 
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
+import '@splidejs/splide/dist/css/splide.min.css'
 
 import s from './AddPostPhotoDialog.module.scss'
 
 import { CroppedArea } from '../../../profile/model/types/profile.types'
 import { InputPhoto } from '../../../profile/ui/InputPhoto/InputPhoto'
 import { CropperPost } from '../CropperPost/CropperPost'
+
+export type CurrentWindow = 'description' | 'expand' | 'filter'
 
 type Props = {
   arr?: string[]
@@ -39,14 +38,35 @@ export const AddPostPhotoDialog = ({
   variant,
   ...rest
 }: Props) => {
+  const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('expand')
   const handleSetPhoto = (file: File) => {
     onImageURL([...imageURLArray, URL.createObjectURL(file)])
+  }
+
+  const onNextClick = () => {
+    if (currentWindow === 'expand') {
+      setCurrentWindow('filter')
+    } else if (currentWindow === 'filter') {
+      setCurrentWindow('description')
+    }
+  }
+
+  const onBackClick = () => {
+    if (currentWindow === 'description') {
+      setCurrentWindow('filter')
+    } else if (currentWindow === 'filter') {
+      setCurrentWindow('expand')
+    } else {
+      onImageURL([])
+    }
   }
 
   return (
     <Dialog
       className={s.dialog}
-      handleBackBtn={onImageURL}
+      currentWindow={currentWindow}
+      onBackClick={onBackClick}
+      onNextClick={onNextClick}
       onOpenChange={onOpenChange}
       open={open}
       title={title}
@@ -54,29 +74,43 @@ export const AddPostPhotoDialog = ({
       variant={variant}
     >
       {imageURLArray.length > 0 ? (
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          navigation
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={swiper => console.log(swiper)}
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          slidesPerView={1}
-          spaceBetween={50}
-        >
+        <Splide aria-label="My Favorite Images">
           {imageURLArray.map((imageURL, i) => (
-            <SwiperSlide key={imageURL + i}>
+            <SplideSlide key={imageURL + i}>
               <CropperPost
                 cropShape="rect"
+                currentWindow={currentWindow}
                 imageURL={imageURL}
                 onSetCroppedArea={onSetCroppedArea}
                 setPhoto={handleSetPhoto}
                 {...rest}
               />
-            </SwiperSlide>
+            </SplideSlide>
           ))}
-        </Swiper>
+        </Splide>
       ) : (
+        // <Swiper
+        //   modules={[Navigation, Pagination, Scrollbar, A11y]}
+        //   navigation
+        //   onSlideChange={() => console.log('slide change')}
+        //   onSwiper={swiper => console.log(swiper)}
+        //   pagination={{ clickable: true }}
+        //   scrollbar={{ draggable: true }}
+        //   slidesPerView={1}
+        //   spaceBetween={50}
+        // >
+        // {imageURLArray.map((imageURL, i) => (
+        //   <SwiperSlide key={imageURL + i}>
+        //     <CropperPost
+        //       cropShape="rect"
+        //       imageURL={imageURL}
+        //       onSetCroppedArea={onSetCroppedArea}
+        //       setPhoto={handleSetPhoto}
+        //       {...rest}
+        //     />
+        //   </SwiperSlide>
+        // ))}
+        // </Swiper>
         <InputPhoto setPhoto={handleSetPhoto} />
       )}
     </Dialog>
