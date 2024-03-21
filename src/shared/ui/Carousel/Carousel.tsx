@@ -26,7 +26,7 @@ export const Carousel = ({ imagesUrl }: Props) => {
       spaceBetween={10}
       style={{ height: '100%', width: '100%' }}
     >
-      {imagesUrl?.map((image: any, index: number) => {
+      {imagesUrl?.map((image, index) => {
         return (
           <SwiperSlide key={index} style={{ position: 'relative' }}>
             <Image

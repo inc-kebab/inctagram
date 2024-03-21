@@ -2,14 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Carousel } from './Carousel'
 
-const mockedImagesUrl = [
-  { url: 'https://dummyimage.com/490x562/06a4ac' },
-  { url: 'https://dummyimage.com/490x562/06a4ac' },
-  { url: 'https://dummyimage.com/490x562/06a4ac' },
-  { url: 'https://dummyimage.com/490x562/06a4ac' },
-  { url: 'https://dummyimage.com/490x562/06a4ac' },
-]
-
 const meta = {
   component: Carousel,
   parameters: {
@@ -28,7 +20,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+const mockedImagesUrl = [
+  { url: 'https://dummyimage.com/490x562/06a4ac' },
+  { url: 'https://dummyimage.com/490x562/06a4ac' },
+  { url: 'https://dummyimage.com/490x562/06a4ac' },
+  { url: 'https://dummyimage.com/490x562/06a4ac' },
+  { url: 'https://dummyimage.com/490x562/06a4ac' },
+]
+
+export const Default: Story = {
   args: {
     imagesUrl: mockedImagesUrl,
   },
