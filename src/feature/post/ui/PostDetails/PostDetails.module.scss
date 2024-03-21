@@ -1,0 +1,46 @@
+@import '@/app/styles/mixins';
+
+.postDetails {
+  display: inline-grid;
+  grid-template-areas:
+    'slider header'
+    'slider content'
+    'slider footer'
+    'slider form';
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--dark-300);
+}
+
+.slider {
+  grid-area: slider;
+  width: 100%;
+  border-right: 1px solid var(--dark-100);
+}
+
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.form {
+  grid-area: form;
+}
+
+@include mobile {
+  .postDetails {
+    grid-template-areas: 'header' 'slider' 'footer' 'content' 'form';
+    grid-template-columns: 1fr;
+    background-color: unset;
+  }
+
+  .slider {
+    height: 324px;
+  }
+}

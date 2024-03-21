@@ -34,7 +34,7 @@ export const Default: Story = { args: { name: 'UserName' } }
 
 export const WithButton: Story = {
   args: {
-    actions: <Button>Action</Button>,
+    actions: <Button>Your component will be placed here.</Button>,
     name: 'UserName',
   },
 }

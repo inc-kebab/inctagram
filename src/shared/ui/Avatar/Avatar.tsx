@@ -1,3 +1,5 @@
+import { CSSProperties, useState } from 'react'
+
 import clsx from 'clsx'
 import Image from 'next/image'
 
@@ -10,6 +12,7 @@ type Props = {
   circle?: boolean
   className?: string
   iconSize?: number
+  style?: CSSProperties
   wrapperSize?: number
 }
 
@@ -18,16 +21,22 @@ export const Avatar = ({
   circle,
   className,
   iconSize = 48,
+  style,
   wrapperSize = 300,
 }: Props) => {
-  return avatarUrl ? (
+  const [imageError, setImageError] = useState(false)
+
+  return avatarUrl && !imageError ? (
     <Image
       alt="avatar"
+      className={className}
       height={wrapperSize}
+      onError={() => setImageError(true)}
       priority
       src={avatarUrl}
       style={{
         borderRadius: circle ? '50%' : '',
+        ...style,
       }}
       width={wrapperSize}
     />
@@ -38,6 +47,7 @@ export const Avatar = ({
         borderRadius: circle ? '50%' : '',
         height: `${wrapperSize}px`,
         width: `${wrapperSize}px`,
+        ...style,
       }}
     >
       <ImageIcon

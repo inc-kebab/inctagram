@@ -9,6 +9,7 @@ export const ru: LocaleType = {
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
     no: 'Нет',
+    publish: 'Опубликовать',
     resendVerificationLink: 'Отправить повторное подтверждение',
     save: 'Сохранить изменения',
     selectFromComputer: 'Выбрать с Компьютера',
@@ -106,6 +107,7 @@ export const ru: LocaleType = {
       metaTitle: 'Главная',
     },
     post: {
+      addComment: 'Добавить комментарий...',
       deletePost: 'Удалить пост',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
       editInfoModal: {
@@ -113,6 +115,7 @@ export const ru: LocaleType = {
           'Вы действительно хотите завершить редактирование? Если вы закроете, внесенные вами изменения не сохранятся.',
         title: 'Закрыть сообщение',
       },
+      editPost: 'Редактировать Пост',
       editPostModal: {
         acceptBtn: 'Сохранить изменения',
         areaLabel: 'Добавьте описания публикаций',

@@ -11,6 +11,7 @@ export const en = {
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     no: 'No',
+    publish: 'Publish',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
     selectFromComputer: 'Select from Computer',
@@ -107,6 +108,7 @@ export const en = {
       metaTitle: 'Main',
     },
     post: {
+      addComment: 'Add a Comment...',
       deletePost: 'Delete Post',
       deletePostQuestion: 'Are you sure you want to delete this post?',
       editInfoModal: {
@@ -114,6 +116,7 @@ export const en = {
           'Do you really want to finish editing? If you close the changes you have made will not be saved.',
         title: 'Close Post',
       },
+      editPost: 'Edit PostDetails',
       editPostModal: {
         acceptBtn: 'Save changes',
         areaLabel: 'Add publication descriptions',
