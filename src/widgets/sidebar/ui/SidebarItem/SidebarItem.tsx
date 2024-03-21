@@ -1,6 +1,7 @@
 'use client'
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
+import { useAppSelector } from '@/app/store/store'
 import { useAddImages } from '@/feature/posts/model/hooks/useAddImages'
 import { AddPostPhotoDialog } from '@/feature/posts/ui/AddPostPhotoDialog/AddPostPhotoDialog'
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
@@ -31,14 +32,16 @@ export const SidebarItem = ({
   ...rest
 }: Props) => {
   const { t } = useTranslation()
-  const [imageURLArray, setImageURLArray] = useState<string[]>([])
   const { handleAddPhoto } = useAddImages()
 
+  const images = useAppSelector(state => state.posts.images)
+
   const handleUpdatePhoto = (cropArea?: CroppedArea) => {
-    imageURLArray.map(imageURL =>
-      getCroppedImg({ crop: cropArea, fileName: 'files', imageSrc: imageURL, t }).then(res =>
-        handleAddPhoto(res)
-      )
+    images.map(
+      image => getCroppedImg({ crop: cropArea, fileName: 'files', imageSrc: image.imageURL, t })
+      // .then(res =>
+      //   handleAddPhoto(res)
+      // )
     )
   }
 
@@ -58,10 +61,9 @@ export const SidebarItem = ({
         </Link>
       ) : (
         <AddPostPhotoDialog
-          imageURLArray={imageURLArray}
-          onImageURL={setImageURLArray}
+          images={images}
           onSetCroppedArea={handleUpdatePhoto}
-          title={imageURLArray.length === 0 ? t.pages.profile.addPhoto : t.pages.profile.cropping}
+          title={images.length === 0 ? t.pages.profile.addPhoto : t.pages.profile.cropping}
           trigger={
             <Button
               className={clsx(s.button, {
@@ -74,7 +76,7 @@ export const SidebarItem = ({
               <span className={s.title}>{item.title}</span>
             </Button>
           }
-          variant={imageURLArray.length === 0 ? 'profile' : 'post'}
+          variant={images.length === 0 ? 'profile' : 'post'}
         />
       )}
     </li>

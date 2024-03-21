@@ -1,11 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-type Images = {
+export type ImageObj = {
+  aspect: number
+
   imageURL: string
-  uploadId: string
+  uploadId?: string
 }
 type PostsState = {
-  images: Images[]
+  images: ImageObj[]
 }
 
 const initialState: PostsState = {
@@ -16,13 +18,13 @@ const postsSlice = createSlice({
   initialState,
   name: 'posts',
   reducers: {
-    addImage(state, action: PayloadAction<Images>) {
+    addImage(state, action: PayloadAction<ImageObj>) {
       state.images.push(action.payload)
     },
     removeImage(state, action: PayloadAction<string>) {
-      state.images = state.images.filter(image => image.uploadId !== action.payload)
+      state.images = state.images.filter(image => image.imageURL !== action.payload)
     },
-    setImages(state, action: PayloadAction<Images[]>) {
+    setImages(state, action: PayloadAction<ImageObj[]>) {
       state.images = action.payload
     },
   },
