@@ -29,6 +29,7 @@ const nextConfig = {
     defaultLocale: "en",
   },
   images: {
+    domains: ['dummyimage.com'],
     remotePatterns: [
       {
         protocol: 'https',
