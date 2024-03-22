@@ -1,0 +1,9 @@
+.iconWrapper {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}

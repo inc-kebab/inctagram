@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 
 import Close from '@/shared/assets/icons/common/close.svg'
-import ImageIcon from '@/shared/assets/icons/fill/image.svg'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import clsx from 'clsx'
-import Image from 'next/image'
 
 import s from './ProfilePhoto.module.scss'
 
@@ -67,16 +66,9 @@ export const ProfilePhoto = ({
   return (
     <div className={clsx(s.container, className)}>
       <div className={s.circle}>
-        {avaUrlFromServer ? (
-          <div className={s.avatarWpapper}>
-            <Image
-              alt="profile avatar"
-              className={s.avatar}
-              height={192}
-              priority
-              src={avaUrlFromServer}
-              width={192}
-            />
+        <div className={s.avatarWpapper}>
+          <Avatar avatarUrl={avaUrlFromServer} circle wrapperSize={192} />
+          {avaUrlFromServer && (
             <DeletePhotoDialog
               confirmCallback={handleDeletePhoto}
               disabled={disabledDelete}
@@ -88,12 +80,8 @@ export const ProfilePhoto = ({
                 </Button>
               }
             />
-          </div>
-        ) : (
-          <div className={s.iconWrapper}>
-            <ImageIcon className={s.image} />
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <AddProfilePhotoDialog
         avatarUrl={avatarUrl}

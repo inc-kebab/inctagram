@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import s from './EditPostForm.module.scss'
 
 import { AdditionalRefProps } from '../../model/types/post.types'
-import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPost'
+import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPostSchema'
 
 type Props = {
   disabled?: boolean

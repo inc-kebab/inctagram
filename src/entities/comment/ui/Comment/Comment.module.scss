@@ -1,0 +1,61 @@
+.comment {
+  display: flex;
+}
+
+.link {
+  display: contents;
+}
+
+.avatar {
+  margin-top: 8px;
+  margin-right: 12px;
+}
+
+.commentContent {
+  width: 100%;
+}
+
+.textContent {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.message {
+  margin-bottom: 5px;
+  line-height: 171%;
+}
+
+.buttonHeart {
+  margin-top: 10px;
+  margin-left: 24px;
+  padding: 0;
+}
+
+.heart {
+  width: 16px;
+  height: 16px;
+  color: var(--danger-500);
+}
+
+.heartOutline {
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--light-100);
+}
+
+.commentFooter {
+  display: flex;
+  gap: 12px;
+
+  margin-bottom: 15px;
+
+  line-height: 131%;
+  color: var(--light-900);
+}
+
+.answerBtn {
+  padding: unset;
+  color: var(--light-900);
+}
