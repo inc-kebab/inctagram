@@ -108,14 +108,14 @@ export const ru: LocaleType = {
     },
     post: {
       addComment: 'Добавить комментарий...',
-      deletePost: 'Удалить пост',
+      deletePost: 'Удалить',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
       editInfoModal: {
         message:
           'Вы действительно хотите завершить редактирование? Если вы закроете, внесенные вами изменения не сохранятся.',
         title: 'Закрыть сообщение',
       },
-      editPost: 'Редактировать Пост',
+      editPost: 'Изменить',
       editPostModal: {
         acceptBtn: 'Сохранить изменения',
         areaLabel: 'Добавьте описания публикаций',
