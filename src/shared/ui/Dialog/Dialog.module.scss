@@ -5,6 +5,12 @@
   animation: overlayshow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.arrowBtn {
+  margin: 0;
+  padding: 0;
+  color: var(--light-100);
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -14,15 +20,6 @@
   padding: 12px 24px;
 
   border-bottom: 1px solid var(--dark-100);
-
-  & .titleText {
-    margin: 0;
-    padding: 0;
-
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-l);
-  }
 }
 
 .content {
@@ -39,6 +36,9 @@
 }
 
 .closeIcon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
   color: var(--light-100);
 }
 
