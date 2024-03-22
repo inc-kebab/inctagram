@@ -1,0 +1,23 @@
+.image {
+  cursor: pointer;
+
+  position: relative;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 238px;
+  height: 238px;
+
+  border-radius: 3px;
+
+  img {
+    transition: all 0.2s linear;
+
+    &:hover {
+      transform: scale(1.02, 1.02);
+    }
+  }
+}
