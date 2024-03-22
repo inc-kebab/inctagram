@@ -1,5 +1,3 @@
-export type PostActionMode = '' | 'delete' | 'edit'
-
 export interface Owner {
   firstName: string
   lastName: string

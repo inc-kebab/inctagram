@@ -8,32 +8,33 @@ type Props = {
   className?: string
   comments: CommentData[]
   postItem: PostItem
+  userId?: number
 }
 
-export const CommentsList = ({ className, comments, postItem }: Props) => {
-  const myId = 1
-
+export const CommentsList = ({ className, comments, postItem, userId }: Props) => {
   return (
     <div className={clsx(s.comments, className)}>
       <Comment
         avatarUrl={postItem.avatarOwner}
         commentText={postItem.description}
-        isOwner={myId === postItem.ownerId}
+        isOwner={userId === postItem.ownerId}
         name={postItem.username}
         time={postItem.createdAt}
       />
-      {comments.map(comment => (
-        <Comment
-          avatarUrl={comment.avatarUrl}
-          commentText={comment.commentText}
-          isOwner={myId === postItem.ownerId}
-          key={comment.idUser}
-          like={comment.like}
-          likesCount={comment.likesCount}
-          name={comment.name}
-          time={comment.time}
-        />
-      ))}
+      {comments.map(comment => {
+        return (
+          <Comment
+            avatarUrl={comment.avatarUrl}
+            commentText={comment.commentText}
+            isOwner={userId === comment.idUser}
+            key={comment.idUser + comment.time}
+            like={comment.like}
+            likesCount={comment.likesCount}
+            name={comment.name}
+            time={comment.time}
+          />
+        )
+      })}
     </div>
   )
 }
