@@ -1,9 +1,8 @@
-import { Comment, CommentData } from '@/entities/post'
-import { PostItem } from '@/feature/post/model/types/api.types'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Comment, CommentData } from '@/entities/comment'
+import { PostItem } from '@/entities/post'
 import clsx from 'clsx'
 
-import s from './PostComments.module.scss'
+import s from './CommentsList.module.scss'
 
 type Props = {
   className?: string
@@ -11,8 +10,7 @@ type Props = {
   postItem: PostItem
 }
 
-export const PostComments = ({ className, comments, postItem }: Props) => {
-  const { t } = useTranslation()
+export const CommentsList = ({ className, comments, postItem }: Props) => {
   const myId = 1
 
   return (

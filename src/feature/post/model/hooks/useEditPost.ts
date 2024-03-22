@@ -6,7 +6,7 @@ import { UseFormRef } from '@/shared/types/form'
 
 import { useEditPostMutation } from '../../api/post-api'
 import { AdditionalRefProps } from '../../model/types/post.types'
-import { EditPostFormValues } from '../../model/utils/validators/editPost'
+import { EditPostFormValues } from '../../model/utils/validators/editPostSchema'
 
 export const useEditPost = () => {
   const editPostRef = useRef<Nullable<UseFormRef<EditPostFormValues, AdditionalRefProps>>>(null)

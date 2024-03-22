@@ -12,7 +12,7 @@ import s from './Comment.module.scss'
 type Props = {
   avatarUrl?: string
   className?: string
-  commentText: string
+  commentText: null | string // ? check
   isOwner: boolean
   like?: boolean
   likesCount?: number
@@ -45,9 +45,11 @@ export const Comment = ({
                 {name + ' '}
               </Typography>
             </Link>
-            <Typography asComponent="span" variant="regular14">
-              {commentText}
-            </Typography>
+            {commentText && (
+              <Typography asComponent="span" variant="regular14">
+                {commentText}
+              </Typography>
+            )}
           </div>
           {!isOwner && (
             <Button asComponent="span" className={s.buttonHeart} variant="text">

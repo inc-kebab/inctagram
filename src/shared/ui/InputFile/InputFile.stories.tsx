@@ -40,7 +40,7 @@ export const Default: Story = {
   },
 }
 
-export const ControlledInputFile: Story = {
+export const Controlled: Story = {
   args: {
     children: <Button asComponent="span">input file</Button>,
     zodSchema: z.instanceof(File) as any,

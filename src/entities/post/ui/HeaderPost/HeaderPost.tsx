@@ -1,4 +1,4 @@
-import { SelectItems, UserBanner } from '@/entities/post'
+import { PostActionMode, UserBanner } from '@/entities/post'
 import { More } from '@/shared/assets/icons/common'
 import { Edit, Trash } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -10,10 +10,10 @@ type Props = {
   avatar?: string
   className?: string
   name: string
-  onSelect: (option: SelectItems) => void
+  onSelect: (option: PostActionMode) => void
 }
 
-export const HeaderPostComments = ({ avatar, className, name, onSelect }: Props) => {
+export const HeaderPost = ({ avatar, className, name, onSelect }: Props) => {
   const { t } = useTranslation()
 
   return (
