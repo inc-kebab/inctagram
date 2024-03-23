@@ -16,6 +16,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "compilerOptions": {
+      "typeRoots": ["./node_modules/@types", "./types"]
+    },
     "paths": {
       "@/*": [
         "./src/*"

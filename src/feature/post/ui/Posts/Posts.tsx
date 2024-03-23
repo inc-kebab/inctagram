@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const Posts = ({ list }: Props) => {
-  const [currentPost, setCurrentPost] = useState<PostItem | null>(null)
+  const [currentPost, setCurrentPost] = useState<Nullable<PostItem>>(null)
   const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false)
 
   const handleChangeCurrentPost = (post: PostItem) => {

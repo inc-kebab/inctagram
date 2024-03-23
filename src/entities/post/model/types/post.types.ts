@@ -14,10 +14,10 @@ export interface Image {
 export interface PostItem {
   avatarOwner: string
   createdAt: string
-  description: null | string //? check
+  description: Nullable<string> //? check
   id: number
   images: Image[]
-  location: null | string //? check
+  location: Nullable<string> //? check
   owner: Owner
   ownerId: number
   updatedAt: string

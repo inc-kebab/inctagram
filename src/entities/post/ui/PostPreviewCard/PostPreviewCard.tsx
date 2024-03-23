@@ -6,7 +6,7 @@ import Image from 'next/image'
 import s from './PostPreviewCard.module.scss'
 
 type Props = {
-  description: null | string
+  description: Nullable<string>
   imageSrc: string
 } & ComponentPropsWithoutRef<'div'>
 

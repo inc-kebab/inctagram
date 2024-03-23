@@ -15,7 +15,7 @@ import { AdditionalRefProps } from '../../model/types/post.types'
 import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPostSchema'
 
 type Props = {
-  currentDescription?: null | string // ? check
+  currentDescription?: Nullable<string> // ? check
   disabled?: boolean
   onSubmit: (data: EditPostFormValues) => void
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>

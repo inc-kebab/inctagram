@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import { Nullable } from '@/shared/types'
 import { format } from 'date-fns'
 
 import { DatePicker } from './DatePicker'

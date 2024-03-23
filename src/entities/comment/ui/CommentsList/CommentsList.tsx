@@ -1,8 +1,10 @@
-import { Comment, CommentData } from '@/entities/comment'
 import { PostItem } from '@/entities/post'
 import clsx from 'clsx'
 
 import s from './CommentsList.module.scss'
+
+import { CommentData } from '../../model/types/comment.types'
+import { Comment } from '../../ui/Comment/Comment'
 
 type Props = {
   className?: string

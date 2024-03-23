@@ -1,12 +1,12 @@
 import { ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
-import { PolymorphComponentPropsWithRef } from '@/shared/types'
+import { PolymorphComponentPropsWithRef } from '@/shared/types/polymorph'
 import clsx from 'clsx'
 
 import s from './Button.module.scss'
 
 type CustomProps = {
-  className?: string
+  className?: Nullable<string>
   endIcon?: ReactNode
   fullWidth?: boolean
   startIcon?: ReactNode

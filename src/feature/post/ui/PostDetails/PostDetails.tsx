@@ -13,7 +13,7 @@ import { Typography } from '@/shared/ui/Typography'
 import s from './PostDetails.module.scss'
 
 type Props = {
-  item: PostItem | null
+  item: Nullable<PostItem>
   onOpenConfirmDeleteModal: () => void
   onOpenEditModal: () => void
 }
