@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useAppDispatch, useAppSelector } from '@/app/store/store'
+import { useAppDispatch } from '@/app/store/store'
 import { useDeleteImageMutation } from '@/feature/post/api/post-api'
 import { ImageObj, postsActions } from '@/feature/post/api/post-slice'
 import { avatarSchema } from '@/feature/profile/model/utils/validators/addAvatar'
@@ -19,7 +19,6 @@ type Props = {
 }
 
 export const ImagesArrayBtn = ({ className, images }: Props) => {
-  const arr = useAppSelector(state => state.posts.images)
   const dispatch = useAppDispatch()
 
   const [deleteImage] = useDeleteImageMutation()
@@ -28,9 +27,11 @@ export const ImagesArrayBtn = ({ className, images }: Props) => {
   const [error, setError] = useState('')
   const { t } = useTranslation()
 
-  const handleDeleteImage = (imageURL: string) => {
-    // deleteImage(uploadId)
-    dispatch(postsActions.removeImage(imageURL))
+  const handleDeleteImage = (imageObj: ImageObj) => {
+    if (imageObj.uploadId) {
+      deleteImage(imageObj.uploadId)
+    }
+    dispatch(postsActions.removeImage(imageObj.imageURL))
   }
 
   const handleSetPhoto = (file: File | any) => {
@@ -60,7 +61,7 @@ export const ImagesArrayBtn = ({ className, images }: Props) => {
               <div className={s.image} key={image.imageURL + i}>
                 <Button
                   className={s.deleteBtn}
-                  onClick={() => handleDeleteImage(image.imageURL)}
+                  onClick={() => handleDeleteImage(image)}
                   startIcon={<Close color="var(--light-100)" height={13} width={13} />}
                   variant="text"
                 />

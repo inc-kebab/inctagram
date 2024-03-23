@@ -2,12 +2,10 @@ import { ReactNode, useState } from 'react'
 
 import { useAppDispatch } from '@/app/store/store'
 import { Dialog } from '@/shared/ui/Dialog'
-
-import '@splidejs/splide/dist/css/splide.min.css'
+import clsx from 'clsx'
 
 import s from './AddPostPhotoDialog.module.scss'
 
-import { CroppedArea } from '../../../profile/model/types/profile.types'
 import { InputPhoto } from '../../../profile/ui/InputPhoto/InputPhoto'
 import { ImageObj, postsActions } from '../../api/post-slice'
 import { CropperPost } from '../CropperPost/CropperPost'
@@ -19,7 +17,6 @@ type Props = {
   disabled?: boolean
   images: ImageObj[]
   onOpenChange?: (open: boolean) => void
-  onSetCroppedArea: (croppedArea?: CroppedArea) => void
   open?: boolean
   title?: string
   trigger: ReactNode
@@ -29,7 +26,6 @@ type Props = {
 export const AddPostPhotoDialog = ({
   images,
   onOpenChange,
-  onSetCroppedArea,
   open,
   title,
   trigger,
@@ -59,7 +55,7 @@ export const AddPostPhotoDialog = ({
 
   return (
     <Dialog
-      className={s.dialog}
+      className={clsx(s.dialog, currentWindow !== 'expand' && s.extendedDialog)}
       currentWindow={currentWindow}
       onBackClick={onBackClick}
       onNextClick={onNextClick}
@@ -70,13 +66,7 @@ export const AddPostPhotoDialog = ({
       variant={variant}
     >
       {images.length > 0 ? (
-        <CropperPost
-          cropShape="rect"
-          currentWindow={currentWindow}
-          images={images}
-          onSetCroppedArea={onSetCroppedArea}
-          {...rest}
-        />
+        <CropperPost currentWindow={currentWindow} images={images} {...rest} />
       ) : (
         <InputPhoto />
       )}

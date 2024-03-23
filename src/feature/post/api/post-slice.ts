@@ -2,10 +2,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export type ImageObj = {
   aspect: number
-
+  croppedAreaPixels?: any
   imageURL: string
   uploadId?: string
 }
+
 type PostsState = {
   images: ImageObj[]
 }
@@ -26,6 +27,12 @@ const postsSlice = createSlice({
     },
     setImages(state, action: PayloadAction<ImageObj[]>) {
       state.images = action.payload
+    },
+    updateImage(state, action: PayloadAction<{ currentIndex: number; uploadId: string }>) {
+      state.images[action.payload.currentIndex] = {
+        ...state.images[action.payload.currentIndex],
+        uploadId: action.payload.uploadId,
+      }
     },
   },
 })

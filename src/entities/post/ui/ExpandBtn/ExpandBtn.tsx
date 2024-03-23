@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useAppDispatch, useAppSelector } from '@/app/store/store'
+import { useAppDispatch } from '@/app/store/store'
 import { ImageObj, postsActions } from '@/feature/post/api/post-slice'
 import { Expand } from '@/shared/assets/icons/common/index'
 import {
@@ -16,21 +16,24 @@ import clsx from 'clsx'
 import s from './ExpandBtn.module.scss'
 
 type Props = {
+  activeIndex: number
   className?: string
-  image: ImageObj | null
   images: ImageObj[]
 }
 
-export const ExpandBtn = ({ className, image, images }: Props) => {
+export const ExpandBtn = ({ activeIndex, className, images }: Props) => {
   const [isOpenExpand, setIsOpenExpand] = useState(false)
   const dispatch = useAppDispatch()
+  const image = images[activeIndex]
+
+  // console.log('activeIndex', activeIndex, image)
 
   return (
     <div className={className}>
       <Button
         className={s.expandBtn}
         onClick={() => setIsOpenExpand(!isOpenExpand)}
-        startIcon={<Expand className={clsx(isOpenExpand && s.isOpenIcon)} height={21} width={21} />}
+        startIcon={<Expand className={clsx(isOpenExpand && s.isOpenIcon)} height={24} width={24} />}
       />
 
       {isOpenExpand && (
