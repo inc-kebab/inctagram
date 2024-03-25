@@ -12,7 +12,7 @@ import s from './Comment.module.scss'
 type Props = {
   avatarUrl?: string
   className?: string
-  commentText: null | string // ? check
+  commentText: Nullable<string>
   isOwner: boolean
   like?: boolean
   likesCount?: number

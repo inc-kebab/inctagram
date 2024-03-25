@@ -8,7 +8,7 @@ import s from './UserBanner.module.scss'
 
 type Props = {
   actions?: ReactNode
-  avatar?: string
+  avatar?: Nullable<string>
   avatarSize?: number
   className?: string
   name: string

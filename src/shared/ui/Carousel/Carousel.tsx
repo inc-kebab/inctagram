@@ -1,5 +1,3 @@
-import { ComponentPropsWithoutRef } from 'react'
-
 import clsx from 'clsx'
 import Image from 'next/image'
 import { Navigation, Pagination } from 'swiper/modules'
@@ -15,10 +13,14 @@ export type ImagesUrlData = {
 }
 
 export type Props = {
-  imagesUrl: ImagesUrlData[]
+  imagesUrl?: ImagesUrlData[]
 } & Omit<SwiperProps, 'modules' | 'navigation' | 'pagination' | 'slidesPerView' | 'spaceBetween'>
 
 export const Carousel = ({ className, imagesUrl, ...props }: Props) => {
+  if (!imagesUrl) {
+    return null
+  }
+
   return (
     <Swiper
       className={clsx('post-single-slider', className)}
@@ -31,14 +33,14 @@ export const Carousel = ({ className, imagesUrl, ...props }: Props) => {
     >
       {imagesUrl?.map((image, index) => {
         return (
-          <SwiperSlide key={index} style={{ position: 'relative' }}>
+          <SwiperSlide key={image.url} style={{ position: 'relative' }}>
             <Image
               alt={`Slide ${index}`}
               fill
               priority
               sizes="70vw"
               src={image.url}
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'cover' }}
             />
           </SwiperSlide>
         )

@@ -116,7 +116,7 @@ export const en = {
           'Do you really want to finish editing? If you close the changes you have made will not be saved.',
         title: 'Close Post',
       },
-      editPost: 'Edit PostDetails',
+      editPost: 'Edit Post',
       editPostModal: {
         acceptBtn: 'Save changes',
         areaLabel: 'Add publication descriptions',

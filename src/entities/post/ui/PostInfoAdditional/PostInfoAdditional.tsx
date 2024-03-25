@@ -7,7 +7,7 @@ import { formatWithOptions } from 'date-fns/fp/formatWithOptions'
 import { enUS, ru } from 'date-fns/locale'
 import { useRouter } from 'next/router'
 
-import s from './PostInfo.module.scss'
+import s from './PostInfoAdditional.module.scss'
 
 type Props = {
   avatars: string[]
@@ -16,7 +16,7 @@ type Props = {
   likesCount: number
 }
 
-export const PostInfo = ({ avatars, className, datePost, likesCount }: Props) => {
+export const PostInfoAdditional = ({ avatars, className, datePost, likesCount }: Props) => {
   const { locale } = useRouter()
   const formatDate = formatWithOptions(
     { locale: locale === 'ru' ? ru : enUS },
@@ -49,7 +49,7 @@ export const PostInfo = ({ avatars, className, datePost, likesCount }: Props) =>
             circle
             className={s.iconInList}
             iconSize={18}
-            key={a}
+            key={i + new Date().toString()}
             style={{ left: `${-(i * 15)}px` }}
             wrapperSize={24}
           />

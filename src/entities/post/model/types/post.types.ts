@@ -1,5 +1,3 @@
-export type PostActionMode = '' | 'delete' | 'edit'
-
 export interface Owner {
   firstName: string
   lastName: string
@@ -14,12 +12,12 @@ export interface Image {
 }
 
 export interface PostItem {
-  avatarOwner: string
+  avatarOwner: Nullable<string>
   createdAt: string
-  description: null | string //? check
+  description?: Nullable<string>
   id: number
   images: Image[]
-  location: null | string //? check
+  location: Nullable<string>
   owner: Owner
   ownerId: number
   updatedAt: string

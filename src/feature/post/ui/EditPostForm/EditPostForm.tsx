@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -7,6 +7,7 @@ import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledTextArea } from '@/shared/ui_controlled/ControlledTextArea'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 
 import s from './EditPostForm.module.scss'
 
@@ -14,12 +15,13 @@ import { AdditionalRefProps } from '../../model/types/post.types'
 import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPostSchema'
 
 type Props = {
+  currentDescription?: Nullable<string> // ? check
   disabled?: boolean
   onSubmit: (data: EditPostFormValues) => void
-}
+} & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, AdditionalRefProps>, Props>(
-  ({ disabled, onSubmit }, ref) => {
+  ({ className, currentDescription, disabled, onSubmit, ...rest }, ref) => {
     const { t } = useTranslation()
 
     const {
@@ -31,7 +33,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
       watch,
     } = useForm<EditPostFormValues>({
       defaultValues: {
-        description: '',
+        description: currentDescription || '',
       },
       mode: 'onTouched',
       resolver: zodResolver(editPostSchema(t)),
@@ -40,7 +42,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
     useImperativeHandle(ref, () => ({ isDirty, reset, setError }))
 
     return (
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={clsx(s.form, className)} onSubmit={handleSubmit(onSubmit)} {...rest}>
         <div className={s.area}>
           <ControlledTextArea
             control={control}

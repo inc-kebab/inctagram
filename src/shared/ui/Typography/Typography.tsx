@@ -1,6 +1,6 @@
 import { ElementRef, ElementType, ReactNode, forwardRef } from 'react'
 
-import { PolymorphComponentPropsWithRef } from '@/shared/types'
+import { PolymorphComponentPropsWithRef } from '@/shared/types/polymorph'
 import clsx from 'clsx'
 
 import s from './Typography.module.scss'

@@ -11,6 +11,8 @@
   padding: 0;
   outline: unset;
 
+  &:focus,
+  &:active:not(:disabled),
   &:hover:not(:disabled, :focus-visible, .error) {
     outline: unset;
   }

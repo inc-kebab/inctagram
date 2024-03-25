@@ -8,7 +8,7 @@ import s from './Avatar.module.scss'
 import ImageIcon from '../../assets/icons/fill/image.svg'
 
 type Props = {
-  avatarUrl?: string
+  avatarUrl?: Nullable<string>
   circle?: boolean
   className?: string
   iconSize?: number

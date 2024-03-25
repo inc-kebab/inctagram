@@ -1,27 +1,24 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 
+import { PostItem } from '@/entities/post'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
-import { Nullable } from '@/shared/types'
 import { UseFormRef } from '@/shared/types/form'
 
 import { useEditPostMutation } from '../../api/post-api'
 import { AdditionalRefProps } from '../../model/types/post.types'
 import { EditPostFormValues } from '../../model/utils/validators/editPostSchema'
 
-export const useEditPost = () => {
+export const useEditPost = (
+  post: PostItem,
+  confirmEdit: () => void,
+  setCurrentPost: (post: PostItem) => void
+) => {
   const editPostRef = useRef<Nullable<UseFormRef<EditPostFormValues, AdditionalRefProps>>>(null)
-
-  const [open, setOpen] = useState(false)
 
   const [editPost, { isLoading: isEditLoad }] = useEditPostMutation()
 
-  const handleSubmitEditPost = (data: EditPostFormValues) => {
-    const newData = {
-      description: data.description,
-      id: '111',
-    }
-
-    editPost(newData).then(res => {
+  const handleSubmitEditPost = ({ description }: EditPostFormValues) => {
+    editPost({ description, id: post.id }).then(res => {
       if ('error' in res && editPostRef.current) {
         const setError = editPostRef.current?.setError
 
@@ -30,12 +27,14 @@ export const useEditPost = () => {
         errors?.fieldErrors?.forEach(error => {
           setError(error.field, { message: error.message })
         })
+      } else {
+        confirmEdit()
+        setCurrentPost({ ...post, description })
       }
     })
   }
 
   return {
-    confirmModal: { open, setOpen },
     editPostRef,
     handleSubmitEditPost,
     isEditLoad,

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { default as ReCAPTCHA } from 'react-google-recaptcha'
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import clsx from 'clsx'
@@ -11,7 +11,7 @@ type Props = {
   className?: string
   error?: string
   isError?: boolean
-  onChange?: (key: null | string) => void
+  onChange?: (key: Nullable<string>) => void
 }
 
 export type ControlledRecaptchaProps<T extends FieldValues> = UseControllerProps<T> &
@@ -26,7 +26,7 @@ export const Recaptcha = <T extends FieldValues>({
 }: ControlledRecaptchaProps<T>) => {
   const { locale } = useRouter()
 
-  const recaptchaRef = useRef<ReCAPTCHA | null>(null)
+  const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
 
   const {
     field: { onChange, ref },

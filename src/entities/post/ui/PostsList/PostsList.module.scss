@@ -1,0 +1,8 @@
+@import '@/app/styles/mixins';
+
+.PostsList {
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}

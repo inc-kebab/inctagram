@@ -46,7 +46,7 @@ export const Controlled: Story = {
     zodSchema: z.instanceof(File) as any,
   },
   render: () => {
-    const [file, setFile] = useState<File | null>(null)
+    const [file, setFile] = useState<Nullable<File>>(null)
 
     return (
       <>

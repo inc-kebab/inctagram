@@ -1,4 +1,5 @@
-export type { PostActionMode, PostItem } from './model/types/post.types'
-export { HeaderPost } from './ui/HeaderPost/HeaderPost'
-export { PostInfo } from './ui/PostInfo/PostInfo'
+export type { PostItem } from './model/types/post.types'
+export { PostInfoAdditional } from './ui/PostInfoAdditional/PostInfoAdditional'
+export { PostPreviewCard } from './ui/PostPreviewCard/PostPreviewCard'
+export { PostsList } from './ui/PostsList/PostsList'
 export { UserBanner } from './ui/UserBanner/UserBanner'
