@@ -4,22 +4,18 @@ import Cropper from 'react-easy-crop'
 import { useAppDispatch } from '@/app/store/store'
 import { ExpandBtn, ImagesArrayBtn } from '@/entities/post'
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
-import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
-import { useTranslation } from '@/shared/hooks/useTranslation'
-import { Button } from '@/shared/ui/Button'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import './Carousel.scss'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import './Carousel.scss'
 
 import s from './CropperPost.module.scss'
 
-import { useAddImagesMutation } from '../../api/post-api'
 import { ImageObj, postsActions } from '../../api/post-slice'
 import { CurrentWindow } from '../AddPostPhotoDialog/AddPostPhotoDialog'
 
@@ -38,9 +34,6 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
   const [zoom, setZoom] = useState(1)
-  const { t } = useTranslation()
-  const [addImages, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
-    useAddImagesMutation()
 
   const handleCropComplete = (_: Crop, croppedAreaPixels: CroppedArea) => {
     const imageWithCroppedAreaPixels: ImageObj = { ...images[activeIndex], croppedAreaPixels }
@@ -55,30 +48,6 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
       )
     )
     setCroppedAreaPixels(croppedAreaPixels)
-  }
-
-  const handleAddPhoto = async (formData: FormData, i: number) => {
-    console.log('formData', Object.fromEntries(formData), i)
-    const response = await addImages(formData)
-
-    // const file = formData.get('files') as Blob | null
-
-    if ('data' in response) {
-      dispatch(
-        postsActions.updateImage({ currentIndex: i, uploadId: response.data.images[0].uploadId })
-      )
-    }
-  }
-
-  const handleSetCroppedArea = () => {
-    images.map((image, i) =>
-      getCroppedImg({
-        crop: image.croppedAreaPixels,
-        fileName: 'files',
-        imageSrc: image.imageURL,
-        t,
-      }).then(res => handleAddPhoto(res, i))
-    )
   }
 
   return (
@@ -124,20 +93,6 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
           </>
         )}
       </div>
-
-      {currentWindow === 'filter' && (
-        <div className={s.filterWindow}>
-          Filter window
-          <Button
-            className={s.save}
-            disabled={disabled}
-            onClick={handleSetCroppedArea}
-            variant="text"
-          >
-            Next
-          </Button>
-        </div>
-      )}
     </div>
   )
 }
