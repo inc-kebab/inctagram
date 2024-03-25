@@ -93,6 +93,16 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
           </>
         )}
       </div>
+      {currentWindow === 'filter' && (
+        <div style={{ alignItems: 'center', display: 'flex', margin: '0 auto ' }}>
+          FILTER WINDOW
+        </div>
+      )}
+      {currentWindow === 'description' && (
+        <div style={{ alignItems: 'center', display: 'flex', margin: '0 auto ' }}>
+          DESCRIPTION WINDOW
+        </div>
+      )}
     </div>
   )
 }
