@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import s from './Button.module.scss'
 
 type CustomProps = {
-  className?: Nullable<string>
+  className?: string
   endIcon?: ReactNode
   fullWidth?: boolean
   startIcon?: ReactNode

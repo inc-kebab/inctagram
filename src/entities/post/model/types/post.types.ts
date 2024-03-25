@@ -12,12 +12,12 @@ export interface Image {
 }
 
 export interface PostItem {
-  avatarOwner: string
+  avatarOwner: Nullable<string>
   createdAt: string
-  description: Nullable<string> //? check
+  description: Nullable<string>
   id: number
   images: Image[]
-  location: Nullable<string> //? check
+  location: Nullable<string>
   owner: Owner
   ownerId: number
   updatedAt: string

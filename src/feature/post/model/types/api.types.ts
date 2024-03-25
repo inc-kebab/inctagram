@@ -13,6 +13,6 @@ export type DeleteArgs = {
 }
 
 export type EditPostArgs = {
-  description: string
+  description?: string
   id: number
 }

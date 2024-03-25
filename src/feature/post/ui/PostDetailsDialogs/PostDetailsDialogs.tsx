@@ -1,10 +1,12 @@
 import { useState } from 'react'
 
 import { PostItem, UserBanner } from '@/entities/post'
+import { Close } from '@/shared/assets/icons/common'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dialog } from '@/shared/ui/Dialog'
+import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import { ConfirmDialog } from '@/widgets/dialogs'
 
 import s from './PostDetailsDialogs.module.scss'
@@ -77,6 +79,9 @@ export const PostDetailsDialogs = ({
         onOpenChange={setOpenPostDetailsModal}
         open={openPostDetailsModal}
       >
+        <DialogClose>
+          <Close className={s.closeIcon} />
+        </DialogClose>
         <PostDetails
           item={currentPost}
           onOpenConfirmDeleteModal={() => setOpenConfirmDeleteModal(true)}
