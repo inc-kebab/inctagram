@@ -12,10 +12,12 @@
 .button {
   display: flex;
   align-items: center;
+
   max-width: 100%;
-  font-weight: var(--font-weight-medium);
   margin: 0;
   padding: 0;
+
+  font-weight: var(--font-weight-medium);
   color: inherit;
 
   &:focus-visible {

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
 import { ProfileInfo } from '@/entities/profile'
-import { useGetMyPostsQuery } from '@/feature/posts/api/posts-api'
+import { useGetMyPostsQuery } from '@/feature/post/api/post-api'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
@@ -12,8 +12,6 @@ import s from './Profile.module.scss'
 const Profile: Page = () => {
   const { data, isLoading } = useGetMyProfileQuery()
   const { data: posts } = useGetMyPostsQuery(null)
-
-  console.log('posts', posts)
 
   if (isLoading) {
     return <Loader fullHeight />
@@ -33,7 +31,7 @@ const Profile: Page = () => {
       {/*отображение постов в виде картинок*/}
       <div>
         {posts?.items.map(item => {
-          console.log('item.images', item.images)
+          // console.log('item.images', item.images)
 
           return <img alt="" key={item.id} src={item.images[0].url} />
         })}

@@ -10,7 +10,6 @@ export const en = {
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
-    next: 'Next',
     no: 'No',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
@@ -21,6 +20,22 @@ export const en = {
     signUp: 'Sign Up',
     simple_save: 'Save',
     yes: 'Yes',
+  },
+  dates: {
+    month: {
+      April: 'April',
+      August: 'August',
+      December: 'December',
+      February: 'February',
+      January: 'January',
+      July: 'July',
+      June: 'June',
+      March: 'March',
+      May: 'May',
+      November: 'November',
+      October: 'October',
+      September: 'September',
+    },
   },
   fields: {
     firstName: 'First name',
@@ -91,6 +106,19 @@ export const en = {
     main: {
       metaTitle: 'Main',
     },
+    post: {
+      deletePost: 'Delete Post',
+      deletePostQuestion: 'Are you sure you want to delete this post?',
+      editInfoModal: {
+        message:
+          'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+        title: 'Close Post',
+      },
+      editPostModal: {
+        acceptBtn: 'Save changes',
+        areaLabel: 'Add publication descriptions',
+      },
+    },
     privacy: {
       changes:
         'We reserve the right to make changes to our privacy policy. In the event of significant ' +
@@ -134,11 +162,18 @@ export const en = {
       title: 'Privacy Policy',
     },
     profile: {
-      addPhoto: 'Add Photo',
       addProfilePhoto: 'Add a Profile Photo',
-      cropping: 'Cropping',
+      deletePhoto: 'Delete Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
+      metaDescription:
+        'Discover detailed information about users, their interests, skills and experience.',
+      metaTitle: 'Profile',
+    },
+    profileSettings: {
+      metaDescription:
+        'Customize your profile to suit your needs. Update your information, add a profile photo. Make your profile unique and informative to stand out and attract attention.',
+      metaTitle: 'Profile settings',
     },
     signIn: {
       forgotPassword: 'Forgot Password',

@@ -7,13 +7,17 @@ const meta = {
     disabled: {
       description: 'Disabled for form component',
     },
+    isError: {
+      control: false,
+      description: 'Flag for reset recaptcha',
+    },
+    isSuccess: {
+      description: 'Flag for hide recaptcha when response return success status',
+    },
     onSubmit: {
       action: 'Form sent',
       description:
         'Is used to pass a handler function that will be called when the form is submitted',
-    },
-    success: {
-      description: 'Flag for hide recaptcha when response return success status',
     },
   },
   component: ForgotPasswordForm,

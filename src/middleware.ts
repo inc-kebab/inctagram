@@ -23,9 +23,9 @@ export function middleware(req: NextRequest) {
 
   if (!token && !isPublicRoute && !isGeneralRoute) {
     if (isNeedChangeRouteLocale) {
-      return NextResponse.redirect(new URL(`/${localeCookie}${AppRoutes.MAIN}?${params}`, req.url))
+      return NextResponse.redirect(new URL(`/${localeCookie}${AppRoutes.MAIN}`, req.url))
     } else {
-      return NextResponse.redirect(new URL(`${AppRoutes.MAIN}?${params}`, req.url))
+      return NextResponse.redirect(new URL(`${AppRoutes.MAIN}`, req.url))
     }
   }
 
@@ -45,7 +45,7 @@ export const config = {
         { key: 'next-router-prefetch', type: 'header' },
         { key: 'purpose', type: 'header', value: 'prefetch' },
       ],
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: '/((?!api|_next/static|_next/image|favicon.ico|assets/images).*)',
     },
   ],
 }

@@ -7,8 +7,6 @@ import { Tabs } from '@/shared/ui/Tabs'
 import { SidebarLayout } from '@/widgets/layout'
 import { useRouter } from 'next/router'
 
-import s from './ProfileSettings.module.scss'
-
 const valuesTabs = ['general', 'devices', 'management', 'payments']
 
 const ProfileSettings: Page = () => {
@@ -40,38 +38,39 @@ const ProfileSettings: Page = () => {
   }, [push, query.tab])
 
   return (
-    <div className={s.root}>
-      <Tabs.Root
-        defaultValue={tabs[0].value}
-        onValueChange={handleChangeTabValue}
-        value={activeTab}
-      >
-        <Tabs.List>
-          {tabs.map(el => (
-            <Tabs.Item key={el.value} value={el.value}>
-              {el.children}
-            </Tabs.Item>
-          ))}
-        </Tabs.List>
-        <Tabs.Content value={tabs[0].value}>
-          <GeneralInformation />
-        </Tabs.Content>
-        <Tabs.Content style={{ padding: 20 }} value={tabs[1].value}>
-          Devices
-        </Tabs.Content>
-        <Tabs.Content style={{ padding: 20 }} value={tabs[2].value}>
-          Account management
-        </Tabs.Content>
-        <Tabs.Content style={{ padding: 20 }} value={tabs[3].value}>
-          My payments
-        </Tabs.Content>
-      </Tabs.Root>
-    </div>
+    <Tabs.Root defaultValue={tabs[0].value} onValueChange={handleChangeTabValue} value={activeTab}>
+      <Tabs.List>
+        {tabs.map(el => (
+          <Tabs.Item key={el.value} value={el.value}>
+            {el.children}
+          </Tabs.Item>
+        ))}
+      </Tabs.List>
+      <Tabs.Content value={tabs[0].value}>
+        <GeneralInformation />
+      </Tabs.Content>
+      <Tabs.Content style={{ padding: 20 }} value={tabs[1].value}>
+        Devices
+      </Tabs.Content>
+      <Tabs.Content style={{ padding: 20 }} value={tabs[2].value}>
+        Account management
+      </Tabs.Content>
+      <Tabs.Content style={{ padding: 20 }} value={tabs[3].value}>
+        My payments
+      </Tabs.Content>
+    </Tabs.Root>
   )
 }
 
-ProfileSettings.getLayout = (page: ReactElement) => {
-  return <SidebarLayout>{page}</SidebarLayout>
+ProfileSettings.getLayout = (page, t) => {
+  return (
+    <SidebarLayout
+      description={t.pages.profileSettings.metaDescription}
+      title={t.pages.profileSettings.metaTitle}
+    >
+      {page}
+    </SidebarLayout>
+  )
 }
 
 export default ProfileSettings

@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 const RedirectProvider = () => {
-  const { query, replace } = useRouter()
+  const { push, query } = useRouter()
 
   const params = useSearchParams()
 
@@ -29,12 +29,12 @@ const RedirectProvider = () => {
       }
 
       if (token) {
-        void replace(AppRoutes.PROFILE)
+        void push(AppRoutes.PROFILE)
       } else {
-        void replace(AppRoutes.MAIN)
+        void push(AppRoutes.MAIN)
       }
     }
-  }, [query.provider, params, replace])
+  }, [query.provider, params, push])
 
   return <Loader fullHeight />
 }

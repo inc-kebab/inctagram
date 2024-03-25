@@ -1,31 +1,31 @@
 .expandContainer {
-  padding: 10px 16px 10px 12px;
+  position: absolute;
+
+  bottom: 49px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   width: 156px;
   height: 152px;
-  position: absolute;
+  padding: 10px 16px 10px 12px;
+
   background-color: rgba(#171717, 0.8);
-  bottom: 49px;
   border-radius: 2px;
-  left: 11px;
 }
 
 .expandWrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .expandBtn {
-  position: absolute;
-  bottom: 11px;
-  left: 11px;
-  margin: 0;
-  padding: 0;
   width: 36px;
   height: 36px;
+  margin: 0;
+  padding: 0;
+
   background-color: rgba(#171717, 0.7);
 
   .isOpenIcon {

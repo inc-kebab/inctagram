@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
+import { CurrentWindow } from '@/feature/post/ui/AddPostPhotoDialog/AddPostPhotoDialog'
 import { ArrowIos, Close } from '@/shared/assets/icons/common'
 import * as RadixDialog from '@radix-ui/react-dialog'
 import clsx from 'clsx'
@@ -7,18 +8,31 @@ import clsx from 'clsx'
 import s from './Dialog.module.scss'
 
 import { Button } from '../Button'
+import { Typography } from '../Typography'
 import { DialogClose } from './DialogClose'
 
 export type Props = {
   className?: string
-  handleBackBtn?: (url: string) => void
+  currentWindow?: CurrentWindow
+  onBackClick?: () => void
+  onNextClick?: () => void
   title?: string
   trigger?: ReactNode
   variant?: 'post' | 'profile'
 } & ComponentPropsWithoutRef<typeof RadixDialog.Root>
 
 export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>((props, ref) => {
-  const { children, className, handleBackBtn, title, trigger, variant = '', ...rest } = props
+  const {
+    children,
+    className,
+    currentWindow,
+    onBackClick,
+    onNextClick,
+    title,
+    trigger,
+    variant = '',
+    ...rest
+  } = props
 
   return (
     <RadixDialog.Root {...rest}>
@@ -30,16 +44,19 @@ export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>(
             <div className={s.title}>
               <Button
                 className={s.arrowBtn}
-                onClick={() => handleBackBtn?.('')}
+                onClick={onBackClick}
                 startIcon={<ArrowIos height={24} width={24} />}
                 variant="text"
               />
-              <h2 className={s.titleText}>{title}</h2>
+              <Typography variant="h1">{title}</Typography>
+              <Button onClick={onNextClick} variant="text">
+                {currentWindow === 'description' ? 'Publish' : 'Next'}
+              </Button>
             </div>
           )}
           {variant === 'profile' && (
             <div className={s.title}>
-              <h2 className={s.titleText}>{title}</h2>
+              <Typography variant="h1">{title}</Typography>
               <DialogClose>
                 <Close className={s.closeIcon} />
               </DialogClose>

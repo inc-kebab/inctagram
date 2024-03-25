@@ -1,11 +1,9 @@
 .imagesArrayBtn {
-  position: absolute;
-  bottom: 11px;
-  right: 11px;
-  margin: 0;
-  padding: 0;
   width: 36px;
   height: 36px;
+  margin: 0;
+  padding: 0;
+
   background-color: rgba(#171717, 0.7);
 
   .isOpenIcon {
@@ -18,15 +16,18 @@
 }
 
 .wrapper {
-  background-color: rgba(#171717, 0.8);
-  height: 106px;
   position: absolute;
+  right: 0;
   bottom: 49px;
-  right: 11px;
-  border-radius: 2px;
-  padding: 12px;
+
   display: flex;
   gap: 12px;
+
+  height: 106px;
+  padding: 12px;
+
+  background-color: rgba(#171717, 0.8);
+  border-radius: 2px;
 
   .addImageBtn {
     cursor: pointer;
@@ -36,14 +37,16 @@
     position: relative;
 
     .deleteBtn {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+
       width: 12px;
       height: 12px;
-      background-color: rgba(#171717, 0.8);
-      right: 2px;
-      top: 2px;
       margin: 0;
       padding: 0;
-      position: absolute;
+
+      background-color: rgba(#171717, 0.8);
     }
   }
 }

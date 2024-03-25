@@ -33,6 +33,7 @@ export const CustomInput = forwardRef<HTMLInputElement, Props>(
             ref={ref}
             {...props}
             autoComplete="off"
+            readOnly
           />
           <Calendar className={s.calendar} />
         </div>

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useAppDispatch } from '@/app/store/store'
+import { postsActions } from '@/feature/post/api/post-slice'
 import { Image as ImageSvg } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
@@ -12,10 +14,11 @@ import s from './InputPhoto.module.scss'
 import { avatarSchema } from '../../model/utils/validators/addAvatar'
 
 type Props = {
-  setPhoto: (photo: File) => void
+  setPhoto?: (photo: File) => void
 }
 
 export const InputPhoto = ({ setPhoto }: Props) => {
+  const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const [error, setError] = useState('')
 
@@ -25,6 +28,11 @@ export const InputPhoto = ({ setPhoto }: Props) => {
     imageSvg: s.imageSvg,
     notification: clsx(s.notification, { [s.error]: error }),
     svgWrapper: s.svgWrapper,
+  }
+  const onSetPhoto = (file: File) => {
+    const imageURL = URL.createObjectURL(file)
+
+    dispatch(postsActions.addImage({ aspect: 0, imageURL }))
   }
 
   return (
@@ -36,7 +44,7 @@ export const InputPhoto = ({ setPhoto }: Props) => {
       <InputFile
         accept=".png, .jpg, .jpeg"
         setError={setError}
-        setFile={setPhoto}
+        setFile={setPhoto ? setPhoto : onSetPhoto}
         zodSchema={avatarSchema(t)}
       >
         <Button asComponent="span" className={s.button}>

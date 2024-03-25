@@ -8,7 +8,7 @@ import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import s from './ConfirmDialog.module.scss'
 
 interface Props {
-  confirmCallback: () => void
+  confirmCallback?: () => void
   content: ReactNode
   disabled?: boolean
   onOpenChange: (open: boolean) => void
@@ -36,7 +36,7 @@ export const ConfirmDialog = ({
       trigger={trigger}
     >
       <div className={s.dialog}>
-        {content}
+        <div className={s.content}>{content}</div>
         <div className={s.actions}>
           <Button disabled={disabled} onClick={confirmCallback} variant="outline">
             {t.button.yes}
