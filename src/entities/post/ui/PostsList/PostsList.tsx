@@ -1,8 +1,8 @@
-import { PostItem } from '@/entities/post'
 import clsx from 'clsx'
 
 import s from './PostsList.module.scss'
 
+import { PostItem } from '../../model/types/post.types'
 import { PostPreviewCard } from '../PostPreviewCard/PostPreviewCard'
 
 interface Props {

@@ -1,10 +1,10 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { DeleteArgs, EditPostArgs, GetMyPostsResponse } from '../model/types/api.types'
+import { DeletePostArgs, EditPostArgs, GetMyPostsResponse } from '../model/types/api.types'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    deletePost: builder.mutation<void, DeleteArgs>({
+    deletePost: builder.mutation<void, DeletePostArgs>({
       onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
         const patchResult = dispatch(
           postApi.util.updateQueryData('getMyPosts', undefined, draft => {

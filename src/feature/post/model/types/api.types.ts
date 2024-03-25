@@ -8,11 +8,11 @@ export interface GetMyPostsResponse {
   totalCount: number
 }
 
-export type DeleteArgs = {
+export type DeletePostArgs = {
   id: number
 }
 
 export type EditPostArgs = {
-  description?: string
+  description?: Nullable<string>
   id: number
 }

@@ -4,6 +4,7 @@ import Close from '@/shared/assets/icons/common/close.svg'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
+import { ConfirmDialog } from '@/widgets/dialogs'
 import clsx from 'clsx'
 
 import s from './ProfilePhoto.module.scss'
@@ -11,7 +12,6 @@ import s from './ProfilePhoto.module.scss'
 import { CroppedArea } from '../../model/types/profile.types'
 import { getCroppedImg } from '../../model/utils/getCroppedImg'
 import { AddProfilePhotoDialog } from '../AddProfilePhotoDialog/AddProfilePhotoDialog'
-import { DeletePhotoDialog } from '../DeletePhotoDialog/DeletePhotoDialog'
 
 type Props = {
   avaUrlFromServer?: string
@@ -69,11 +69,13 @@ export const ProfilePhoto = ({
         <div className={s.avatarWpapper}>
           <Avatar avatarUrl={avaUrlFromServer} circle wrapperSize={192} />
           {avaUrlFromServer && (
-            <DeletePhotoDialog
+            <ConfirmDialog
               confirmCallback={handleDeletePhoto}
+              content={t.pages.profile.deleteProfilePhoto}
               disabled={disabledDelete}
+              onOpenChange={setOpenDelete}
               open={openDelete}
-              setOpen={setOpenDelete}
+              title={t.pages.profile.deletePhoto}
               trigger={
                 <Button className={s.deleteAvatar} variant="text">
                   <Close className={s.closeIcon} viewBox="0 0 24 24" />
