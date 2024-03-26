@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { useAppDispatch } from '@/app/store/store'
 import { ImageObj, postsActions } from '@/feature/post/api/post-slice'
 import { Expand } from '@/shared/assets/icons/common/index'
@@ -19,14 +17,27 @@ type Props = {
   activeIndex: number
   className?: string
   images: ImageObj[]
+  isOpenExpand: boolean
+  setIsOpenExpand: (isOpenExpand: boolean) => void
 }
 
-export const ExpandBtn = ({ activeIndex, className, images }: Props) => {
-  const [isOpenExpand, setIsOpenExpand] = useState(false)
+export const ExpandBtn = ({
+  activeIndex,
+  className,
+  images,
+  isOpenExpand,
+  setIsOpenExpand,
+}: Props) => {
   const dispatch = useAppDispatch()
   const image = images[activeIndex]
 
-  // console.log('activeIndex', activeIndex, image)
+  const onAspectHandler = (aspect: number) => () => {
+    dispatch(
+      postsActions.setImages(
+        images.map(img => (img.imageURL === image?.imageURL ? { ...img, aspect } : img))
+      )
+    )
+  }
 
   return (
     <div className={className}>
@@ -42,15 +53,7 @@ export const ExpandBtn = ({ activeIndex, className, images }: Props) => {
             <Typography>Original</Typography>
             <Button
               className={s.squareBtn}
-              onClick={() =>
-                dispatch(
-                  postsActions.setImages(
-                    images.map(img =>
-                      img.imageURL === image?.imageURL ? { ...img, aspect: 0 } : img
-                    )
-                  )
-                )
-              }
+              onClick={onAspectHandler(0)}
               startIcon={
                 <ImageIcon
                   color={image?.aspect === 0 ? 'var(--light-100)' : 'var(--light-900)'}
@@ -67,15 +70,7 @@ export const ExpandBtn = ({ activeIndex, className, images }: Props) => {
             <Typography>1:1 </Typography>
             <Button
               className={s.squareBtn}
-              onClick={() =>
-                dispatch(
-                  postsActions.setImages(
-                    images.map(img =>
-                      img.imageURL === image?.imageURL ? { ...img, aspect: 1 } : img
-                    )
-                  )
-                )
-              }
+              onClick={onAspectHandler(1)}
               startIcon={
                 <Square color={image?.aspect === 1 ? 'var(--light-100)' : 'var(--light-900)'} />
               }
@@ -87,15 +82,7 @@ export const ExpandBtn = ({ activeIndex, className, images }: Props) => {
             <Typography>4:5</Typography>
             <Button
               className={s.squareBtn}
-              onClick={() =>
-                dispatch(
-                  postsActions.setImages(
-                    images.map(img =>
-                      img.imageURL === image?.imageURL ? { ...img, aspect: 4 / 5 } : img
-                    )
-                  )
-                )
-              }
+              onClick={onAspectHandler(4 / 5)}
               startIcon={
                 <VerticalRectangle
                   color={image?.aspect === 4 / 5 ? 'var(--light-100)' : 'var(--light-900)'}
@@ -109,15 +96,7 @@ export const ExpandBtn = ({ activeIndex, className, images }: Props) => {
             <Typography> 16:9</Typography>
             <Button
               className={s.squareBtn}
-              onClick={() =>
-                dispatch(
-                  postsActions.setImages(
-                    images.map(img =>
-                      img.imageURL === image?.imageURL ? { ...img, aspect: 16 / 9 } : img
-                    )
-                  )
-                )
-              }
+              onClick={onAspectHandler(16 / 9)}
               startIcon={
                 <HorizontalRectangle
                   color={image?.aspect === 16 / 9 ? 'var(--light-100)' : 'var(--light-900)'}

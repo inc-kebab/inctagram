@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Cropper from 'react-easy-crop'
 
 import { useAppDispatch } from '@/app/store/store'
@@ -34,21 +34,38 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
   const [zoom, setZoom] = useState(1)
-
+  const [isOpenExpand, setIsOpenExpand] = useState(false)
+  const swiperRef = useRef<any>(null)
   const handleCropComplete = (_: Crop, croppedAreaPixels: CroppedArea) => {
-    const imageWithCroppedAreaPixels: ImageObj = { ...images[activeIndex], croppedAreaPixels }
+    if (croppedAreaPixels) {
+      setCroppedAreaPixels(croppedAreaPixels)
+      const imageWithCroppedAreaPixels: ImageObj = { ...images[activeIndex], croppedAreaPixels }
 
-    dispatch(
-      postsActions.setImages(
-        images.map(image =>
-          image.imageURL === imageWithCroppedAreaPixels.imageURL
-            ? imageWithCroppedAreaPixels
-            : image
+      dispatch(
+        postsActions.setImages(
+          images.map(image =>
+            image.imageURL === imageWithCroppedAreaPixels.imageURL
+              ? imageWithCroppedAreaPixels
+              : image
+          )
         )
       )
-    )
-    setCroppedAreaPixels(croppedAreaPixels)
+    }
   }
+
+  const navigateToLastSlide = () => {
+    const swiperInstance = swiperRef.current
+
+    if (swiperInstance && swiperInstance.slides) {
+      swiperInstance.slideTo(swiperInstance.slides.length - 1)
+    }
+  }
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.allowTouchMove = !isOpenExpand
+    }
+  }, [isOpenExpand])
 
   return (
     <div className={s.container}>
@@ -60,9 +77,13 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
           onSlideChange={swiper => {
             setActiveIndex(swiper.activeIndex)
           }}
+          onSwiper={swiper => {
+            swiperRef.current = swiper
+          }}
           pagination={{ clickable: true }}
+          ref={swiperRef}
           slidesPerView={1}
-          spaceBetween={10}
+          spaceBetween={0}
           style={{ height: '100%', width: '100%' }}
         >
           {images.map((image, i) => (
@@ -88,8 +109,18 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
 
         {currentWindow === 'expand' && (
           <>
-            <ExpandBtn activeIndex={activeIndex} className={s.expandBtn} images={images} />
-            <ImagesArrayBtn className={s.imagesArrayBtn} images={images} />
+            <ExpandBtn
+              activeIndex={activeIndex}
+              className={s.expandBtn}
+              images={images}
+              isOpenExpand={isOpenExpand}
+              setIsOpenExpand={setIsOpenExpand}
+            />
+            <ImagesArrayBtn
+              className={s.imagesArrayBtn}
+              images={images}
+              navigateToLastSlide={navigateToLastSlide}
+            />
           </>
         )}
       </div>

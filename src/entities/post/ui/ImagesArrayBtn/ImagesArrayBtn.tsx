@@ -16,9 +16,10 @@ import s from './ImagesArrayBtn.module.scss'
 type Props = {
   className?: string
   images: ImageObj[]
+  navigateToLastSlide: any
 }
 
-export const ImagesArrayBtn = ({ className, images }: Props) => {
+export const ImagesArrayBtn = ({ className, images, navigateToLastSlide }: Props) => {
   const dispatch = useAppDispatch()
 
   const [deleteImage] = useDeleteImageMutation()
@@ -34,10 +35,12 @@ export const ImagesArrayBtn = ({ className, images }: Props) => {
     dispatch(postsActions.removeImage(imageObj.imageURL))
   }
 
-  const handleSetPhoto = (file: File | any) => {
+  const handleSetPhoto = async (file: File | any) => {
     const imageURL = URL.createObjectURL(file)
 
-    dispatch(postsActions.addImage({ aspect: 0, imageURL }))
+    await dispatch(postsActions.addImage({ aspect: 0, imageURL }))
+    setIsOpen(false)
+    navigateToLastSlide()
   }
 
   return (
