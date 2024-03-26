@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 
-import { useAppDispatch } from '@/app/store/store'
+import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
@@ -10,31 +10,20 @@ import s from './AddPostPhotoDialog.module.scss'
 
 import { InputPhoto } from '../../../profile/ui/InputPhoto/InputPhoto'
 import { useAddImagesMutation } from '../../api/post-api'
-import { ImageObj, postsActions } from '../../api/post-slice'
+import { postsActions } from '../../api/post-slice'
 import { CropperPost } from '../CropperPost/CropperPost'
 
 export type CurrentWindow = 'description' | 'expand' | 'filter'
 
 type Props = {
-  arr?: string[]
   disabled?: boolean
-  images: ImageObj[]
   onOpenChange?: (open: boolean) => void
   open?: boolean
-  title?: string
   trigger: ReactNode
-  variant?: 'post' | 'profile'
 }
 
-export const AddPostPhotoDialog = ({
-  images,
-  onOpenChange,
-  open,
-  title,
-  trigger,
-  variant,
-  ...rest
-}: Props) => {
+export const AddPostPhotoDialog = ({ onOpenChange, open, trigger, ...rest }: Props) => {
+  const images = useAppSelector(state => state.posts.images)
   const dispatch = useAppDispatch()
   const [addImages, { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess }] =
     useAddImagesMutation()
@@ -44,10 +33,10 @@ export const AddPostPhotoDialog = ({
   const handleAddPhoto = async (formData: FormData, i: number) => {
     // console.log('formData', Object.fromEntries(formData), i)
     const response = await addImages(formData)
-
     // const file = formData.get('files') as Blob | null
 
     if ('data' in response) {
+      console.log('handleAddPhoto uploadId', response.data.images[0].uploadId)
       dispatch(
         postsActions.updateImage({ currentIndex: i, uploadId: response.data.images[0].uploadId })
       )
@@ -92,9 +81,9 @@ export const AddPostPhotoDialog = ({
       onNextClick={onNextClick}
       onOpenChange={onOpenChange}
       open={open}
-      title={title}
+      title={images.length === 0 ? t.pages.post.addPhoto : t.pages.post.cropping}
       trigger={trigger}
-      variant={variant}
+      variant={images.length === 0 ? 'profile' : 'post'}
     >
       {images.length > 0 ? (
         <CropperPost currentWindow={currentWindow} images={images} {...rest} />

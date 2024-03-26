@@ -1,7 +1,6 @@
 'use client'
 import { ComponentPropsWithoutRef } from 'react'
 
-import { useAppSelector } from '@/app/store/store'
 import { AddPostPhotoDialog } from '@/feature/post/ui/AddPostPhotoDialog/AddPostPhotoDialog'
 import { Button } from '@/shared/ui/Button'
 import clsx from 'clsx'
@@ -27,8 +26,6 @@ export const SidebarItem = ({
   item,
   ...rest
 }: Props) => {
-  const images = useAppSelector(state => state.posts.images)
-
   return (
     <li className={clsx(s.item, { [s.lastGroupItem]: isLastGroupItem })} {...rest}>
       {isLink ? (
@@ -45,8 +42,6 @@ export const SidebarItem = ({
         </Link>
       ) : (
         <AddPostPhotoDialog
-          images={images}
-          title={images.length === 0 ? 'Add Photo' : 'Cropping'}
           trigger={
             <Button
               className={clsx(s.button, {
@@ -59,7 +54,6 @@ export const SidebarItem = ({
               <span className={s.title}>{item.title}</span>
             </Button>
           }
-          variant={images.length === 0 ? 'profile' : 'post'}
         />
       )}
     </li>

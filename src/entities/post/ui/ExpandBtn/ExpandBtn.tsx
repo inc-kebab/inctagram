@@ -21,20 +21,16 @@ type Props = {
   setIsOpenExpand: (isOpenExpand: boolean) => void
 }
 
-export const ExpandBtn = ({
-  activeIndex,
-  className,
-  images,
-  isOpenExpand,
-  setIsOpenExpand,
-}: Props) => {
+export const ExpandBtn = (props: Props) => {
+  const { activeIndex, className, images, isOpenExpand, setIsOpenExpand } = props
+
   const dispatch = useAppDispatch()
-  const image = images[activeIndex]
+  const imageObj = images[activeIndex]
 
   const onAspectHandler = (aspect: number) => () => {
     dispatch(
       postsActions.setImages(
-        images.map(img => (img.imageURL === image?.imageURL ? { ...img, aspect } : img))
+        images.map(image => (image.imageURL === imageObj?.imageURL ? { ...image, aspect } : image))
       )
     )
   }
@@ -56,7 +52,7 @@ export const ExpandBtn = ({
               onClick={onAspectHandler(0)}
               startIcon={
                 <ImageIcon
-                  color={image?.aspect === 0 ? 'var(--light-100)' : 'var(--light-900)'}
+                  color={imageObj?.aspect === 0 ? 'var(--light-100)' : 'var(--light-900)'}
                   height={24}
                   width={24}
                 />
@@ -72,7 +68,7 @@ export const ExpandBtn = ({
               className={s.squareBtn}
               onClick={onAspectHandler(1)}
               startIcon={
-                <Square color={image?.aspect === 1 ? 'var(--light-100)' : 'var(--light-900)'} />
+                <Square color={imageObj?.aspect === 1 ? 'var(--light-100)' : 'var(--light-900)'} />
               }
               variant="text"
             />
@@ -85,7 +81,7 @@ export const ExpandBtn = ({
               onClick={onAspectHandler(4 / 5)}
               startIcon={
                 <VerticalRectangle
-                  color={image?.aspect === 4 / 5 ? 'var(--light-100)' : 'var(--light-900)'}
+                  color={imageObj?.aspect === 4 / 5 ? 'var(--light-100)' : 'var(--light-900)'}
                 />
               }
               variant="text"
@@ -99,7 +95,7 @@ export const ExpandBtn = ({
               onClick={onAspectHandler(16 / 9)}
               startIcon={
                 <HorizontalRectangle
-                  color={image?.aspect === 16 / 9 ? 'var(--light-100)' : 'var(--light-900)'}
+                  color={imageObj?.aspect === 16 / 9 ? 'var(--light-100)' : 'var(--light-900)'}
                 />
               }
               variant="text"

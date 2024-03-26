@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'rea
 
 import { CurrentWindow } from '@/feature/post/ui/AddPostPhotoDialog/AddPostPhotoDialog'
 import { ArrowIos, Close } from '@/shared/assets/icons/common'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import * as RadixDialog from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 
@@ -34,6 +35,8 @@ export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>(
     ...rest
   } = props
 
+  const { t } = useTranslation()
+
   return (
     <RadixDialog.Root {...rest}>
       <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
@@ -50,7 +53,7 @@ export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>(
               />
               <Typography variant="h1">{title}</Typography>
               <Button onClick={onNextClick} variant="text">
-                {currentWindow === 'description' ? 'Publish' : 'Next'}
+                {currentWindow === 'description' ? t.pages.post.publish : t.pages.post.next}
               </Button>
             </div>
           )}

@@ -106,6 +106,8 @@ export const ru: LocaleType = {
       metaTitle: 'Главная',
     },
     post: {
+      addPhoto: 'Добавить Фото',
+      cropping: 'Обрезка',
       deletePost: 'Удалить пост',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
       editInfoModal: {
@@ -117,6 +119,8 @@ export const ru: LocaleType = {
         acceptBtn: 'Сохранить изменения',
         areaLabel: 'Добавьте описания публикаций',
       },
+      next: 'Далее',
+      publish: 'Опубликовать',
     },
     privacy: {
       changes:

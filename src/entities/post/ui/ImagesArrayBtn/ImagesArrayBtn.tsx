@@ -20,6 +20,7 @@ type Props = {
 }
 
 export const ImagesArrayBtn = ({ className, images, navigateToLastSlide }: Props) => {
+  console.log('ImagesArrayBtn images', images)
   const dispatch = useAppDispatch()
 
   const [deleteImage] = useDeleteImageMutation()
@@ -30,6 +31,7 @@ export const ImagesArrayBtn = ({ className, images, navigateToLastSlide }: Props
 
   const handleDeleteImage = (imageObj: ImageObj) => {
     if (imageObj.uploadId) {
+      console.log('ImagesArrayBtn imageObj.uploadId', imageObj.uploadId)
       deleteImage(imageObj.uploadId)
     }
     dispatch(postsActions.removeImage(imageObj.imageURL))

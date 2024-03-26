@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import Cropper from 'react-easy-crop'
 
-import { useAppDispatch } from '@/app/store/store'
-import { ExpandBtn, ImagesArrayBtn } from '@/entities/post'
+import { useAppDispatch, useAppSelector } from '@/app/store/store'
+import { ExpandBtn, ImagesArrayBtn, ZoomIn } from '@/entities/post'
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -28,14 +28,18 @@ type Props = {
   images: ImageObj[]
 }
 
-export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
+export const CropperPost = ({ currentWindow, disabled }: Props) => {
   const dispatch = useAppDispatch()
+  const images = useAppSelector(state => state.posts.images)
+
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0 })
   const [activeIndex, setActiveIndex] = useState(0)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
   const [zoom, setZoom] = useState(1)
   const [isOpenExpand, setIsOpenExpand] = useState(false)
+  const [isOpenZoom, setIsOpenZoom] = useState(false)
   const swiperRef = useRef<any>(null)
+
   const handleCropComplete = (_: Crop, croppedAreaPixels: CroppedArea) => {
     if (croppedAreaPixels) {
       setCroppedAreaPixels(croppedAreaPixels)
@@ -63,9 +67,13 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
 
   useEffect(() => {
     if (swiperRef.current) {
-      swiperRef.current.allowTouchMove = !isOpenExpand
+      if (isOpenZoom === true || isOpenExpand === true) {
+        swiperRef.current.allowTouchMove = false
+      } else {
+        swiperRef.current.allowTouchMove = true
+      }
     }
-  }, [isOpenExpand])
+  }, [isOpenZoom, isOpenExpand])
 
   return (
     <div className={s.container}>
@@ -89,7 +97,7 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
           {images.map((image, i) => (
             <SwiperSlide key={image.imageURL + i} style={{ position: 'relative' }}>
               {image.aspect === 0 && <Image alt="" fill objectFit="cover" src={image.imageURL} />}
-              {image.aspect > 0 && (
+              {(image.aspect > 0 || isOpenZoom) && (
                 <Cropper
                   aspect={image.aspect}
                   crop={crop}
@@ -115,6 +123,15 @@ export const CropperPost = ({ currentWindow, disabled, images }: Props) => {
               images={images}
               isOpenExpand={isOpenExpand}
               setIsOpenExpand={setIsOpenExpand}
+            />
+            <ZoomIn
+              activeIndex={activeIndex}
+              className={s.zoomInBtn}
+              images={images}
+              isOpenZoom={isOpenZoom}
+              setIsOpenZoom={setIsOpenZoom}
+              setZoom={setZoom}
+              zoom={zoom}
             />
             <ImagesArrayBtn
               className={s.imagesArrayBtn}

@@ -107,6 +107,8 @@ export const en = {
       metaTitle: 'Main',
     },
     post: {
+      addPhoto: 'Add Photo',
+      cropping: 'Cropping',
       deletePost: 'Delete Post',
       deletePostQuestion: 'Are you sure you want to delete this post?',
       editInfoModal: {
@@ -118,6 +120,8 @@ export const en = {
         acceptBtn: 'Save changes',
         areaLabel: 'Add publication descriptions',
       },
+      next: 'Next',
+      publish: 'Publish',
     },
     privacy: {
       changes:
