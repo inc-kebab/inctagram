@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-import { PostItem, PostsList } from '@/entities/post'
-import { PostsListSkeleton } from '@/entities/post/ui/PostsListSeketon/PostsListSkeleton'
+import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
-import { PostDetailsDialogs, useGetMyPostsQuery } from '@/feature/post'
+import { PostDetailsDialogs, invalidateTagsPost, useGetMyPostsQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
 import { Page } from '@/shared/types/layout'
@@ -28,11 +28,19 @@ const Profile: Page = () => {
   const { data, isLoading } = useGetMyProfileQuery()
   const { data: posts, isFetching, isLoading: isPostsLoad } = useGetMyPostsQuery({ cursor })
 
+  const dispatch = useDispatch()
+
   useInfinityScroll({
     callback: () => setCursor(posts?.cursor),
     hasMore: posts?.hasMore,
     triggerRef,
   })
+
+  useEffect(() => {
+    return () => {
+      dispatch(invalidateTagsPost(['myPosts']))
+    }
+  }, [dispatch])
 
   if (isLoading) {
     return <Loader containerHeight />

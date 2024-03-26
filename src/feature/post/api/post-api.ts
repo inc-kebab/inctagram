@@ -62,9 +62,13 @@ const postApi = baseApi.injectEndpoints({
         return currentArg !== previousArg
       },
       merge: (cache, res) => {
-        cache.items.push(...res.items)
-        cache.cursor = res.cursor
-        cache.hasMore = res.hasMore
+        if (cache) {
+          cache.items.push(...res.items)
+          cache.cursor = res.cursor
+          cache.hasMore = res.hasMore
+        } else {
+          return res
+        }
       },
       providesTags: (_, error) => (error ? [] : ['myPosts']),
       query: params => ({ params, url: '/posts' }),
@@ -76,3 +80,4 @@ const postApi = baseApi.injectEndpoints({
 })
 
 export const { useDeletePostMutation, useEditPostMutation, useGetMyPostsQuery } = postApi
+export const { invalidateTags: invalidateTagsPost } = postApi.util
