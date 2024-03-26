@@ -64,6 +64,7 @@ const postApi = baseApi.injectEndpoints({
       merge: (cache, res) => {
         cache.items.push(...res.items)
         cache.cursor = res.cursor
+        cache.hasMore = res.hasMore
       },
       providesTags: (_, error) => (error ? [] : ['myPosts']),
       query: params => ({ params, url: '/posts' }),

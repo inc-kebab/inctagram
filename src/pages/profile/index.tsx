@@ -28,9 +28,11 @@ const Profile: Page = () => {
   const { data, isLoading } = useGetMyProfileQuery()
   const { data: posts, isFetching, isLoading: isPostsLoad } = useGetMyPostsQuery({ cursor })
 
-  const handleChangeCursor = () => setCursor(posts?.cursor)
-
-  useInfinityScroll({ callback: handleChangeCursor, triggerRef })
+  useInfinityScroll({
+    callback: () => setCursor(posts?.cursor),
+    hasMore: posts?.hasMore,
+    triggerRef,
+  })
 
   if (isLoading) {
     return <Loader containerHeight />

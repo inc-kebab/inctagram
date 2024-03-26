@@ -2,6 +2,7 @@ import { PostItem } from '@/entities/post'
 
 export interface GetMyPostsResponse {
   cursor: number
+  hasMore: boolean
   items: PostItem[]
   pageSize: number
   pagesCount: number
