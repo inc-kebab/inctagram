@@ -8,6 +8,13 @@ export interface GetMyPostsResponse {
   totalCount: number
 }
 
+export interface GetMyPostsArgs {
+  cursor?: number
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: 'asc' | 'desc'
+}
+
 export type DeletePostArgs = {
   id: number
 }

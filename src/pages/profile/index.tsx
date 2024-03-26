@@ -1,6 +1,11 @@
+import { useRef, useState } from 'react'
+
+import { PostItem, PostsList } from '@/entities/post'
+import { PostsListSkeleton } from '@/entities/post/ui/PostsListSeketon/PostsListSkeleton'
 import { ProfileInfo } from '@/entities/profile'
-import { Posts, useGetMyPostsQuery } from '@/feature/post'
+import { PostDetailsDialogs, useGetMyPostsQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
+import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
 import { SidebarLayout } from '@/widgets/layout'
@@ -8,8 +13,24 @@ import { SidebarLayout } from '@/widgets/layout'
 import s from './Profile.module.scss'
 
 const Profile: Page = () => {
+  const triggerRef = useRef<HTMLDivElement | null>(null)
+
+  const [cursor, setCursor] = useState<number | undefined>(undefined)
+
+  const [currentPost, setCurrentPost] = useState<Nullable<PostItem>>(null)
+  const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false)
+
+  const handleChangeCurrentPost = (post: PostItem) => {
+    setCurrentPost(post)
+    setOpenPostDetailsModal(true)
+  }
+
   const { data, isLoading } = useGetMyProfileQuery()
-  const { data: posts, isLoading: isPostsLoad } = useGetMyPostsQuery()
+  const { data: posts, isFetching, isLoading: isPostsLoad } = useGetMyPostsQuery({ cursor })
+
+  const handleChangeCursor = () => setCursor(posts?.cursor)
+
+  useInfinityScroll({ callback: handleChangeCursor, triggerRef })
 
   if (isLoading) {
     return <Loader containerHeight />
@@ -25,7 +46,25 @@ const Profile: Page = () => {
           username: data?.username,
         }}
       />
-      {isPostsLoad ? <Loader /> : <Posts list={posts?.items} />}
+      {isPostsLoad ? (
+        <PostsListSkeleton count={8} />
+      ) : (
+        <>
+          <PostsList
+            cursor={posts?.cursor}
+            list={posts?.items}
+            onSetCurrentPost={handleChangeCurrentPost}
+            ref={triggerRef}
+          />
+          {isFetching && <PostsListSkeleton />}
+        </>
+      )}
+      <PostDetailsDialogs
+        currentPost={currentPost}
+        openPostDetailsModal={openPostDetailsModal}
+        setCurrentPost={setCurrentPost}
+        setOpenPostDetailsModal={setOpenPostDetailsModal}
+      />
     </>
   )
 }

@@ -10,6 +10,7 @@ export interface UseInfinityScrollOptions {
  * Кастомный хук бесконечного скролла.
  *
  * @param {useInfinityScroll} callback - фукнция, которая вызовется, когда элемент покажется во вьюпорте
+ * @param {useInfinityScroll} hasMore - флаг, который обозначает, будут ли еще элементы при запросе следующей страницы
  * @param {useInfinityScroll} triggerRef - элемент, который должен показаться во вьюпорте
  */
 
