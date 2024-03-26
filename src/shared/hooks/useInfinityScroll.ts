@@ -26,12 +26,14 @@ export const useInfinityScroll = ({
     const trigger = triggerRef.current
 
     if (callback && trigger) {
-      observer = new IntersectionObserver(([entry]) => {
-        //* isIntersecting - равен true, когда наблюдаемый элемент хотя бы на 1 пиксель пересекает вьюпорт
-        if (entry.isIntersecting && hasMore) {
-          callback()
-        }
-      })
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && hasMore) {
+            callback()
+          }
+        },
+        { threshold: 0.8 }
+      )
 
       observer.observe(trigger)
     }
