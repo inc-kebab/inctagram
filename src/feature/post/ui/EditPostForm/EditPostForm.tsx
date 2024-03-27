@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -22,14 +23,16 @@ type Props = {
 
 export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, AdditionalRefProps>, Props>(
   ({ className, currentDescription, disabled, onSubmit, ...rest }, ref) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
     const {
       control,
       formState: { errors, isDirty, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
+      setValue,
       watch,
     } = useForm<EditPostFormValues>({
       defaultValues: {
@@ -40,6 +43,8 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
     })
 
     useImperativeHandle(ref, () => ({ isDirty, reset, setError }))
+
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
 
     return (
       <form className={clsx(s.form, className)} onSubmit={handleSubmit(onSubmit)} {...rest}>

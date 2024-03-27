@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react
 import { Controller } from 'react-hook-form'
 
 import { GeneralRoutes } from '@/shared/const/routes'
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -27,12 +28,23 @@ type Props = {
 
 export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Props>(
   ({ className, disabled, onSubmit, userData, ...rest }, ref) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
-    const { changeCityRef, control, errors, handleSubmit, isValid, reset, setError } =
-      useEditProfileForm(t, userData)
+    const {
+      changeCityRef,
+      control,
+      errors,
+      getValues,
+      handleSubmit,
+      isValid,
+      reset,
+      setError,
+      setValue,
+    } = useEditProfileForm(t, userData)
 
     useImperativeHandle(ref, () => ({ reset, setError }))
+
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
 
     return (
       <Card

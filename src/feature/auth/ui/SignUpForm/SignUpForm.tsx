@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { Github, Google } from '@/shared/assets/icons/other'
 import { AuthRoutes, GeneralRoutes } from '@/shared/const/routes'
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -31,14 +32,16 @@ export const SignUpForm = forwardRef(
     { className, disabled, hrefGithub, hrefGoogle, onSubmit, ...props }: Props,
     ref: Ref<UseFormRef<SignUpFormValues>>
   ) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
     const {
       control,
       formState: { errors, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
+      setValue,
     } = useForm<SignUpFormValues>({
       defaultValues: {
         accept: false,
@@ -52,6 +55,8 @@ export const SignUpForm = forwardRef(
     })
 
     useImperativeHandle(ref, () => ({ reset, setError }))
+
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
 
     return (
       <Card
