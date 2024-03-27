@@ -32,8 +32,18 @@ export const ProfileInfo = ({ className, userData }: Props) => {
             Profile settings
           </Button>
         </div>
-        <div>subscribers</div>
-        <div>about me</div>
+        <ul className={s.subscriber}>
+          <li>
+            <span>2 218</span> Following
+          </li>
+          <li>
+            <span>2 358</span> Followers
+          </li>
+          <li>
+            <span>2 764</span> Publications
+          </li>
+        </ul>
+        <Typography variant="regular16">{userData?.aboutMe || 'about me'}</Typography>
       </div>
     </div>
   )

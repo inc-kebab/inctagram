@@ -3,6 +3,28 @@
   gap: 38px;
 }
 
+.subscriber {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  width: 395px;
+  padding: 0;
+  font-size: var(--font-size-s);
+  margin: 0;
+
+  & > li {
+    display: flex;
+    flex-direction: column;
+
+    & > span {
+      display: inline-block;
+      margin-bottom: 7px;
+      font-weight: var(--font-weight-bold);
+    }
+  }
+}
+
 .info {
   display: flex;
   flex-direction: column;
