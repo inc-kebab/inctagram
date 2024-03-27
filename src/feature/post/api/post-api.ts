@@ -33,7 +33,6 @@ const postApi = baseApi.injectEndpoints({
       }),
     }),
     editPost: builder.mutation<void, EditPostArgs>({
-      invalidatesTags: ['myPosts'],
       onQueryStarted: async ({ description, id }, { dispatch, queryFulfilled }) => {
         const patchResult = dispatch(
           postApi.util.updateQueryData('getMyPosts', {}, draft => {
