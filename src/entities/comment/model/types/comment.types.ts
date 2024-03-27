@@ -1,6 +1,6 @@
 export type CommentData = {
-  avatarUrl?: string
-  commentText: string
+  avatarUrl: Nullable<string>
+  commentText: Nullable<string>
   idUser: number
   like?: boolean
   likesCount?: number

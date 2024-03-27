@@ -21,6 +21,6 @@ export type DeletePostArgs = {
 }
 
 export type EditPostArgs = {
-  description?: Nullable<string>
+  description: string
   id: number
 }
