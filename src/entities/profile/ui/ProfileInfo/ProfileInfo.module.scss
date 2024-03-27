@@ -1,28 +1,7 @@
 .ProfileInfo {
   display: flex;
   gap: 38px;
-}
-
-.subscriber {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  list-style: none;
-  width: 395px;
-  padding: 0;
-  font-size: var(--font-size-s);
-  margin: 0;
-
-  & > li {
-    display: flex;
-    flex-direction: column;
-
-    & > span {
-      display: inline-block;
-      margin-bottom: 7px;
-      font-weight: var(--font-weight-bold);
-    }
-  }
+  align-items: flex-start;
 }
 
 .info {
@@ -34,10 +13,28 @@
 }
 
 .name {
+  margin-bottom: 20px;
+}
+
+.subscriber {
   display: flex;
-  gap: 12px;
+  gap: 80px;
   align-items: center;
   justify-content: space-between;
 
-  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-size: var(--font-size-s);
+  list-style: none;
+
+  & .item {
+    display: flex;
+    flex-direction: column;
+    line-height: var(--line-height-m);
+
+    & .count {
+      font-weight: var(--font-weight-bold);
+    }
+  }
 }
