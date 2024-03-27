@@ -4,14 +4,14 @@ import clsx from 'clsx'
 
 import s from './Skeleton.module.scss'
 
-interface SkeletonPT {
+interface Props {
   border?: string
   className?: string
   height?: number | string
   width?: number | string
 }
 
-export const Skeleton = ({ border, className, height, width }: SkeletonPT) => {
+export const Skeleton = ({ border, className, height, width }: Props) => {
   const styles: CSSProperties = {
     borderRadius: border,
     height,
