@@ -10,7 +10,7 @@ import Link from 'next/link'
 import s from './Comment.module.scss'
 
 type Props = {
-  avatarUrl?: string
+  avatarUrl: Nullable<string>
   className?: string
   commentText: Nullable<string>
   isOwner: boolean

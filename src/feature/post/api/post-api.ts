@@ -1,13 +1,18 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { DeletePostArgs, EditPostArgs, GetMyPostsResponse } from '../model/types/api.types'
+import {
+  DeletePostArgs,
+  EditPostArgs,
+  GetMyPostsArgs,
+  GetMyPostsResponse,
+} from '../model/types/api.types'
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     deletePost: builder.mutation<void, DeletePostArgs>({
       onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
         const patchResult = dispatch(
-          postApi.util.updateQueryData('getMyPosts', undefined, draft => {
+          postApi.util.updateQueryData('getMyPosts', {}, draft => {
             const deletedPostIdx = draft.items.findIndex(el => el.id === id)
 
             if (deletedPostIdx !== -1) {
@@ -31,7 +36,7 @@ const postApi = baseApi.injectEndpoints({
       invalidatesTags: ['myPosts'],
       onQueryStarted: async ({ description, id }, { dispatch, queryFulfilled }) => {
         const patchResult = dispatch(
-          postApi.util.updateQueryData('getMyPosts', undefined, draft => {
+          postApi.util.updateQueryData('getMyPosts', {}, draft => {
             const editedPostIdx = draft.items.findIndex(el => el.id === id)
 
             if (editedPostIdx !== -1) {
@@ -52,11 +57,27 @@ const postApi = baseApi.injectEndpoints({
         url: `/posts/${body.id}`,
       }),
     }),
-    getMyPosts: builder.query<GetMyPostsResponse, void>({
+    getMyPosts: builder.query<GetMyPostsResponse, GetMyPostsArgs>({
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg
+      },
+      merge: (cache, res) => {
+        if (cache) {
+          cache.items.push(...res.items)
+          cache.cursor = res.cursor
+          cache.hasMore = res.hasMore
+        } else {
+          return res
+        }
+      },
       providesTags: (_, error) => (error ? [] : ['myPosts']),
-      query: () => ({ url: '/posts' }),
+      query: params => ({ params, url: '/posts' }),
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName
+      },
     }),
   }),
 })
 
 export const { useDeletePostMutation, useEditPostMutation, useGetMyPostsQuery } = postApi
+export const { invalidateTags: invalidateTagsPost } = postApi.util

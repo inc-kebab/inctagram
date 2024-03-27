@@ -14,7 +14,7 @@ export interface Image {
 export interface PostItem {
   avatarOwner: Nullable<string>
   createdAt: string
-  description?: Nullable<string>
+  description: Nullable<string>
   id: number
   images: Image[]
   location: Nullable<string>

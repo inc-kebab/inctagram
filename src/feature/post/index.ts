@@ -1,2 +1,2 @@
-export { useGetMyPostsQuery } from './api/post-api'
-export { Posts } from './ui/Posts/Posts'
+export { invalidateTagsPost, useGetMyPostsQuery } from './api/post-api'
+export { PostDetailsDialogs } from './ui/PostDetailsDialogs/PostDetailsDialogs'
