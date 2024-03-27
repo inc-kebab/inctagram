@@ -8,8 +8,26 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'off',
       },
     },
+    {
+      files: ['**/*.ts', '**/*.tsx'], // ? need?
+      rules: {
+        'no-undef': 'off',
+      },
+    },
   ],
   rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        css: 'always',
+        js: 'never',
+        jsx: 'never',
+        mjs: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'react/jsx-curly-brace-presence': [2, { children: 'never', props: 'never' }],
   },

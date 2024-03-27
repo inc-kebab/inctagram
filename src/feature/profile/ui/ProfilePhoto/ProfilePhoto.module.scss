@@ -19,10 +19,6 @@
   height: 42px;
 }
 
-.avatar {
-  border-radius: 50%;
-}
-
 .avatarWrapper {
   position: relative;
   z-index: 10;
@@ -65,16 +61,4 @@
 .closeIcon {
   width: 16px;
   height: 16px;
-}
-
-.iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 192px;
-  height: 192px;
-
-  background: var(--dark-500);
-  border-radius: 50%;
 }

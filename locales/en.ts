@@ -11,6 +11,7 @@ export const en = {
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     no: 'No',
+    publish: 'Publish',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
     selectFromComputer: 'Select from Computer',
@@ -106,6 +107,21 @@ export const en = {
     main: {
       metaTitle: 'Main',
     },
+    post: {
+      addComment: 'Add a Comment...',
+      deletePost: 'Delete Post',
+      deletePostQuestion: 'Are you sure you want to delete this post?',
+      editInfoModal: {
+        message:
+          'Do you really want to finish editing? If you close the changes you have made will not be saved.',
+        title: 'Close Post',
+      },
+      editPost: 'Edit Post',
+      editPostModal: {
+        acceptBtn: 'Save changes',
+        areaLabel: 'Add publication descriptions',
+      },
+    },
     privacy: {
       changes:
         'We reserve the right to make changes to our privacy policy. In the event of significant ' +
@@ -150,6 +166,7 @@ export const en = {
     },
     profile: {
       addProfilePhoto: 'Add a Profile Photo',
+      deletePhoto: 'Delete Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
       logOutConfirmation: 'Are you really want to log out of your account',
       metaDescription:

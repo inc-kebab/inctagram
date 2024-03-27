@@ -19,7 +19,7 @@ type Props = {
 export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) => {
   const [crop, setCrop] = useState<Crop>({ x: 0, y: 0 })
 
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<CroppedArea | null>(null)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Nullable<CroppedArea>>(null)
 
   const [zoom, setZoom] = useState(1)
 

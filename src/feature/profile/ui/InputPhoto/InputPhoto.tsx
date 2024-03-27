@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { Image as ImageSvg } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { InputFile } from '@/shared/ui/InputFile'
 import { Notification } from '@/shared/ui/Notification'
@@ -30,9 +30,7 @@ export const InputPhoto = ({ setPhoto }: Props) => {
   return (
     <div className={classes.dialogContainer}>
       {error && <Notification className={classes.notification} error={error} />}
-      <div className={classes.svgWrapper}>
-        <ImageSvg className={classes.imageSvg} />
-      </div>
+      <Avatar className={classes.svgWrapper} />
       <InputFile
         accept=".png, .jpg, .jpeg"
         setError={setError}

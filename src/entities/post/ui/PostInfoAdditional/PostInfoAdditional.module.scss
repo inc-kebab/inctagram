@@ -1,0 +1,56 @@
+@import '@/app/styles/mixins';
+
+.postInfo {
+  padding: 12px 24px 7px;
+  border-bottom: 1px solid var(--dark-100);
+}
+
+.firstIcons {
+  display: flex;
+  gap: 24px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 19px;
+}
+
+.iconBtn {
+  padding: 0;
+  color: var(--light-100);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.messageBtn {
+  display: none;
+}
+
+.iconsList {
+  position: relative;
+  display: flex;
+  margin-left: 30px;
+}
+
+.iconInList {
+  position: absolute;
+}
+
+.likesCount {
+  margin-bottom: 5px;
+  margin-left: 70px;
+}
+
+.date {
+  color: var(--light-900);
+}
+
+@include mobile {
+  .messageBtn {
+    display: inline-flex;
+  }
+}

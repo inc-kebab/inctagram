@@ -3,27 +3,6 @@
   gap: 38px;
 }
 
-.avatar {
-  border-radius: 50%;
-}
-
-.iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 200px;
-  height: 200px;
-
-  background-color: var(--dark-500);
-  border-radius: 50%;
-}
-
-.image {
-  width: 42px;
-  height: 42px;
-}
-
 .info {
   display: flex;
   flex-direction: column;
