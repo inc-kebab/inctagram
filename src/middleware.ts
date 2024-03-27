@@ -7,33 +7,47 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get('accessToken')?.value
   const nextUrlPath = req.nextUrl.pathname
 
-  const isNeedChangeRouteLocale = localeCookie && req.nextUrl.locale !== localeCookie
+  const isLocaleDifferent = !!localeCookie && req.nextUrl.locale !== localeCookie
 
-  const isGeneralRoute = nextUrlPath.startsWith('/general/')
+  const isGeneral = nextUrlPath.startsWith('/general/')
 
-  const isPublicRoute = nextUrlPath.startsWith('/auth/') || nextUrlPath === '/'
+  const isPublic = nextUrlPath.startsWith('/auth/') || nextUrlPath === '/'
 
-  if (token && isPublicRoute && !isGeneralRoute) {
-    if (isNeedChangeRouteLocale) {
+  if (isGeneral) {
+    if (isLocaleDifferent) {
+      req.cookies.set('NEXT_LOCALE', localeCookie)
+
+      return NextResponse.redirect(new URL(`/${localeCookie}${nextUrlPath}?${params}`, req.url))
+    } else {
+      return NextResponse.next()
+    }
+  }
+
+  if (token && isPublic) {
+    if (isLocaleDifferent) {
+      req.cookies.set('NEXT_LOCALE', localeCookie)
+
       return NextResponse.redirect(new URL(`/${localeCookie}${AppRoutes.HOME}?${params}`, req.url))
     } else {
       return NextResponse.redirect(new URL(`${AppRoutes.HOME}?${params}`, req.url))
     }
   }
 
-  if (!token && !isPublicRoute && !isGeneralRoute) {
-    if (isNeedChangeRouteLocale) {
+  if (!token && !isPublic) {
+    if (isLocaleDifferent) {
+      req.cookies.set('NEXT_LOCALE', localeCookie)
+
       return NextResponse.redirect(new URL(`/${localeCookie}${AppRoutes.MAIN}`, req.url))
     } else {
       return NextResponse.redirect(new URL(`${AppRoutes.MAIN}`, req.url))
     }
   }
 
-  if (isNeedChangeRouteLocale) {
+  if (isLocaleDifferent) {
+    req.cookies.set('NEXT_LOCALE', localeCookie)
+
     return NextResponse.redirect(new URL(`/${localeCookie}${nextUrlPath}?${params}`, req.url))
   }
-
-  req.cookies.set('NEXT_LOCALE', req.nextUrl.locale)
 
   return NextResponse.next()
 }
