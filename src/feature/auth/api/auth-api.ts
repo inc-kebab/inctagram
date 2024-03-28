@@ -106,6 +106,7 @@ const authApi = baseApi.injectEndpoints({
 export const {
   useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
+  useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
