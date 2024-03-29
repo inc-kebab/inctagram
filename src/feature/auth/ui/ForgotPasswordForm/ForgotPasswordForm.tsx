@@ -79,6 +79,7 @@ export const ForgotPasswordForm = forwardRef(
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
+          placeholder={t.placeholders.email}
           type="email"
         />
         <Typography className={s.description} variant="regular14">

@@ -82,6 +82,7 @@ export const SignInForm = forwardRef(
           error={errors.email?.message}
           label={t.label.email}
           name="email"
+          placeholder={t.placeholders.email}
           rules={{ required: true }}
           type="email"
         />
@@ -93,6 +94,7 @@ export const SignInForm = forwardRef(
           error={errors.password?.message}
           label={t.label.password}
           name="password"
+          placeholder={t.placeholders.password}
           rules={{ required: true }}
           type="password"
         />

@@ -75,6 +75,7 @@ export const CreateNewPasswordForm = forwardRef(
           error={errors?.password?.message}
           label={t.label.newPassword}
           name="password"
+          placeholder={t.placeholders.password}
           type="password"
         />
         <ControlledTextField
@@ -85,6 +86,7 @@ export const CreateNewPasswordForm = forwardRef(
           error={errors?.confirmPassword?.message}
           label={t.label.confirmPassword}
           name="confirmPassword"
+          placeholder={t.placeholders.passwordConfirm}
           type="password"
         />
         <Typography className={s.limitations} variant="regular14">
