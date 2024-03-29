@@ -91,7 +91,7 @@ export const ForgotPasswordForm = forwardRef(
         )}
         <Button
           className={s.button}
-          disabled={disabled || !isValid || !!errors?.email?.message}
+          disabled={disabled || !isValid || isError}
           fullWidth
           type="submit"
         >
