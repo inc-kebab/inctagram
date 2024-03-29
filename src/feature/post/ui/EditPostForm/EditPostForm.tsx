@@ -55,6 +55,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
             error={errors.description?.message}
             label={t.pages.post.editPostModal.areaLabel}
             name="description"
+            placeholder={t.placeholders.postDescription}
             resize="none"
             rows={3}
           />

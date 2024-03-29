@@ -79,6 +79,7 @@ export const ForgotPasswordForm = forwardRef(
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
+          placeholder={t.placeholders.email}
           type="email"
         />
         <Typography className={s.description} variant="regular14">
@@ -91,7 +92,7 @@ export const ForgotPasswordForm = forwardRef(
         )}
         <Button
           className={s.button}
-          disabled={disabled || !isValid || !!errors?.email?.message}
+          disabled={disabled || !isValid || isError}
           fullWidth
           type="submit"
         >

@@ -2,6 +2,7 @@
 
 import { LocaleType } from './en'
 
+/* eslint-disable max-lines */
 export const ru: LocaleType = {
   button: {
     back: 'Вернуться',
@@ -107,7 +108,6 @@ export const ru: LocaleType = {
       metaTitle: 'Главная',
     },
     post: {
-      addComment: 'Добавить комментарий...',
       deletePost: 'Удалить',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
       editInfoModal: {
@@ -253,6 +253,19 @@ export const ru: LocaleType = {
         'социальной сети. При использовании нашего приложения вы соглашаетесь с нашими условиями и обязуетесь их соблюдать. ' +
         'Если вы не согласны с нашими условиями, пожалуйста, не используйте наше приложение.',
     },
+  },
+  placeholders: {
+    aboutMe: 'Напишите о себе',
+    birthDate: 'Укажите вашу дату рождения',
+    city: 'Укажите ваш город проживания',
+    comment: 'Введите текси комментария',
+    email: 'email@inctagrum.fun',
+    firstName: 'Введите ваше имя',
+    lastName: 'Введите вашу фамилию',
+    password: 'Введите ваш пароль',
+    passwordConfirm: 'Введите ваш пароль снова',
+    postDescription: 'Добавьте описание для вашей публикации',
+    username: 'Введите имя пользователя',
   },
   tabs: {
     devices: 'Устройства',

@@ -4,6 +4,7 @@
 // pages: названия для страниц и их элементов, например "Congratulations!", "Create new password", "Email verification link expired", и т.д.
 // если на странице есть модалка то объект "modal" так же вкладывается внутрь объекта с названием страницы
 
+/* eslint-disable max-lines */
 export const en = {
   button: {
     back: 'Back',
@@ -108,7 +109,6 @@ export const en = {
       metaTitle: 'Main',
     },
     post: {
-      addComment: 'Add a Comment...',
       deletePost: 'Delete Post',
       deletePostQuestion: 'Are you sure you want to delete this post?',
       editInfoModal: {
@@ -255,6 +255,19 @@ export const en = {
         'By using our application, you agree to our terms and commit to abide by them. If you do not ' +
         'agree with our terms, please do not use our application.',
     },
+  },
+  placeholders: {
+    aboutMe: 'Write about yourself',
+    birthDate: 'Specify your date of birth',
+    city: 'Specify your city of residence',
+    comment: 'Enter your comment text',
+    email: 'email@inctagrum.fun',
+    firstName: 'Enter your first name',
+    lastName: 'Enter your last name',
+    password: 'Enter your password',
+    passwordConfirm: 'Enter your password again',
+    postDescription: 'Add a description for the your post',
+    username: 'Enter your username',
   },
   tabs: {
     devices: 'Devices',

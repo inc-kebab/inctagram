@@ -96,6 +96,7 @@ export const SignUpForm = forwardRef(
           error={errors.username?.message}
           label={t.label.userName}
           name="username"
+          placeholder={t.placeholders.username}
           rules={{ required: true }}
         />
         <ControlledTextField
@@ -106,6 +107,7 @@ export const SignUpForm = forwardRef(
           error={errors.email?.message}
           label={t.label.email}
           name="email"
+          placeholder={t.placeholders.email}
           rules={{ required: true }}
           type="email"
         />
@@ -117,6 +119,7 @@ export const SignUpForm = forwardRef(
           error={errors.password?.message}
           label={t.label.password}
           name="password"
+          placeholder={t.placeholders.password}
           rules={{ required: true }}
           type="password"
         />
@@ -128,6 +131,7 @@ export const SignUpForm = forwardRef(
           error={errors.passwordConfirm?.message}
           label={t.label.confirmPassword}
           name="passwordConfirm"
+          placeholder={t.placeholders.passwordConfirm}
           rules={{ required: true }}
           type="password"
         />
