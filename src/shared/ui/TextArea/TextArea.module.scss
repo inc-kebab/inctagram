@@ -43,7 +43,7 @@
 
   &.error {
     color: var(--light-100);
-    border-color: var(--danger-500);
+    outline: 1px solid var(--danger-500);
   }
 
   &:hover:not(:disabled, :focus-visible, .error) {

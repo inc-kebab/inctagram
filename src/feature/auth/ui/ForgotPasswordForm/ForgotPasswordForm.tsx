@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, Ref, forwardRef, useImperativeHandle } from '
 import { useForm } from 'react-hook-form'
 
 import { AuthRoutes } from '@/shared/const/routes'
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -32,7 +33,7 @@ export const ForgotPasswordForm = forwardRef(
     { className, disabled, isError, isSuccess, onSubmit, ...rest }: ForgotPasswordProps,
     ref: Ref<UseFormRef<ForgotPasswordFormValues>>
   ) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
     const {
       control,
@@ -41,6 +42,7 @@ export const ForgotPasswordForm = forwardRef(
       handleSubmit,
       reset,
       setError,
+      setValue,
     } = useForm<ForgotPasswordFormValues>({
       defaultValues: {
         email: '',
@@ -56,6 +58,8 @@ export const ForgotPasswordForm = forwardRef(
       reset,
       setError,
     }))
+
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
 
     return (
       <Card
@@ -75,6 +79,7 @@ export const ForgotPasswordForm = forwardRef(
           error={errors?.email?.message}
           label={t.label.email}
           name="email"
+          placeholder={t.placeholders.email}
           type="email"
         />
         <Typography className={s.description} variant="regular14">
@@ -87,7 +92,7 @@ export const ForgotPasswordForm = forwardRef(
         )}
         <Button
           className={s.button}
-          disabled={disabled || !isValid || !!errors?.email?.message}
+          disabled={disabled || !isValid || isError}
           fullWidth
           type="submit"
         >

@@ -1,22 +1,22 @@
 import { useEffect } from 'react'
 
-import { useMeQuery } from '@/feature/auth/api/auth-api'
+import { useLazyMeQuery } from '@/feature/auth'
 import { AppRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
-import { getCookie, setCookie } from 'cookies-next'
+import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 const RedirectProvider = () => {
-  const { push, query } = useRouter()
+  const { asPath, locale, push, query } = useRouter()
 
   const params = useSearchParams()
 
-  const { data } = useMeQuery()
+  const [getMe] = useLazyMeQuery()
 
   useEffect(() => {
     if (query.provider) {
-      let token
+      let token: Nullable<string | undefined>
 
       if (query.provider !== 'credentials') {
         token = params?.get('code')
@@ -28,13 +28,16 @@ const RedirectProvider = () => {
         token = getCookie('accessToken')
       }
 
-      if (token) {
-        void push(AppRoutes.PROFILE)
-      } else {
-        void push(AppRoutes.MAIN)
-      }
+      getMe().then(res => {
+        if ('data' in res && token) {
+          void push(AppRoutes.PROFILE, asPath, { locale })
+        } else {
+          deleteCookie('accessToken')
+          void push(AppRoutes.MAIN, asPath, { locale })
+        }
+      })
     }
-  }, [query.provider, params, push])
+  }, [query.provider, params, push, getMe, asPath, locale])
 
   return <Loader fullHeight />
 }

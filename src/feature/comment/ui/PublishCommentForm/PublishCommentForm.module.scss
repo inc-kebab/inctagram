@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  padding: 18px 24px;
+}
+
+.textField {
+  width: 100%;
+}
+
+.input {
+  padding: 0;
+  outline: unset;
+
+  &:focus,
+  &:active:not(:disabled),
+  &:hover:not(:disabled, :focus-visible, .error) {
+    outline: unset;
+  }
+}
+
+.publishBtn {
+  padding: 0 0 0 24px;
+}

@@ -1,41 +1,46 @@
+import clsx from 'clsx'
 import Image from 'next/image'
 import { Navigation, Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 
+import './Carousel.scss'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import './Carousel.scss'
 
 export type ImagesUrlData = {
   url: string
 }
 
 export type Props = {
-  imagesUrl: ImagesUrlData[]
-}
+  imagesUrl?: ImagesUrlData[]
+} & Omit<SwiperProps, 'modules' | 'navigation' | 'pagination' | 'slidesPerView' | 'spaceBetween'>
 
-export const Carousel = ({ imagesUrl }: Props) => {
+export const Carousel = ({ className, imagesUrl, ...props }: Props) => {
+  if (!imagesUrl) {
+    return null
+  }
+
   return (
     <Swiper
-      className="post-single-slider"
+      className={clsx('post-single-slider', className)}
       modules={[Navigation, Pagination]}
       navigation
       pagination={{ clickable: true }}
       slidesPerView={1}
       spaceBetween={10}
-      style={{ height: '100%', width: '100%' }}
+      {...props}
     >
       {imagesUrl?.map((image, index) => {
         return (
-          <SwiperSlide key={index} style={{ position: 'relative' }}>
+          <SwiperSlide key={image.url} style={{ position: 'relative' }}>
             <Image
               alt={`Slide ${index}`}
               fill
               priority
               sizes="70vw"
               src={image.url}
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'cover' }}
             />
           </SwiperSlide>
         )

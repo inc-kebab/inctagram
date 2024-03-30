@@ -1,27 +1,7 @@
 .ProfileInfo {
   display: flex;
   gap: 38px;
-}
-
-.avatar {
-  border-radius: 50%;
-}
-
-.iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 200px;
-  height: 200px;
-
-  background-color: var(--dark-500);
-  border-radius: 50%;
-}
-
-.image {
-  width: 42px;
-  height: 42px;
+  align-items: flex-start;
 }
 
 .info {
@@ -33,10 +13,28 @@
 }
 
 .name {
+  margin-bottom: 20px;
+}
+
+.subscriber {
   display: flex;
-  gap: 12px;
+  gap: 80px;
   align-items: center;
   justify-content: space-between;
 
-  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-size: var(--font-size-s);
+  list-style: none;
+
+  & .item {
+    display: flex;
+    flex-direction: column;
+    line-height: var(--line-height-m);
+
+    & .count {
+      font-weight: var(--font-weight-bold);
+    }
+  }
 }

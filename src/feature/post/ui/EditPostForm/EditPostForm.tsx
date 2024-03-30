@@ -1,37 +1,42 @@
-import { forwardRef, useImperativeHandle } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import { ControlledTextArea } from '@/shared/ui_controlled/ControlledTextArea'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 
 import s from './EditPostForm.module.scss'
 
 import { AdditionalRefProps } from '../../model/types/post.types'
-import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPost'
+import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPostSchema'
 
 type Props = {
+  currentDescription?: Nullable<string> // ? check
   disabled?: boolean
   onSubmit: (data: EditPostFormValues) => void
-}
+} & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, AdditionalRefProps>, Props>(
-  ({ disabled, onSubmit }, ref) => {
-    const { t } = useTranslation()
+  ({ className, currentDescription, disabled, onSubmit, ...rest }, ref) => {
+    const { locale, t } = useTranslation()
 
     const {
       control,
       formState: { errors, isDirty, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
+      setValue,
       watch,
     } = useForm<EditPostFormValues>({
       defaultValues: {
-        description: '',
+        description: currentDescription || '',
       },
       mode: 'onTouched',
       resolver: zodResolver(editPostSchema(t)),
@@ -39,8 +44,10 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
 
     useImperativeHandle(ref, () => ({ isDirty, reset, setError }))
 
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
+
     return (
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={clsx(s.form, className)} onSubmit={handleSubmit(onSubmit)} {...rest}>
         <div className={s.area}>
           <ControlledTextArea
             control={control}
@@ -48,6 +55,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
             error={errors.description?.message}
             label={t.pages.post.editPostModal.areaLabel}
             name="description"
+            placeholder={t.placeholders.postDescription}
             resize="none"
             rows={3}
           />

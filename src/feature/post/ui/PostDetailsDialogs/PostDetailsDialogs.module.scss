@@ -1,0 +1,33 @@
+.dialog {
+  width: 100%;
+  max-width: 972px;
+}
+
+.editDialog {
+  display: grid;
+  grid-template: auto 1fr / 1fr 1fr;
+  grid-template-areas:
+    'slider header'
+    'slider content';
+}
+
+.slider {
+  grid-area: slider;
+  width: 100%;
+  height: 503px;
+  border-right: 1px solid var(--dark-100);
+}
+
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.closeIcon {
+  position: fixed;
+  top: -36px;
+  right: -36px;
+}

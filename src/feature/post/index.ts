@@ -1,2 +1,2 @@
-export { useEditPost } from './model/hooks/useEditPost'
-export { EditPostForm } from './ui/EditPostForm/EditPostForm'
+export { invalidateTagsPost, useGetMyPostsQuery } from './api/post-api'
+export { PostDetailsDialogs } from './ui/PostDetailsDialogs/PostDetailsDialogs'

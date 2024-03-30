@@ -35,7 +35,7 @@ export const Default: Story = {
   render: args => {
     return (
       <div style={{ height: '562px', width: '490px' }}>
-        <Carousel {...args} />
+        <Carousel style={{ height: '100%', width: '100%' }} {...args} />
       </div>
     )
   },

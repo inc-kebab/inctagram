@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react
 import { Controller } from 'react-hook-form'
 
 import { GeneralRoutes } from '@/shared/const/routes'
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -27,12 +28,23 @@ type Props = {
 
 export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Props>(
   ({ className, disabled, onSubmit, userData, ...rest }, ref) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
-    const { changeCityRef, control, errors, handleSubmit, isValid, reset, setError } =
-      useEditProfileForm(t, userData)
+    const {
+      changeCityRef,
+      control,
+      errors,
+      getValues,
+      handleSubmit,
+      isValid,
+      reset,
+      setError,
+      setValue,
+    } = useEditProfileForm(t, userData)
 
     useImperativeHandle(ref, () => ({ reset, setError }))
+
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
 
     return (
       <Card
@@ -48,6 +60,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.username?.message}
           label={t.label.userName}
           name="username"
+          placeholder={t.placeholders.username}
         />
         <ControlledTextField
           className={s.field}
@@ -56,6 +69,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.firstname?.message}
           label={t.label.firstName}
           name="firstname"
+          placeholder={t.placeholders.firstName}
         />
         <ControlledTextField
           className={s.field}
@@ -64,6 +78,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.lastname?.message}
           label={t.label.lastName}
           name="lastname"
+          placeholder={t.placeholders.lastName}
         />
         <ControlledDatePicker
           className={s.field}
@@ -86,6 +101,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           label={t.label.birthDate}
           maxDate={new Date()}
           name="birthDate"
+          placeholder={t.placeholders.birthDate}
         />
         <Controller
           control={control}
@@ -97,7 +113,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
               label={t.label.city}
               {...field}
               autoComplete="off"
-              placeholder=""
+              placeholder={t.placeholders.city}
               ref={changeCityRef}
             />
           )}
@@ -108,6 +124,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.aboutMe?.message}
           label={t.label.aboutMe}
           name="aboutMe"
+          placeholder={t.placeholders.aboutMe}
           resize="none"
           rows={3}
         />

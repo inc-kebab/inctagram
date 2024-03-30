@@ -9,9 +9,14 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
   prepareHeaders: headers => {
     const accessToken = getCookie('accessToken')
+    const currentLang = getCookie('NEXT_LOCALE')
 
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
+    }
+
+    if (currentLang) {
+      headers.set('X-Url-lang', currentLang)
     }
 
     return headers

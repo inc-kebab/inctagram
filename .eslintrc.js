@@ -8,6 +8,12 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'off',
       },
     },
+    {
+      files: ['**/*.ts', '**/*.tsx'], // ? need?
+      rules: {
+        'no-undef': 'off',
+      },
+    },
   ],
   rules: {
     'import/extensions': [

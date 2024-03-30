@@ -7,6 +7,7 @@ import {
 } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
@@ -33,14 +34,16 @@ export const CreateNewPasswordForm = forwardRef(
     { className, disabled, onSubmit, ...rest }: Props,
     ref: Ref<UseFormRef<CreateNewPasswordFormValues>>
   ) => {
-    const { t } = useTranslation()
+    const { locale, t } = useTranslation()
 
     const {
       control,
       formState: { errors, isValid },
+      getValues,
       handleSubmit,
       reset,
       setError,
+      setValue,
     } = useForm<CreateNewPasswordFormValues>({
       defaultValues: {
         confirmPassword: '',
@@ -51,6 +54,8 @@ export const CreateNewPasswordForm = forwardRef(
     })
 
     useImperativeHandle(ref, () => ({ reset, setError }))
+
+    useFormRevalidateWithLocale({ errors, locale, setValue, values: getValues() })
 
     return (
       <Card
@@ -70,6 +75,7 @@ export const CreateNewPasswordForm = forwardRef(
           error={errors?.password?.message}
           label={t.label.newPassword}
           name="password"
+          placeholder={t.placeholders.password}
           type="password"
         />
         <ControlledTextField
@@ -80,6 +86,7 @@ export const CreateNewPasswordForm = forwardRef(
           error={errors?.confirmPassword?.message}
           label={t.label.confirmPassword}
           name="confirmPassword"
+          placeholder={t.placeholders.passwordConfirm}
           type="password"
         />
         <Typography className={s.limitations} variant="regular14">

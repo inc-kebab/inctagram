@@ -16,6 +16,7 @@ export const useEditProfileForm = (t: LocaleType, userData?: GetProfileResponse)
   const {
     control,
     formState: { errors, isValid },
+    getValues,
     handleSubmit,
     reset,
     setError,
@@ -65,5 +66,15 @@ export const useEditProfileForm = (t: LocaleType, userData?: GetProfileResponse)
     }
   }, [reset, userData])
 
-  return { changeCityRef, control, errors, handleSubmit, isValid, reset, setError }
+  return {
+    changeCityRef,
+    control,
+    errors,
+    getValues,
+    handleSubmit,
+    isValid,
+    reset,
+    setError,
+    setValue,
+  }
 }

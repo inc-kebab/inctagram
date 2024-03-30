@@ -119,7 +119,7 @@ export const LangVersion: Story = {
 export const Controlled: Story = {
   args: { options: defaultOptions },
   render: args => {
-    const [current, setCurrent] = useState<null | string>(null)
+    const [current, setCurrent] = useState<Nullable<string>>(null)
 
     const handleChangeCurrentOption = (value: string) => {
       setCurrent(value)

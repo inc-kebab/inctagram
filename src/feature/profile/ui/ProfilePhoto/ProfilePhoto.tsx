@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react'
 
 import Close from '@/shared/assets/icons/common/close.svg'
-import ImageIcon from '@/shared/assets/icons/fill/image.svg'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
+import { ConfirmDialog } from '@/widgets/dialogs'
 import clsx from 'clsx'
-import Image from 'next/image'
 
 import s from './ProfilePhoto.module.scss'
 
 import { CroppedArea } from '../../model/types/profile.types'
 import { getCroppedImg } from '../../model/utils/getCroppedImg'
 import { AddProfilePhotoDialog } from '../AddProfilePhotoDialog/AddProfilePhotoDialog'
-import { DeletePhotoDialog } from '../DeletePhotoDialog/DeletePhotoDialog'
 
 type Props = {
   avaUrlFromServer?: string
@@ -67,33 +66,24 @@ export const ProfilePhoto = ({
   return (
     <div className={clsx(s.container, className)}>
       <div className={s.circle}>
-        {avaUrlFromServer ? (
-          <div className={s.avatarWpapper}>
-            <Image
-              alt="profile avatar"
-              className={s.avatar}
-              height={192}
-              priority
-              src={avaUrlFromServer}
-              width={192}
-            />
-            <DeletePhotoDialog
+        <div className={s.avatarWpapper}>
+          <Avatar avatarUrl={avaUrlFromServer} circle wrapperSize={192} />
+          {avaUrlFromServer && (
+            <ConfirmDialog
               confirmCallback={handleDeletePhoto}
+              content={t.pages.profile.deleteProfilePhoto}
               disabled={disabledDelete}
+              onOpenChange={setOpenDelete}
               open={openDelete}
-              setOpen={setOpenDelete}
+              title={t.pages.profile.deletePhoto}
               trigger={
                 <Button className={s.deleteAvatar} variant="text">
                   <Close className={s.closeIcon} viewBox="0 0 24 24" />
                 </Button>
               }
             />
-          </div>
-        ) : (
-          <div className={s.iconWrapper}>
-            <ImageIcon className={s.image} />
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <AddProfilePhotoDialog
         avatarUrl={avatarUrl}

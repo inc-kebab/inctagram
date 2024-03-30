@@ -16,8 +16,8 @@ export interface ResponseError<T extends Record<string, any>> {
 }
 
 interface CatchingData<T extends Record<string, any>> {
-  error: null | string
-  fieldErrors: FieldError<T>[] | null
+  error: Nullable<string>
+  fieldErrors: Nullable<FieldError<T>[]>
 }
 
 const getValidError = <T extends Record<string, any>>(errorData: ResponseError<T>) => {
