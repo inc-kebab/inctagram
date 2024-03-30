@@ -8,3 +8,39 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+.image_filter--normal {
+  filter: none;
+}
+
+.image_filter--clarendon {
+  filter: saturate(2);
+}
+
+.image_filter--lark {
+  filter: grayscale(100%);
+}
+
+.image_filter--gingham {
+  filter: contrast(160%);
+}
+
+.image_filter--moon {
+  filter: contrast(110%) brightness(110%) saturate(130%);
+}
+
+.image_filter--xRay {
+  filter: invert(80%);
+}
+
+.image_filter--shabby {
+  filter: sepia(80%);
+}
+
+.image_filter--oldSchool {
+  filter: opacity(70%);
+}
+
+.image_filter--silentHill {
+  filter: hue-rotate(150deg);
+}

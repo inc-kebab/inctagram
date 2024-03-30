@@ -1,0 +1,42 @@
+.expandContainer {
+  position: absolute;
+
+  bottom: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 156px;
+  height: 152px;
+  padding: 10px 16px 10px 12px;
+
+  background-color: rgba(#171717, 0.8);
+  border-radius: 2px;
+}
+
+.expandWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.expandBtn {
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+
+  background-color: rgba(#171717, 0.7);
+
+  .isOpenIcon {
+    color: var(--primary-500);
+  }
+
+  &:hover {
+    background-color: rgba(#171717, 0.8);
+  }
+}
+
+.squareBtn {
+  padding: 0;
+}

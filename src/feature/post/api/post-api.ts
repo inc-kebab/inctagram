@@ -1,6 +1,13 @@
 import { baseApi } from '@/shared/api/base-api'
 
 import {
+  AddImagesResponse,
+  CreatePostParams,
+  CreatePostResponse,
+  GetPostsResponse,
+  PostsParams,
+} from '../model/types/post.types'
+import {
   DeletePostArgs,
   EditPostArgs,
   GetMyPostsArgs,
@@ -56,6 +63,23 @@ const postApi = baseApi.injectEndpoints({
         url: `/posts/${body.id}`,
       }),
     }),
+    addImages: builder.mutation<AddImagesResponse, FormData>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/posts/images',
+      }),
+    }),
+    createPost: builder.mutation<CreatePostResponse, CreatePostParams>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/posts',
+      }),
+    }),
+    deleteImage: builder.mutation<void, string>({
+      query: imageId => ({ method: 'DELETE', url: `/posts/images/${imageId}` }),
+    }),
     getMyPosts: builder.query<GetMyPostsResponse, GetMyPostsArgs>({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg
@@ -78,5 +102,14 @@ const postApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { useDeletePostMutation, useEditPostMutation, useGetMyPostsQuery } = postApi
+export const {
+  useDeletePostMutation, 
+  useEditPostMutation, 
+  useGetMyPostsQuery
+  useAddImagesMutation,
+  useCreatePostMutation,
+  useDeleteImageMutation,
+  useEditPostMutation,
+} = postsApi
+
 export const { invalidateTags: invalidateTagsPost } = postApi.util

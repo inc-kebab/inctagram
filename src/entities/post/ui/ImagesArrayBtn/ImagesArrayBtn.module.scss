@@ -1,0 +1,62 @@
+.imagesArrayBtn {
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+
+  background-color: rgba(#171717, 0.7);
+
+  .isOpenIcon {
+    color: var(--primary-500);
+  }
+
+  &:hover {
+    background-color: rgba(#171717, 0.8);
+  }
+}
+
+.wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 38px;
+
+  display: flex;
+  gap: 12px;
+
+  height: 106px;
+  padding: 12px;
+
+  background-color: rgba(#171717, 0.8);
+  border-radius: 2px;
+
+  .images {
+    overflow: visible hidden;
+    display: flex;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .addImageBtn {
+    cursor: pointer;
+  }
+
+  .image {
+    position: relative;
+
+    .deleteBtn {
+      position: absolute;
+      z-index: 1;
+      top: 2px;
+      right: 2px;
+
+      width: 12px;
+      height: 12px;
+      margin: 0;
+      padding: 0;
+
+      background-color: rgba(#171717, 0.8);
+    }
+  }
+}

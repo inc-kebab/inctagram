@@ -19,7 +19,7 @@ export const getSidebarItems = (t: LocaleType) => {
     },
     {
       activeIcon: <PlusSquare />,
-      href: '/create',
+      href: '',
       icon: <PlusSquareOutline />,
       title: t.layout.sidebar.create,
     },

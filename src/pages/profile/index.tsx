@@ -1,8 +1,9 @@
+import { ReactElement } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-
 import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
+import { useGetMyProfileQuery } from '@/feature/profile'
 import { PostDetailsDialogs, invalidateTagsPost, useGetMyPostsQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
@@ -24,10 +25,10 @@ const Profile: Page = () => {
     setCurrentPost(post)
     setOpenPostDetailsModal(true)
   }
-
+          
   const { data, isLoading } = useGetMyProfileQuery()
   const { data: posts, isFetching, isLoading: isPostsLoad } = useGetMyPostsQuery({ cursor })
-
+          
   const dispatch = useDispatch()
 
   useInfinityScroll({
@@ -43,13 +44,13 @@ const Profile: Page = () => {
   }, [dispatch])
 
   if (isLoading) {
-    return <Loader containerHeight />
+    return <Loader fullHeight />
   }
 
   return (
     <>
       <ProfileInfo
-        className={s.info}
+        className={s.root}
         userData={{
           aboutMe: data?.aboutMe,
           avatar: data?.avatars?.['avatar-medium']?.url,
@@ -79,12 +80,8 @@ const Profile: Page = () => {
   )
 }
 
-Profile.getLayout = (page, t) => {
-  return (
-    <SidebarLayout description={t.pages.profile.metaDescription} title={t.pages.profile.metaTitle}>
-      {page}
-    </SidebarLayout>
-  )
+Profile.getLayout = (page: ReactElement) => {
+  return <SidebarLayout>{page}</SidebarLayout>
 }
 
 export default Profile

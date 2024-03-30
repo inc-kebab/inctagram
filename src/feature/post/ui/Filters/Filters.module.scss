@@ -1,0 +1,25 @@
+.filtersContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.imageGroup {
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+}
+
+.name {
+  line-height: var(--line-height-lg);
+}
+
+.activeFilter {
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-500);
+}

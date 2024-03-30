@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
 
 import s from './AddProfilePhotoDialog.module.scss'
@@ -13,9 +12,10 @@ type Props = {
   avatarUrl: string
   disabled?: boolean
   onAvatarUrl: (url: string) => void
-  onOpenChange: (open: boolean) => void
+  onOpenChange?: (open: boolean) => void
   onSetCroppedArea: (size: CroppedArea) => void
-  open: boolean
+  open?: boolean
+  title?: string
   trigger: ReactNode
 }
 
@@ -25,11 +25,10 @@ export const AddProfilePhotoDialog = ({
   onOpenChange,
   onSetCroppedArea,
   open,
+  title,
   trigger,
   ...rest
 }: Props) => {
-  const { t } = useTranslation()
-
   const handleSetPhoto = (file: File) => {
     onAvatarUrl(URL.createObjectURL(file))
   }
@@ -39,7 +38,7 @@ export const AddProfilePhotoDialog = ({
       className={s.dialog}
       onOpenChange={onOpenChange}
       open={open}
-      title={t.pages.profile.addProfilePhoto}
+      title={title}
       trigger={trigger}
     >
       {avatarUrl ? (

@@ -92,6 +92,7 @@ export const ProfilePhoto = ({
         onOpenChange={handleChangeOpenAdd}
         onSetCroppedArea={handleUpdatePhoto}
         open={openAdd}
+        title={t.pages.profile.addProfilePhoto}
         trigger={
           <Button asComponent="button" variant="outline">
             {t.pages.profile.addProfilePhoto}
