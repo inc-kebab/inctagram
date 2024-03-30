@@ -120,7 +120,9 @@ export const en = {
         acceptBtn: 'Save changes',
         areaLabel: 'Add publication descriptions',
       },
+      filters: 'Filters',
       next: 'Next',
+      publication: 'Publication',
       publish: 'Publish',
     },
     privacy: {

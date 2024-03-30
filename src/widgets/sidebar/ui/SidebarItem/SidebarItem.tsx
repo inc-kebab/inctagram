@@ -1,5 +1,5 @@
 'use client'
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { AddPostPhotoDialog } from '@/feature/post/ui/AddPostPhotoDialog/AddPostPhotoDialog'
 import { Button } from '@/shared/ui/Button'
@@ -26,6 +26,8 @@ export const SidebarItem = ({
   item,
   ...rest
 }: Props) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
   return (
     <li className={clsx(s.item, { [s.lastGroupItem]: isLastGroupItem })} {...rest}>
       {isLink ? (
@@ -42,12 +44,15 @@ export const SidebarItem = ({
         </Link>
       ) : (
         <AddPostPhotoDialog
+          onOpenChange={setIsDialogOpen}
+          open={isDialogOpen}
           trigger={
             <Button
               className={clsx(s.button, {
                 [s.disabled]: disabled,
                 [s.full]: item.title && item.icon,
               })}
+              onClick={() => setIsDialogOpen(true)}
               variant="text"
             >
               {item.icon}

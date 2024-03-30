@@ -9,15 +9,17 @@ import Image from 'next/image'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import './Carousel.scss'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import './Carousel.scss'
 
 import s from './CropperPost.module.scss'
 
 import { ImageObj, postsActions } from '../../api/post-slice'
 import { CurrentWindow } from '../AddPostPhotoDialog/AddPostPhotoDialog'
+import { Description } from '../Description/Description'
+import { Filters } from '../Filters/Filters'
 
 type Crop = { x: number; y: number }
 
@@ -67,11 +69,7 @@ export const CropperPost = ({ currentWindow, disabled }: Props) => {
 
   useEffect(() => {
     if (swiperRef.current) {
-      if (isOpenZoom === true || isOpenExpand === true) {
-        swiperRef.current.allowTouchMove = false
-      } else {
-        swiperRef.current.allowTouchMove = true
-      }
+      swiperRef.current.allowTouchMove = !(isOpenZoom || isOpenExpand)
     }
   }, [isOpenZoom, isOpenExpand])
 
@@ -94,25 +92,37 @@ export const CropperPost = ({ currentWindow, disabled }: Props) => {
           spaceBetween={0}
           style={{ height: '100%', width: '100%' }}
         >
-          {images.map((image, i) => (
-            <SwiperSlide key={image.imageURL + i} style={{ position: 'relative' }}>
-              {image.aspect === 0 && <Image alt="" fill objectFit="cover" src={image.imageURL} />}
-              {(image.aspect > 0 || isOpenZoom) && (
-                <Cropper
-                  aspect={image.aspect}
-                  crop={crop}
-                  cropShape="rect"
-                  image={image.imageURL}
-                  objectFit="cover"
-                  onCropChange={setCrop}
-                  onCropComplete={handleCropComplete}
-                  onZoomChange={setZoom}
-                  showGrid={false}
-                  zoom={zoom}
-                />
-              )}
-            </SwiperSlide>
-          ))}
+          {images.map((image, i) => {
+            const { aspect, filter, imageURL } = image
+
+            return (
+              <SwiperSlide key={imageURL + i} style={{ position: 'relative' }}>
+                {image.aspect === 0 && (
+                  <Image
+                    alt={filter}
+                    className={filter}
+                    fill
+                    src={imageURL}
+                    style={{ objectFit: 'cover' }}
+                  />
+                )}
+                {(aspect > 0 || isOpenZoom) && (
+                  <Cropper
+                    aspect={aspect}
+                    crop={crop}
+                    cropShape="rect"
+                    image={imageURL}
+                    objectFit="cover"
+                    onCropChange={setCrop}
+                    onCropComplete={handleCropComplete}
+                    onZoomChange={setZoom}
+                    showGrid={false}
+                    zoom={zoom}
+                  />
+                )}
+              </SwiperSlide>
+            )
+          })}
         </Swiper>
 
         {currentWindow === 'expand' && (
@@ -142,13 +152,13 @@ export const CropperPost = ({ currentWindow, disabled }: Props) => {
         )}
       </div>
       {currentWindow === 'filter' && (
-        <div style={{ alignItems: 'center', display: 'flex', margin: '0 auto ' }}>
-          FILTER WINDOW
+        <div style={{ alignItems: 'center', display: 'flex', margin: '0 auto' }}>
+          <Filters activeIndex={activeIndex} images={images} />
         </div>
       )}
       {currentWindow === 'description' && (
         <div style={{ alignItems: 'center', display: 'flex', margin: '0 auto ' }}>
-          DESCRIPTION WINDOW
+          <Description />
         </div>
       )}
     </div>

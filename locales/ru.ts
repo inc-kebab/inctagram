@@ -119,7 +119,9 @@ export const ru: LocaleType = {
         acceptBtn: 'Сохранить изменения',
         areaLabel: 'Добавьте описания публикаций',
       },
+      filters: 'Фильтры',
       next: 'Далее',
+      publication: 'Публикация',
       publish: 'Опубликовать',
     },
     privacy: {

@@ -16,31 +16,27 @@ import s from './ImagesArrayBtn.module.scss'
 type Props = {
   className?: string
   images: ImageObj[]
-  navigateToLastSlide: any
+  navigateToLastSlide: () => void
 }
 
 export const ImagesArrayBtn = ({ className, images, navigateToLastSlide }: Props) => {
-  console.log('ImagesArrayBtn images', images)
   const dispatch = useAppDispatch()
-
   const [deleteImage] = useDeleteImageMutation()
-
   const [isOpen, setIsOpen] = useState(false)
   const [error, setError] = useState('')
   const { t } = useTranslation()
 
   const handleDeleteImage = (imageObj: ImageObj) => {
     if (imageObj.uploadId) {
-      console.log('ImagesArrayBtn imageObj.uploadId', imageObj.uploadId)
       deleteImage(imageObj.uploadId)
     }
     dispatch(postsActions.removeImage(imageObj.imageURL))
   }
 
-  const handleSetPhoto = async (file: File | any) => {
+  const handleSetPhoto = (file: File | any) => {
     const imageURL = URL.createObjectURL(file)
 
-    await dispatch(postsActions.addImage({ aspect: 0, imageURL }))
+    dispatch(postsActions.addImage({ aspect: 0, imageURL }))
     setIsOpen(false)
     navigateToLastSlide()
   }
@@ -61,18 +57,24 @@ export const ImagesArrayBtn = ({ className, images, navigateToLastSlide }: Props
 
       {isOpen && (
         <div className={s.wrapper}>
-          {images &&
-            images.map((image, i) => (
-              <div className={s.image} key={image.imageURL + i}>
-                <Button
-                  className={s.deleteBtn}
-                  onClick={() => handleDeleteImage(image)}
-                  startIcon={<Close color="var(--light-100)" height={13} width={13} />}
-                  variant="text"
-                />
-                <Image alt="" height={80} src={image.imageURL} width={80} />
-              </div>
-            ))}
+          <div className={s.images}>
+            {images &&
+              images.map((image, i) => {
+                const { imageURL } = image
+
+                return (
+                  <div className={s.image} key={imageURL + i}>
+                    <Button
+                      className={s.deleteBtn}
+                      onClick={() => handleDeleteImage(image)}
+                      startIcon={<Close color="var(--light-100)" height={13} width={13} />}
+                      variant="text"
+                    />
+                    <Image alt="" height={80} src={imageURL} width={80} />
+                  </div>
+                )
+              })}
+          </div>
           <InputFile
             accept=".png, .jpg, .jpeg"
             setError={setError}

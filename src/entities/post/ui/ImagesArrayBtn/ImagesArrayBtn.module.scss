@@ -29,6 +29,15 @@
   background-color: rgba(#171717, 0.8);
   border-radius: 2px;
 
+  .images {
+    overflow: visible hidden;
+    display: flex;
+    gap: 10px;
+
+    width: 100%;
+    max-width: 200px;
+  }
+
   .addImageBtn {
     cursor: pointer;
   }
@@ -38,6 +47,7 @@
 
     .deleteBtn {
       position: absolute;
+      z-index: 1;
       top: 2px;
       right: 2px;
 

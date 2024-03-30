@@ -43,6 +43,7 @@ const postsApi = baseApi.injectEndpoints({
 
 export const {
   useAddImagesMutation,
+  useCreatePostMutation,
   useDeleteImageMutation,
   useEditPostMutation,
   useGetMyPostsQuery,
