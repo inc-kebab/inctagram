@@ -1,26 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-type CroppedAreaPixels = {
-  height: number
-  width: number
-  x: number
-  y: number
-}
-
-export type ImageObj = {
-  aspect: number
-  croppedAreaPixels?: CroppedAreaPixels
-  imageURL: string
-  uploadId?: string
-}
-
-export type ImageObjWithFilter = ImageObj & {
-  filter: string
-}
-
-type PostsState = {
-  images: ImageObjWithFilter[]
-}
+import { ImageObj, PostsState } from '../types/post.types'
 
 const initialState: PostsState = {
   images: [],

@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { useAppDispatch } from '@/app/store/store'
 import { useDeleteImageMutation } from '@/feature/post/api/post-api'
-import { ImageObj, postsActions } from '@/feature/post/api/post-slice'
 import { avatarSchema } from '@/feature/profile/model/utils/validators/addAvatar'
 import { Close } from '@/shared/assets/icons/common/index'
 import { Image as ImageIcon, PlusCircle } from '@/shared/assets/icons/outline/index'
@@ -12,6 +11,9 @@ import { InputFile } from '@/shared/ui/InputFile'
 import Image from 'next/image'
 
 import s from './ImagesArrayBtn.module.scss'
+
+import { postsActions } from '../../model/slice/post-slice'
+import { ImageObj } from '../../model/types/post.types'
 
 type Props = {
   className?: string

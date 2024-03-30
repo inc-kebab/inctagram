@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Cropper from 'react-easy-crop'
 
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
-import { ExpandBtn, ImagesArrayBtn, ZoomIn } from '@/entities/post'
+import { ExpandBtn, ImageObj, ImagesArrayBtn, ZoomIn, postsActions } from '@/entities/post'
 import { CroppedArea } from '@/feature/profile/model/types/profile.types'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -16,7 +16,6 @@ import 'swiper/css/pagination'
 
 import s from './CropperPost.module.scss'
 
-import { ImageObj, postsActions } from '../../api/post-slice'
 import { CurrentWindow } from '../AddPostPhotoDialog/AddPostPhotoDialog'
 import { Description } from '../Description/Description'
 import { Filters } from '../Filters/Filters'

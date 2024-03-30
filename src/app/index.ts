@@ -1,4 +1,2 @@
-export { AuthProvider } from './providers/AuthProvider'
 export { ErrorBoundary } from './providers/ErrorBoundary'
-export { store } from './store/store'
-export type { AppDispatch, RootState } from './store/store'
+export { store, useAppDispatch, useAppSelector } from './store/store'

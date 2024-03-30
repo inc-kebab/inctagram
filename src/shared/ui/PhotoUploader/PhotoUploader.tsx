@@ -6,16 +6,19 @@ import { Button } from '@/shared/ui/Button'
 import { InputFile } from '@/shared/ui/InputFile'
 import { Notification } from '@/shared/ui/Notification'
 import clsx from 'clsx'
+import { ZodEffects } from 'zod'
 
-import s from './InputPhoto.module.scss'
+import s from './PhotoUploader.module.scss'
 
-import { avatarSchema } from '../../model/utils/validators/addAvatar'
+type ModeInputPhoto = 'default' | 'preview'
 
 type Props = {
+  mode?: ModeInputPhoto
   setPhoto: (photo: File) => void
+  zodSchema: ZodEffects<any>
 }
 
-export const InputPhoto = ({ setPhoto }: Props) => {
+export const PhotoUploader = ({ mode = 'default', setPhoto, zodSchema }: Props) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
 
@@ -30,14 +33,18 @@ export const InputPhoto = ({ setPhoto }: Props) => {
   return (
     <div className={classes.dialogContainer}>
       {error && <Notification className={classes.notification} error={error} />}
-      <div className={classes.svgWrapper}>
-        <ImageSvg className={classes.imageSvg} />
-      </div>
+      {mode === 'default' ? (
+        <div className={classes.svgWrapper}>
+          <ImageSvg className={classes.imageSvg} />
+        </div>
+      ) : (
+        <div>add avatar component please</div>
+      )}
       <InputFile
         accept=".png, .jpg, .jpeg"
         setError={setError}
         setFile={setPhoto}
-        zodSchema={avatarSchema(t)}
+        zodSchema={zodSchema}
       >
         <Button asComponent="span" className={s.button}>
           {t.button.selectFromComputer}

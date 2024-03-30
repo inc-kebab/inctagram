@@ -1,11 +1,13 @@
 import { useAppDispatch } from '@/app/store/store'
-import { ImageObj, postsActions } from '@/feature/post/api/post-slice'
 import { Maximize } from '@/shared/assets/icons/outline'
 import { Button } from '@/shared/ui/Button'
 import { Slider } from '@/shared/ui/Slider'
 import clsx from 'clsx'
 
 import s from './ZoomIn.module.scss'
+
+import { postsActions } from '../../model/slice/post-slice'
+import { ImageObj } from '../../model/types/post.types'
 
 type Props = {
   activeIndex: number

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/app/store/store'
-import { ImageObj, postsActions } from '@/feature/post/api/post-slice'
+import { ImageObj, postsActions } from '@/entities/post/model/slice/post-slice'
 import { Expand } from '@/shared/assets/icons/common/index'
 import {
   HorizontalRectangle,

@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 
 import { useAppDispatch } from '@/app/store/store'
-import { ImageObjWithFilter, postsActions } from '@/feature/post/api/post-slice'
+import { ImageObjWithFilter, postsActions } from '@/entities/post/model/slice/post-slice'
 import clsx from 'clsx'
 import Image from 'next/image'
 

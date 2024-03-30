@@ -1,16 +1,17 @@
 import { ReactNode, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
+import { ImageObjWithFilter, postsActions } from '@/entities/post'
 import { getCroppedImg } from '@/feature/profile/model/utils/getCroppedImg'
+import { PhotoSchema } from '@/shared/helpers/validators/PhotoSchema'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
+import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 import clsx from 'clsx'
 
 import s from './AddPostPhotoDialog.module.scss'
 
-import { InputPhoto } from '../../../profile/ui/InputPhoto/InputPhoto'
 import { useAddImagesMutation, useCreatePostMutation } from '../../api/post-api'
-import { ImageObjWithFilter, postsActions } from '../../api/post-slice'
 import { CropperPost } from '../CropperPost/CropperPost'
 import { getFilteredImage } from '../Filters/helpers/imageFilterProcessor'
 
@@ -30,6 +31,12 @@ export const AddPostPhotoDialog = ({ onOpenChange, open, trigger, ...rest }: Pro
   const [createPost] = useCreatePostMutation()
   const { t } = useTranslation()
   const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('expand')
+
+  const onSetPhoto = (file: File) => {
+    const imageURL = URL.createObjectURL(file)
+
+    dispatch(postsActions.addImage({ aspect: 0, imageURL }))
+  }
 
   const handleAddPhoto = async (formData: FormData, i: number) => {
     const response = await addImages(formData)
@@ -116,7 +123,7 @@ export const AddPostPhotoDialog = ({ onOpenChange, open, trigger, ...rest }: Pro
       {images.length > 0 ? (
         <CropperPost currentWindow={currentWindow} images={images} {...rest} />
       ) : (
-        <InputPhoto />
+        <PhotoUploader setPhoto={onSetPhoto} zodSchema={PhotoSchema(t)} />
       )}
     </Dialog>
   )
