@@ -35,9 +35,6 @@ const postsApi = baseApi.injectEndpoints({
         url: `/posts/${body.id}`,
       }),
     }),
-    getMyPosts: builder.query<GetPostsResponse, PostsParams>({
-      query: () => ({ url: '/posts' }),
-    }),
   }),
 })
 
@@ -46,5 +43,4 @@ export const {
   useCreatePostMutation,
   useDeleteImageMutation,
   useEditPostMutation,
-  useGetMyPostsQuery,
 } = postsApi
