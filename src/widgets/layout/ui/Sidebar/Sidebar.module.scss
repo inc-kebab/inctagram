@@ -1,11 +1,14 @@
 .sidebar {
+  position: sticky;
+  top: var(--header-height);
+
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 
-  width: 100%;
-  max-width: 14.3rem;
+  width: 13.75rem;
   height: calc(100vh - var(--header-height));
-  padding: 4.5rem 0 2.25rem;
+  padding: 4.5rem 0 2.25rem var(--container-padding);
 
   background-color: var(--dark-700);
   border-right: 1px solid var(--dark-300);

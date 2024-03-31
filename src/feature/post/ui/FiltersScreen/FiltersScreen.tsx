@@ -5,10 +5,12 @@ import { CroppedImage, postsActions } from '@/entities/post'
 import { FilterImage } from '@/shared/helpers/getCroppedImage'
 import clsx from 'clsx'
 import Image from 'next/image'
-import { Controller, Navigation, Pagination } from 'swiper/modules'
+import { Controller } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './FiltersScreen.module.scss'
+
+import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
 
 const filtersScreen: { name: string; value: FilterImage }[] = [
   { name: 'Normal', value: 'image_filter--normal' },
@@ -68,17 +70,10 @@ export const FiltersScreen = ({ croppedImages }: Props) => {
   return (
     <div className={s.container}>
       <Swiper
-        className="post-single-slider"
+        {...getPostSliderConfig({ classes: [s.slider], modules: [Controller] })}
         controller={{ control: controlledSwiper }}
-        modules={[Navigation, Pagination, Controller]}
-        navigation
         onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
         onSwiper={setControlledSwiper}
-        pagination={{ clickable: true }}
-        simulateTouch={false}
-        slidesPerView={1}
-        spaceBetween={0}
-        style={{ height: '100%', width: '50%' }}
       >
         {croppedImages.map((image, i) => {
           const { filter, imageURL } = image

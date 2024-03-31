@@ -1,12 +1,11 @@
 import { ImageURL, UserBanner } from '@/entities/post'
 import { useTranslation } from '@/shared/hooks/useTranslation'
-import clsx from 'clsx'
 import Image from 'next/image'
-import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import s from './DescriptionScreen.module.scss'
 
+import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
 import { useCreatePost } from '../../model/hooks/useCreatePost'
 import { EditPostForm } from '../EditPostForm/EditPostForm'
 
@@ -28,15 +27,7 @@ export const DescriptionScreen = ({ images, onCloseModal, userAvatar, userName }
 
   return (
     <div className={s.container}>
-      <Swiper
-        className={clsx('post-single-slider', s.slider)}
-        modules={[Navigation, Pagination]}
-        navigation
-        pagination={{ clickable: true }}
-        slidesPerView={1}
-        spaceBetween={0}
-        style={{ height: '100%', width: '50%' }}
-      >
+      <Swiper {...getPostSliderConfig({ classes: [s.slider] })}>
         {images.map((image, i) => {
           const { imageURL } = image
 

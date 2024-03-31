@@ -20,7 +20,7 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-  title: 'widgets/Header',
+  title: 'widgets/Layout/Header',
 } satisfies Meta<typeof Header>
 
 export default meta

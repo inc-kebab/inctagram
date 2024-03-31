@@ -8,7 +8,7 @@ type Props = {
   onChangeZoom: (zoom: number) => void
 }
 
-export const CropperPostImage = ({ image, onChangeZoom }: Props) => {
+export const CropperImage = ({ image, onChangeZoom }: Props) => {
   const { aspect, crop, imageURL, zoom } = image
 
   const dispatch = useAppDispatch()

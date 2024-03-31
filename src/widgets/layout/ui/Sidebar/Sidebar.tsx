@@ -26,11 +26,13 @@ export const Sidebar = ({ buttonName, isLoading, items, onLogout, ...rest }: Pro
 
           const isActive = pathname === itemPath
 
+          const isCreatePostModal = el.href === '/create'
+
           return (
             <SidebarItem
               isActive={isActive}
+              isCreatePostModal={isCreatePostModal}
               isLastGroupItem={i === 4}
-              isLink={el.href !== ''}
               item={el}
               key={i}
             />

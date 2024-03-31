@@ -32,7 +32,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'widgets/Sidebar/Item',
+  title: 'widgets/Layout/Sidebar/Item',
 } satisfies Meta<typeof SidebarItem>
 
 export default meta

@@ -3,23 +3,16 @@ import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 
-import s from './CreatePostDialogTitle.module.scss'
-
-import { CurrentWindow } from '../../model/types/post.types'
+import s from './Title.module.scss'
 
 interface Props {
-  currentWindow: CurrentWindow
   onBackClick: () => void
   onNextClick: () => void
+  showRightButton?: boolean
   title: string
 }
 
-export const CreatePostDialogTitle = ({
-  currentWindow,
-  onBackClick,
-  onNextClick,
-  title,
-}: Props) => {
+export const Title = ({ onBackClick, onNextClick, showRightButton, title }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -33,7 +26,7 @@ export const CreatePostDialogTitle = ({
       <Typography asComponent="h2" textAlign="center" variant="h1">
         {title}
       </Typography>
-      {currentWindow !== 'description' && (
+      {showRightButton && (
         <Button className={s.right} onClick={onNextClick} variant="text">
           {t.pages.post.next}
         </Button>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
+import { ConfirmDialog } from '@/entities/dialog'
 import Close from '@/shared/assets/icons/common/close.svg'
 import { getCroppedImage } from '@/shared/helpers/getCroppedImage'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
-import { ConfirmDialog } from '@/widgets/dialogs'
 import clsx from 'clsx'
 
 import s from './ProfilePhoto.module.scss'

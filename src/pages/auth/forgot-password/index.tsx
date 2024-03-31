@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 
+import { DialogEmailSent } from '@/entities/dialog'
 import {
   ForgotPasswordForm,
   ForgotPasswordFormValues,
@@ -9,7 +10,6 @@ import {
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
-import { DialogEmailSent } from '@/widgets/dialogs'
 import { AuthLayout } from '@/widgets/layout'
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'

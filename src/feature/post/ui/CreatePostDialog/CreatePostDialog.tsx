@@ -10,23 +10,22 @@ import { Dialog } from '@/shared/ui/Dialog'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 import clsx from 'clsx'
 
-import s from './AddPostPhotoDialog.module.scss'
+import s from './CreatePostDialog.module.scss'
 
 import { CurrentWindow } from '../../model/types/post.types'
-import { CreatePostDialogTitle } from '../CreatePostDialogTitle/CreatePostDialogTitle'
 import { CropperPostScreen } from '../CropperPostScreen/CropperPostScreen'
 import { DescriptionScreen } from '../DescriptionScreen/DescriptionScreen'
 import { FiltersScreen } from '../FiltersScreen/FiltersScreen'
+import { Title } from './Title/Title'
 
 type Props = {
-  disabled?: boolean
-  onOpenChange?: (open: boolean) => void
-  open?: boolean
   trigger: ReactNode
 }
 
-export const AddPostPhotoDialog = ({ onOpenChange, open, trigger, ...rest }: Props) => {
+export const CreatePostDialog = ({ trigger }: Props) => {
   const { t } = useTranslation()
+
+  const [open, setOpen] = useState(false)
 
   const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('expand')
 
@@ -119,7 +118,7 @@ export const AddPostPhotoDialog = ({ onOpenChange, open, trigger, ...rest }: Pro
         return (
           <DescriptionScreen
             images={imagesWithFilters}
-            onCloseModal={() => onOpenChange?.(false)}
+            onCloseModal={() => setOpen(false)}
             userAvatar={data?.avatars?.['avatar-medium']?.url}
             userName={data?.username}
           />
@@ -132,14 +131,14 @@ export const AddPostPhotoDialog = ({ onOpenChange, open, trigger, ...rest }: Pro
     <Dialog
       className={clsx(s.dialog, currentWindow !== 'expand' && s.extendedDialog)}
       customTitleComponent={
-        <CreatePostDialogTitle
-          currentWindow={currentWindow}
+        <Title
           onBackClick={handleClickBack}
           onNextClick={handleClickNext}
+          showRightButton={currentWindow !== 'description'}
           title={title}
         />
       }
-      onOpenChange={onOpenChange}
+      onOpenChange={setOpen}
       open={open}
       trigger={trigger}
     >

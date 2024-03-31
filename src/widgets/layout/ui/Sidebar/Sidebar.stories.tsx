@@ -39,7 +39,7 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-  title: 'widgets/Sidebar/Bar',
+  title: 'widgets/Layout/Sidebar/Bar',
 } satisfies Meta<typeof Sidebar>
 
 export default meta

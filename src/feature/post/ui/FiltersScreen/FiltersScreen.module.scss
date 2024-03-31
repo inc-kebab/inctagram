@@ -4,6 +4,11 @@
   height: 502px;
 }
 
+.slider {
+  width: 50%;
+  height: 100%;
+}
+
 .filtersContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

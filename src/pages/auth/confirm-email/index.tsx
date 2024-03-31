@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { DialogEmailSent } from '@/entities/dialog'
 import {
   Congratulations,
   EmailVerificationBlock,
@@ -9,7 +10,6 @@ import {
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
-import { DialogEmailSent } from '@/widgets/dialogs'
 import { AuthLayout } from '@/widgets/layout'
 import { useRouter } from 'next/router'
 
