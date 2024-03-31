@@ -1,45 +1,64 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { ImageObj, PostsState } from '../types/post.types'
+import { CroppedImage, ImageObj, PostsState, UpdateImageModel } from '../types/postSlice.types'
 
 const initialState: PostsState = {
+  croppedImages: [],
   images: [],
+  imagesWithFilters: [],
 }
 
 const postsSlice = createSlice({
   initialState,
   name: 'posts',
   reducers: {
-    addImage(state, action: PayloadAction<ImageObj>) {
-      state.images.push({ ...action.payload, filter: 'normal' })
+    addImage(state, action: PayloadAction<string>) {
+      state.images.push({
+        aspect: 0,
+        crop: { x: 0, y: 0 },
+        croppedAreaPixels: null,
+        imageURL: action.payload,
+        uploadId: null,
+        zoom: 1,
+      })
     },
     removeImage(state, action: PayloadAction<string>) {
       state.images = state.images.filter(image => image.imageURL !== action.payload)
     },
+    resetCroppedImages(state) {
+      state.croppedImages = []
+    },
     resetImages(state) {
       state.images = []
     },
-    setFilterToImage(state, action: PayloadAction<{ filter: string; imageUrl: string }>) {
-      state.images = state.images.map(image => {
-        if (image.imageURL === action.payload.imageUrl) {
-          return { ...image, filter: action.payload.filter }
-        }
+    resetImagesWithFilters(state) {
+      state.imagesWithFilters = []
+    },
+    setCroppedImages(state, action: PayloadAction<string[]>) {
+      state.croppedImages = action.payload.map(el => ({
+        filter: 'image_filter--normal',
+        imageURL: el,
+      }))
+    },
+    setImagesWithFilters(state, action: PayloadAction<string[]>) {
+      state.imagesWithFilters = action.payload.map(el => ({ imageURL: el }))
+    },
+    updateFilterCroppedImage(state, action: PayloadAction<CroppedImage>) {
+      const { filter, imageURL } = action.payload
 
-        return image
-      })
+      const idx = state.croppedImages.findIndex(el => el.imageURL === imageURL)
+
+      if (idx !== -1) {
+        state.croppedImages[idx] = { ...state.croppedImages[idx], filter }
+      }
     },
-    setImages(state, action: PayloadAction<ImageObj[]>) {
-      state.images = action.payload.map(image => {
-        return {
-          ...image,
-          filter: 'normal',
-        }
-      })
-    },
-    updateImage(state, action: PayloadAction<{ currentIndex: number; uploadId: string }>) {
-      state.images[action.payload.currentIndex] = {
-        ...state.images[action.payload.currentIndex],
-        uploadId: action.payload.uploadId,
+    updateImage(state, action: PayloadAction<UpdateImageModel>) {
+      const { imageURL, ...updatedEntries } = action.payload
+
+      const imageIdx = state.images.findIndex(el => el.imageURL === imageURL)
+
+      if (imageIdx !== -1) {
+        state.images[imageIdx] = { ...state.images[imageIdx], ...updatedEntries }
       }
     },
   },

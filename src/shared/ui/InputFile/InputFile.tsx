@@ -4,7 +4,7 @@ import { ZodEffects } from 'zod'
 
 type Props = {
   children: ReactNode
-  setError: (error: string) => void
+  setError?: (error: string) => void
   setFile: (file: File) => void
   zodSchema: ZodEffects<any>
 } & ComponentPropsWithoutRef<'input'>
@@ -19,7 +19,7 @@ export const InputFile = forwardRef<ElementRef<'input'>, Props>(
         if (validationResult.success) {
           setFile(file)
         } else {
-          setError(validationResult.error.errors[0].message)
+          setError?.(validationResult.error.errors[0].message)
         }
       }
     }

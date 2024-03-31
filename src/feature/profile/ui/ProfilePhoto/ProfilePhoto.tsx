@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Close from '@/shared/assets/icons/common/close.svg'
+import { getCroppedImage } from '@/shared/helpers/getCroppedImage'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
@@ -9,8 +10,6 @@ import clsx from 'clsx'
 
 import s from './ProfilePhoto.module.scss'
 
-import { CroppedArea } from '../../model/types/profile.types'
-import { getCroppedImg } from '../../model/utils/getCroppedImg'
 import { AddProfilePhotoDialog } from '../AddProfilePhotoDialog/AddProfilePhotoDialog'
 
 type Props = {
@@ -51,8 +50,8 @@ export const ProfilePhoto = ({
 
   const handleUpdatePhoto = (cropArea: CroppedArea) => {
     if (cropArea) {
-      getCroppedImg({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl, t }).then(res =>
-        onUpdatePhoto(res)
+      getCroppedImage({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl, t }).then(res =>
+        onUpdatePhoto(res as FormData)
       )
     }
   }

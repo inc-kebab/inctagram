@@ -1,12 +1,13 @@
 import { ReactNode } from 'react'
 
+import { photoSchema } from '@/shared/helpers/validators/photoSchema'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@/shared/ui/Dialog'
+import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 
 import s from './AddProfilePhotoDialog.module.scss'
 
-import { CroppedArea } from '../../model/types/profile.types'
 import { CropperPhoto } from '../CropperPhoto/CropperPhoto'
-import { InputPhoto } from '../InputPhoto/InputPhoto'
 
 type Props = {
   avatarUrl: string
@@ -29,6 +30,8 @@ export const AddProfilePhotoDialog = ({
   trigger,
   ...rest
 }: Props) => {
+  const { t } = useTranslation()
+
   const handleSetPhoto = (file: File) => {
     onAvatarUrl(URL.createObjectURL(file))
   }
@@ -44,7 +47,7 @@ export const AddProfilePhotoDialog = ({
       {avatarUrl ? (
         <CropperPhoto avatarUrl={avatarUrl} onSetCroppedArea={onSetCroppedArea} {...rest} />
       ) : (
-        <InputPhoto setPhoto={handleSetPhoto} />
+        <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t)} />
       )}
     </Dialog>
   )

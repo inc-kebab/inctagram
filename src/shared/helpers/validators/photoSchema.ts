@@ -4,7 +4,7 @@ import { z } from 'zod'
 export const ALLOWED_IMAGES_FORMATS = ['image/jpeg', 'image/jpg', 'image/png']
 export const MAX_SIZE_IMAGE = 10485760
 
-export const avatarSchema = (t: LocaleType) => {
+export const photoSchema = (t: LocaleType) => {
   return z
     .instanceof(File)
     .refine(file => file.size <= MAX_SIZE_IMAGE, t.validation.avatarSize)

@@ -2,16 +2,37 @@ import { toast } from 'react-toastify'
 
 import { LocaleType } from '@/../locales'
 
-import { CroppedArea } from '../types/profile.types'
+const filtersStyle = {
+  'image_filter--clarendon': 'saturate(2)',
+  'image_filter--gingham': 'contrast(160%)',
+  'image_filter--lark': 'grayscale(100%)',
+  'image_filter--moon': 'contrast(110%) brightness(110%) saturate(130%)',
+  'image_filter--normal': 'none',
+  'image_filter--oldSchool': 'opacity(70%)',
+  'image_filter--shabby': 'sepia(80%)',
+  'image_filter--silentHill': 'hue-rotate(150deg)',
+  'image_filter--xRay': 'invert(80%)',
+}
+
+export type FilterImage = keyof typeof filtersStyle
 
 type Params = {
-  crop?: CroppedArea
-  fileName: string
+  crop?: Nullable<CroppedArea>
+  fileName?: string
+  filter?: FilterImage
   imageSrc: string
+  mode?: 'blob' | 'filters' | 'formData' | 'url'
   t: LocaleType
 }
 
-export const getCroppedImg = ({ crop, fileName, imageSrc, t }: Params): Promise<FormData> => {
+export const getCroppedImage = ({
+  crop = null,
+  fileName = 'file',
+  filter,
+  imageSrc,
+  mode = 'formData',
+  t,
+}: Params): Promise<Blob | FormData | string> => {
   return new Promise((resolve, reject) => {
     const image = new Image()
 
@@ -26,6 +47,10 @@ export const getCroppedImg = ({ crop, fileName, imageSrc, t }: Params): Promise<
         canvas.height = image.naturalHeight
 
         if (ctx) {
+          if (mode === 'filters' && filter) {
+            ctx.filter = filtersStyle[filter]
+          }
+
           ctx.drawImage(image, 0, 0)
         }
       } else {
@@ -36,6 +61,10 @@ export const getCroppedImg = ({ crop, fileName, imageSrc, t }: Params): Promise<
         canvas.height = crop.height
 
         if (ctx) {
+          if (mode === 'filters' && filter) {
+            ctx.filter = filtersStyle[filter]
+          }
+
           ctx.drawImage(
             image,
             crop.x * scaleX,
@@ -57,10 +86,17 @@ export const getCroppedImg = ({ crop, fileName, imageSrc, t }: Params): Promise<
 
           return
         }
-        const formData = new FormData()
 
-        formData.append(fileName, blob)
-        resolve(formData)
+        if (mode === 'formData') {
+          const formData = new FormData()
+
+          formData.append(fileName, blob)
+          resolve(formData)
+        } else if (mode === 'url' || mode === 'filters') {
+          resolve(URL.createObjectURL(blob))
+        } else {
+          resolve(blob)
+        }
       }, 'image/jpeg')
     }
 

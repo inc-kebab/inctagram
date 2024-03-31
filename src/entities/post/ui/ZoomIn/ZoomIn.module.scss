@@ -1,31 +1,16 @@
-.zoomInContainer {
-  position: absolute;
-
-  bottom: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 124px;
-  height: 36px;
-
-  background-color: rgba(#171717, 0.8);
-  border-radius: 2px;
+.viewport {
+  position: relative;
+  background-color: rgba(#171717, 0.7); // dark-500
+  border: none;
 }
 
-.zoomInBtn {
-  width: 36px;
-  height: 36px;
-  margin: 0;
-  padding: 0;
+.expandBtn {
+  padding: 6px;
+  color: var(--light-100);
+  background-color: rgba(#171717, 0.7); // dark-500
 
-  background-color: rgba(#171717, 0.7);
-
-  .isOpenIcon {
+  &[data-state='open'] {
     color: var(--primary-500);
-  }
-
-  &:hover {
-    background-color: rgba(#171717, 0.8);
   }
 }
 
@@ -36,9 +21,11 @@
 .slider {
   width: 100px;
 }
+
 .sliderTrackClass {
   height: 2px;
 }
+
 .sliderThumbClass {
   width: 6px;
   height: 6px;

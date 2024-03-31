@@ -2,12 +2,8 @@ import { baseApi } from '@/shared/api/base-api'
 
 import {
   AddImagesResponse,
-  CreatePostParams,
+  CreatePostArgs,
   CreatePostResponse,
-  GetPostsResponse,
-  PostsParams,
-} from '../model/types/post.types'
-import {
   DeletePostArgs,
   EditPostArgs,
   GetMyPostsArgs,
@@ -16,6 +12,23 @@ import {
 
 const postApi = baseApi.injectEndpoints({
   endpoints: builder => ({
+    addImages: builder.mutation<AddImagesResponse, FormData>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/posts/images',
+      }),
+    }),
+    createPost: builder.mutation<CreatePostResponse, CreatePostArgs>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/posts',
+      }),
+    }),
+    deleteImage: builder.mutation<void, string>({
+      query: imageId => ({ method: 'DELETE', url: `/posts/images/${imageId}` }),
+    }),
     deletePost: builder.mutation<void, DeletePostArgs>({
       onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
         const patchResult = dispatch(
@@ -63,23 +76,6 @@ const postApi = baseApi.injectEndpoints({
         url: `/posts/${body.id}`,
       }),
     }),
-    addImages: builder.mutation<AddImagesResponse, FormData>({
-      query: body => ({
-        body,
-        method: 'POST',
-        url: '/posts/images',
-      }),
-    }),
-    createPost: builder.mutation<CreatePostResponse, CreatePostParams>({
-      query: body => ({
-        body,
-        method: 'POST',
-        url: '/posts',
-      }),
-    }),
-    deleteImage: builder.mutation<void, string>({
-      query: imageId => ({ method: 'DELETE', url: `/posts/images/${imageId}` }),
-    }),
     getMyPosts: builder.query<GetMyPostsResponse, GetMyPostsArgs>({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg
@@ -103,13 +99,12 @@ const postApi = baseApi.injectEndpoints({
 })
 
 export const {
-  useDeletePostMutation, 
-  useEditPostMutation, 
-  useGetMyPostsQuery
   useAddImagesMutation,
   useCreatePostMutation,
   useDeleteImageMutation,
+  useDeletePostMutation,
   useEditPostMutation,
-} = postsApi
+  useGetMyPostsQuery,
+} = postApi
 
 export const { invalidateTags: invalidateTagsPost } = postApi.util
