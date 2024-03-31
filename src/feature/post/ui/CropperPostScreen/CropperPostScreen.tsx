@@ -60,6 +60,7 @@ export const CropperPostScreen = ({ disabled, images }: Props) => {
         {...getPostSliderConfig({ classes: [s.slider], modules: [Controller] })}
         controller={{ control: controlledSwiper }}
         onSwiper={setControlledSwiper}
+        simulateTouch={false}
       >
         {images.map((el, i) => {
           const { aspect, imageURL, zoom } = el

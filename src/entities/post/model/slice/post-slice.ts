@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { CroppedImage, ImageObj, PostsState, UpdateImageModel } from '../types/postSlice.types'
+import { CroppedImage, PostsState, UpdateImageModel } from '../types/postSlice.types'
 
 const initialState: PostsState = {
   croppedImages: [],
@@ -24,6 +24,11 @@ const postsSlice = createSlice({
     },
     removeImage(state, action: PayloadAction<string>) {
       state.images = state.images.filter(image => image.imageURL !== action.payload)
+    },
+    resetAllImages(state) {
+      state.images = []
+      state.croppedImages = []
+      state.imagesWithFilters = []
     },
     resetCroppedImages(state) {
       state.croppedImages = []

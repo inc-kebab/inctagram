@@ -118,7 +118,11 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         return (
           <DescriptionScreen
             images={imagesWithFilters}
-            onCloseModal={() => setOpen(false)}
+            onCloseModal={() => {
+              setOpen(false)
+              setCurrentWindow('expand')
+              dispatch(postsActions.resetAllImages()) // TODO CONFIRM DIALOG WITH DRAFT
+            }}
             userAvatar={data?.avatars?.['avatar-medium']?.url}
             userName={data?.username}
           />
