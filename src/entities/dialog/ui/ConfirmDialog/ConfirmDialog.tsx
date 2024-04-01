@@ -10,6 +10,7 @@ import s from './ConfirmDialog.module.scss'
 interface Props {
   confirmCallback?: () => void
   content: ReactNode
+  customActions?: ReactNode
   disabled?: boolean
   onOpenChange: (open: boolean) => void
   open: boolean
@@ -20,6 +21,7 @@ interface Props {
 export const ConfirmDialog = ({
   confirmCallback,
   content,
+  customActions,
   disabled,
   onOpenChange,
   open,
@@ -37,14 +39,16 @@ export const ConfirmDialog = ({
     >
       <div className={s.dialog}>
         <div className={s.content}>{content}</div>
-        <div className={s.actions}>
-          <Button disabled={disabled} onClick={confirmCallback} variant="outline">
-            {t.button.yes}
-          </Button>
-          <DialogClose>
-            <Button disabled={disabled}>{t.button.no}</Button>
-          </DialogClose>
-        </div>
+        {customActions || (
+          <div className={s.actions}>
+            <Button disabled={disabled} onClick={confirmCallback} variant="outline">
+              {t.button.yes}
+            </Button>
+            <DialogClose>
+              <Button disabled={disabled}>{t.button.no}</Button>
+            </DialogClose>
+          </div>
+        )}
       </div>
     </Dialog>
   )

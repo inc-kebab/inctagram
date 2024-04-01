@@ -1,4 +1,5 @@
 import { ImageURL, UserBanner } from '@/entities/post'
+import { useGetMyProfileQuery } from '@/feature/profile'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -12,12 +13,12 @@ import { EditPostForm } from '../EditPostForm/EditPostForm'
 interface Props {
   images: ImageURL[]
   onCloseModal: () => void
-  userAvatar?: Nullable<string>
-  userName?: string
 }
 
-export const DescriptionScreen = ({ images, onCloseModal, userAvatar, userName }: Props) => {
+export const DescriptionScreen = ({ images, onCloseModal }: Props) => {
   const { t } = useTranslation()
+
+  const { data } = useGetMyProfileQuery()
 
   const { createPostRef, handleSubmitCreatePost, isCreatePostLoad } = useCreatePost({
     callback: onCloseModal,
@@ -39,7 +40,7 @@ export const DescriptionScreen = ({ images, onCloseModal, userAvatar, userName }
         })}
       </Swiper>
       <div className={s.description}>
-        <UserBanner avatar={userAvatar} name={userName || ''} />
+        <UserBanner avatar={data?.avatars?.['avatar-medium']?.url} name={data?.username || ''} />
         <EditPostForm
           disabled={isCreatePostLoad}
           onSubmit={handleSubmitCreatePost}

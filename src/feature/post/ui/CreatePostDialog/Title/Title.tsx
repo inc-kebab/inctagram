@@ -8,21 +8,30 @@ import s from './Title.module.scss'
 interface Props {
   onBackClick: () => void
   onNextClick: () => void
+  showLeftButton?: boolean
   showRightButton?: boolean
   title: string
 }
 
-export const Title = ({ onBackClick, onNextClick, showRightButton, title }: Props) => {
+export const Title = ({
+  onBackClick,
+  onNextClick,
+  showLeftButton,
+  showRightButton,
+  title,
+}: Props) => {
   const { t } = useTranslation()
 
   return (
     <div className={s.title}>
-      <Button
-        className={s.left}
-        onClick={onBackClick}
-        startIcon={<ArrowIos height={24} width={24} />}
-        variant="text"
-      />
+      {showLeftButton && (
+        <Button
+          className={s.left}
+          onClick={onBackClick}
+          startIcon={<ArrowIos height={24} width={24} />}
+          variant="text"
+        />
+      )}
       <Typography asComponent="h2" textAlign="center" variant="h1">
         {title}
       </Typography>

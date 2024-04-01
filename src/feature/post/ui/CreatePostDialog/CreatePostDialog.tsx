@@ -1,11 +1,12 @@
 import { ReactNode, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
+import { ConfirmDialog } from '@/entities/dialog'
 import { postsActions } from '@/entities/post'
-import { useGetMyProfileQuery } from '@/feature/profile'
 import { getCroppedImage } from '@/shared/helpers/getCroppedImage'
 import { photoSchema } from '@/shared/helpers/validators/photoSchema'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 import clsx from 'clsx'
@@ -26,8 +27,9 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   const { t } = useTranslation()
 
   const [open, setOpen] = useState(false)
+  const [openConfirm, setOpenConfirm] = useState(false)
 
-  const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('expand')
+  const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('upload')
 
   const images = useAppSelector(state => state.posts.images)
   const croppedImages = useAppSelector(state => state.posts.croppedImages)
@@ -35,9 +37,21 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const dispatch = useAppDispatch()
 
-  const { data } = useGetMyProfileQuery()
+  const titles: Record<CurrentWindow, string> = {
+    description: t.pages.post.publication,
+    expand: t.pages.post.cropping,
+    filter: t.pages.post.filters,
+    upload: t.pages.post.addPhoto,
+  }
 
-  const handleSetPhoto = (file: File) => dispatch(postsActions.addImage(URL.createObjectURL(file)))
+  const isBigSizeScreen = currentWindow === 'filter' || currentWindow === 'description'
+
+  const isShowUploadScreen = currentWindow === 'upload' && images.length === 0
+
+  const handleSetPhoto = (file: File) => {
+    dispatch(postsActions.addImage(URL.createObjectURL(file)))
+    setCurrentWindow('expand')
+  }
 
   const handleSetCroppedImages = () => {
     const promises = images.map(el => {
@@ -53,7 +67,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   }
 
   const handleSetImagesWithFilters = () => {
-    const promises = croppedImages.map((el, i) => {
+    const promises = croppedImages.map(el => {
       return getCroppedImage({
         filter: el.filter,
         imageSrc: el.imageURL,
@@ -68,14 +82,6 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     })
   }
 
-  const titles = {
-    description: t.pages.post.publication,
-    expand: t.pages.post.cropping,
-    filter: t.pages.post.filters,
-  }
-
-  const title = images.length === 0 ? t.pages.post.addPhoto : titles[currentWindow]
-
   const handleClickNext = () => {
     if (currentWindow === 'expand') {
       handleSetCroppedImages()
@@ -86,6 +92,11 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const handleClickBack = () => {
     switch (true) {
+      case currentWindow === 'expand': {
+        setCurrentWindow('upload')
+        dispatch(postsActions.resetImages())
+        break
+      }
       case currentWindow === 'description': {
         setCurrentWindow('filter')
         dispatch(postsActions.resetImagesWithFilters())
@@ -103,9 +114,30 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     }
   }
 
+  const handleChangeOpen = (open: boolean) => {
+    if (!open) {
+      currentWindow === 'upload' ? setOpen(false) : setOpenConfirm(true)
+    } else {
+      setOpen(true)
+    }
+  }
+
+  const handleCloseModal = () => {
+    setOpen(false)
+    setCurrentWindow('upload')
+    dispatch(postsActions.resetAllImages())
+  }
+
+  const handleCloseModals = () => {
+    setOpen(false)
+    setOpenConfirm(false)
+    setCurrentWindow('upload')
+    dispatch(postsActions.resetAllImages())
+  }
+
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
-      case images.length === 0: {
+      case images.length === 0 && currentWindow === 'upload': {
         return <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t)} />
       }
       case currentWindow === 'expand': {
@@ -115,38 +147,44 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         return <FiltersScreen croppedImages={croppedImages} />
       }
       case currentWindow === 'description': {
-        return (
-          <DescriptionScreen
-            images={imagesWithFilters}
-            onCloseModal={() => {
-              setOpen(false)
-              setCurrentWindow('expand')
-              dispatch(postsActions.resetAllImages()) // TODO CONFIRM DIALOG WITH DRAFT
-            }}
-            userAvatar={data?.avatars?.['avatar-medium']?.url}
-            userName={data?.username}
-          />
-        )
+        return <DescriptionScreen images={imagesWithFilters} onCloseModal={handleCloseModal} />
       }
     }
   }
 
   return (
-    <Dialog
-      className={clsx(s.dialog, currentWindow !== 'expand' && s.extendedDialog)}
-      customTitleComponent={
-        <Title
-          onBackClick={handleClickBack}
-          onNextClick={handleClickNext}
-          showRightButton={currentWindow !== 'description'}
-          title={title}
-        />
-      }
-      onOpenChange={setOpen}
-      open={open}
-      trigger={trigger}
-    >
-      {renderWindow(currentWindow)}
-    </Dialog>
+    <>
+      <Dialog
+        className={clsx(s.dialog, isBigSizeScreen && s.extendedDialog)}
+        customTitleComponent={
+          <Title
+            onBackClick={handleClickBack}
+            onNextClick={handleClickNext}
+            showLeftButton={currentWindow !== 'upload'}
+            showRightButton={currentWindow !== 'description' && !isShowUploadScreen}
+            title={titles[currentWindow]}
+          />
+        }
+        onOpenChange={handleChangeOpen}
+        open={open}
+        trigger={trigger}
+      >
+        {renderWindow(currentWindow)}
+      </Dialog>
+      <ConfirmDialog
+        content={t.pages.post.confirmCloseCreateModal.message}
+        customActions={
+          <div className={s.confirmActions}>
+            <Button onClick={handleCloseModals} variant="outline">
+              {t.button.discard}
+            </Button>
+            <Button onClick={handleCloseModals}>{t.button.save}</Button>
+          </div>
+        }
+        onOpenChange={setOpenConfirm}
+        open={openConfirm}
+        title={t.pages.post.confirmCloseCreateModal.title}
+      />
+    </>
   )
 }
