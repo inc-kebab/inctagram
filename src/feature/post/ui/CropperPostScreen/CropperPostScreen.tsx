@@ -74,7 +74,7 @@ export const CropperPostScreen = ({ disabled, images }: Props) => {
               )}
               <div className={s.actions}>
                 <ExpandBtn currentAspect={aspect} imageURL={imageURL} />
-                <ZoomIn imageURL={imageURL} setZoom={handleChangeZoom(imageURL)} zoom={zoom} />
+                <ZoomIn aspect={el.aspect} imageURL={imageURL} zoom={zoom} />
               </div>
             </SwiperSlide>
           )
