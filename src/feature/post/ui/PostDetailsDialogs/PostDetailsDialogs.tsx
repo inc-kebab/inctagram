@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ConfirmDialog } from '@/entities/dialog'
 import { PostItem, UserBanner } from '@/entities/post'
 import { Close } from '@/shared/assets/icons/common'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
@@ -7,7 +8,6 @@ import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
-import { ConfirmDialog } from '@/widgets/dialogs'
 
 import s from './PostDetailsDialogs.module.scss'
 

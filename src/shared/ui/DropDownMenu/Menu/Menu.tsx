@@ -6,19 +6,33 @@ import clsx from 'clsx'
 import s from './Menu.module.scss'
 
 type MenuProps = {
+  onOpenChange?: (open: boolean) => void
+  open?: boolean
+  portal?: boolean
   trigger: ReactNode
 } & Omit<ComponentPropsWithoutRef<typeof RadixDropdown.Content>, 'asChild'>
 
 export const Menu = forwardRef<ElementRef<typeof RadixDropdown.Content>, MenuProps>(
-  ({ children, className, trigger, ...rest }, ref) => {
+  ({ children, className, onOpenChange, open, portal = true, trigger, ...rest }, ref) => {
+    const menuContent = (
+      <RadixDropdown.Content
+        className={clsx(s.content, className)}
+        ref={ref}
+        {...rest}
+        onPointerDownOutside={e => {
+          if (!portal) {
+            e.detail.originalEvent.preventDefault()
+          }
+        }}
+      >
+        {children}
+      </RadixDropdown.Content>
+    )
+
     return (
-      <RadixDropdown.Root>
+      <RadixDropdown.Root onOpenChange={onOpenChange} open={open}>
         <RadixDropdown.Trigger asChild>{trigger}</RadixDropdown.Trigger>
-        <RadixDropdown.Portal>
-          <RadixDropdown.Content className={clsx(s.content, className)} ref={ref} {...rest}>
-            {children}
-          </RadixDropdown.Content>
-        </RadixDropdown.Portal>
+        {portal ? <RadixDropdown.Portal>{menuContent}</RadixDropdown.Portal> : menuContent}
       </RadixDropdown.Root>
     )
   }

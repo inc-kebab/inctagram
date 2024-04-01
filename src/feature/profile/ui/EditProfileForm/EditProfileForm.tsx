@@ -60,6 +60,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.username?.message}
           label={t.label.userName}
           name="username"
+          placeholder={t.placeholders.username}
         />
         <ControlledTextField
           className={s.field}
@@ -68,6 +69,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.firstname?.message}
           label={t.label.firstName}
           name="firstname"
+          placeholder={t.placeholders.firstName}
         />
         <ControlledTextField
           className={s.field}
@@ -76,6 +78,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.lastname?.message}
           label={t.label.lastName}
           name="lastname"
+          placeholder={t.placeholders.lastName}
         />
         <ControlledDatePicker
           className={s.field}
@@ -98,6 +101,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           label={t.label.birthDate}
           maxDate={new Date()}
           name="birthDate"
+          placeholder={t.placeholders.birthDate}
         />
         <Controller
           control={control}
@@ -109,7 +113,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
               label={t.label.city}
               {...field}
               autoComplete="off"
-              placeholder=""
+              placeholder={t.placeholders.city}
               ref={changeCityRef}
             />
           )}
@@ -120,6 +124,7 @@ export const EditProfileForm = forwardRef<UseFormRef<EditProfileFormValues>, Pro
           error={errors.aboutMe?.message}
           label={t.label.aboutMe}
           name="aboutMe"
+          placeholder={t.placeholders.aboutMe}
           resize="none"
           rows={3}
         />

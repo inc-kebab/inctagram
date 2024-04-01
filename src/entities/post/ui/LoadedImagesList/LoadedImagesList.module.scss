@@ -1,0 +1,65 @@
+.viewport {
+  background-color: rgba(#171717, 0.7); // dark-500
+  border: none;
+}
+
+.expandBtn {
+  padding: 6px;
+  color: var(--light-100);
+  background-color: rgba(#171717, 0.7); // dark-500
+
+  &[data-state='open'] {
+    color: var(--primary-500);
+  }
+}
+
+.images {
+  cursor: initial;
+  gap: 12px;
+  align-items: start;
+}
+
+.imagesArray {
+  overflow: none;
+  overflow-x: auto;
+  display: flex;
+  gap: 10px;
+
+  max-width: 200px;
+}
+
+.image {
+  position: relative;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+}
+
+.deleteBtn {
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  right: 2px;
+
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+
+  background-color: rgba(#171717, 0.8);
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: var(--dark-900);
+  }
+}
+
+.addImageBtn {
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  &:hover {
+    color: var(--primary-500);
+  }
+}

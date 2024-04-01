@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
@@ -49,7 +49,7 @@ const Profile: Page = () => {
   return (
     <>
       <ProfileInfo
-        className={s.info}
+        className={s.root}
         userData={{
           aboutMe: data?.aboutMe,
           avatar: data?.avatars?.['avatar-medium']?.url,
@@ -79,12 +79,8 @@ const Profile: Page = () => {
   )
 }
 
-Profile.getLayout = (page, t) => {
-  return (
-    <SidebarLayout description={t.pages.profile.metaDescription} title={t.pages.profile.metaTitle}>
-      {page}
-    </SidebarLayout>
-  )
+Profile.getLayout = (page: ReactElement) => {
+  return <SidebarLayout>{page}</SidebarLayout>
 }
 
 export default Profile

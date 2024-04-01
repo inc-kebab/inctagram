@@ -5,12 +5,14 @@ import { AppRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Meta, MetaProps } from '@/shared/seo/Meta'
-import { Header } from '@/widgets/header'
-import { Sidebar, getSidebarItems } from '@/widgets/sidebar'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
 import s from './SidebarLayout.module.scss'
+
+import { getSidebarItems } from '../../model/utils/getSidebarItems'
+import { Header } from '../Header/Header'
+import { Sidebar } from '../Sidebar/Sidebar'
 
 type Props = PropsWithChildren & Omit<MetaProps, 'children'>
 

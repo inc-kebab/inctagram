@@ -2,12 +2,14 @@
 
 import { LocaleType } from './en'
 
+/* eslint-disable max-lines */
 export const ru: LocaleType = {
   button: {
     back: 'Вернуться',
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
+    discard: 'Отменить',
     no: 'Нет',
     publish: 'Опубликовать',
     resendVerificationLink: 'Отправить повторное подтверждение',
@@ -107,8 +109,14 @@ export const ru: LocaleType = {
       metaTitle: 'Главная',
     },
     post: {
-      addComment: 'Добавить комментарий...',
-      deletePost: 'Удалить',
+      addPhoto: 'Добавить Фото',
+      confirmCloseCreateModal: {
+        message:
+          'Вы действительно хотите закрыть создание публикации? Если вы закроете ее, все будет удалено',
+        title: 'Закрыть',
+      },
+      cropping: 'Обрезка',
+      deletePost: 'Удалить пост',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
       editInfoModal: {
         message:
@@ -120,6 +128,11 @@ export const ru: LocaleType = {
         acceptBtn: 'Сохранить изменения',
         areaLabel: 'Добавьте описания публикаций',
       },
+      filters: 'Фильтры',
+      next: 'Далее',
+      publication: 'Публикация',
+      publish: 'Опубликовать',
+      successCreate: 'Пост успешно создан!',
     },
     privacy: {
       changes:
@@ -253,6 +266,19 @@ export const ru: LocaleType = {
         'социальной сети. При использовании нашего приложения вы соглашаетесь с нашими условиями и обязуетесь их соблюдать. ' +
         'Если вы не согласны с нашими условиями, пожалуйста, не используйте наше приложение.',
     },
+  },
+  placeholders: {
+    aboutMe: 'Напишите о себе',
+    birthDate: 'Укажите вашу дату рождения',
+    city: 'Укажите ваш город проживания',
+    comment: 'Введите текси комментария',
+    email: 'email@inctagrum.fun',
+    firstName: 'Введите ваше имя',
+    lastName: 'Введите вашу фамилию',
+    password: 'Введите ваш пароль',
+    passwordConfirm: 'Введите ваш пароль снова',
+    postDescription: 'Добавьте описание для вашей публикации',
+    username: 'Введите имя пользователя',
   },
   tabs: {
     devices: 'Устройства',

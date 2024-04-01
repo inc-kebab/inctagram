@@ -1,4 +1,4 @@
-import { PostItem } from '@/entities/post'
+import { Image, PostItem } from '@/entities/post'
 
 export interface GetMyPostsResponse {
   cursor: number
@@ -23,4 +23,15 @@ export type DeletePostArgs = {
 export type EditPostArgs = {
   description: string
   id: number
+}
+
+export type AddImagesResponse = {
+  images: Image[]
+}
+
+export type CreatePostResponse = PostItem
+
+export type CreatePostArgs = {
+  description: string
+  images: string[]
 }

@@ -1,0 +1,14 @@
+.dialog {
+  width: 100%;
+  max-width: 492px;
+  margin: 0 15px;
+}
+
+.extendedDialog {
+  max-width: 900px;
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: space-between;
+}

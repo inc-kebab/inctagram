@@ -1,14 +1,10 @@
 import { useState } from 'react'
-import Cropper from 'react-easy-crop'
+import Cropper, { Point } from 'react-easy-crop'
 
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
 
 import s from './CropperPhoto.module.scss'
-
-import { CroppedArea } from '../../model/types/profile.types'
-
-type Crop = { x: number; y: number }
 
 type Props = {
   avatarUrl: string
@@ -17,7 +13,7 @@ type Props = {
 }
 
 export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) => {
-  const [crop, setCrop] = useState<Crop>({ x: 0, y: 0 })
+  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
 
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Nullable<CroppedArea>>(null)
 
@@ -25,7 +21,7 @@ export const CropperPhoto = ({ avatarUrl, disabled, onSetCroppedArea }: Props) =
 
   const { t } = useTranslation()
 
-  const handleCropComplete = (_: Crop, croppedAreaPixels: CroppedArea) => {
+  const handleCropComplete = (_: Point, croppedAreaPixels: CroppedArea) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
 

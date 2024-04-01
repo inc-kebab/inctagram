@@ -42,7 +42,7 @@ export const PublishCommentForm = forwardRef(
           classNameInput={s.input}
           control={control}
           name="comment"
-          placeholder={t.pages.post.addComment}
+          placeholder={t.placeholders.comment}
         />
         <Button className={s.publishBtn} disabled={disabled} variant="text">
           {t.button.publish}

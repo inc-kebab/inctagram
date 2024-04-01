@@ -1,0 +1,23 @@
+.viewport {
+  background-color: rgba(#171717, 0.7); // dark-500
+  border: none;
+}
+
+.expandBtn {
+  padding: 6px;
+  color: var(--light-100);
+  background-color: rgba(#171717, 0.7); // dark-500
+
+  &[data-state='open'] {
+    color: var(--primary-500);
+  }
+}
+
+.item {
+  justify-content: space-between;
+  color: var(--light-900);
+}
+
+.activeItem {
+  color: var(--light-100);
+}

@@ -1,0 +1,53 @@
+@import '@/app/styles/mixins';
+
+.dialogContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72px 24px 48px;
+
+  &.error {
+    padding-top: 0;
+  }
+}
+
+.notification {
+  margin: 24px 0;
+}
+
+.svgWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 300px;
+  height: 300px;
+  margin-bottom: 60px;
+
+  background-color: var(--dark-500);
+  border-radius: 2px;
+}
+
+.imageSvg {
+  width: 48px;
+  height: 48px;
+}
+
+.button {
+  width: 100%;
+  max-width: 300px;
+}
+
+@include mobile {
+  .dialogContainer {
+    padding: 24px 0;
+  }
+
+  .notification {
+    margin: 24px 10px;
+  }
+
+  .svgWrapper {
+    margin-bottom: 36px;
+  }
+}

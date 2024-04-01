@@ -19,9 +19,18 @@ export const ProfileInfo = ({ className, userData }: Props) => {
     <div className={clsx(s.ProfileInfo, className)}>
       <Avatar avatarUrl={userData?.avatar} circle wrapperSize={200} />
       <div className={s.info}>
-        <Typography asComponent="h2" className={s.name} variant="h1">
-          {userData?.username}
-        </Typography>
+        <div className={s.header}>
+          <Typography asComponent="h2" className={s.name} variant="h1">
+            {userData?.username}
+          </Typography>
+          <Button
+            asComponent={Link}
+            href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
+            variant="secondary"
+          >
+            Profile settings
+          </Button>
+        </div>
         <ul className={s.subscriber}>
           <li className={s.item}>
             <span className={s.count}>2 218</span> Following
@@ -35,13 +44,6 @@ export const ProfileInfo = ({ className, userData }: Props) => {
         </ul>
         {userData?.aboutMe && <Typography variant="regular16">{userData.aboutMe}</Typography>}
       </div>
-      <Button
-        asComponent={Link}
-        href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
-        variant="secondary"
-      >
-        Profile settings
-      </Button>
     </div>
   )
 }

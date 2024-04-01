@@ -33,9 +33,9 @@ export const LangSwitcher = ({ className }: Props) => {
     <Select
       className={clsx(s.root, className)}
       classNames={{ icon: s.icon, trigger: s.trigger }}
-      defaultValue={locale || defaultLocale}
       onValueChange={changeLocale}
       options={SELECT_OPTIONS}
+      value={locale || defaultLocale}
     />
   )
 }
