@@ -12,6 +12,7 @@
 .filtersContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
   width: 50%;
 }
 
@@ -31,8 +32,6 @@
   gap: 6px;
   align-items: center;
   justify-content: center;
-
-  padding: 12px;
 
   transition: all 0.2s linear;
 

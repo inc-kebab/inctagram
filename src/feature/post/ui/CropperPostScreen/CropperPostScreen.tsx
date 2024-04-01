@@ -18,11 +18,10 @@ import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
 import { CropperImage } from './CropperImage'
 
 type Props = {
-  disabled?: boolean
   images: ImageObj[]
 }
 
-export const CropperPostScreen = ({ disabled, images }: Props) => {
+export const CropperPostScreen = ({ images }: Props) => {
   const dispatch = useAppDispatch()
 
   const [controlledSwiper, setControlledSwiper] = useState<SwiperClass | null>(null)

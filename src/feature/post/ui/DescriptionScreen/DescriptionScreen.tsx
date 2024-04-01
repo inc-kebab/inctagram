@@ -1,6 +1,7 @@
 import { ImageURL, UserBanner } from '@/entities/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Loader } from '@/shared/ui/Loader'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -18,7 +19,7 @@ interface Props {
 export const DescriptionScreen = ({ images, onCloseModal }: Props) => {
   const { t } = useTranslation()
 
-  const { data } = useGetMyProfileQuery()
+  const { data, isLoading } = useGetMyProfileQuery()
 
   const { createPostRef, handleSubmitCreatePost, isCreatePostLoad } = useCreatePost({
     callback: onCloseModal,
@@ -40,14 +41,23 @@ export const DescriptionScreen = ({ images, onCloseModal }: Props) => {
         })}
       </Swiper>
       <div className={s.description}>
-        <UserBanner avatar={data?.avatars?.['avatar-medium']?.url} name={data?.username || ''} />
-        <EditPostForm
-          disabled={isCreatePostLoad}
-          onSubmit={handleSubmitCreatePost}
-          ref={createPostRef}
-          style={{ height: '100%' }}
-          titleSubmit={t.pages.post.publish}
-        />
+        {isLoading ? (
+          <Loader containerHeight />
+        ) : (
+          <>
+            <UserBanner
+              avatar={data?.avatars?.['avatar-medium']?.url}
+              name={data?.username || ''}
+            />
+            <EditPostForm
+              disabled={isCreatePostLoad}
+              onSubmit={handleSubmitCreatePost}
+              ref={createPostRef}
+              style={{ height: '100%' }}
+              titleSubmit={t.pages.post.publish}
+            />
+          </>
+        )}
       </div>
     </div>
   )
