@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { useAppDispatch } from '@/app/store/store'
 import { ExpandBtn, ImageObj, LoadedImagesList, ZoomIn, postsActions } from '@/entities/post'
+import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import Image from 'next/image'
 import { Controller } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
@@ -26,11 +27,16 @@ export const CropperPostScreen = ({ images }: Props) => {
 
   const [controlledSwiper, setControlledSwiper] = useState<SwiperClass | null>(null)
 
-  const [deleteImage] = useDeleteImageMutation()
+  const [deleteImage] = useDeleteImageMutation() // TODO - MOVE TO EDIT POST LOGIC
 
   const handleDeleteImage = (imageObj: ImageObj) => {
     if (imageObj.uploadId) {
-      deleteImage(imageObj.uploadId)
+      // TODO - DELETE UPLOADID IN SLICE
+      deleteImage(imageObj.uploadId).then(res => {
+        if ('error' in res) {
+          handleErrorResponse(res.error)
+        }
+      })
     }
     dispatch(postsActions.removeImage(imageObj.imageURL))
   }

@@ -1,8 +1,9 @@
 import { useRef } from 'react'
+import { toast } from 'react-toastify'
 
 import { LocaleType } from '@/../locales'
 import { ImageURL } from '@/entities/post'
-import { getCroppedImage } from '@/shared/helpers/getCroppedImage'
+import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { UseFormRef } from '@/shared/types/form'
 
@@ -22,24 +23,24 @@ export const useCreatePost = ({ callback, imagesWithFilters, t }: Params) => {
   const [loadImages, { isLoading: isImagesLoad }] = useAddImagesMutation()
   const [createPost, { isLoading: isCreateLoad }] = useCreatePostMutation()
 
-  const handleLoadImages = async (imagesArray: ImageURL[]) => {
+  const handleLoadImages = (imagesArray: ImageURL[]) => {
     const formData = new FormData()
 
     const imagesFiles = imagesArray.map(el =>
-      getCroppedImage({
+      getModifiedImage({
         imageSrc: el.imageURL,
         mode: 'blob',
         t,
       })
     )
 
-    const res = await Promise.all(imagesFiles)
+    return Promise.all(imagesFiles).then(res => {
+      res.forEach(el => {
+        formData.append('files', el as Blob)
+      })
 
-    res.forEach(el_1 => {
-      formData.append('files', el_1 as Blob)
+      return loadImages(formData)
     })
-
-    return await loadImages(formData)
   }
 
   const handleSubmitCreatePost = ({ description }: EditPostFormValues) => {
@@ -57,6 +58,7 @@ export const useCreatePost = ({ callback, imagesWithFilters, t }: Params) => {
         if (response) {
           if ('data' in response) {
             callback?.()
+            toast.success(t.pages.post.successCreate)
           } else {
             handleErrorResponse(response.error)
           }

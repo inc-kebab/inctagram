@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { useAppDispatch } from '@/app/store/store'
 import { CroppedImage, postsActions } from '@/entities/post'
-import { FilterImage } from '@/shared/helpers/getCroppedImage'
+import { FilterImage } from '@/shared/helpers/getModifiedImage'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { Controller } from 'swiper/modules'

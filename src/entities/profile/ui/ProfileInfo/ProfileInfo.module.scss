@@ -2,6 +2,7 @@
   display: flex;
   gap: 38px;
   align-items: flex-start;
+  margin-bottom: 48px;
 }
 
 .info {
@@ -10,6 +11,13 @@
   flex-grow: 1;
   gap: 20px;
   align-items: flex-start;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .name {

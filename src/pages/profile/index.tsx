@@ -43,7 +43,7 @@ const Profile: Page = () => {
   }, [dispatch])
 
   if (isLoading) {
-    return <Loader fullHeight />
+    return <Loader containerHeight />
   }
 
   return (

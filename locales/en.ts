@@ -133,6 +133,7 @@ export const en = {
       next: 'Next',
       publication: 'Publication',
       publish: 'Publish',
+      successCreate: 'Success create post!',
     },
     privacy: {
       changes:

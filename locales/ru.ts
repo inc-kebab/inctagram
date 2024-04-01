@@ -132,6 +132,7 @@ export const ru: LocaleType = {
       next: 'Далее',
       publication: 'Публикация',
       publish: 'Опубликовать',
+      successCreate: 'Пост успешно создан!',
     },
     privacy: {
       changes:

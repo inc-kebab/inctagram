@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
 import Close from '@/shared/assets/icons/common/close.svg'
-import { getCroppedImage } from '@/shared/helpers/getCroppedImage'
+import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
@@ -50,7 +50,7 @@ export const ProfilePhoto = ({
 
   const handleUpdatePhoto = (cropArea: CroppedArea) => {
     if (cropArea) {
-      getCroppedImage({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl, t }).then(res =>
+      getModifiedImage({ crop: cropArea, fileName: 'file', imageSrc: avatarUrl, t }).then(res =>
         onUpdatePhoto(res as FormData)
       )
     }

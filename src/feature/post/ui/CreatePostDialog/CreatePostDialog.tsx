@@ -1,9 +1,10 @@
 import { ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { ConfirmDialog } from '@/entities/dialog'
 import { postsActions } from '@/entities/post'
-import { getCroppedImage } from '@/shared/helpers/getCroppedImage'
+import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
 import { photoSchema } from '@/shared/helpers/validators/photoSchema'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
@@ -57,18 +58,20 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     const promises = images.map(el => {
       const crop = el.aspect === 0 ? null : el.croppedAreaPixels
 
-      return getCroppedImage({ crop, imageSrc: el.imageURL, mode: 'url', t }) as Promise<string>
+      return getModifiedImage({ crop, imageSrc: el.imageURL, mode: 'url', t }) as Promise<string>
     })
 
-    Promise.all(promises).then(images => {
-      dispatch(postsActions.setCroppedImages(images))
-      setCurrentWindow('filter')
-    })
+    Promise.all(promises)
+      .then(images => {
+        dispatch(postsActions.setCroppedImages(images))
+        setCurrentWindow('filter')
+      })
+      .catch(e => toast.error(e.message))
   }
 
   const handleSetImagesWithFilters = () => {
     const promises = croppedImages.map(el => {
-      return getCroppedImage({
+      return getModifiedImage({
         filter: el.filter,
         imageSrc: el.imageURL,
         mode: 'filters',
@@ -76,10 +79,12 @@ export const CreatePostDialog = ({ trigger }: Props) => {
       }) as Promise<string>
     })
 
-    Promise.all(promises).then(images => {
-      dispatch(postsActions.setImagesWithFilters(images))
-      setCurrentWindow('description')
-    })
+    Promise.all(promises)
+      .then(images => {
+        dispatch(postsActions.setImagesWithFilters(images))
+        setCurrentWindow('description')
+      })
+      .catch(e => toast.error(e.message))
   }
 
   const handleClickNext = () => {

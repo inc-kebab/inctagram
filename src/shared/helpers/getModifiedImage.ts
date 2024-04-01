@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify'
-
 import { LocaleType } from '@/../locales'
 
 const filtersStyle = {
@@ -25,7 +23,7 @@ type Params = {
   t: LocaleType
 }
 
-export const getCroppedImage = ({
+export const getModifiedImage = ({
   crop = null,
   fileName = 'file',
   filter,
@@ -81,7 +79,6 @@ export const getCroppedImage = ({
 
       canvas.toBlob(blob => {
         if (!blob) {
-          toast.error(t.validation.imgLoad)
           reject(new Error(t.validation.imgLoad))
 
           return
@@ -100,8 +97,7 @@ export const getCroppedImage = ({
       }, 'image/jpeg')
     }
 
-    image.onerror = error => {
-      toast.error(t.validation.imgLoad)
+    image.onerror = () => {
       reject(new Error(t.validation.imgLoad))
     }
   })
