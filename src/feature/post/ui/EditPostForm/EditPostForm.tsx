@@ -19,10 +19,11 @@ type Props = {
   currentDescription?: Nullable<string> // ? check
   disabled?: boolean
   onSubmit: (data: EditPostFormValues) => void
+  titleSubmit?: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, AdditionalRefProps>, Props>(
-  ({ className, currentDescription, disabled, onSubmit, ...rest }, ref) => {
+  ({ className, currentDescription, disabled, onSubmit, titleSubmit, ...rest }, ref) => {
     const { locale, t } = useTranslation()
 
     const {
@@ -65,7 +66,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
           >{`${watch('description').length}/500`}</Typography>
         </div>
         <Button className={s.btn} disabled={disabled && isValid} type="submit">
-          {t.pages.post.editPostModal.acceptBtn}
+          {titleSubmit || t.pages.post.editPostModal.acceptBtn}
         </Button>
       </form>
     )

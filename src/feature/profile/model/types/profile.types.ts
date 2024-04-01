@@ -5,13 +5,6 @@ export type Avatar = {
   width: number
 }
 
-export type CroppedArea = {
-  height: number
-  width: number
-  x: number
-  y: number
-}
-
 export type AddAvatarResponse = {
   'avatar-medium': Nullable<Avatar>
   'avatar-thumbnail': Nullable<Avatar>

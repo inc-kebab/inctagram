@@ -1,9 +1,8 @@
-import { ReactElement } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
-import { useGetMyProfileQuery } from '@/feature/profile'
 import { PostDetailsDialogs, invalidateTagsPost, useGetMyPostsQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
@@ -25,10 +24,10 @@ const Profile: Page = () => {
     setCurrentPost(post)
     setOpenPostDetailsModal(true)
   }
-          
+
   const { data, isLoading } = useGetMyProfileQuery()
   const { data: posts, isFetching, isLoading: isPostsLoad } = useGetMyPostsQuery({ cursor })
-          
+
   const dispatch = useDispatch()
 
   useInfinityScroll({
@@ -44,7 +43,7 @@ const Profile: Page = () => {
   }, [dispatch])
 
   if (isLoading) {
-    return <Loader fullHeight />
+    return <Loader containerHeight />
   }
 
   return (

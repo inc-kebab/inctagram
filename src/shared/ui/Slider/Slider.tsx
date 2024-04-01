@@ -15,7 +15,7 @@ export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, Props>(
     const { className, sliderThumbClass, sliderTrackClass, ...rest } = props
 
     return (
-      <RadixSlider.Root className={clsx(s.sliderRoot, className)} {...rest}>
+      <RadixSlider.Root className={clsx(s.sliderRoot, className)} {...rest} ref={ref}>
         <RadixSlider.Track className={clsx(s.sliderTrack, sliderTrackClass)}>
           <RadixSlider.Range className={s.sliderRange} />
         </RadixSlider.Track>

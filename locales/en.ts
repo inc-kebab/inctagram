@@ -11,6 +11,7 @@ export const en = {
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
+    discard: 'Discard',
     no: 'No',
     publish: 'Publish',
     resendVerificationLink: 'Resend verification link',
@@ -110,6 +111,11 @@ export const en = {
     },
     post: {
       addPhoto: 'Add Photo',
+      confirmCloseCreateModal: {
+        message:
+          'Do you really want to close the creation of a publication? If you close everything will be deleted',
+        title: 'Close',
+      },
       cropping: 'Cropping',
       deletePost: 'Delete Post',
       deletePostQuestion: 'Are you sure you want to delete this post?',
@@ -127,6 +133,7 @@ export const en = {
       next: 'Next',
       publication: 'Publication',
       publish: 'Publish',
+      successCreate: 'Success create post!',
     },
     privacy: {
       changes:

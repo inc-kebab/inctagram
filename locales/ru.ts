@@ -9,6 +9,7 @@ export const ru: LocaleType = {
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
+    discard: 'Отменить',
     no: 'Нет',
     publish: 'Опубликовать',
     resendVerificationLink: 'Отправить повторное подтверждение',
@@ -109,6 +110,11 @@ export const ru: LocaleType = {
     },
     post: {
       addPhoto: 'Добавить Фото',
+      confirmCloseCreateModal: {
+        message:
+          'Вы действительно хотите закрыть создание публикации? Если вы закроете ее, все будет удалено',
+        title: 'Закрыть',
+      },
       cropping: 'Обрезка',
       deletePost: 'Удалить пост',
       deletePostQuestion: 'Вы уверены, что хотите удалить этот пост?',
@@ -126,6 +132,7 @@ export const ru: LocaleType = {
       next: 'Далее',
       publication: 'Публикация',
       publish: 'Опубликовать',
+      successCreate: 'Пост успешно создан!',
     },
     privacy: {
       changes:

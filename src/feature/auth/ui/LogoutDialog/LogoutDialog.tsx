@@ -1,10 +1,10 @@
 import { ReactNode, useState } from 'react'
 
+import { ConfirmDialog } from '@/entities/dialog'
 import { useMeQuery } from '@/feature/auth'
 import { Logout } from '@/shared/assets/icons/common'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Button } from '@/shared/ui/Button'
-import { ConfirmDialog } from '@/widgets/dialogs'
 
 import s from './LogoutDialog.module.scss'
 
