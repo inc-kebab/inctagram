@@ -4,7 +4,10 @@ import { NextRequest, NextResponse } from 'next/server'
 export function middleware(req: NextRequest) {
   const token = req.cookies.get('accessToken')?.value
 
-  const isPublicRoute = req.nextUrl.pathname.startsWith('/auth') || req.nextUrl.pathname === '/'
+  const isPublicRoute =
+    req.nextUrl.pathname.startsWith('/auth') ||
+    req.nextUrl.pathname === '/' ||
+    req.nextUrl.pathname.startsWith('/public')
 
   if (token && isPublicRoute) {
     return NextResponse.redirect(new URL(AppRoutes.HOME, req.url))
