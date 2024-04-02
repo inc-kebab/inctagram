@@ -1,5 +1,50 @@
-.expandBtn {
-  padding: 6px;
-  color: var(--light-100);
-  background-color: rgba(#171717, 0.7); // dark-500
+.zoomInContainer {
+  position: absolute;
+  bottom: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 124px;
+  height: 36px;
+
+  background-color: rgba(#171717, 0.7);
+  border-radius: 2px;
+}
+
+.zoomInBtn {
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+
+  background-color: rgba(#171717, 0.7);
+
+  .isOpenIcon {
+    color: var(--primary-500);
+  }
+
+  &:hover {
+    color: var(--primary-500);
+    background-color: rgba(#171717, 0.7);
+  }
+}
+
+.squareBtn {
+  padding: 0;
+}
+
+.slider {
+  width: 100px;
+}
+
+.sliderTrackClass {
+  height: 3px;
+}
+
+.sliderThumbClass {
+  width: 7px;
+  height: 7px;
+  box-shadow: 0 0 0 4px var(--primary-500);
 }
