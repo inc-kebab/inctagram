@@ -1,8 +1,11 @@
+@import '@/app/styles/mixins';
+
 .ProfileInfo {
   display: flex;
   gap: 38px;
   align-items: flex-start;
   margin-bottom: 48px;
+  position: relative;
 }
 
 .info {
@@ -44,5 +47,32 @@
     & .count {
       font-weight: var(--font-weight-bold);
     }
+  }
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+}
+
+@include mobile {
+  .avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .subscriber {
+    gap: unset;
+    width: 100%;
+  }
+  .item {
+    font-size: var(--font-size-xs);
+  }
+  .name {
+    font-size: var(--font-size-m);
+    margin: 0;
+    position: absolute;
+    top: 75px;
+    left: 0;
   }
 }

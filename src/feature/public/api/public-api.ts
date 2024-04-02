@@ -11,9 +11,9 @@ export const publicApi = baseApi.injectEndpoints({
     }),
     getPublicProfile: builder.query<GetPostsResponse, number >({
       query: (userId)  => ({  url: `/public-profile/${userId}` })
-    }),
-  }), 
-})
+    }), 
+  }),  
+}) 
 
 export const {useGetAllPublicPostsQuery, useGetAllUsersPostsQuery, useGetPublicProfileQuery } = publicApi
 

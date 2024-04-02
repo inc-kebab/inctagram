@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { CounterRegisteredUsers } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
 import { useGetAllPublicPostsQuery } from '@/feature/public/api/public-api'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -35,6 +36,7 @@ const Public: Page = () => {
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
       <main style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-around' }}>
+        <CounterRegisteredUsers count={12} />
         {allPosts?.items.slice(0, 4).map(item => (
           <div key={item.id}>
             <Image alt="" height={200} src={item.images[0].url} width={200} />

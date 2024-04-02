@@ -1,6 +1,6 @@
 export type Images = {
   fileSize: number;
-  height: number;
+  height: number; 
   uploadId: string;
   url: string;
   width: number;

@@ -1,51 +1,58 @@
-import { ReactElement, useRef, useState } from 'react';
+import { ReactElement, useRef, useState } from "react";
 
-import { PostItem, PostsList } from '@/entities/post';
-import { ProfileInfo } from '@/entities/profile';
-import { PostDetailsDialogs } from '@/feature/post';
-import { GetPostsResponse, GetPublicProfileResponse } from '@/feature/public/model/types/public';
+import { PostItem, PostsList } from "@/entities/post";
+import { ProfileInfo } from "@/entities/profile";
+import { PostDetailsDialogs } from "@/feature/post";
+import { GetPostsResponse, GetPublicProfileResponse } from "@/feature/public/model/types/public";
 import { useInfinityScroll } from "@/shared/hooks/useInfinityScroll";
-import { PublicLayout } from '@/widgets/layout';
-import { GetServerSidePropsContext } from 'next';
+import { PublicLayout } from "@/widgets/layout";
+import { GetServerSidePropsContext } from "next";
 
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ownerId = context.params?.ownerId;
 
-  const getAllUsersPostsResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public-posts/user/${Number(ownerId)}`);
-  const allUsersPosts = await getAllUsersPostsResponse.json();
+  const [getAllUsersPostsResponse, getPublicProfileResponse] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public-posts/user/${Number(ownerId)}`),
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public-profile/${Number(ownerId)}`)
+ ])
 
-  const getPublicProfile = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public-profile/${Number(ownerId)}`);
-  const publicProfile = await getPublicProfile.json();
+ const [allUsersPosts, publicProfile] = await Promise.all([
+    getAllUsersPostsResponse.json(),
+    getPublicProfileResponse.json()
+ ])
 
-   if (!allUsersPosts || !publicProfile) {
+  if (!allUsersPosts || !publicProfile) {
     return { notFound: true };
   }
 
   return {
-       props: {
-       allUsersPosts ,  publicProfile
-     },
-   };
+    props: {
+      allUsersPosts, publicProfile
+    }
+  };
 };
 
-const OwnerPage = ({ allUsersPosts, publicProfile }: { allUsersPosts: GetPostsResponse , publicProfile: GetPublicProfileResponse}) => {
+const OwnerPage = ({ allUsersPosts, publicProfile }: {
+  allUsersPosts: GetPostsResponse,
+  publicProfile: GetPublicProfileResponse
+}) => {
 
-  const triggerRef = useRef<HTMLDivElement | null>(null)
-  const [cursor, setCursor] = useState<number | undefined>(undefined)
-  const [currentPost,  setCurrentPost] = useState<Nullable<PostItem>>(null)
-  const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false)
+  const triggerRef = useRef<HTMLDivElement | null>(null);
+  const [cursor, setCursor] = useState<number | undefined>(undefined);
+  const [currentPost, setCurrentPost] = useState<Nullable<PostItem>>(null);
+  const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false);
 
   const handleChangeCurrentPost = (post: PostItem) => {
-    setCurrentPost(post)
-    setOpenPostDetailsModal(true)
-   }
+    setCurrentPost(post);
+    setOpenPostDetailsModal(true);
+  };
 
   useInfinityScroll({
     callback: () => setCursor(allUsersPosts?.cursor),
     hasMore: allUsersPosts?.hasMore,
-    triggerRef,
-  })
+    triggerRef
+  });
 
   return (
     <>
@@ -53,15 +60,16 @@ const OwnerPage = ({ allUsersPosts, publicProfile }: { allUsersPosts: GetPostsRe
         myProfile={false}
         userData={{
           aboutMe: publicProfile.aboutMe,
-          avatar: publicProfile?.avatars?.['avatar-medium']?.url,
-          username: publicProfile?.username,
+          avatar: publicProfile?.avatars?.["avatar-medium"]?.url,
+          username: publicProfile?.username
         }}
       />
-          <PostsList
-             list={allUsersPosts?.items}
-             onSetCurrentPost={handleChangeCurrentPost}
-             ref={triggerRef}
-           />
+      <PostsList
+        cursor={allUsersPosts.cursor}
+        list={allUsersPosts?.items}
+        onSetCurrentPost={handleChangeCurrentPost}
+        ref={triggerRef}
+      />
       <PostDetailsDialogs
         currentPost={currentPost}
         openPostDetailsModal={openPostDetailsModal}
@@ -69,11 +77,11 @@ const OwnerPage = ({ allUsersPosts, publicProfile }: { allUsersPosts: GetPostsRe
         setOpenPostDetailsModal={setOpenPostDetailsModal}
       />
     </>
-  )
-}
+  );
+};
 
 OwnerPage.getLayout = (page: ReactElement) => {
-  return <PublicLayout>{page}</PublicLayout>
-}
+  return <PublicLayout>{page}</PublicLayout>;
+};
 
-export default OwnerPage
+export default OwnerPage;
