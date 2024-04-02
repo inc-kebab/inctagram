@@ -3,18 +3,23 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { CounterRegisteredUsers } from './CounterRegisteredUsers'
 
 const meta = {
-  argTypes: {},
-  component: CounterRegisteredUsers,
-  parameters: {
-    layout: 'fullscreen', //change
+  argTypes: {
+    count: {
+      control: 'number',
+      description: 'Current count of registered users',
+    },
   },
-  title: 'components/CounterRegisteredUsers', //change
+  component: CounterRegisteredUsers,
+  tags: ['autodocs'],
+  title: 'entities/User/CounterRegisteredUsers',
 } satisfies Meta<typeof CounterRegisteredUsers>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Demo: Story = {
-  args: {},
+export const Default: Story = {
+  args: {
+    count: 34566,
+  },
 }
