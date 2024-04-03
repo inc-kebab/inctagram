@@ -3,9 +3,9 @@
 .ProfileInfo {
   display: grid;
   grid-template-areas:
-    "avatar name settings"
-    "avatar subscriber ."
-    "avatar aboutMe aboutMe";
+    'avatar name settings'
+    'avatar subscriber .'
+    'avatar aboutMe aboutMe';
   grid-template-columns: auto 1fr;
   grid-template-rows: auto;
   gap: 20px 38px;
@@ -60,16 +60,14 @@
       }
     }
   }
-
 }
-
 
 @include mobile {
   .ProfileInfo {
     grid-template-areas:
-      "avatar subscriber"
-      "name ."
-      "aboutMe aboutMe";
+      'avatar subscriber'
+      'name .'
+      'aboutMe aboutMe';
     row-gap: 10px;
     place-items: center center;
     margin-bottom: 29px;
