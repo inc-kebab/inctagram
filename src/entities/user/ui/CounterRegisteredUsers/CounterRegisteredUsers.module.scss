@@ -1,0 +1,39 @@
+@import '@/app/styles/mixins';
+
+.root {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 24px;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+
+  padding: 8px;
+
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}
+
+.number {
+  padding: 4px 10px;
+
+  &:not(:last-child) {
+    border-right: 1px solid var(--dark-300);
+  }
+}
+
+@include mobile-small {
+  .root {
+    flex-direction: column;
+  }
+}

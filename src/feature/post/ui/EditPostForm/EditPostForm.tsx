@@ -16,7 +16,7 @@ import { AdditionalRefProps } from '../../model/types/post.types'
 import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPostSchema'
 
 type Props = {
-  currentDescription?: Nullable<string> // ? check
+  currentDescription?: Nullable<string>
   disabled?: boolean
   onSubmit: (data: EditPostFormValues) => void
   titleSubmit?: string
@@ -39,7 +39,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
       defaultValues: {
         description: currentDescription || '',
       },
-      mode: 'onTouched',
+      mode: 'all',
       resolver: zodResolver(editPostSchema(t)),
     })
 
@@ -65,7 +65,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
             variant="smallLink"
           >{`${watch('description').length}/500`}</Typography>
         </div>
-        <Button className={s.btn} disabled={disabled && isValid} type="submit">
+        <Button className={s.btn} disabled={disabled || !isValid} type="submit">
           {titleSubmit || t.pages.post.editPostModal.acceptBtn}
         </Button>
       </form>
