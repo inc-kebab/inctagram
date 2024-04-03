@@ -32,6 +32,7 @@ export const ExpandBtn = ({ className, classNameTrigger, currentAspect, imageURL
     <Dropdown.Menu
       align="start"
       className={clsx(s.viewport, className)}
+      modal={false}
       portal={false}
       side="top"
       sideOffset={2}

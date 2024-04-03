@@ -29,11 +29,12 @@ export const CropperImage = ({ image, onChangeZoom }: Props) => {
       crop={crop}
       cropShape="rect"
       image={imageURL}
-      objectFit="contain"
+      objectFit="cover"
       onCropChange={handleChangeCrop}
       onCropComplete={handleCropComplete(imageURL)}
       onZoomChange={onChangeZoom}
       showGrid={false}
+      style={{ cropAreaStyle: { border: '2px solid var(--primary-500)' } }}
       zoom={zoom}
     />
   )
