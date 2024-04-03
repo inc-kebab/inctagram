@@ -42,7 +42,11 @@ export const ProfileInfo = ({ className, userData }: Props) => {
             <span className={s.count}>2 764</span> Publications
           </li>
         </ul>
-        {userData?.aboutMe && <Typography variant="regular16">{userData.aboutMe}</Typography>}
+        {userData?.aboutMe && (
+          <Typography className={s.text} variant="regular16">
+            {userData.aboutMe}
+          </Typography>
+        )}
       </div>
     </div>
   )
