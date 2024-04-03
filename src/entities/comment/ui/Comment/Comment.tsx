@@ -5,7 +5,9 @@ import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 import clsx from 'clsx'
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow'
+import { enUS, ru } from 'date-fns/locale'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import s from './Comment.module.scss'
 
@@ -30,7 +32,12 @@ export const Comment = ({
   name,
   time,
 }: Props) => {
-  const dateAgo = formatDistanceToNow(new Date(time))
+  const { locale } = useRouter()
+
+  const dateAgo = formatDistanceToNow(new Date(time), {
+    addSuffix: true,
+    locale: locale === 'ru' ? ru : enUS,
+  })
 
   return (
     <div className={clsx(s.comment, className)}>
@@ -46,7 +53,7 @@ export const Comment = ({
               </Typography>
             </Link>
             {commentText && (
-              <Typography asComponent="span" variant="regular14">
+              <Typography asComponent="span" className={s.text} variant="regular14">
                 {commentText}
               </Typography>
             )}
@@ -59,7 +66,7 @@ export const Comment = ({
         </div>
         <div className={s.commentFooter}>
           <Typography asComponent="span" variant="small">
-            {dateAgo} ago
+            {dateAgo}
           </Typography>
           {!!likesCount && (
             <Typography asComponent="span" variant="small">

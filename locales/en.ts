@@ -16,6 +16,7 @@ export const en = {
     publish: 'Publish',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
+    saveDraft: 'Save draft',
     selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',

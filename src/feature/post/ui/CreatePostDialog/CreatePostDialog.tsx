@@ -142,6 +142,10 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     dispatch(postsActions.resetAllImages())
   }
 
+  const handleCloseConfirmModal = () => {
+    setOpenConfirm(false)
+  }
+
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
       case images.length === 0 && currentWindow === 'upload': {
@@ -150,7 +154,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         )
       }
       case currentWindow === 'expand': {
-        return <CropperPostScreen images={images} />
+        return <CropperPostScreen images={images} onChangeCurrentWindow={setCurrentWindow} />
       }
       case currentWindow === 'filter': {
         return <FiltersScreen croppedImages={croppedImages} />
@@ -184,10 +188,10 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         content={t.pages.post.confirmCloseCreateModal.message}
         customActions={
           <div className={s.confirmActions}>
-            <Button onClick={handleCloseModals} variant="outline">
+            <Button onClick={handleCloseConfirmModal} variant="outline">
               {t.button.discard}
             </Button>
-            <Button onClick={handleCloseModals}>{t.button.save}</Button>
+            <Button onClick={handleCloseModals}>{t.button.saveDraft}</Button>
           </div>
         }
         onOpenChange={setOpenConfirm}

@@ -16,13 +16,15 @@ import s from './CropperPostScreen.module.scss'
 
 import { useDeleteImageMutation } from '../../api/post-api'
 import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
+import { CurrentWindow } from '../../model/types/post.types'
 import { CropperImage } from './CropperImage'
 
 type Props = {
   images: ImageObj[]
+  onChangeCurrentWindow?: (window: CurrentWindow) => void
 }
 
-export const CropperPostScreen = ({ images }: Props) => {
+export const CropperPostScreen = ({ images, onChangeCurrentWindow }: Props) => {
   const dispatch = useAppDispatch()
 
   const [controlledSwiper, setControlledSwiper] = useState<SwiperClass | null>(null)
@@ -39,6 +41,10 @@ export const CropperPostScreen = ({ images }: Props) => {
       })
     }
     dispatch(postsActions.removeImage(imageObj.imageURL))
+
+    if (images.length === 1) {
+      onChangeCurrentWindow?.('upload')
+    }
   }
 
   const handleChangeZoom = (imageURL: string) => (zoom: number) => {
