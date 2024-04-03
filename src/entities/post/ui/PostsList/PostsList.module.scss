@@ -12,10 +12,5 @@
 @include mobile {
   .PostsList {
     grid-template-columns: repeat(3, 1fr);
-
-    .size {
-      width: 108px;
-      height: 108px;
-    }
   }
 }

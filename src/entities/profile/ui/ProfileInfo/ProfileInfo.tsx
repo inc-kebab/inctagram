@@ -19,34 +19,39 @@ export const ProfileInfo = ({ className, myProfile = true, userData }: Props) =>
   return (
     <div className={clsx(s.ProfileInfo, className)}>
       <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} />
-      <div className={s.info}>
-        <div className={s.header}>
-          <Typography asComponent="h2" className={s.name} variant="h1">
-            {userData?.username}
-          </Typography>
-          {myProfile && (
-            <Button
-              asComponent={Link}
-              href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
-              variant="secondary"
-            >
-              Profile settings
-            </Button>
-          )}
-        </div>
-        <ul className={s.subscriber}>
-          <li className={s.item}>
-            <span className={s.count}>2 218</span> Following
-          </li>
-          <li className={s.item}>
-            <span className={s.count}>2 358</span> Followers
-          </li>
-          <li className={s.item}>
-            <span className={s.count}>2 764</span> Publications
-          </li>
-        </ul>
-        {userData?.aboutMe && <Typography variant="regular16">{userData.aboutMe}</Typography>}
-      </div>
+
+      <Typography asComponent="h2" className={s.name} variant="h1">
+        {userData?.username}
+      </Typography>
+
+      {myProfile && (
+        <Button
+          asComponent={Link}
+          className={s.settings}
+          href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
+          variant="secondary"
+        >
+          Profile settings
+        </Button>
+      )}
+
+      <ul className={s.subscriber}>
+        <li className={s.item}>
+          <span className={s.count}>2 218</span> Following
+        </li>
+        <li className={s.item}>
+          <span className={s.count}>2 358</span> Followers
+        </li>
+        <li className={s.item}>
+          <span className={s.count}>2 764</span> Publications
+        </li>
+      </ul>
+
+      {userData?.aboutMe && (
+        <Typography className={s.aboutMe} variant="regular16">
+          {userData.aboutMe}
+        </Typography>
+      )}
     </div>
   )
 }

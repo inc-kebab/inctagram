@@ -24,7 +24,6 @@ export const PostsList = forwardRef<HTMLDivElement, Props>(
       <div className={clsx(s.PostsList, className)}>
         {list.map(el => (
           <PostPreviewCard
-            className={s.size}
             description={el.description}
             imageSrc={el.images[0].url}
             key={el.id}
