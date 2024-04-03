@@ -20,6 +20,8 @@ import { DescriptionScreen } from '../DescriptionScreen/DescriptionScreen'
 import { FiltersScreen } from '../FiltersScreen/FiltersScreen'
 import { Title } from './Title/Title'
 
+const MAX_SIZE_IMAGE = 20971520 // 20Mb
+
 type Props = {
   trigger: ReactNode
 }
@@ -143,7 +145,9 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
       case images.length === 0 && currentWindow === 'upload': {
-        return <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t)} />
+        return (
+          <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t, MAX_SIZE_IMAGE)} />
+        )
       }
       case currentWindow === 'expand': {
         return <CropperPostScreen images={images} />
