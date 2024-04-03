@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 export const editPostSchema = (t: LocaleType) => {
   return z.object({
-    description: z.string().trim().max(500, t.validation.maxLength(500)),
+    description: z.string().max(500, t.validation.maxLength(500)),
   })
 }
 
