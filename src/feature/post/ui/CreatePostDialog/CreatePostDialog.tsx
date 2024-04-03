@@ -150,7 +150,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         )
       }
       case currentWindow === 'expand': {
-        return <CropperPostScreen images={images} />
+        return <CropperPostScreen images={images} onChangeCurrentWindow={setCurrentWindow} />
       }
       case currentWindow === 'filter': {
         return <FiltersScreen croppedImages={croppedImages} />
