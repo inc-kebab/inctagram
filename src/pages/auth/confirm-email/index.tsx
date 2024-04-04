@@ -8,6 +8,7 @@ import {
   useResendRegLinkMutation,
 } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
 import { AuthLayout } from '@/widgets/layout'
@@ -71,4 +72,4 @@ ConfirmEmail.getLayout = (page, t) => {
   )
 }
 
-export default ConfirmEmail
+export default DefenderAuthRoute(ConfirmEmail)

@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 
 import { ErrorBoundary, store } from '@/app'
 import { useLoader } from '@/shared/hooks/useLoader'
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
 import { setCookie } from 'cookies-next'
 import { Inter } from 'next/font/google'
+import { useRouter } from 'next/router'
 
 import 'react-toastify/dist/ReactToastify.css'
 import '@/app/styles/nprogress.scss'
@@ -24,9 +24,7 @@ const inter = Inter({ subsets: ['latin', 'cyrillic'], weight: ['400', '600', '70
 export default function App({ Component, pageProps }: Props) {
   useLoader()
 
-  const { locale, t } = useTranslation()
-
-  const getLayout = Component.getLayout ?? (page => page)
+  const { locale } = useRouter()
 
   useEffect(() => {
     setCookie('NEXT_LOCALE', locale, { maxAge: 100 * 365 * 24 * 60 * 60 }) // 1year
@@ -35,7 +33,7 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <ErrorBoundary>
-        {getLayout(<Component className={inter.className} {...pageProps} />, t)}
+        <Component className={inter.className} {...pageProps} />
         <ToastProvider />
       </ErrorBoundary>
     </Provider>

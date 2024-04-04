@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { ConfirmDialog } from '@/entities/dialog'
-import { postsActions } from '@/entities/post'
+import { MAX_SIZE_IMAGE_20MB, postsActions } from '@/entities/post'
 import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
 import { photoSchema } from '@/shared/helpers/validators/photoSchema'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -19,8 +19,6 @@ import { CropperPostScreen } from '../CropperPostScreen/CropperPostScreen'
 import { DescriptionScreen } from '../DescriptionScreen/DescriptionScreen'
 import { FiltersScreen } from '../FiltersScreen/FiltersScreen'
 import { Title } from './Title/Title'
-
-const MAX_SIZE_IMAGE = 20971520 // 20Mb
 
 type Props = {
   trigger: ReactNode
@@ -142,15 +140,22 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     dispatch(postsActions.resetAllImages())
   }
 
+  const handleCloseConfirmModal = () => {
+    setOpenConfirm(false)
+  }
+
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
       case images.length === 0 && currentWindow === 'upload': {
         return (
-          <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t, MAX_SIZE_IMAGE)} />
+          <PhotoUploader
+            setPhoto={handleSetPhoto}
+            zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)}
+          />
         )
       }
       case currentWindow === 'expand': {
-        return <CropperPostScreen images={images} />
+        return <CropperPostScreen images={images} onChangeCurrentWindow={setCurrentWindow} />
       }
       case currentWindow === 'filter': {
         return <FiltersScreen croppedImages={croppedImages} />
@@ -184,10 +189,10 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         content={t.pages.post.confirmCloseCreateModal.message}
         customActions={
           <div className={s.confirmActions}>
-            <Button onClick={handleCloseModals} variant="outline">
+            <Button onClick={handleCloseConfirmModal} variant="outline">
               {t.button.discard}
             </Button>
-            <Button onClick={handleCloseModals}>{t.button.save}</Button>
+            <Button onClick={handleCloseModals}>{t.button.saveDraft}</Button>
           </div>
         }
         onOpenChange={setOpenConfirm}

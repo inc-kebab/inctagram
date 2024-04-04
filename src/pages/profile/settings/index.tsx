@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useMemo, useState } from 'react'
 
 import { GeneralInformation } from '@/feature/profile'
+import { DefenderProtectedRoute } from '@/shared/helpers/hoc/DefenderProtectedRoute'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
@@ -73,4 +74,4 @@ ProfileSettings.getLayout = (page, t) => {
   )
 }
 
-export default ProfileSettings
+export default DefenderProtectedRoute(ProfileSettings)

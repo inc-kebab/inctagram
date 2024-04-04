@@ -12,7 +12,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const Public: Page = () => {
-  const [loading, setLoading] = useState(true)
+  const { t } = useTranslation()
+  /*  const [loading, setLoading] = useState(true)
 
   const { push } = useRouter()
 
@@ -31,7 +32,7 @@ const Public: Page = () => {
 
   if (loading) {
     return <Loader fullHeight />
-  }
+  }*/
 
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
