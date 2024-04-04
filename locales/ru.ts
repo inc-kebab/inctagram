@@ -130,6 +130,7 @@ export const ru: LocaleType = {
         areaLabel: 'Добавьте описания публикаций',
       },
       filters: 'Фильтры',
+      maxPost: 'Может быть загружено не более 10 изображений',
       next: 'Далее',
       publication: 'Публикация',
       publish: 'Опубликовать',

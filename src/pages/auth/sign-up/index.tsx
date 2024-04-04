@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import { DialogEmailSent } from '@/entities/dialog'
 import { SignUpForm, SignUpFormValues, useSignUpMutation } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { AuthLayout } from '@/widgets/layout'
@@ -61,4 +62,4 @@ SignUp.getLayout = (page, t) => {
   )
 }
 
-export default SignUp
+export default DefenderAuthRoute(SignUp)

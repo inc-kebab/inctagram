@@ -131,6 +131,7 @@ export const en = {
         areaLabel: 'Add publication descriptions',
       },
       filters: 'Filters',
+      maxPost: 'A maximum of 10 images can be uploaded',
       next: 'Next',
       publication: 'Publication',
       publish: 'Publish',

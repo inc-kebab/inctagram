@@ -1,18 +1,14 @@
 import { useEffect } from 'react'
 
-import { useLazyMeQuery } from '@/feature/auth'
-import { AppRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
-import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 const RedirectProvider = () => {
-  const { asPath, locale, push, query } = useRouter()
+  const { query } = useRouter()
 
   const params = useSearchParams()
-
-  const [getMe] = useLazyMeQuery()
 
   useEffect(() => {
     if (query.provider) {
@@ -24,20 +20,9 @@ const RedirectProvider = () => {
         if (token) {
           setCookie('accessToken', token, { maxAge: 30 * 60 }) // 30min
         }
-      } else {
-        token = getCookie('accessToken')
       }
-
-      getMe().then(res => {
-        if ('data' in res && token) {
-          void push(AppRoutes.PROFILE, asPath, { locale })
-        } else {
-          deleteCookie('accessToken')
-          void push(AppRoutes.MAIN, asPath, { locale })
-        }
-      })
     }
-  }, [query.provider, params, push, getMe, asPath, locale])
+  }, [query.provider, params])
 
   return <Loader fullHeight />
 }

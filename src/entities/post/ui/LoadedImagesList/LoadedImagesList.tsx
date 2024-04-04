@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+
 import { Close } from '@/shared/assets/icons/common'
 import { Image as ImageIcon, PlusCircle } from '@/shared/assets/icons/outline'
 import { photoSchema } from '@/shared/helpers/validators/photoSchema'
@@ -10,6 +13,7 @@ import Image from 'next/image'
 
 import s from './LoadedImagesList.module.scss'
 
+import { MAX_SIZE_IMAGE_20MB } from '../../model/const'
 import { ImageObj } from '../../model/types/postSlice.types'
 
 type Props = {
@@ -31,14 +35,34 @@ export const LoadedImagesList = ({
 }: Props) => {
   const { t } = useTranslation()
 
+  const [error, setError] = useState('')
+
   const handleSetPhoto = (file: File) => {
-    onSetImage(URL.createObjectURL(file))
+    if (images.length > 9) {
+      setError(t.pages.post.maxPost)
+
+      return
+    }
+
+    if (!error) {
+      onSetImage(URL.createObjectURL(file))
+    }
+    setError('')
   }
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error)
+      setError('')
+    }
+  }, [error])
 
   return (
     <Dropdown.Menu
       align="end"
       className={clsx(s.viewport, className)}
+      modal={false}
+      portal={false}
       side="top"
       sideOffset={2}
       trigger={
@@ -73,7 +97,12 @@ export const LoadedImagesList = ({
             )
           })}
         </div>
-        <InputFile accept=".png, .jpg, .jpeg" setFile={handleSetPhoto} zodSchema={photoSchema(t)}>
+        <InputFile
+          accept=".png, .jpg, .jpeg"
+          setError={setError}
+          setFile={handleSetPhoto}
+          zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)}
+        >
           <PlusCircle className={s.addImageBtn} />
         </InputFile>
       </Dropdown.Item>

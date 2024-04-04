@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { ConfirmDialog } from '@/entities/dialog'
-import { postsActions } from '@/entities/post'
+import { MAX_SIZE_IMAGE_20MB, postsActions } from '@/entities/post'
 import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
 import { photoSchema } from '@/shared/helpers/validators/photoSchema'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -19,8 +19,6 @@ import { CropperPostScreen } from '../CropperPostScreen/CropperPostScreen'
 import { DescriptionScreen } from '../DescriptionScreen/DescriptionScreen'
 import { FiltersScreen } from '../FiltersScreen/FiltersScreen'
 import { Title } from './Title/Title'
-
-const MAX_SIZE_IMAGE = 20971520 // 20Mb
 
 type Props = {
   trigger: ReactNode
@@ -150,7 +148,10 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     switch (true) {
       case images.length === 0 && currentWindow === 'upload': {
         return (
-          <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t, MAX_SIZE_IMAGE)} />
+          <PhotoUploader
+            setPhoto={handleSetPhoto}
+            zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)}
+          />
         )
       }
       case currentWindow === 'expand': {
