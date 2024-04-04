@@ -8,6 +8,7 @@ import {
   useResendRecoveryPasswordMutation,
 } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { AuthLayout } from '@/widgets/layout'
@@ -79,4 +80,4 @@ ForgotPassword.getLayout = (page, t) => {
   )
 }
 
-export default ForgotPassword
+export default DefenderAuthRoute(ForgotPassword)

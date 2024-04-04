@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 
 import { useLogoutMutation } from '@/feature/auth'
-import { AppRoutes } from '@/shared/const/routes'
+import { AuthRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Meta, MetaProps } from '@/shared/seo/Meta'
@@ -26,7 +26,7 @@ export const SidebarLayout = ({ children, ...rest }: Props) => {
   const handleLogout = () => {
     logout().then(res => {
       if ('data' in res) {
-        void push(AppRoutes.MAIN)
+        void push(AuthRoutes.SIGN_IN)
       }
       if ('error' in res) {
         handleErrorResponse(res.error)
