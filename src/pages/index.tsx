@@ -35,17 +35,27 @@ const Public: Page = () => {
 
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
-      <main style={{ alignItems: 'center', display: 'flex', justifyContent: 'space-around' }}>
+      <main
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+          justifyContent: 'space-around',
+        }}
+      >
         <CounterRegisteredUsers count={12} />
-        {allPosts?.items.slice(0, 4).map(item => (
-          <div key={item.id}>
-            <Image alt="" height={200} src={item.images[0].url} width={200} />
-            <Link href={`public/${item.ownerId}`}>
-              <h2>{item.username}</h2>
-            </Link>
-            <p>{item.description}</p>
-          </div>
-        ))}
+        <div style={{ display: 'flex', gap: '13px' }}>
+          {allPosts?.items.slice(0, 4).map(item => (
+            <div key={item.id}>
+              <Image alt="" height={200} src={item.images[0].url} width={200} />
+              <Link href={`public/${item.ownerId}`}>
+                <h2>{item.username}</h2>
+              </Link>
+              <p>{item.description}</p>
+            </div>
+          ))}
+        </div>
       </main>
     </PublicLayout>
   )

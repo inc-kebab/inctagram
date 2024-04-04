@@ -53,26 +53,20 @@ export const Header = ({ isUnauthorized }: Props) => {
               </div>
 
               <Dropdown.Menu
+                align="end"
+                sideOffset={6}
                 trigger={<Button className={s.mobile} startIcon={<More />} variant="text" />}
               >
-                <>
-                  <Button
-                    asComponent={Link}
-                    className={s.mobileLogin}
-                    href={AuthRoutes.SIGN_IN}
-                    variant="text"
-                  >
+                <Dropdown.Item>
+                  <Typography asComponent={Link} href={AuthRoutes.SIGN_IN} variant="regular14">
                     {t.button.signIn}
-                  </Button>
-                  <Button
-                    asComponent={Link}
-                    className={s.mobileRegister}
-                    href={AuthRoutes.SIGN_UP}
-                    variant="primary"
-                  >
+                  </Typography>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Typography asComponent={Link} href={AuthRoutes.SIGN_UP} variant="regular14">
                     {t.button.signUp}
-                  </Button>
-                </>
+                  </Typography>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </>
           )}
