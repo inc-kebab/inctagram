@@ -5,6 +5,8 @@ import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
 import { PostDetailsDialogs, invalidateTagsPost, useGetMyPostsQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
+import { DefenderProtectedRoute } from '@/shared/helpers/hoc/DefenderProtectedRoute'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
@@ -83,4 +85,4 @@ Profile.getLayout = (page: ReactElement) => {
   return <SidebarLayout>{page}</SidebarLayout>
 }
 
-export default Profile
+export default DefenderProtectedRoute(Profile)

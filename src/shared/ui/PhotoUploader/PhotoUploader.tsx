@@ -10,15 +10,12 @@ import { ZodEffects } from 'zod'
 
 import s from './PhotoUploader.module.scss'
 
-type ModeInputPhoto = 'default' | 'preview'
-
 type Props = {
-  mode?: ModeInputPhoto
   setPhoto: (photo: File) => void
   zodSchema: ZodEffects<any>
 }
 
-export const PhotoUploader = ({ mode = 'default', setPhoto, zodSchema }: Props) => {
+export const PhotoUploader = ({ setPhoto, zodSchema }: Props) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
 
@@ -33,13 +30,9 @@ export const PhotoUploader = ({ mode = 'default', setPhoto, zodSchema }: Props) 
   return (
     <div className={classes.dialogContainer}>
       {error && <Notification className={classes.notification} error={error} />}
-      {mode === 'default' ? (
-        <div className={classes.svgWrapper}>
-          <ImageSvg className={classes.imageSvg} />
-        </div>
-      ) : (
-        <div>add avatar component please</div>
-      )}
+      <div className={classes.svgWrapper}>
+        <ImageSvg className={classes.imageSvg} />
+      </div>
       <InputFile
         accept=".png, .jpg, .jpeg"
         setError={setError}

@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 
 import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
-import { GeneralRoutes } from '@/shared/const/routes'
+import { AppRoutes, GeneralRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { AuthLayout } from '@/widgets/layout'
@@ -13,14 +14,14 @@ import s from './SignIn.module.scss'
 const SignIn: Page = () => {
   const ref = useRef<UseFormRef<SignInFormValues>>(null)
 
-  const { replace } = useRouter()
+  const { push } = useRouter()
 
   const [signIn, { isLoading }] = useLoginMutation()
 
   const handleSignIn = (data: SignInFormValues) => {
     signIn(data).then(res => {
       if ('data' in res) {
-        void replace(GeneralRoutes.REDIRECT + '/credentials')
+        void push(AppRoutes.PROFILE)
       }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError
@@ -54,4 +55,4 @@ SignIn.getLayout = (page, t) => {
   )
 }
 
-export default SignIn
+export default DefenderAuthRoute(SignIn)
