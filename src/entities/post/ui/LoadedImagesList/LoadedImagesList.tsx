@@ -38,6 +38,12 @@ export const LoadedImagesList = ({
   const [error, setError] = useState('')
 
   const handleSetPhoto = (file: File) => {
+    if (images.length > 9) {
+      setError(t.pages.post.maxPost)
+
+      return
+    }
+
     if (!error) {
       onSetImage(URL.createObjectURL(file))
     }
@@ -55,6 +61,8 @@ export const LoadedImagesList = ({
     <Dropdown.Menu
       align="end"
       className={clsx(s.viewport, className)}
+      modal={false}
+      portal={false}
       side="top"
       sideOffset={2}
       trigger={
