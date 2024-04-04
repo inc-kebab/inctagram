@@ -13,17 +13,19 @@ import { EditPostFormValues } from '../../model/utils/validators/editPostSchema'
 
 interface Params {
   callback?: () => void
+  changeStatus?: (status: boolean) => void
   imagesWithFilters: ImageURL[]
   t: LocaleType
 }
 
-export const useCreatePost = ({ callback, imagesWithFilters, t }: Params) => {
+export const useCreatePost = ({ callback, changeStatus, imagesWithFilters, t }: Params) => {
   const createPostRef = useRef<Nullable<UseFormRef<EditPostFormValues, AdditionalRefProps>>>(null)
 
   const [loadImages, { isLoading: isImagesLoad }] = useAddImagesMutation()
   const [createPost, { isLoading: isCreateLoad }] = useCreatePostMutation()
 
   const handleLoadImages = (imagesArray: ImageURL[]) => {
+    changeStatus?.(true)
     const formData = new FormData()
 
     const imagesFiles = imagesArray.map(el =>
@@ -64,6 +66,7 @@ export const useCreatePost = ({ callback, imagesWithFilters, t }: Params) => {
           }
         }
       })
+      .finally(() => changeStatus?.(false))
   }
 
   return {
