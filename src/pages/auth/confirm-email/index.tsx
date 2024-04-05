@@ -8,7 +8,7 @@ import {
   useResendRegLinkMutation,
 } from '@/feature/auth'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
-import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
 import { AuthLayout } from '@/widgets/layout'

@@ -5,7 +5,7 @@ import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
 import { PostDetailsDialogs, invalidateTagsPost, useGetMyPostsQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
-import { DefenderProtectedRoute } from '@/shared/helpers/hoc/DefenderProtectedRoute'
+import { DefenderProtectedRoute } from '@/shared/helpers/hoc'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
@@ -27,7 +27,6 @@ const Profile: Page = () => {
   }
 
   const { data, isLoading } = useGetMyProfileQuery()
-
   const { data: posts, isFetching, isLoading: isPostsLoad } = useGetMyPostsQuery({ cursor })
 
   const dispatch = useDispatch()
@@ -38,11 +37,11 @@ const Profile: Page = () => {
     triggerRef,
   })
 
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(invalidateTagsPost(['myPosts'])) // ??????????
-  //   }
-  // }, [dispatch])
+  useEffect(() => {
+    return () => {
+      dispatch(invalidateTagsPost(['myPosts']))
+    }
+  }, [dispatch])
 
   if (isLoading) {
     return <Loader containerHeight />

@@ -30,6 +30,8 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   const [open, setOpen] = useState(false)
   const [openConfirm, setOpenConfirm] = useState(false)
 
+  const [isRequest, setIsRequest] = useState(false)
+
   const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('upload')
 
   const images = useAppSelector(state => state.posts.images)
@@ -121,7 +123,11 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const handleChangeOpen = (open: boolean) => {
     if (!open) {
-      currentWindow === 'upload' ? setOpen(false) : setOpenConfirm(true)
+      if (currentWindow === 'upload') {
+        setOpen(false)
+      } else if (!isRequest) {
+        setOpenConfirm(true)
+      }
     } else {
       setOpen(true)
     }
@@ -134,10 +140,8 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   }
 
   const handleCloseModals = () => {
-    setOpen(false)
     setOpenConfirm(false)
-    setCurrentWindow('upload')
-    dispatch(postsActions.resetAllImages())
+    handleCloseModal()
   }
 
   const handleCloseConfirmModal = () => {
@@ -161,7 +165,13 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         return <FiltersScreen croppedImages={croppedImages} />
       }
       case currentWindow === 'description': {
-        return <DescriptionScreen images={imagesWithFilters} onCloseModal={handleCloseModal} />
+        return (
+          <DescriptionScreen
+            images={imagesWithFilters}
+            onChangeStatus={setIsRequest}
+            onCloseModal={handleCloseModal}
+          />
+        )
       }
     }
   }
