@@ -65,6 +65,7 @@
     "eslint-config-next": "14.1.0",
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^9.0.11",
+    "next-redux-wrapper": "^8.1.0",
     "sass": "^1.70.0",
     "storybook": "^7.6.11",
     "stylelint": "^16.1.0",

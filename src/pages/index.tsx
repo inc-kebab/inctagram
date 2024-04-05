@@ -1,38 +1,14 @@
-import { useEffect, useState } from 'react'
-
 import { CounterRegisteredUsers } from '@/entities/user'
-import { useMeQuery } from '@/feature/auth'
 import { useGetAllPublicPostsQuery } from '@/feature/public/api/public-api'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
-import { Loader } from '@/shared/ui/Loader'
 import { PublicLayout } from '@/widgets/layout'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 const Public: Page = () => {
   const { t } = useTranslation()
-  /*  const [loading, setLoading] = useState(true)
-
-  const { push } = useRouter()
-
-  const { data } = useMeQuery()
-
-  const { t } = useTranslation()
-  const { data: allPosts } = useGetAllPublicPostsQuery()
-
-  useEffect(() => {
-    if (data) {
-      void push('/home')
-    } else {
-      setLoading(false)
-    }
-  }, [data, push])
-
-  if (loading) {
-    return <Loader fullHeight />
-  }*/
+  const { data: allPosts } = useGetAllPublicPostsQuery(undefined)
 
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
