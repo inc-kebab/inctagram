@@ -1,33 +1,10 @@
-import { useEffect, useState } from 'react'
-
-import { useMeQuery } from '@/feature/auth'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc/DefenderAuthRoute'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
-import { Loader } from '@/shared/ui/Loader'
 import { PublicLayout } from '@/widgets/layout'
-import { useRouter } from 'next/router'
 
 const Public: Page = () => {
   const { t } = useTranslation()
-  /*  const [loading, setLoading] = useState(true)
-
-  const { push } = useRouter()
-
-  const { data } = useMeQuery()
-
-  const { t } = useTranslation()
-
-  useEffect(() => {
-    if (data) {
-      void push('/home')
-    } else {
-      setLoading(false)
-    }
-  }, [data, push])
-
-  if (loading) {
-    return <Loader fullHeight />
-  }*/
 
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
@@ -36,4 +13,8 @@ const Public: Page = () => {
   )
 }
 
-export default Public
+Public.getLayout = (page, t) => {
+  return <PublicLayout title={t.pages.main.metaTitle}>{page}</PublicLayout>
+}
+
+export default DefenderAuthRoute(Public)

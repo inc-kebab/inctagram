@@ -13,16 +13,18 @@ import { EditPostForm } from '../EditPostForm/EditPostForm'
 
 interface Props {
   images: ImageURL[]
+  onChangeStatus?: (status: boolean) => void
   onCloseModal: () => void
 }
 
-export const DescriptionScreen = ({ images, onCloseModal }: Props) => {
+export const DescriptionScreen = ({ images, onChangeStatus, onCloseModal }: Props) => {
   const { t } = useTranslation()
 
   const { data, isLoading } = useGetMyProfileQuery()
 
   const { createPostRef, handleSubmitCreatePost, isCreatePostLoad } = useCreatePost({
     callback: onCloseModal,
+    changeStatus: onChangeStatus,
     imagesWithFilters: images,
     t,
   })

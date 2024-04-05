@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useMemo, useState } from 'react'
 
 import { GeneralInformation } from '@/feature/profile'
-import { DefenderProtectedRoute } from '@/shared/helpers/hoc/DefenderProtectedRoute'
+import { DefenderProtectedRoute } from '@/shared/helpers/hoc'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
