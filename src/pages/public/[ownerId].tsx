@@ -19,7 +19,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     store.dispatch(publicApi.endpoints.getPublicProfile.initiate(Number(ownerId)))
   ]);
 
-  await store.dispatch(publicApi.util.getRunningQueriesThunk());
+  store.dispatch(publicApi.util.getRunningQueriesThunk());
 
   const allUsersPosts = getAllUsersPostsResponse.data;
   const publicProfile = getPublicProfileResponse.data;
