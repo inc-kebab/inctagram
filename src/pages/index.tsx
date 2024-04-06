@@ -1,61 +1,53 @@
-import { store } from '@/app'
+import { wrapper } from '@/app/store/store'
 import { CounterRegisteredUsers } from '@/entities/user'
-import { publicApi, useGetAllPublicPostsQuery } from '@/feature/public/api/public-api'
-import { GetPostsResponse } from '@/feature/public/model/types/public-types'
+import { PostItem, PublicPostsList, getPublicPosts } from '@/feature/public-posts'
+import { getTotalProfileCount } from '@/feature/public-profile'
+import { baseApi } from '@/shared/api/base-api'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { PublicLayout } from '@/widgets/layout'
-import Image from 'next/image'
-import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-export const getStaticProps = async () => {
-  const getAllPosts = await store.dispatch(
-    publicApi.endpoints.getAllPublicPosts.initiate(undefined)
+import s from './mainPublic.module.scss'
+
+export const getStaticProps = wrapper.getStaticProps(store => async () => {
+  const resUsers = await store.dispatch(getTotalProfileCount.initiate())
+  const resPosts = await store.dispatch(
+    getPublicPosts.initiate({ pageSize: 4, sortDirection: 'desc' })
   )
 
-  store.dispatch(publicApi.util.getRunningQueriesThunk())
-
-  const allPosts = getAllPosts.data
-
-  if (!allPosts) {
-    return { notFound: true }
+  if (!resUsers || !resPosts) {
+    return notFound()
   }
+
+  const posts = resPosts.data?.items
+  const countUsers = resUsers.data?.totalUsersCount
+
+  await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
   return {
     props: {
-      allPosts,
+      countUsers,
+      posts,
     },
     revalidate: 60,
   }
+})
+
+type Props = {
+  countUsers: number
+  posts: PostItem[]
 }
 
-const Public = ({ allPosts }: { allPosts: GetPostsResponse }) => {
+const Public: Page<Props> = ({ countUsers, posts }) => {
   const { t } = useTranslation()
 
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
-      <main
-        style={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 20,
-          justifyContent: 'space-around',
-        }}
-      >
-        <CounterRegisteredUsers count={12} />
-        <div style={{ display: 'flex', gap: '13px' }}>
-          {allPosts?.items.slice(0, 4).map(item => (
-            <div key={item.id}>
-              <Image alt="" height={200} src={item.images[0].url} width={200} />
-              <Link href={`public/${item.ownerId}`}>
-                <h2>{item.username}</h2>
-              </Link>
-              <p>{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </main>
+      <div className={s.container}>
+        <CounterRegisteredUsers count={countUsers} />
+        <PublicPostsList posts={posts} />
+      </div>
     </PublicLayout>
   )
 }

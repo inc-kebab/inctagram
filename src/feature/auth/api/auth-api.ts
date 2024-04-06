@@ -13,7 +13,7 @@ import {
   SignUpArgs,
 } from '../model/types/api.types'
 
-const authApi = baseApi.injectEndpoints({
+export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     checkRecoveryCode: builder.mutation<Email, CheckRecoveryCodeArgs>({
       query: body => ({

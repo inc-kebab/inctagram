@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 import { store } from "@/app";
-import { PostItem, PostsList } from "@/entities/post";
+import { PostItem, PostsList, PostsListSkeleton } from "@/entities/post";
 import { ProfileInfo } from "@/entities/profile";
+import { authApi } from "@/feature/auth/api/auth-api";
 import { PostDetailsDialogs } from "@/feature/post";
 import { publicApi, useGetAllUsersPostsQuery } from "@/feature/public/api/public-api";
 import { GetPostsResponse, GetPublicProfileResponse, Items } from "@/feature/public/model/types/public-types";
@@ -13,21 +14,29 @@ import { GetServerSidePropsContext } from "next";
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ownerId = context.params?.ownerId;
 
-  // сделать me запрос
+  const meResponse = await store.dispatch(authApi.endpoints.me.initiate());
 
-  // если пользователь авторизован, то реидректить его на /profile/ownerId
+  if (meResponse.data) {
+    return {
+      redirect: {
+        destination: `/profile/${ownerId}`
+      }
+    };
+  }
 
-  // если нет, то логика ниже
 
   const [getAllUsersPostsResponse, getPublicProfileResponse] = await Promise.all([
-    store.dispatch(publicApi.endpoints.getAllUsersPosts.initiate({ userId: Number(ownerId)})),
+    store.dispatch(publicApi.endpoints.getAllUsersPosts.initiate({ userId: Number(ownerId) })),
     store.dispatch(publicApi.endpoints.getPublicProfile.initiate(Number(ownerId)))
   ]);
 
-  store.dispatch(publicApi.util.getRunningQueriesThunk());
 
+  await Promise.all([store.dispatch(publicApi.util.getRunningQueriesThunk()), store.dispatch(authApi.util.getRunningQueriesThunk())]);
+
+  const isPostsLoad = getAllUsersPostsResponse.isLoading || getPublicProfileResponse.isLoading;
   const allUsersPosts = getAllUsersPostsResponse.data;
   const publicProfile = getPublicProfileResponse.data;
+
 
   if (!allUsersPosts || !publicProfile) {
     return { notFound: true };
@@ -35,13 +44,14 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
-      allUsersPosts, ownerId, publicProfile
+      allUsersPosts, isPostsLoad, ownerId, publicProfile
     }
   };
 };
 
-const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
+const OwnerPage = ({ allUsersPosts, isPostsLoad, ownerId, publicProfile }: {
   allUsersPosts: GetPostsResponse,
+  isPostsLoad: boolean
   ownerId: number
   publicProfile: GetPublicProfileResponse
 }) => {
@@ -54,7 +64,10 @@ const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
 
   const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false);
 
-  const { data: posts, isFetching, isLoading } = useGetAllUsersPostsQuery({ cursor , userId: ownerId}, {skip: cursor === undefined})
+  const { data: posts, isFetching, isLoading } = useGetAllUsersPostsQuery({
+    cursor,
+    userId: ownerId
+  }, { skip: cursor === undefined }); // если убрать skip тоже работает
 
   const handleChangeCurrentPost = (post: PostItem) => {
     setCurrentPost(post);
@@ -64,11 +77,11 @@ const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
   useEffect(() => {
     setPostsList(prevPosts => {
       if (posts && posts.items) {
-        return [...prevPosts, ...posts.items]
+        return [...prevPosts, ...posts.items];
       }
 
-      return prevPosts
-    })
+      return prevPosts;
+    });
   }, [posts]);
 
   useInfinityScroll({
@@ -88,12 +101,20 @@ const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
           username: publicProfile?.username
         }}
       />
-      <PostsList
-        cursor={cursor ? posts?.cursor : allUsersPosts.cursor}
-        list={postsList}
-        onSetCurrentPost={handleChangeCurrentPost}
-        ref={triggerRef}
-      />
+      {isPostsLoad ? (
+        <PostsListSkeleton count={8} />
+      ) : (
+        <>
+          <PostsList
+            cursor={cursor ? posts?.cursor : allUsersPosts.cursor}
+            list={postsList}
+            onSetCurrentPost={handleChangeCurrentPost}
+            ref={triggerRef}
+          />
+          {isFetching && <PostsListSkeleton />}
+        </>)
+      }
+
       <PostDetailsDialogs
         currentPost={currentPost}
         openPostDetailsModal={openPostDetailsModal}
