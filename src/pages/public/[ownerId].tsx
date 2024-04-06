@@ -1,18 +1,23 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { store, useAppDispatch } from "@/app";
+import { store } from "@/app";
 import { PostItem, PostsList } from "@/entities/post";
 import { ProfileInfo } from "@/entities/profile";
 import { PostDetailsDialogs } from "@/feature/post";
-import { invalidateTagsPublic, publicApi, useGetAllUsersPostsQuery } from "@/feature/public/api/public-api";
+import { publicApi, useGetAllUsersPostsQuery } from "@/feature/public/api/public-api";
 import { GetPostsResponse, GetPublicProfileResponse, Items } from "@/feature/public/model/types/public-types";
 import { useInfinityScroll } from "@/shared/hooks/useInfinityScroll";
 import { PublicLayout } from "@/widgets/layout";
 import { GetServerSidePropsContext } from "next";
 
-
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ownerId = context.params?.ownerId;
+  
+  // сделать me запрос
+  
+  // если пользователь авторизован, то реидректить его на /profile/ownerId
+  
+  // если нет, то логика ниже
 
   const [getAllUsersPostsResponse, getPublicProfileResponse] = await Promise.all([
     store.dispatch(publicApi.endpoints.getAllUsersPosts.initiate({ userId: Number(ownerId)})),
@@ -28,22 +33,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     return { notFound: true };
   }
 
-
-
-  // const [getAllUsersPostsResponse, getPublicProfileResponse, ] = await Promise.all([
-  //   fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public-posts/user/${Number(ownerId)}`),
-  //   fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public-profile/${Number(ownerId)}`)
-  // ]);
-  // const [ allUsersPosts, publicProfile] = await Promise.all([
-  // getAllUsersPostsResponse.json(),
-  // getPublicProfileResponse.json()
-  // ]);
-
-  // if (!allUsersPosts || !publicProfile) {
-  //   return { notFound: true };
-  // }
-
-
   return {
     props: {
       allUsersPosts, ownerId, publicProfile
@@ -51,37 +40,40 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   };
 };
 
-
-
-
 const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
   allUsersPosts: GetPostsResponse,
   ownerId: number
   publicProfile: GetPublicProfileResponse
 }) => {
-  const dispatch = useAppDispatch()
   const triggerRef = useRef<HTMLDivElement | null>(null);
+  
   const [postsList, setPostsList] = useState<Items[]>(allUsersPosts.items);
-  const [cursor, setCursor] = useState<number | undefined>(undefined);
   const [currentPost, setCurrentPost] = useState<Nullable<PostItem>>(null);
+  
+  const [cursor, setCursor] = useState<number | undefined>(undefined);
+  
   const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false);
 
-  const { data: posts, isFetching, isLoading } = useGetAllUsersPostsQuery({ cursor , userId: ownerId})
+  const { data: posts, isFetching, isLoading } = useGetAllUsersPostsQuery({ cursor , userId: ownerId}, {skip: cursor === undefined})
 
   const handleChangeCurrentPost = (post: PostItem) => {
     setCurrentPost(post);
     setOpenPostDetailsModal(true);
   };
+  
+  useEffect(() => {
+    setPostsList(prevPosts => {
+      if (posts && posts.items) {
+        return [...prevPosts, ...posts.items]
+      }
+      
+      return prevPosts
+    })
+  }, [posts]);
 
   useInfinityScroll({
-    callback: () => {
-      if (posts) {
-        setPostsList(prevPosts => [...prevPosts, ...posts.items]);
-        setCursor(posts.cursor);
-      }
-    },
-    // callback: () =>  setCursor(allUsersPosts.cursor),
-    hasMore: allUsersPosts?.hasMore,
+    callback: () => setCursor(prev => prev ? posts?.cursor : allUsersPosts.cursor),
+    hasMore: posts ? posts.hasMore : allUsersPosts?.hasMore,
     triggerRef
   });
 
@@ -97,7 +89,7 @@ const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
         }}
       />
       <PostsList
-        cursor={posts?.cursor}
+        cursor={cursor ? posts?.cursor : allUsersPosts.cursor}
         list={postsList}
         onSetCurrentPost={handleChangeCurrentPost}
         ref={triggerRef}
