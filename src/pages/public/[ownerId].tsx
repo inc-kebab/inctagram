@@ -12,11 +12,11 @@ import { GetServerSidePropsContext } from "next";
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ownerId = context.params?.ownerId;
-  
+
   // сделать me запрос
-  
+
   // если пользователь авторизован, то реидректить его на /profile/ownerId
-  
+
   // если нет, то логика ниже
 
   const [getAllUsersPostsResponse, getPublicProfileResponse] = await Promise.all([
@@ -46,12 +46,12 @@ const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
   publicProfile: GetPublicProfileResponse
 }) => {
   const triggerRef = useRef<HTMLDivElement | null>(null);
-  
+
   const [postsList, setPostsList] = useState<Items[]>(allUsersPosts.items);
   const [currentPost, setCurrentPost] = useState<Nullable<PostItem>>(null);
-  
+
   const [cursor, setCursor] = useState<number | undefined>(undefined);
-  
+
   const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false);
 
   const { data: posts, isFetching, isLoading } = useGetAllUsersPostsQuery({ cursor , userId: ownerId}, {skip: cursor === undefined})
@@ -60,13 +60,13 @@ const OwnerPage = ({ allUsersPosts, ownerId, publicProfile }: {
     setCurrentPost(post);
     setOpenPostDetailsModal(true);
   };
-  
+
   useEffect(() => {
     setPostsList(prevPosts => {
       if (posts && posts.items) {
         return [...prevPosts, ...posts.items]
       }
-      
+
       return prevPosts
     })
   }, [posts]);

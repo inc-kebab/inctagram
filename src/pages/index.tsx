@@ -1,14 +1,36 @@
+import { store } from '@/app'
 import { CounterRegisteredUsers } from '@/entities/user'
-import { useGetAllPublicPostsQuery } from '@/feature/public/api/public-api'
+import { publicApi, useGetAllPublicPostsQuery } from '@/feature/public/api/public-api'
+import { GetPostsResponse } from '@/feature/public/model/types/public-types'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { PublicLayout } from '@/widgets/layout'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Public: Page = () => {
+export const getStaticProps = async () => {
+  const getAllPosts = await store.dispatch(
+    publicApi.endpoints.getAllPublicPosts.initiate(undefined)
+  )
+
+  store.dispatch(publicApi.util.getRunningQueriesThunk())
+
+  const allPosts = getAllPosts.data
+
+  if (!allPosts) {
+    return { notFound: true }
+  }
+
+  return {
+    props: {
+      allPosts,
+    },
+    revalidate: 60,
+  }
+}
+
+const Public = ({ allPosts }: { allPosts: GetPostsResponse }) => {
   const { t } = useTranslation()
-  const { data: allPosts } = useGetAllPublicPostsQuery(undefined)
 
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
