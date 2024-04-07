@@ -1,4 +1,4 @@
-export { getPublicPosts } from './api/public-posts-api'
+export { getAllPublicPosts, useGetAllPublicPostsQuery } from './api/public-posts-api'
 export type {
   GetPublicPostsArgs,
   GetPublicPostsResponse,

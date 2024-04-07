@@ -4,7 +4,7 @@ import { GetPublicPostsArgs, GetPublicPostsResponse } from '../model/types/publi
 
 export const publicPostsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getPublicPosts: builder.query<GetPublicPostsResponse, GetPublicPostsArgs>({
+    getAllPublicPosts: builder.query<GetPublicPostsResponse, GetPublicPostsArgs>({
       query: ({ pageSize, sortDirection }) => ({
         url: `/public-posts/all?pageSize=${pageSize}&sortDirection=${sortDirection}`,
       }),
@@ -12,4 +12,5 @@ export const publicPostsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { getPublicPosts } = publicPostsApi.endpoints
+export const { getAllPublicPosts } = publicPostsApi.endpoints
+export const { useGetAllPublicPostsQuery } = publicPostsApi

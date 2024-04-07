@@ -1,1 +1,1 @@
-export { getTotalProfileCount } from './api/public-profile-api'
+export { getTotalProfileCount, useGetTotalProfileCountQuery } from './api/public-profile-api'
