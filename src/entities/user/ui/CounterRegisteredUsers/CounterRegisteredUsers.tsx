@@ -3,13 +3,13 @@ import clsx from 'clsx'
 
 import s from './CounterRegisteredUsers.module.scss'
 
-interface Props {
+type Props = {
   className?: string
-  count: number
+  count: number | undefined
 }
 
 export const CounterRegisteredUsers = ({ className, count }: Props) => {
-  if (count < 1) {
+  if (!count || count < 1) {
     return null
   }
 
@@ -17,13 +17,13 @@ export const CounterRegisteredUsers = ({ className, count }: Props) => {
 
   return (
     <div className={clsx(s.root, className)}>
-      <Typography asComponent="h1" variant="h1">
+      <Typography asComponent="h2" variant="h1">
         Registered users:
       </Typography>
       <div className={s.counter}>
         {arrayNumbers.map((el, i) => {
           return (
-            <Typography className={s.number} key={i} variant="h2">
+            <Typography asComponent="span" className={s.number} key={i} variant="h2">
               {el}
             </Typography>
           )

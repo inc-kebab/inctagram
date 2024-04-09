@@ -30,3 +30,8 @@ export type UpdateProfileArgs = {
   lastname: string
   username: string
 }
+
+export interface GetTotalUsersResponse {
+  lastUserId: number
+  totalUsersCount: number
+}

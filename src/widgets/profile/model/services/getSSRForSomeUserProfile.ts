@@ -1,6 +1,7 @@
 import { wrapper } from '@/app'
 import { meSSR } from '@/feature/auth'
-import { publicApi } from '@/feature/public/api/public-api'
+import { getUsersPosts } from '@/feature/post'
+import { getPublicProfile } from '@/feature/profile'
 import { baseApi } from '@/shared/api/base-api'
 import { AppRoutes } from '@/shared/const/routes'
 import { getTokenFromHeaders } from '@/shared/helpers/getTokenFromHeaders'
@@ -48,8 +49,8 @@ export const getSSRForSomeUserProfile = (publicPage: boolean) =>
       }
     }
 
-    store.dispatch(publicApi.endpoints.getUsersPosts.initiate({ userId: Number(userId) }))
-    store.dispatch(publicApi.endpoints.getPublicProfile.initiate(Number(userId)))
+    store.dispatch(getUsersPosts.initiate({ userId: Number(userId) }))
+    store.dispatch(getPublicProfile.initiate(Number(userId)))
 
     const allRes = await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 

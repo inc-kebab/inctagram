@@ -21,7 +21,7 @@ type Props = AppProps & {
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], weight: ['400', '600', '700'] })
 
-export default function App({ Component, pageProps }: Props) {
+export function App({ Component, pageProps }: Props) {
   const { props, store } = wrapper.useWrappedStore(pageProps)
 
   useLoader()
@@ -41,3 +41,5 @@ export default function App({ Component, pageProps }: Props) {
     </Provider>
   )
 }
+
+export default App

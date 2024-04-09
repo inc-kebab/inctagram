@@ -1,52 +1,44 @@
-import { wrapper } from '@/app/store/store'
+import { wrapper } from '@/app'
+import { PublicPostsList } from '@/entities/post'
 import { CounterRegisteredUsers } from '@/entities/user'
-import { PostItem, PublicPostsList, getPublicPosts } from '@/feature/public-posts'
-import { getTotalProfileCount } from '@/feature/public-profile'
-import { baseApi } from '@/shared/api/base-api'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { GetMyPostsArgs, getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
+import { getTotalUsersCount, useGetTotalUsersCountQuery } from '@/feature/profile'
+import { getRunningQueriesThunk } from '@/shared/api/base-api'
 import { Page } from '@/shared/types/layout'
 import { PublicLayout } from '@/widgets/layout'
-import { notFound } from 'next/navigation'
 
-import s from './mainPublic.module.scss'
+import s from './index.module.scss'
+
+const argsForPublicPosts: GetMyPostsArgs = { pageSize: 4, sortDirection: 'desc' }
 
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
-  const resUsers = await store.dispatch(getTotalProfileCount.initiate())
-  const resPosts = await store.dispatch(
-    getPublicPosts.initiate({ pageSize: 4, sortDirection: 'desc' })
-  )
+  store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
+  store.dispatch(getAllPublicPosts.initiate(argsForPublicPosts, { forceRefetch: true }))
 
-  if (!resUsers || !resPosts) {
-    return notFound()
+  const allRes = await Promise.all(store.dispatch(getRunningQueriesThunk()))
+
+  //? don't checked work
+  if (!allRes) {
+    return {
+      notFound: true,
+    }
   }
 
-  const posts = resPosts.data?.items
-  const countUsers = resUsers.data?.totalUsersCount
-
-  await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
-
   return {
-    props: {
-      countUsers,
-      posts,
-    },
+    props: {},
     revalidate: 60,
   }
 })
 
-type Props = {
-  countUsers: number
-  posts: PostItem[]
-}
-
-const Public: Page<Props> = ({ countUsers, posts }) => {
-  const { t } = useTranslation()
+const Public: Page = () => {
+  const { data } = useGetTotalUsersCountQuery()
+  const { data: dataPosts } = useGetAllPublicPostsQuery(argsForPublicPosts)
 
   return (
-    <PublicLayout title={t.pages.main.metaTitle}>
+    <PublicLayout>
       <div className={s.container}>
-        {countUsers && <CounterRegisteredUsers count={countUsers} />}
-        {posts && <PublicPostsList posts={posts} />}
+        <CounterRegisteredUsers className={s.users} count={data?.totalUsersCount} />
+        <PublicPostsList posts={dataPosts?.items} />
       </div>
     </PublicLayout>
   )

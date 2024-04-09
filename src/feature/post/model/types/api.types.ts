@@ -16,6 +16,8 @@ export interface GetMyPostsArgs {
   sortDirection?: 'asc' | 'desc'
 }
 
+export type GetAllPostsArgs = GetMyPostsArgs & { userId: number }
+
 export type DeletePostArgs = {
   id: number
 }

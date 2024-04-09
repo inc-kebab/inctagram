@@ -20,3 +20,5 @@ export const baseApi = createApi({
   reducerPath: 'baseApi',
   tagTypes: ['me', 'profile', 'myPosts', 'posts'],
 })
+
+export const { getRunningQueriesThunk } = baseApi.util
