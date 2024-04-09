@@ -42,7 +42,7 @@ export const getSSRForSomeUserProfile = (publicPage: boolean) =>
       if (isMyProfile) {
         return {
           redirect: {
-            destination: `/my-profile`,
+            destination: AppRoutes.MY_PROFILE,
             permanent: false,
           },
         }

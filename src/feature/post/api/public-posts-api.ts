@@ -1,16 +1,16 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { GetAllPostsArgs, GetMyPostsArgs, GetMyPostsResponse } from '../model/types/api.types'
+import { GetAllPostsArgs, GetPostsArgs, GetPostsResponse } from '../model/types/api.types'
 
 export const publicPostsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getAllPublicPosts: builder.query<GetMyPostsResponse, GetMyPostsArgs>({
+    getAllPublicPosts: builder.query<GetPostsResponse, GetPostsArgs>({
       query: ({ pageSize = 4, sortDirection = 'desc', ...rest }) => ({
         params: { pageSize, sortDirection, ...rest },
         url: `/public-posts/all`,
       }),
     }),
-    getUsersPosts: builder.query<GetMyPostsResponse, GetAllPostsArgs>({
+    getUsersPosts: builder.query<GetPostsResponse, GetAllPostsArgs>({
       forceRefetch({ currentArg, previousArg }) {
         return (
           currentArg?.userId !== previousArg?.userId || currentArg?.cursor !== previousArg?.cursor

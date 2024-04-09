@@ -18,7 +18,7 @@ interface Props {
 export const ProfileInfo = ({ className, myProfile = true, userData }: Props) => {
   return (
     <div className={clsx(s.ProfileInfo, className)}>
-      <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} />
+      <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} wrapperSize={200} />
 
       <Typography asComponent="h2" className={s.name} variant="h1">
         {userData?.username}

@@ -54,6 +54,7 @@ export const SomeUserProfile = ({ publicProfile = false }: Props) => {
       {isFetching && <PostsListSkeleton />}
       <PostDetailsDialogs
         currentPost={currentPost}
+        isOwner={false}
         openPostDetailsModal={openPostDetailsModal}
         setCurrentPost={setCurrentPost}
         setOpenPostDetailsModal={setOpenPostDetailsModal}

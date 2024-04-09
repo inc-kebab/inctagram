@@ -18,6 +18,7 @@ import { PostDetails } from '../PostDetails/PostDetails'
 
 interface Props {
   currentPost: Nullable<PostItem>
+  isOwner: boolean
   openPostDetailsModal: boolean
   setCurrentPost: (post: Nullable<PostItem>) => void
   setOpenPostDetailsModal: (open: boolean) => void
@@ -25,6 +26,7 @@ interface Props {
 
 export const PostDetailsDialogs = ({
   currentPost,
+  isOwner,
   openPostDetailsModal,
   setCurrentPost,
   setOpenPostDetailsModal,
@@ -83,6 +85,7 @@ export const PostDetailsDialogs = ({
           <Close className={s.closeIcon} />
         </DialogClose>
         <PostDetails
+          isOwner={isOwner}
           item={currentPost}
           onOpenConfirmDeleteModal={() => setOpenConfirmDeleteModal(true)}
           onOpenEditModal={() => setOpenEditModal(true)}

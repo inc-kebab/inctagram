@@ -1,15 +1,16 @@
 import { wrapper } from '@/app'
 import { PublicPostsList } from '@/entities/post'
 import { CounterRegisteredUsers } from '@/entities/user'
-import { GetMyPostsArgs, getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
+import { GetPostsArgs, getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
 import { getTotalUsersCount, useGetTotalUsersCountQuery } from '@/feature/profile'
 import { getRunningQueriesThunk } from '@/shared/api/base-api'
+import { DefenderAuthRoute } from '@/shared/helpers/hoc'
 import { Page } from '@/shared/types/layout'
 import { PublicLayout } from '@/widgets/layout'
 
 import s from './index.module.scss'
 
-const argsForPublicPosts: GetMyPostsArgs = { pageSize: 4, sortDirection: 'desc' }
+const argsForPublicPosts: GetPostsArgs = { pageSize: 4, sortDirection: 'desc' }
 
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
   store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
@@ -35,13 +36,14 @@ const Public: Page = () => {
   const { data: dataPosts } = useGetAllPublicPostsQuery(argsForPublicPosts)
 
   return (
-    <PublicLayout>
-      <div className={s.container}>
-        <CounterRegisteredUsers className={s.users} count={data?.totalUsersCount} />
-        <PublicPostsList posts={dataPosts?.items} />
-      </div>
-    </PublicLayout>
+    <div className={s.container}>
+      <CounterRegisteredUsers className={s.users} count={data?.totalUsersCount} />
+      <PublicPostsList posts={dataPosts?.items} />
+    </div>
   )
 }
 
-export default Public
+Public.getLayout = (page, t) => {
+  return <PublicLayout title={t.pages.main.metaTitle}>{page}</PublicLayout>
+}
+export default DefenderAuthRoute(Public)

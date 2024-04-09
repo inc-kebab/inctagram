@@ -8,8 +8,8 @@ import {
   CreatePostResponse,
   DeletePostArgs,
   EditPostArgs,
-  GetMyPostsArgs,
-  GetMyPostsResponse,
+  GetPostsArgs,
+  GetPostsResponse,
 } from '../model/types/api.types'
 
 const postApi = baseApi.injectEndpoints({
@@ -100,16 +100,11 @@ const postApi = baseApi.injectEndpoints({
         url: `/posts/${body.id}`,
       }),
     }),
-    getMyPosts: builder.query<GetMyPostsResponse, GetMyPostsArgs>({
+    getMyPosts: builder.query<GetPostsResponse, GetPostsArgs>({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg
       },
       merge: (cache, res) => {
-        /*
-         if (cache.totalCount !== res.totalCount) {
-         return res
-         }
-         */
         if (cache) {
           cache.items.push(...res.items)
           cache.cursor = res.cursor
