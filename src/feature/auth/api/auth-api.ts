@@ -65,6 +65,13 @@ export const authApi = baseApi.injectEndpoints({
     me: builder.query<MeResponse, void>({
       query: () => ({ url: '/auth/me' }),
     }),
+    meSSR: builder.query<MeResponse, { token: null | string }>({
+      query: ({ token }) => {
+        const headers = token ? { Authorization: `Bearer ${token}` } : undefined
+
+        return { headers, url: '/auth/me' }
+      },
+    }),
     newPassword: builder.mutation<void, NewPasswordArgs>({
       query: data => ({
         body: data,
@@ -116,3 +123,5 @@ export const {
   useResendRegLinkMutation,
   useSignUpMutation,
 } = authApi
+
+export const { meSSR } = authApi.endpoints

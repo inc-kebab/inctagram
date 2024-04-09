@@ -118,3 +118,4 @@ export const {
   useRemoveProfilePhotoMutation,
   useUpdateProfileMutation,
 } = profileAPI
+export const { getMyProfile } = profileAPI.endpoints

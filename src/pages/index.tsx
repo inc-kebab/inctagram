@@ -45,8 +45,8 @@ const Public: Page<Props> = ({ countUsers, posts }) => {
   return (
     <PublicLayout title={t.pages.main.metaTitle}>
       <div className={s.container}>
-        <CounterRegisteredUsers count={countUsers} />
-        <PublicPostsList posts={posts} />
+        {countUsers && <CounterRegisteredUsers count={countUsers} />}
+        {posts && <PublicPostsList posts={posts} />}
       </div>
     </PublicLayout>
   )

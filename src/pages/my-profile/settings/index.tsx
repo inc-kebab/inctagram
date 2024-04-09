@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { GeneralInformation } from '@/feature/profile'
 import { DefenderProtectedRoute } from '@/shared/helpers/hoc'

@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { Provider } from 'react-redux'
 
-import { ErrorBoundary, store } from '@/app'
+import { ErrorBoundary, wrapper } from '@/app'
 import { useLoader } from '@/shared/hooks/useLoader'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
@@ -22,6 +22,8 @@ type Props = AppProps & {
 const inter = Inter({ subsets: ['latin', 'cyrillic'], weight: ['400', '600', '700'] })
 
 export default function App({ Component, pageProps }: Props) {
+  const { props, store } = wrapper.useWrappedStore(pageProps)
+
   useLoader()
 
   const { locale } = useRouter()
@@ -33,7 +35,7 @@ export default function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <ErrorBoundary>
-        <Component className={inter.className} {...pageProps} />
+        <Component className={inter.className} {...props.pageProps} />
         <ToastProvider />
       </ErrorBoundary>
     </Provider>

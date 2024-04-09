@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
-import { AppRoutes, GeneralRoutes } from '@/shared/const/routes'
+import { AppRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { DefenderAuthRoute } from '@/shared/helpers/hoc'
 import { UseFormRef } from '@/shared/types/form'
@@ -21,7 +21,7 @@ const SignIn: Page = () => {
   const handleSignIn = (data: SignInFormValues) => {
     signIn(data).then(res => {
       if ('data' in res) {
-        void push(AppRoutes.PROFILE)
+        void push(AppRoutes.MY_PROFILE)
       }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError

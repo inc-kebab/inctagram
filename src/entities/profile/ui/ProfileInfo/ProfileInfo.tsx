@@ -28,7 +28,7 @@ export const ProfileInfo = ({ className, myProfile = true, userData }: Props) =>
         <Button
           asComponent={Link}
           className={s.settings}
-          href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
+          href={{ pathname: AppRoutes.MY_PROFILE_SETTINGS, query: { tab: 'general' } }}
           variant="secondary"
         >
           Profile settings

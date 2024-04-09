@@ -137,3 +137,4 @@ export const {
 } = postApi
 
 export const { invalidateTags: invalidateTagsPost } = postApi.util
+export const { getMyPosts } = postApi.endpoints
