@@ -1,7 +1,8 @@
-import { PostItem } from '@/feature/public-posts'
 import Image from 'next/image'
 
 import s from './PublicPostsList.module.scss'
+
+import { PostItem } from '../../model/types/post.types'
 
 type Props = { posts: PostItem[] | undefined }
 

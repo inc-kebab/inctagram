@@ -1,34 +1,22 @@
-import { wrapper } from '@/app/store/store'
+import { wrapper } from '@/app'
+import { PublicPostsList } from '@/entities/post'
 import { CounterRegisteredUsers } from '@/entities/user'
-import {
-  PublicPostsList,
-  getAllPublicPosts,
-  useGetAllPublicPostsQuery,
-} from '@/feature/public-posts'
-import { getTotalProfileCount, useGetTotalProfileCountQuery } from '@/feature/public-profile'
-import { publicProfileApi } from '@/feature/public-profile/api/public-profile-api'
+import { GetMyPostsArgs, getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
+import { getTotalUsersCount, useGetTotalUsersCountQuery } from '@/feature/profile'
+import { getRunningQueriesThunk } from '@/shared/api/base-api'
 import { DefenderAuthRoute } from '@/shared/helpers/hoc'
 import { Page } from '@/shared/types/layout'
 import { PublicLayout } from '@/widgets/layout'
 
-import s from './mainPublic.module.scss'
+import s from './index.module.scss'
+
+const argsForPublicPosts: GetMyPostsArgs = { pageSize: 4, sortDirection: 'desc' }
 
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
-  store.dispatch(
-    getTotalProfileCount.initiate(undefined, {
-      forceRefetch: true,
-    })
-  )
-  store.dispatch(
-    getAllPublicPosts.initiate(
-      { pageSize: 4, sortDirection: 'desc' },
-      {
-        forceRefetch: true,
-      }
-    )
-  )
+  store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
+  store.dispatch(getAllPublicPosts.initiate(argsForPublicPosts, { forceRefetch: true }))
 
-  const allRes = await Promise.all(store.dispatch(publicProfileApi.util.getRunningQueriesThunk()))
+  const allRes = await Promise.all(store.dispatch(getRunningQueriesThunk()))
 
   //? don't checked work
   if (!allRes) {
@@ -44,12 +32,12 @@ export const getStaticProps = wrapper.getStaticProps(store => async () => {
 })
 
 const Public: Page = () => {
-  const { data } = useGetTotalProfileCountQuery()
-  const { data: dataPosts } = useGetAllPublicPostsQuery({ pageSize: 4, sortDirection: 'desc' })
+  const { data } = useGetTotalUsersCountQuery()
+  const { data: dataPosts } = useGetAllPublicPostsQuery(argsForPublicPosts)
 
   return (
     <div className={s.container}>
-      <CounterRegisteredUsers count={data?.totalUsersCount} />
+      <CounterRegisteredUsers className={s.users} count={data?.totalUsersCount} />
       <PublicPostsList posts={dataPosts?.items} />
     </div>
   )
