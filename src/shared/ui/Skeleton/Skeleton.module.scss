@@ -1,12 +1,23 @@
+@import '@/app/styles/mixins';
+
 .Skeleton {
+
+  @include mobile {
+    width: 100%;
+    height: 100%;
+    padding-top: 100%;
+    border-radius: 2px;
+  }
+
   position: relative;
 
   overflow: hidden;
 
-  width: 100%;
-  height: 50px;
+  width: 238px;
+  height: 238px;
 
   background-color: var(--primary-900);
+  border-radius: 4px;
 
   &::before {
     content: '';
@@ -35,3 +46,4 @@
     left: 100%;
   }
 }
+

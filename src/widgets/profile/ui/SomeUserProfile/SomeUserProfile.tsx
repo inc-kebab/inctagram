@@ -47,11 +47,12 @@ export const SomeUserProfile = ({ publicProfile = false }: Props) => {
       />
       <PostsList
         cursor={posts?.cursor}
+        isFetching={isFetching}
         list={posts?.items}
         onSetCurrentPost={handleChangeCurrentPost}
         ref={triggerRef}
       />
-      {isFetching && <PostsListSkeleton />}
+      {isFetching && <PostsListSkeleton count={4} />}
       <PostDetailsDialogs
         currentPost={currentPost}
         isOwner={false}
