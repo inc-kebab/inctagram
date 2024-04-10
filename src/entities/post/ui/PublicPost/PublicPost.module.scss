@@ -1,0 +1,49 @@
+.post {
+  width: 234px;
+}
+
+.imageContainer {
+  display: flex;
+}
+
+.user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.userName {
+  font-weight: var(--font-weight-semibold);
+}
+
+.timeAgo {
+  margin-top: 12px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--light-900);
+}
+
+.description {
+  max-height: 100px;
+  word-break: break-all;
+}
+
+.textContent {
+  font-size: var(--font-size-s);
+}
+
+.expanded {
+  max-height: none;
+}
+
+.toggleText {
+  cursor: pointer;
+  font-size: var(--font-size-s);
+  color: var(--primary-500);
+  text-decoration: underline;
+}

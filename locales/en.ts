@@ -20,6 +20,8 @@ export const en = {
     selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
+    showLess: 'Show less',
+    showMore: 'Show more',
     signIn: 'Sign In',
     signUp: 'Sign Up',
     simple_save: 'Save',
