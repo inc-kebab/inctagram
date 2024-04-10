@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
 import { PostItem, UserBanner } from '@/entities/post'
 import { Close } from '@/shared/assets/icons/common'
+import { AppRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
+import { useRouter } from 'next/router'
 
 import s from './PostDetailsDialogs.module.scss'
 
@@ -32,7 +34,7 @@ export const PostDetailsDialogs = ({
   setOpenPostDetailsModal,
 }: Props) => {
   const { t } = useTranslation()
-
+  const { push, query } = useRouter()
   const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false)
 
   const [openEditModal, setOpenEditModal] = useState(false)
@@ -74,13 +76,18 @@ export const PostDetailsDialogs = ({
       })
   }
 
+  const handler = (open: boolean) => {
+    if (!open) {
+      void push(query.id ? { query: { id: query.id } } : {}, undefined, {
+        shallow: true,
+      })
+    }
+    setOpenPostDetailsModal(open)
+  }
+
   return (
     <>
-      <Dialog
-        className={s.dialog}
-        onOpenChange={setOpenPostDetailsModal}
-        open={openPostDetailsModal}
-      >
+      <Dialog className={s.dialog} onOpenChange={handler} open={openPostDetailsModal}>
         <DialogClose>
           <Close className={s.closeIcon} />
         </DialogClose>

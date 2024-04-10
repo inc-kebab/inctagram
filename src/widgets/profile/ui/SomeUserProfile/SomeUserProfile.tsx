@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { PostItem, PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
-import { PostDetailsDialogs, useGetUsersPostsQuery } from '@/feature/post'
+import { PostDetailsDialogs, useGetPublicPostQuery, useGetUsersPostsQuery } from '@/feature/post'
 import { useGetPublicProfileQuery } from '@/feature/profile'
 import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
 import { PublicLayout, SidebarLayout } from '@/widgets/layout'
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const SomeUserProfile = ({ publicProfile = false }: Props) => {
-  const { isReady, query } = useRouter()
+  const { isReady, push, query } = useRouter()
 
   const triggerRef = useRef<HTMLDivElement | null>(null)
 
@@ -23,10 +23,15 @@ export const SomeUserProfile = ({ publicProfile = false }: Props) => {
 
   const { data: userData } = useGetPublicProfileQuery(Number(query.id), { skip: !isReady })
   const { data: posts, isFetching } = useGetUsersPostsQuery({ cursor, userId: Number(query.id) })
+  const { data: publicPost } = useGetPublicPostQuery(
+    { postId: Number(query.post), userId: query.id },
+    { skip: !query.post }
+  )
 
   const handleChangeCurrentPost = (post: PostItem) => {
     setCurrentPost(post)
     setOpenPostDetailsModal(true)
+    push({ query: { id: query.id, post: post.id } }, undefined, { shallow: true })
   }
 
   useInfinityScroll({
@@ -34,6 +39,12 @@ export const SomeUserProfile = ({ publicProfile = false }: Props) => {
     hasMore: posts?.hasMore,
     triggerRef,
   })
+
+  useEffect(() => {
+    if (query.post && publicPost) {
+      handleChangeCurrentPost(publicPost)
+    }
+  }, [])
 
   const content = (
     <>

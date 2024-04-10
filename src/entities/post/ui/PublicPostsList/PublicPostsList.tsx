@@ -22,7 +22,7 @@ export const PublicPostsList = ({ posts }: Props) => {
           <div
             key={el.id}
             onClick={() => {
-              push(`${AppRoutes.PUBLIC_PROFILE}/${el.ownerId}`)
+              push(`${AppRoutes.PUBLIC_PROFILE}/${el.ownerId}?post=${el.id}`)
             }}
           >
             <Image alt="awd" height={300} src={el.images[0].url} width={200} />
