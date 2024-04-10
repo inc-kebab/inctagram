@@ -4,7 +4,7 @@
   max-width: 10.25rem;
 }
 
-@include mobile-small {
+@include mobile {
   .root {
     max-width: 5rem;
     padding: 4px 2px;

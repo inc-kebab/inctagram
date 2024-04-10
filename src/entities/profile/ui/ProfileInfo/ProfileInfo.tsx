@@ -11,43 +11,47 @@ import { Profile } from '../../model/types/profile.types'
 
 interface Props {
   className?: string
+  myProfile?: boolean
   userData?: Profile
 }
 
-export const ProfileInfo = ({ className, userData }: Props) => {
+export const ProfileInfo = ({ className, myProfile = true, userData }: Props) => {
   return (
     <div className={clsx(s.ProfileInfo, className)}>
-      <Avatar avatarUrl={userData?.avatar} circle wrapperSize={200} />
-      <div className={s.info}>
-        <div className={s.header}>
-          <Typography asComponent="h2" className={s.name} variant="h1">
-            {userData?.username}
-          </Typography>
-          <Button
-            asComponent={Link}
-            href={{ pathname: AppRoutes.PROFILE_SETTINGS, query: { tab: 'general' } }}
-            variant="secondary"
-          >
-            Profile settings
-          </Button>
-        </div>
-        <ul className={s.subscriber}>
-          <li className={s.item}>
-            <span className={s.count}>2 218</span> Following
-          </li>
-          <li className={s.item}>
-            <span className={s.count}>2 358</span> Followers
-          </li>
-          <li className={s.item}>
-            <span className={s.count}>2 764</span> Publications
-          </li>
-        </ul>
-        {userData?.aboutMe && (
-          <Typography className={s.text} variant="regular16">
-            {userData.aboutMe}
-          </Typography>
-        )}
-      </div>
+      <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} wrapperSize={200} />
+
+      <Typography asComponent="h2" className={s.name} variant="h1">
+        {userData?.username}
+      </Typography>
+
+      {myProfile && (
+        <Button
+          asComponent={Link}
+          className={s.settings}
+          href={{ pathname: AppRoutes.MY_PROFILE_SETTINGS, query: { tab: 'general' } }}
+          variant="secondary"
+        >
+          Profile settings
+        </Button>
+      )}
+
+      <ul className={s.subscriber}>
+        <li className={s.item}>
+          <span className={s.count}>2 218</span> Following
+        </li>
+        <li className={s.item}>
+          <span className={s.count}>2 358</span> Followers
+        </li>
+        <li className={s.item}>
+          <span className={s.count}>2 764</span> Publications
+        </li>
+      </ul>
+
+      {userData?.aboutMe && (
+        <Typography className={s.aboutMe} variant="regular16">
+          {userData.aboutMe}
+        </Typography>
+      )}
     </div>
   )
 }

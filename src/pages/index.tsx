@@ -1,7 +1,7 @@
 import { wrapper } from '@/app'
 import { PublicPostsList } from '@/entities/post'
 import { CounterRegisteredUsers } from '@/entities/user'
-import { GetMyPostsArgs, getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
+import { getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
 import { getTotalUsersCount, useGetTotalUsersCountQuery } from '@/feature/profile'
 import { getRunningQueriesThunk } from '@/shared/api/base-api'
 import { DefenderAuthRoute } from '@/shared/helpers/hoc'
@@ -10,11 +10,9 @@ import { PublicLayout } from '@/widgets/layout'
 
 import s from './index.module.scss'
 
-const argsForPublicPosts: GetMyPostsArgs = { pageSize: 4, sortDirection: 'desc' }
-
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
   store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
-  store.dispatch(getAllPublicPosts.initiate(argsForPublicPosts, { forceRefetch: true }))
+  store.dispatch(getAllPublicPosts.initiate({}, { forceRefetch: true }))
 
   const allRes = await Promise.all(store.dispatch(getRunningQueriesThunk()))
 
@@ -33,7 +31,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async () => {
 
 const Public: Page = () => {
   const { data } = useGetTotalUsersCountQuery()
-  const { data: dataPosts } = useGetAllPublicPostsQuery(argsForPublicPosts)
+  const { data: dataPosts } = useGetAllPublicPostsQuery({})
 
   return (
     <div className={s.container}>
