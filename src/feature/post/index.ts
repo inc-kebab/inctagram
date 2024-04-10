@@ -5,6 +5,5 @@ export {
   useGetAllPublicPostsQuery,
   useGetUsersPostsQuery,
 } from './api/public-posts-api'
-export type { GetPostsArgs } from './model/types/api.types'
 export { CreatePostDialog } from './ui/CreatePostDialog/CreatePostDialog'
 export { PostDetailsDialogs } from './ui/PostDetailsDialogs/PostDetailsDialogs'

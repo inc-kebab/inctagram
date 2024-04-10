@@ -9,6 +9,10 @@ export interface GetPostsResponse {
   totalCount: number
 }
 
+export type GetPublicPostsResponse = {
+  userId: number
+} & GetPostsResponse
+
 export interface GetPostsArgs {
   cursor?: number
   pageSize?: number

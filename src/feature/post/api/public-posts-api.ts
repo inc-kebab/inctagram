@@ -1,6 +1,11 @@
 import { baseApi } from '@/shared/api/base-api'
 
-import { GetAllPostsArgs, GetPostsArgs, GetPostsResponse } from '../model/types/api.types'
+import {
+  GetAllPostsArgs,
+  GetPostsArgs,
+  GetPostsResponse,
+  GetPublicPostsResponse,
+} from '../model/types/api.types'
 
 export const publicPostsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -10,14 +15,14 @@ export const publicPostsApi = baseApi.injectEndpoints({
         url: `/public-posts/all`,
       }),
     }),
-    getUsersPosts: builder.query<GetPostsResponse, GetAllPostsArgs>({
+    getUsersPosts: builder.query<GetPublicPostsResponse, GetAllPostsArgs>({
       forceRefetch({ currentArg, previousArg }) {
         return (
           currentArg?.userId !== previousArg?.userId || currentArg?.cursor !== previousArg?.cursor
         )
       },
       merge: (cache, res) => {
-        if (cache.totalCount !== res.totalCount) {
+        if (cache.userId !== res.userId) {
           return res
         }
 
@@ -29,10 +34,9 @@ export const publicPostsApi = baseApi.injectEndpoints({
           return res
         }
       },
-      providesTags: (_, error) => (error ? [] : ['posts']),
       query: ({ userId, ...rest }) => ({ params: rest, url: `/public-posts/user/${userId}` }),
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}(${queryArgs.userId})`
       },
     }),
   }),
