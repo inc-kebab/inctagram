@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'

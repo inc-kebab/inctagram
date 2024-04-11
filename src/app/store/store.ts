@@ -1,7 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { postsReducer } from '@/entities/post'
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { configureStore } from '@reduxjs/toolkit'
 import { Context, createWrapper } from 'next-redux-wrapper'
 

@@ -1,6 +1,6 @@
 import { Heart } from '@/shared/assets/icons/fill'
 import { Heart as HeartOutline } from '@/shared/assets/icons/outline'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'

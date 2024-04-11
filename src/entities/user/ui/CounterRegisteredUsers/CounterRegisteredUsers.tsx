@@ -1,4 +1,4 @@
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Typography } from '@/shared/ui/Typography'
 import clsx from 'clsx'
 

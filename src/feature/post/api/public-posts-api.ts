@@ -1,5 +1,5 @@
 import { PostItem } from '@/entities/post'
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 
 import {
   GetAllPostsArgs,

@@ -1,8 +1,7 @@
 import { useRef } from 'react'
 import { toast } from 'react-toastify'
 
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { handleErrorResponse } from '@/shared/helpers'
 import { UseFormRef } from '@/shared/types/form'
 import { format } from 'date-fns'
 

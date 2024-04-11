@@ -10,8 +10,7 @@ import {
   useResendRecoveryPasswordMutation,
 } from '@/feature/auth'
 import { AuthRoutes } from '@/shared/const/routes'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
-import { DefenderAuthRoute } from '@/shared/helpers/hoc'
+import { DefenderAuthRoute, handleErrorResponse } from '@/shared/helpers'
 import { UseFormRef } from '@/shared/types/form'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'

@@ -2,7 +2,7 @@ import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 
 import { LocaleType } from '@/../locales'
 import { ChevronLeft, ChevronRight } from '@/shared/assets/icons/common'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Options, Select } from '@/shared/ui/Select'
 import clsx from 'clsx'

@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Provider } from 'react-redux'
 
 import { ErrorBoundary, wrapper } from '@/app'
-import { useLoader } from '@/shared/hooks/useLoader'
+import { useLoader } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
 import { setCookie } from 'cookies-next'

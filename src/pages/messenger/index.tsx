@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { DefenderProtectedRoute } from '@/shared/helpers/hoc'
+import { DefenderProtectedRoute } from '@/shared/helpers'
 import { Page } from '@/shared/types/layout'
 import { SidebarLayout } from '@/widgets/layout'
 

@@ -1,22 +1,17 @@
-import { brotliDecompress } from 'node:zlib'
-
 import { wrapper } from '@/app'
 import { PublicPostsList } from '@/entities/post'
 import { CounterRegisteredUsers } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
 import { getAllPublicPosts, useGetAllPublicPostsQuery } from '@/feature/post'
 import { getTotalUsersCount, useGetTotalUsersCountQuery } from '@/feature/profile'
-import { getRunningQueriesThunk } from '@/shared/api/base-api'
-import { DefenderAuthRoute } from '@/shared/helpers/hoc'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { getRunningQueriesThunk } from '@/shared/api'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Notification } from '@/shared/ui/Notification'
 import { PublicLayout } from '@/widgets/layout'
 import { GetStaticPropsResult } from 'next'
 
 import s from './index.module.scss'
-
-// TODO попробуй сделать страницу доступной для всех
 
 type ErrorArgs = {
   isPostsError?: boolean
@@ -65,10 +60,10 @@ const Public: Page = ({ isPostsError, isUsersError }: Props) => {
   const { t } = useTranslation()
   const { data } = useGetTotalUsersCountQuery()
   const { data: dataPosts } = useGetAllPublicPostsQuery({})
-  const { data: currentUser } = useMeQuery()
+  const { data: currentUser } = useMeQuery(undefined)
 
   return (
-    <PublicLayout currentUser={currentUser} title={t.pages.main.metaTitle}>
+    <PublicLayout isAuth={!!currentUser} title={t.pages.main.metaTitle}>
       <div className={s.container}>
         {isUsersError ? (
           <Notification className={s.notification} error={t.pages.main.ssgErrorUsersCount} />

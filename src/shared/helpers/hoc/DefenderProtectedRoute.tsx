@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useMeQuery } from '@/feature/auth'
 import { AuthRoutes } from '@/shared/const/routes'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
 import { AppProps } from 'next/app'

@@ -2,7 +2,7 @@ import { wrapper } from '@/app'
 import { me } from '@/feature/auth'
 import { getMyPosts, getPublicPost, getUsersPosts } from '@/feature/post'
 import { getMyProfile, getPublicProfile } from '@/feature/profile'
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { AppRoutes } from '@/shared/const/routes'
 import { MainProfileContent, SomeProfileContent } from '@/widgets/profile'
 
@@ -24,10 +24,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
     }
   }
 
-  const token = context.req.cookies.accessToken
-
   const meResponse = await store.dispatch(me.initiate(undefined))
-
   const queryPostId = postId ? `?post=${postId}` : ''
 
   if (!meResponse.data) {

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { GeneralInformation } from '@/feature/profile'
-import { DefenderProtectedRoute } from '@/shared/helpers/hoc'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { DefenderProtectedRoute } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
 import { SidebarLayout } from '@/widgets/layout'

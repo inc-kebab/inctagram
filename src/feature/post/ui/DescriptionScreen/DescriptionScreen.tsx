@@ -1,6 +1,6 @@
 import { ImageURL, UserBanner } from '@/entities/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Loader } from '@/shared/ui/Loader'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'

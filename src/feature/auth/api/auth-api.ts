@@ -1,4 +1,4 @@
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { deleteCookie, setCookie } from 'cookies-next'
 
 import {
@@ -62,7 +62,7 @@ export const authApi = baseApi.injectEndpoints({
         }
       },
     }),
-    me: builder.query<MeResponse, void>({
+    me: builder.query<MeResponse, undefined>({
       query: () => ({ url: '/auth/me' }),
     }),
     newPassword: builder.mutation<void, NewPasswordArgs>({

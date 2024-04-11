@@ -1,5 +1,5 @@
 import { AppRoutes } from '@/shared/const/routes'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'

@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect } from 'react'
 
-export interface UseInfinityScrollOptions {
+interface UseInfinityScrollOptions {
   callback?: () => void
   hasMore?: boolean
   triggerRef: MutableRefObject<HTMLElement | null>

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useMeQuery } from '@/feature/auth'
 import { AppRoutes } from '@/shared/const/routes'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
 import { AppProps } from 'next/app'
@@ -19,12 +19,12 @@ export const DefenderAuthRoute = (Page: Page) => {
     const { currentData, data, isFetching } = useMeQuery(undefined)
 
     useEffect(() => {
-      if (data || currentData) {
-        const userId = data?.id || currentData?.id
+      if (data) {
+        const userId = data?.id
 
         void push(AppRoutes.PROFILE + `/${userId}`)
       }
-    }, [data, push, currentData])
+    }, [data, push])
 
     if (currentData || data) {
       return null

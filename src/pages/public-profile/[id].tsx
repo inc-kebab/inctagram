@@ -2,7 +2,7 @@ import { wrapper } from '@/app'
 import { me } from '@/feature/auth'
 import { getPublicPost, getUsersPosts } from '@/feature/post'
 import { getPublicProfile } from '@/feature/profile'
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { AppRoutes } from '@/shared/const/routes'
 import { SomeProfileContent } from '@/widgets/profile'
 
@@ -23,8 +23,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
       return { notFound: true }
     }
   }
-
-  const token = context.req.cookies.accessToken
 
   const meResponse = await store.dispatch(me.initiate(undefined))
   const queryPostId = postId ? `?post=${postId}` : ''

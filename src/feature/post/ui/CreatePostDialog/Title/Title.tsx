@@ -1,5 +1,5 @@
 import { ArrowIos } from '@/shared/assets/icons/common'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 

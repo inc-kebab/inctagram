@@ -1,7 +1,7 @@
 import { LocaleType } from '@/../locales'
 import { z } from 'zod'
 
-export const ALLOWED_IMAGES_FORMATS = ['image/jpeg', 'image/jpg', 'image/png']
+const ALLOWED_IMAGES_FORMATS = ['image/jpeg', 'image/jpg', 'image/png']
 
 export const photoSchema = (t: LocaleType, maxSize = 10485760) => {
   return z

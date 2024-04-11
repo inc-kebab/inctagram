@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
-import { DefenderPublicRoute } from '@/shared/helpers/hoc'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { DefenderPublicRoute } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { BackToPage } from '@/shared/ui/BackToPage'
 import { Typography } from '@/shared/ui/Typography'

@@ -16,12 +16,13 @@ export const MainProfileContent = () => {
   const { query } = router
 
   const [currentCursor, setCurrentCursor] = useState<number | undefined>(undefined)
-  const { data: me } = useMeQuery()
+
+  const { data: me } = useMeQuery(undefined)
   const { data } = useGetMyProfileQuery(undefined, { skip: !me })
   const { data: posts, isFetching } = useGetMyPostsQuery({ cursor: currentCursor }, { skip: !me })
   const { data: publicPost } = useGetPublicPostQuery(
     { postId: Number(query.post), userId: query.id },
-    { skip: !query.post }
+    { skip: !query.post || !me }
   )
 
   const {

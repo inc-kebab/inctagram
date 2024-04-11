@@ -1,5 +1,5 @@
-import { baseApi } from '@/shared/api/base-api'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { baseApi } from '@/shared/api'
+import { handleErrorResponse } from '@/shared/helpers'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 import {

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 
 import { PostItem } from '@/entities/post'
-import { useInfinityScroll } from '@/shared/hooks/useInfinityScroll'
+import { useInfinityScroll } from '@/shared/hooks'
 import { NextRouter } from 'next/router'
 
 interface Params {
@@ -12,7 +12,7 @@ interface Params {
 }
 
 export const useProfile = ({ cursor, hasMore, router, setCurrentCursor }: Params) => {
-  const { push, query } = router
+  const { query, replace } = router
 
   const triggerRef = useRef<HTMLDivElement | null>(null)
 
@@ -23,7 +23,7 @@ export const useProfile = ({ cursor, hasMore, router, setCurrentCursor }: Params
   const handleChangeCurrentPost = (post: PostItem) => {
     setCurrentPost(post)
     setOpenPostDetailsModal(true)
-    void push({ query: { id: query.id, post: post.id } }, undefined, { shallow: true })
+    void replace({ query: { id: query.id, post: post.id } }, undefined, { shallow: true })
   }
 
   useInfinityScroll({
