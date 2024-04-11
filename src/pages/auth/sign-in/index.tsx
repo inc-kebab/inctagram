@@ -21,7 +21,7 @@ const SignIn: Page = () => {
   const handleSignIn = (data: SignInFormValues) => {
     signIn(data).then(res => {
       if ('data' in res) {
-        void push(AppRoutes.MY_PROFILE)
+        void push(AppRoutes.PROFILE + `/${res.data.userId}`)
       }
       if ('error' in res && ref.current) {
         const setError = ref.current.setError

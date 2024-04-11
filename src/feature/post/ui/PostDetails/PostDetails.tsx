@@ -27,7 +27,7 @@ export const PostDetails = ({
 }: Props) => {
   const { t } = useTranslation()
 
-  const { data } = useMeQuery()
+  const { data } = useMeQuery(undefined)
 
   if (!item) {
     return null

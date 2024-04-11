@@ -102,7 +102,7 @@ const postApi = baseApi.injectEndpoints({
     }),
     getMyPosts: builder.query<GetPostsResponse, GetPostsArgs>({
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg !== previousArg
+        return currentArg?.cursor !== previousArg?.cursor
       },
       merge: (cache, res) => {
         if (cache) {
@@ -116,7 +116,7 @@ const postApi = baseApi.injectEndpoints({
       providesTags: (_, error) => (error ? [] : ['myPosts']),
       query: params => ({ params, url: '/posts' }),
       serializeQueryArgs: ({ endpointName }) => {
-        return endpointName
+        return `${endpointName}({})`
       },
     }),
   }),
@@ -131,5 +131,4 @@ export const {
   useGetMyPostsQuery,
 } = postApi
 
-export const { invalidateTags: invalidateTagsPost } = postApi.util
 export const { getMyPosts } = postApi.endpoints

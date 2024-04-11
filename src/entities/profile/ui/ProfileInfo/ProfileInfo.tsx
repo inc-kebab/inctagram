@@ -12,10 +12,11 @@ import { Profile } from '../../model/types/profile.types'
 interface Props {
   className?: string
   myProfile?: boolean
+  ownerId?: number
   userData?: Profile
 }
 
-export const ProfileInfo = ({ className, myProfile = true, userData }: Props) => {
+export const ProfileInfo = ({ className, myProfile = true, ownerId, userData }: Props) => {
   return (
     <div className={clsx(s.ProfileInfo, className)}>
       <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} wrapperSize={200} />
@@ -24,11 +25,11 @@ export const ProfileInfo = ({ className, myProfile = true, userData }: Props) =>
         {userData?.username}
       </Typography>
 
-      {myProfile && (
+      {myProfile && ownerId && (
         <Button
           asComponent={Link}
           className={s.settings}
-          href={{ pathname: AppRoutes.MY_PROFILE_SETTINGS, query: { tab: 'general' } }}
+          href={{ pathname: AppRoutes.PROFILE + `/${ownerId}/settings`, query: { tab: 'general' } }}
           variant="secondary"
         >
           Profile settings

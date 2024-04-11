@@ -35,7 +35,7 @@ export function App({ Component, pageProps }: Props) {
   return (
     <Provider store={store}>
       <ErrorBoundary>
-        <Component className={inter.className} {...props.pageProps} />
+        <Component className={inter.className} {...props} />
         <ToastProvider />
       </ErrorBoundary>
     </Provider>

@@ -10,18 +10,17 @@ import { PublicLayout } from '@/widgets/layout'
 
 import s from './index.module.scss'
 
+// TODO попробуй сделать страницу доступной для всех
+
 export const getStaticProps = wrapper.getStaticProps(store => async () => {
-  store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
-  store.dispatch(getAllPublicPosts.initiate({}, { forceRefetch: true }))
+  const users = await store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
+  const posts = await store.dispatch(getAllPublicPosts.initiate({}, { forceRefetch: true }))
 
-  const allRes = await Promise.all(store.dispatch(getRunningQueriesThunk()))
-
-  //? don't checked work
-  if (!allRes) {
-    return {
-      notFound: true,
-    }
+  if (!posts || !users) {
+    return { props: {} } //TODO добавить данные об ошибке
   }
+
+  await Promise.all(store.dispatch(getRunningQueriesThunk()))
 
   return {
     props: {},

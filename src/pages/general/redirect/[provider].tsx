@@ -14,13 +14,15 @@ const RedirectProvider = () => {
   useEffect(() => {
     if (query.provider) {
       let token: Nullable<string | undefined>
+      let userId: Nullable<string | undefined>
 
       if (query.provider !== 'credentials') {
         token = params?.get('code')
+        userId = params?.get('userId')
 
         if (token) {
           setCookie('accessToken', token, { maxAge: 30 * 60 }) // 30min
-          void replace(AppRoutes.MY_PROFILE, AppRoutes.MY_PROFILE)
+          void replace(AppRoutes.PROFILE + `/${userId}`, AppRoutes.PROFILE + `/${userId}`)
         } else {
           void replace(AppRoutes.MAIN, AppRoutes.MAIN)
         }

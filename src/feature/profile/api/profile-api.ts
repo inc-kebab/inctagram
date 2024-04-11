@@ -52,7 +52,7 @@ const profileAPI = baseApi.injectEndpoints({
         url: '/profile/avatar',
       }),
     }),
-    getMyProfile: builder.query<GetProfileResponse, void>({
+    getMyProfile: builder.query<GetProfileResponse, undefined>({
       providesTags: ['profile'],
       query: () => ({ url: '/profile' }),
     }),

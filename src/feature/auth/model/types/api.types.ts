@@ -36,6 +36,7 @@ export interface LoginArgs {
 
 export interface LoginResponse {
   accessToken: string
+  userId: number
 }
 
 export interface SignUpArgs {

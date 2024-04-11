@@ -1,4 +1,4 @@
-export { invalidateTagsPost, useGetMyPostsQuery } from './api/post-api'
+export { getMyPosts, useGetMyPostsQuery } from './api/post-api'
 export {
   getAllPublicPosts,
   getPublicPost,

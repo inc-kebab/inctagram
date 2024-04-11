@@ -12,14 +12,14 @@ export const DefenderProtectedRoute = (Page: Page) => {
   const Component = ({ pageProps }: AppProps) => {
     const { push } = useRouter()
 
-    const { data, isError, isFetching } = useMeQuery()
+    const { data, isError, isFetching } = useMeQuery(undefined)
 
     const { t } = useTranslation()
 
     const getLayout = Page.getLayout ?? (page => page)
 
     useEffect(() => {
-      if (!data || isError) {
+      if (isError) {
         void push(AuthRoutes.SIGN_IN)
       }
     }, [data, push, isError])

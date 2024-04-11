@@ -18,7 +18,7 @@ export const LogoutDialog = ({ disabled, onLogout }: Props) => {
 
   const { t } = useTranslation()
 
-  const { data } = useMeQuery()
+  const { data } = useMeQuery(undefined)
 
   const textContent: ReactNode = (
     <div>

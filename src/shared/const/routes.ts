@@ -19,8 +19,6 @@ export enum AppRoutes {
   HOME = '/home',
   MAIN = '/',
   MESSENGER = '/messenger',
-  MY_PROFILE = '/my-profile',
-  MY_PROFILE_SETTINGS = '/my-profile/settings',
   PROFILE = '/profile',
   PUBLIC_PROFILE = '/public-profile',
   SEARCH = '/search',

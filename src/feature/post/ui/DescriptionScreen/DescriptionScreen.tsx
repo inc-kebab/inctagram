@@ -20,7 +20,7 @@ interface Props {
 export const DescriptionScreen = ({ images, onChangeStatus, onCloseModal }: Props) => {
   const { t } = useTranslation()
 
-  const { data, isLoading } = useGetMyProfileQuery()
+  const { data, isLoading } = useGetMyProfileQuery(undefined)
 
   const { createPostRef, handleSubmitCreatePost, isCreatePostLoad } = useCreatePost({
     callback: onCloseModal,

@@ -16,11 +16,13 @@ export const DefenderAuthRoute = (Page: Page) => {
 
     const getLayout = Page.getLayout ?? (page => page)
 
-    const { currentData, data, isFetching } = useMeQuery()
+    const { currentData, data, isFetching } = useMeQuery(undefined)
 
     useEffect(() => {
       if (data || currentData) {
-        void push(AppRoutes.MY_PROFILE)
+        const userId = data?.id || currentData?.id
+
+        void push(AppRoutes.PROFILE + `/${userId}`)
       }
     }, [data, push, currentData])
 

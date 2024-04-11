@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { useLogoutMutation } from '@/feature/auth'
+import { useLogoutMutation, useMeQuery } from '@/feature/auth'
 import { AuthRoutes } from '@/shared/const/routes'
 import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
 import { useTranslation } from '@/shared/hooks/useTranslation'
@@ -18,6 +18,8 @@ type Props = PropsWithChildren & Omit<MetaProps, 'children'>
 
 export const SidebarLayout = ({ children, ...rest }: Props) => {
   const { push } = useRouter()
+
+  const { data } = useMeQuery(undefined)
 
   const [logout, { isLoading }] = useLogoutMutation()
 
@@ -41,7 +43,7 @@ export const SidebarLayout = ({ children, ...rest }: Props) => {
         <Sidebar
           buttonName={t.layout.sidebar.logout}
           isLoading={isLoading}
-          items={getSidebarItems(t)}
+          items={getSidebarItems(t, data?.id)}
           onLogout={handleLogout}
         />
         <main className={s.main}>{children}</main>

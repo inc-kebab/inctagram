@@ -10,7 +10,7 @@ import {
 } from '@/shared/assets/icons/outline'
 import { AppRoutes } from '@/shared/const/routes'
 
-export const getSidebarItems = (t: LocaleType) => {
+export const getSidebarItems = (t: LocaleType, id?: number) => {
   return [
     {
       activeIcon: <Home />,
@@ -26,7 +26,7 @@ export const getSidebarItems = (t: LocaleType) => {
     },
     {
       activeIcon: <Person />,
-      href: AppRoutes.MY_PROFILE,
+      href: AppRoutes.PROFILE + `/${id}`,
       icon: <PersonOutline />,
       title: t.layout.sidebar.profile,
     },

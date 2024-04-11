@@ -1,10 +1,10 @@
 import { wrapper } from '@/app'
 import { me } from '@/feature/auth'
-import { getPublicPost, getUsersPosts } from '@/feature/post'
-import { getPublicProfile } from '@/feature/profile'
+import { getMyPosts, getPublicPost, getUsersPosts } from '@/feature/post'
+import { getMyProfile, getPublicProfile } from '@/feature/profile'
 import { baseApi } from '@/shared/api/base-api'
 import { AppRoutes } from '@/shared/const/routes'
-import { SomeProfileContent } from '@/widgets/profile'
+import { MainProfileContent, SomeProfileContent } from '@/widgets/profile'
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
   const userId = context.params?.id as string | undefined
@@ -27,19 +27,28 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
   const token = context.req.cookies.accessToken
 
   const meResponse = await store.dispatch(me.initiate(undefined))
+
   const queryPostId = postId ? `?post=${postId}` : ''
 
-  if (meResponse.data) {
+  if (!meResponse.data) {
+    // TODO refresh-token
+
     return {
       redirect: {
-        destination: AppRoutes.PROFILE + `/${userId}` + queryPostId,
+        destination: AppRoutes.PUBLIC_PROFILE + `/${userId}` + queryPostId,
         permanent: false,
       },
     }
   }
+  const isMyProfile = Number(userId) === meResponse.data.id
 
-  store.dispatch(getUsersPosts.initiate({ userId: Number(userId) }))
-  store.dispatch(getPublicProfile.initiate(Number(userId)))
+  if (isMyProfile) {
+    await store.dispatch(getMyPosts.initiate({}))
+    await store.dispatch(getMyProfile.initiate(undefined))
+  } else {
+    await store.dispatch(getUsersPosts.initiate({ userId: Number(userId) }))
+    await store.dispatch(getPublicProfile.initiate(Number(userId)))
+  }
 
   const allRes = await Promise.all(store.dispatch(baseApi.util.getRunningQueriesThunk()))
 
@@ -47,9 +56,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
     return { notFound: true }
   }
 
-  return { props: {} }
+  return { props: { isMyProfile } }
 })
 
-const PublicProfile = () => <SomeProfileContent isPublicPage />
+interface Props {
+  isMyProfile: boolean
+}
 
-export default PublicProfile
+const Profile = ({ isMyProfile }: Props) =>
+  isMyProfile ? <MainProfileContent /> : <SomeProfileContent />
+
+export default Profile
