@@ -12,50 +12,60 @@ import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Page } from '@/shared/types/layout'
 import { Notification } from '@/shared/ui/Notification'
 import { PublicLayout } from '@/widgets/layout'
+import { GetStaticPropsResult } from 'next'
 
 import s from './index.module.scss'
 
 // TODO попробуй сделать страницу доступной для всех
 
-export const getStaticProps = wrapper.getStaticProps(store => async () => {
-  const users = await store.dispatch(getTotalUsersCount.initiate(undefined, { forceRefetch: true }))
-  const posts = await store.dispatch(getAllPublicPosts.initiate({}, { forceRefetch: true }))
+type ErrorArgs = {
+  isPostsError?: boolean
+  isUsersError?: boolean
+}
 
-  if (!posts) {
+export const getStaticProps = wrapper.getStaticProps(
+  store => async (): Promise<GetStaticPropsResult<ErrorArgs>> => {
+    const users = await store.dispatch(
+      getTotalUsersCount.initiate(undefined, { forceRefetch: true })
+    )
+    const posts = await store.dispatch(getAllPublicPosts.initiate({}, { forceRefetch: true }))
+
+    await Promise.all(store.dispatch(getRunningQueriesThunk()))
+    if (!posts) {
+      return {
+        props: {
+          isPostsError: true,
+        },
+        revalidate: 60,
+      }
+    }
+
+    if (!users) {
+      return {
+        props: {
+          isUsersError: true,
+        },
+        revalidate: 60,
+      }
+    }
+
     return {
-      props: {
-        isPostsError: true,
-      },
+      props: {},
+      revalidate: 60,
     }
   }
-
-  if (!users) {
-    return {
-      props: {
-        isUsersError: true,
-      },
-    }
-  }
-
-  await Promise.all(store.dispatch(getRunningQueriesThunk()))
-
-  return {
-    props: {},
-    revalidate: 60,
-  }
-})
+)
 
 type Props = {
   isPostsError?: boolean
   isUsersError?: boolean
 }
 
-const Public: Page = (props: Props) => {
+const Public: Page = ({ isPostsError, isUsersError }: Props) => {
   const { t } = useTranslation()
   const { data } = useGetTotalUsersCountQuery()
   const { data: dataPosts } = useGetAllPublicPostsQuery({})
   const { data: currentUser } = useMeQuery()
-  const { isPostsError, isUsersError } = props
 
   return (
     <PublicLayout currentUser={currentUser} title={t.pages.main.metaTitle}>
