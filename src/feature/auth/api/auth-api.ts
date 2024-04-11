@@ -62,7 +62,7 @@ export const authApi = baseApi.injectEndpoints({
         }
       },
     }),
-    me: builder.query<MeResponse, undefined>({
+    me: builder.query<MeResponse, void>({
       query: () => ({ url: '/auth/me' }),
     }),
     newPassword: builder.mutation<void, NewPasswordArgs>({

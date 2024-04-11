@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Typography } from '@/shared/ui/Typography'
 import clsx from 'clsx'
 
@@ -9,6 +10,8 @@ type Props = {
 }
 
 export const CounterRegisteredUsers = ({ className, count }: Props) => {
+  const { t } = useTranslation()
+
   if (!count || count < 1) {
     return null
   }
@@ -18,7 +21,7 @@ export const CounterRegisteredUsers = ({ className, count }: Props) => {
   return (
     <div className={clsx(s.root, className)}>
       <Typography asComponent="h2" variant="h1">
-        Registered users:
+        {t.pages.main.usersTitle}:
       </Typography>
       <div className={s.counter}>
         {arrayNumbers.map((el, i) => {

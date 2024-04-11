@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
+import { useMeQuery } from '@/feature/auth'
 import { PostDetailsDialogs, useGetMyPostsQuery, useGetPublicPostQuery } from '@/feature/post'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { SidebarLayout } from '@/widgets/layout'
@@ -15,9 +16,9 @@ export const MainProfileContent = () => {
   const { query } = router
 
   const [currentCursor, setCurrentCursor] = useState<number | undefined>(undefined)
-
-  const { data } = useGetMyProfileQuery(undefined)
-  const { data: posts, isFetching } = useGetMyPostsQuery({ cursor: currentCursor })
+  const { data: me } = useMeQuery()
+  const { data } = useGetMyProfileQuery(undefined, { skip: !me })
+  const { data: posts, isFetching } = useGetMyPostsQuery({ cursor: currentCursor }, { skip: !me })
   const { data: publicPost } = useGetPublicPostQuery(
     { postId: Number(query.post), userId: query.id },
     { skip: !query.post }
