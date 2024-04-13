@@ -1,16 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { getPostSliderConfig } from '@/feature/post/model/config/getPostSliderConfig'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
 import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 import s from './PublicPost.module.scss'
 
 import { PostItem } from '../../model/types/post.types'
 
-type Props = { post: PostItem | undefined }
+type Props = { handleClick: () => void; post: PostItem | undefined }
 
-export const PublicPost = ({ post }: Props) => {
+export const PublicPost = ({ handleClick, post }: Props) => {
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(false)
   const [isTruncated, setIsTruncated] = useState(false)
@@ -37,8 +39,25 @@ export const PublicPost = ({ post }: Props) => {
   return (
     <div className={s.post}>
       <div className={s.imageContainer}>
-        <Image alt="post image" height={240} src={post.images[0].url} width={234} />
-        {/*  TODO add swiper */}
+        {post.images.length > 1 ? (
+          <Swiper {...getPostSliderConfig({ classes: [s.slider] })}>
+            {post?.images?.map((image, i) => {
+              return (
+                <SwiperSlide key={image.url + i}>
+                  <Image alt={image.url + i} fill onClick={() => handleClick()} src={image.url} />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+        ) : (
+          <Image
+            alt="post image"
+            height={240}
+            onClick={() => handleClick()}
+            src={post.images[0].url}
+            width={234}
+          />
+        )}
       </div>
       <div className={s.user}>
         <Image

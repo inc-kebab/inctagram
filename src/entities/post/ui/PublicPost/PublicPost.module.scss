@@ -3,7 +3,13 @@
 }
 
 .imageContainer {
+  cursor: pointer;
   display: flex;
+}
+
+.slider {
+  width: 234px;
+  height: 240px;
 }
 
 .user {
