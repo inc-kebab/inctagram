@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
         rule.test?.test?.('.svg'),

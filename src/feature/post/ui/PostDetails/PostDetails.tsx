@@ -4,7 +4,7 @@ import { useMeQuery } from '@/feature/auth'
 import { PublishCommentForm, mockComments } from '@/feature/comment'
 import { More } from '@/shared/assets/icons/common'
 import { Edit, Trash } from '@/shared/assets/icons/outline'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
@@ -27,7 +27,7 @@ export const PostDetails = ({
 }: Props) => {
   const { t } = useTranslation()
 
-  const { data } = useMeQuery()
+  const { data } = useMeQuery(undefined)
 
   if (!item) {
     return null

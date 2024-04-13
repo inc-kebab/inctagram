@@ -40,7 +40,7 @@ export const Carousel = ({ className, imagesUrl, ...props }: Props) => {
               priority
               sizes="70vw"
               src={image.url}
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'contain' }}
             />
           </SwiperSlide>
         )

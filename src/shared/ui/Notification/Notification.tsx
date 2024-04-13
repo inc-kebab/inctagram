@@ -1,4 +1,4 @@
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import clsx from 'clsx'
 
 import s from './Notification.module.scss'

@@ -1,4 +1,5 @@
 import { AppRoutes } from '@/shared/const/routes'
+import { useTranslation } from '@/shared/hooks'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
@@ -12,10 +13,13 @@ import { Profile } from '../../model/types/profile.types'
 interface Props {
   className?: string
   myProfile?: boolean
+  ownerId?: number
   userData?: Profile
 }
 
-export const ProfileInfo = ({ className, myProfile = true, userData }: Props) => {
+export const ProfileInfo = ({ className, myProfile = true, ownerId, userData }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className={clsx(s.ProfileInfo, className)}>
       <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} wrapperSize={200} />
@@ -24,26 +28,26 @@ export const ProfileInfo = ({ className, myProfile = true, userData }: Props) =>
         {userData?.username}
       </Typography>
 
-      {myProfile && (
+      {myProfile && ownerId && (
         <Button
           asComponent={Link}
           className={s.settings}
-          href={{ pathname: AppRoutes.MY_PROFILE_SETTINGS, query: { tab: 'general' } }}
+          href={{ pathname: AppRoutes.PROFILE + `/${ownerId}/settings`, query: { tab: 'general' } }}
           variant="secondary"
         >
-          Profile settings
+          {t.button.profileSettings}
         </Button>
       )}
 
       <ul className={s.subscriber}>
         <li className={s.item}>
-          <span className={s.count}>2 218</span> Following
+          <span className={s.count}>2 218</span> {t.pages.profile.following}
         </li>
         <li className={s.item}>
-          <span className={s.count}>2 358</span> Followers
+          <span className={s.count}>2 358</span> {t.pages.profile.followers}
         </li>
         <li className={s.item}>
-          <span className={s.count}>2 764</span> Publications
+          <span className={s.count}>2 764</span> {t.pages.profile.publications}
         </li>
       </ul>
 

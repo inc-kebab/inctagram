@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { GeneralInformation } from '@/feature/profile'
-import { DefenderProtectedRoute } from '@/shared/helpers/hoc'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { DefenderProtectedRoute } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
 import { SidebarLayout } from '@/widgets/layout'
@@ -19,7 +19,7 @@ const ProfileSettings: Page = () => {
 
   const handleChangeTabValue = (value: string) => {
     setActiveTab(value)
-    void push({ query: { tab: value } })
+    void push({ query: { id: query.id, tab: value } })
   }
 
   const tabs = useMemo(() => {
@@ -34,9 +34,9 @@ const ProfileSettings: Page = () => {
   useEffect(() => {
     if (!query.tab || !valuesTabs.includes(query.tab as string)) {
       setActiveTab('general')
-      void push({ query: { tab: 'general' } })
+      void push({ query: { id: query.id, tab: 'general' } })
     }
-  }, [push, query.tab])
+  }, [push, query.tab, query.id])
 
   return (
     <Tabs.Root defaultValue={tabs[0].value} onValueChange={handleChangeTabValue} value={activeTab}>

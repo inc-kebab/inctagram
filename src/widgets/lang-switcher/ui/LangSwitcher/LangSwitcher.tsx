@@ -1,5 +1,5 @@
 import { RuIcon, UkIcon } from '@/shared/assets/icons/lang'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Select } from '@/shared/ui/Select'
 import clsx from 'clsx'
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Image as ImageSvg } from '@/shared/assets/icons/outline'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { InputFile } from '@/shared/ui/InputFile'
 import { Notification } from '@/shared/ui/Notification'

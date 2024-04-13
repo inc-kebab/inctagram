@@ -1,6 +1,6 @@
 import { More } from '@/shared/assets/icons/common'
 import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { Typography } from '@/shared/ui/Typography'

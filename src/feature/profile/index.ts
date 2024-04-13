@@ -1,4 +1,4 @@
-export { useGetMyProfileQuery } from './api/profile-api'
+export { getMyProfile, useGetMyProfileQuery } from './api/profile-api'
 export {
   getPublicProfile,
   getTotalUsersCount,

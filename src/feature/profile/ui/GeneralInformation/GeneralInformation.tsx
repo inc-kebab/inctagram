@@ -1,4 +1,4 @@
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 
 import s from './GeneralInformation.module.scss'
 
@@ -12,7 +12,7 @@ import { ProfilePhoto } from '../ProfilePhoto/ProfilePhoto'
 export const GeneralInformation = () => {
   const { t } = useTranslation()
 
-  const { data, isLoading: isGetProfileLoad } = useGetMyProfileQuery()
+  const { data, isLoading: isGetProfileLoad } = useGetMyProfileQuery(undefined)
 
   const { handleUpdateProfile, isLoading, updateProfileRef } = useUpdateProfile(
     t.label.successUpdateProfile

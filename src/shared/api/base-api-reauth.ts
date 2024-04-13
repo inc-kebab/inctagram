@@ -1,22 +1,35 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { GetServerSidePropsContext } from 'next'
 
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BACKEND_API,
   credentials: 'include',
-  prepareHeaders: headers => {
-    const accessToken = getCookie('accessToken')
-    const currentLang = getCookie('NEXT_LOCALE')
+  prepareHeaders: (headers, { extra }) => {
+    if (typeof window !== 'undefined') {
+      const accessTokenFront = getCookie('accessToken')
+      const currentLangFront = getCookie('NEXT_LOCALE')
 
-    if (accessToken) {
-      headers.set('Authorization', `Bearer ${accessToken}`)
-    }
+      if (accessTokenFront) {
+        headers.set('Authorization', `Bearer ${accessTokenFront}`)
+      }
 
-    if (currentLang) {
-      headers.set('X-Url-lang', currentLang)
+      if (currentLangFront) {
+        headers.set('X-Url-lang', currentLangFront)
+      }
+    } else {
+      const extraSSR = extra as GetServerSidePropsContext | undefined
+
+      if (extraSSR?.req?.cookies?.accessToken) {
+        headers.set('Authorization', `Bearer ${extraSSR.req.cookies.accessToken}`)
+      }
+
+      if (extraSSR?.locale) {
+        headers.set('X-Url-lang', extraSSR.locale)
+      }
     }
 
     return headers

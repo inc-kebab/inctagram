@@ -1,4 +1,4 @@
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { AppProps } from 'next/app'
 

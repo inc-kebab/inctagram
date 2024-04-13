@@ -1,8 +1,7 @@
 import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useFormRevalidateWithLocale } from '@/shared/hooks/useFormRevalidateWithLocale'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useFormRevalidateWithLocale, useTranslation } from '@/shared/hooks'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'

@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useAppDispatch } from '@/app/store/store'
 import { ExpandBtn, ImageObj, LoadedImagesList, ZoomIn, postsActions } from '@/entities/post'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { handleErrorResponse } from '@/shared/helpers'
 import Image from 'next/image'
 import { Controller } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
