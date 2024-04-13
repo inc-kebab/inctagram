@@ -1,4 +1,5 @@
-import { baseApi } from '@/shared/api/base-api'
+import { PostItem } from '@/entities/post'
+import { baseApi } from '@/shared/api'
 
 import {
   GetAllPostsArgs,
@@ -13,6 +14,15 @@ export const publicPostsApi = baseApi.injectEndpoints({
       query: ({ pageSize = 4, sortDirection = 'desc', ...rest }) => ({
         params: { pageSize, sortDirection, ...rest },
         url: `/public-posts/all`,
+      }),
+    }),
+    getPublicPost: builder.query<
+      PostItem,
+      { postId: number; userId: string | string[] | undefined }
+    >({
+      query: data => ({
+        params: { userId: data.userId },
+        url: `/public-posts/${data.postId}`,
       }),
     }),
     getUsersPosts: builder.query<GetPublicPostsResponse, GetAllPostsArgs>({
@@ -42,5 +52,6 @@ export const publicPostsApi = baseApi.injectEndpoints({
   }),
 })
 
-export const { getAllPublicPosts, getUsersPosts } = publicPostsApi.endpoints
-export const { useGetAllPublicPostsQuery, useGetUsersPostsQuery } = publicPostsApi
+export const { getAllPublicPosts, getPublicPost, getUsersPosts } = publicPostsApi.endpoints
+export const { useGetAllPublicPostsQuery, useGetPublicPostQuery, useGetUsersPostsQuery } =
+  publicPostsApi

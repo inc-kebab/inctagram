@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 import { PostItem } from '@/entities/post'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { handleErrorResponse } from '@/shared/helpers'
 import { UseFormRef } from '@/shared/types/form'
 
 import { useEditPostMutation } from '../../api/post-api'

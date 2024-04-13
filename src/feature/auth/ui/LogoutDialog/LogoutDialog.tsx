@@ -3,7 +3,7 @@ import { ReactNode, useState } from 'react'
 import { ConfirmDialog } from '@/entities/dialog'
 import { useMeQuery } from '@/feature/auth'
 import { Logout } from '@/shared/assets/icons/common'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 
 import s from './LogoutDialog.module.scss'
@@ -18,7 +18,7 @@ export const LogoutDialog = ({ disabled, onLogout }: Props) => {
 
   const { t } = useTranslation()
 
-  const { data } = useMeQuery()
+  const { data } = useMeQuery(undefined)
 
   const textContent: ReactNode = (
     <div>

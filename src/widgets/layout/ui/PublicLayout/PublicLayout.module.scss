@@ -1,12 +1,11 @@
 @import '@/app/styles/mixins';
 
 .main {
+  max-width: 920px;
   margin: 0 auto;
-  padding: 36px 154px;
+  padding: 0 15px;
 }
 
-@include mobile {
-  .main {
-    padding: 24px 15px;
-  }
+.back {
+  margin-top: 24px;
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Cropper, { Point } from 'react-easy-crop'
 
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 
 import s from './CropperPhoto.module.scss'

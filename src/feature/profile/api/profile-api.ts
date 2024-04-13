@@ -1,4 +1,4 @@
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 
 import {
   AddAvatarResponse,
@@ -52,7 +52,7 @@ const profileAPI = baseApi.injectEndpoints({
         url: '/profile/avatar',
       }),
     }),
-    getMyProfile: builder.query<GetProfileResponse, void>({
+    getMyProfile: builder.query<GetProfileResponse, undefined>({
       providesTags: ['profile'],
       query: () => ({ url: '/profile' }),
     }),

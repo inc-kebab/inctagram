@@ -5,12 +5,14 @@ import { LocaleType } from './en'
 /* eslint-disable max-lines */
 export const ru: LocaleType = {
   button: {
+    answer: 'Ответить',
     back: 'Вернуться',
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
     discard: 'Отменить',
     no: 'Нет',
+    profileSettings: 'Настройки профиля',
     publish: 'Опубликовать',
     resendVerificationLink: 'Отправить повторное подтверждение',
     save: 'Сохранить изменения',
@@ -108,6 +110,11 @@ export const ru: LocaleType = {
     },
     main: {
       metaTitle: 'Главная',
+      ssgErrorPosts:
+        'Произошла ошибка при получении данных о публикациях. Повторите попытку через минуту.',
+      ssgErrorUsersCount:
+        'Произошла ошибка при получении данных о пользователях. Повторите попытку через минуту.',
+      usersTitle: 'Зарегистрированные пользователи',
     },
     post: {
       addPhoto: 'Добавить Фото',
@@ -130,6 +137,7 @@ export const ru: LocaleType = {
         areaLabel: 'Добавьте описания публикаций',
       },
       filters: 'Фильтры',
+      likes: 'Нравится',
       maxPost: 'Может быть загружено не более 10 изображений',
       next: 'Далее',
       publication: 'Публикация',
@@ -182,10 +190,13 @@ export const ru: LocaleType = {
       addProfilePhoto: 'Добавить фото',
       deletePhoto: 'Удалить фото',
       deleteProfilePhoto: 'Вы уверены, что хотите удалить фотографию?',
+      followers: 'Подписчики',
+      following: 'Подписки',
       logOutConfirmation: 'Вы действительно хотите выйти из своего аккаунта',
       metaDescription:
         'Откройте для себя подробную информацию о пользователях, их интересах, навыках и опыте.',
       metaTitle: 'Профиль',
+      publications: 'Публикации',
     },
     profileSettings: {
       metaDescription:
@@ -273,7 +284,7 @@ export const ru: LocaleType = {
     aboutMe: 'Напишите о себе',
     birthDate: 'Укажите вашу дату рождения',
     city: 'Укажите ваш город проживания',
-    comment: 'Введите текси комментария',
+    comment: 'Введите текст комментария',
     email: 'email@inctagrum.fun',
     firstName: 'Введите ваше имя',
     lastName: 'Введите вашу фамилию',

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
-import { photoSchema } from '@/shared/helpers/validators/photoSchema'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { photoSchema } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Dialog } from '@/shared/ui/Dialog'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 

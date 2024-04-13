@@ -1,4 +1,4 @@
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { deleteCookie, setCookie } from 'cookies-next'
 
 import {
@@ -62,15 +62,8 @@ export const authApi = baseApi.injectEndpoints({
         }
       },
     }),
-    me: builder.query<MeResponse, void>({
+    me: builder.query<MeResponse, undefined>({
       query: () => ({ url: '/auth/me' }),
-    }),
-    meSSR: builder.query<MeResponse, { token: null | string }>({
-      query: ({ token }) => {
-        const headers = token ? { Authorization: `Bearer ${token}` } : undefined
-
-        return { headers, url: '/auth/me' }
-      },
     }),
     newPassword: builder.mutation<void, NewPasswordArgs>({
       query: data => ({
@@ -113,7 +106,6 @@ export const authApi = baseApi.injectEndpoints({
 export const {
   useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
-  useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
@@ -124,4 +116,4 @@ export const {
   useSignUpMutation,
 } = authApi
 
-export const { meSSR } = authApi.endpoints
+export const { me } = authApi.endpoints

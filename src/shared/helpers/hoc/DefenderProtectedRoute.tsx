@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useMeQuery } from '@/feature/auth'
 import { AuthRoutes } from '@/shared/const/routes'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Loader } from '@/shared/ui/Loader'
 import { AppProps } from 'next/app'
@@ -12,14 +12,14 @@ export const DefenderProtectedRoute = (Page: Page) => {
   const Component = ({ pageProps }: AppProps) => {
     const { push } = useRouter()
 
-    const { data, isError, isFetching } = useMeQuery()
+    const { data, isError, isFetching } = useMeQuery(undefined)
 
     const { t } = useTranslation()
 
     const getLayout = Page.getLayout ?? (page => page)
 
     useEffect(() => {
-      if (!data || isError) {
+      if (isError) {
         void push(AuthRoutes.SIGN_IN)
       }
     }, [data, push, isError])

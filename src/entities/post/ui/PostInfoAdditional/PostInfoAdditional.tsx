@@ -1,4 +1,5 @@
 import { Bookmark, Heart, MessageCircle, PaperPlane } from '@/shared/assets/icons/outline'
+import { useTranslation } from '@/shared/hooks'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
@@ -17,6 +18,7 @@ type Props = {
 }
 
 export const PostInfoAdditional = ({ avatars, className, datePost, likesCount }: Props) => {
+  const { t } = useTranslation()
   const { locale } = useRouter()
   const formatDate = formatWithOptions(
     { locale: locale === 'ru' ? ru : enUS },
@@ -55,7 +57,9 @@ export const PostInfoAdditional = ({ avatars, className, datePost, likesCount }:
           />
         ))}
       </div>
-      <Typography className={s.likesCount}>{likesCount} Like</Typography>
+      <Typography className={s.likesCount}>
+        {likesCount} {t.pages.post.likes}
+      </Typography>
       <Typography asComponent="span" className={s.date} variant="small">
         {date}
       </Typography>

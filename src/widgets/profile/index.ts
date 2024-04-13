@@ -1,2 +1,2 @@
-export { getSSRForSomeUserProfile } from './model/services/getSSRForSomeUserProfile'
-export { SomeUserProfile } from './ui/SomeUserProfile/SomeUserProfile'
+export { MainProfileContent } from './ui/MainProfileContent/MainProfileContent'
+export { SomeProfileContent } from './ui/SomeProfileContent/SomeProfileContent'

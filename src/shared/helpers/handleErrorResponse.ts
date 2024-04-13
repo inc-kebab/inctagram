@@ -8,7 +8,7 @@ interface FieldError<T extends Record<string, any>> {
   message: string
 }
 
-export interface ResponseError<T extends Record<string, any>> {
+interface ResponseError<T extends Record<string, any>> {
   errorDescription?: FieldError<T>[]
   message?: string
   statusCode: number
