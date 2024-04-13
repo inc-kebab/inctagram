@@ -44,14 +44,20 @@ export const PublicPost = ({ handleClick, post }: Props) => {
             {post?.images?.map((image, i) => {
               return (
                 <SwiperSlide key={image.url + i}>
-                  <Image alt={image.url + i} fill onClick={() => handleClick()} src={image.url} />
+                  <Image
+                    alt={'Post image ' + i}
+                    height={240}
+                    onClick={() => handleClick()}
+                    src={image.url}
+                    width={234}
+                  />
                 </SwiperSlide>
               )
             })}
           </Swiper>
         ) : (
           <Image
-            alt="post image"
+            alt="Post image"
             height={240}
             onClick={() => handleClick()}
             src={post.images[0].url}
