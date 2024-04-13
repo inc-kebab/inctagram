@@ -1,54 +1,54 @@
 .post {
   width: 234px;
-}
 
-.imageContainer {
-  cursor: pointer;
-  display: flex;
+  & .banner {
+    padding: 12px 0;
+  }
 }
 
 .slider {
+  cursor: pointer;
   width: 234px;
   height: 240px;
+  transition: height 0.2s linear;
 }
 
-.user {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-top: 12px;
-}
-
-.avatar {
-  border-radius: 50%;
-}
-
-.userName {
-  font-weight: var(--font-weight-semibold);
+.sliderMin {
+  height: 140px;
 }
 
 .timeAgo {
-  margin-top: 12px;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
+  margin-bottom: 3px;
   color: var(--light-900);
 }
 
 .description {
-  max-height: 100px;
+  overflow: hidden;
+  display: -webkit-box;
+
+  height: 60px;
+
+  text-overflow: ellipsis;
   word-break: break-all;
+
+  transition: height 0.2s linear;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
-.textContent {
-  font-size: var(--font-size-s);
-}
+.descriptionMax {
+  height: 160px;
 
-.expanded {
-  max-height: none;
+  -webkit-line-clamp: 8;
 }
 
 .toggleText {
   cursor: pointer;
+  user-select: none;
+
+  float: right;
+
   font-size: var(--font-size-s);
   color: var(--primary-500);
   text-decoration: underline;

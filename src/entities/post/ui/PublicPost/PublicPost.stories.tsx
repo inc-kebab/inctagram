@@ -5,11 +5,16 @@ import { PostItem } from '@/entities/post'
 import { PublicPost } from './PublicPost'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    handleClick: {
+      action: 'Redirect to page with post',
+    },
+  },
   component: PublicPost,
   parameters: {
     layout: 'centered',
   },
+  tags: ['autodocs'],
   title: 'entities/Post/PublicPost',
 } satisfies Meta<typeof PublicPost>
 
@@ -59,7 +64,6 @@ const createMockPost = (): PostItem => ({
 
 export const Default: Story = {
   args: {
-    handleClick: () => console.log('click'),
     post: createMockPost(),
   },
 }

@@ -1,36 +1,49 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 
+import { UserBanner } from '@/entities/post'
 import { getPostSliderConfig } from '@/feature/post/model/config/getPostSliderConfig'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Typography } from '@/shared/ui/Typography'
+import clsx from 'clsx'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
+import { enUS, ru } from 'date-fns/locale'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import s from './PublicPost.module.scss'
 
 import { PostItem } from '../../model/types/post.types'
 
-type Props = { handleClick: () => void; post: PostItem | undefined }
+type Props = {
+  handleClick: () => void
+  post: PostItem
+}
 
 export const PublicPost = ({ handleClick, post }: Props) => {
   const { t } = useTranslation()
+
+  const { locale } = useRouter()
+
+  const descriptionRef = useRef<Nullable<HTMLDivElement>>(null)
+
   const [isExpanded, setIsExpanded] = useState(false)
   const [isTruncated, setIsTruncated] = useState(false)
-  const toggleIsExpanded = useCallback(() => setIsExpanded(prev => !prev), [])
 
-  const timeAgo = useMemo(
-    () => formatDistanceToNowStrict(parseISO(post?.createdAt as string), { addSuffix: true }),
-    [post?.createdAt]
-  )
+  const toggleIsExpanded = () => setIsExpanded(prev => !prev)
 
-  useEffect(() => {
-    if (post?.description && post.description.length > 83) {
-      setIsTruncated(true)
-      setIsExpanded(false)
-    } else {
-      setIsTruncated(false)
+  const timeAgo = formatDistanceToNowStrict(parseISO(post?.createdAt as string), {
+    addSuffix: true,
+    locale: locale === 'ru' ? ru : enUS,
+  })
+
+  useLayoutEffect(() => {
+    if (descriptionRef.current) {
+      if (descriptionRef.current.clientHeight < descriptionRef.current.scrollHeight) {
+        setIsTruncated(true)
+      }
     }
-  }, [post?.description])
+  }, [descriptionRef])
 
   if (!post) {
     return null
@@ -38,57 +51,37 @@ export const PublicPost = ({ handleClick, post }: Props) => {
 
   return (
     <div className={s.post}>
-      <div className={s.imageContainer}>
-        {post.images.length > 1 ? (
-          <Swiper {...getPostSliderConfig({ classes: [s.slider] })}>
-            {post?.images?.map((image, i) => {
-              return (
-                <SwiperSlide key={image.url + i}>
-                  <Image
-                    alt={'Post image ' + i}
-                    height={240}
-                    onClick={() => handleClick()}
-                    src={image.url}
-                    width={234}
-                  />
-                </SwiperSlide>
-              )
-            })}
-          </Swiper>
-        ) : (
-          <Image
-            alt="Post image"
-            height={240}
-            onClick={() => handleClick()}
-            src={post.images[0].url}
-            width={234}
-          />
-        )}
-      </div>
-      <div className={s.user}>
-        <Image
-          alt="userAvatar"
-          className={s.avatar}
-          height={36}
-          src={post.avatarOwner || ''}
-          width={36}
-        />
-
-        <span className={s.userName}>{post.username}</span>
-      </div>
-      <div className={s.timeAgo}>{timeAgo}</div>
-      <div className={`${s.description} ${isExpanded ? s.expanded : ''}`}>
-        <span className={s.textContent}>
-          {isTruncated && !isExpanded
-            ? `${post?.description?.substring(0, 83)}...`
-            : post.description}
-        </span>{' '}
-        {isTruncated && (
-          <span className={s.toggleText} onClick={toggleIsExpanded}>
-            {isExpanded ? t.button.showLess : t.button.showMore}
-          </span>
-        )}
-      </div>
+      <Swiper {...getPostSliderConfig({ classes: [s.slider, { [s.sliderMin]: isExpanded }] })}>
+        {post?.images?.map((image, i) => {
+          return (
+            <SwiperSlide key={image.url + i}>
+              <Image
+                alt={'Post image ' + i}
+                height={240}
+                onClick={() => handleClick()}
+                src={image.url}
+                width={234}
+              />
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
+      <UserBanner avatar={post.avatarOwner} className={s.banner} name={post.username} />
+      <Typography className={s.timeAgo} variant="small">
+        {timeAgo}
+      </Typography>
+      {post.description && (
+        <>
+          <div className={clsx(s.description, isExpanded && s.descriptionMax)} ref={descriptionRef}>
+            {post.description}
+          </div>
+          {isTruncated && (
+            <span className={s.toggleText} onClick={toggleIsExpanded}>
+              {isExpanded ? t.button.showLess : t.button.showMore}
+            </span>
+          )}
+        </>
+      )}
     </div>
   )
 }

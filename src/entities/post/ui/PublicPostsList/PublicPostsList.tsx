@@ -17,15 +17,14 @@ export const PublicPostsList = ({ posts }: Props) => {
 
   return (
     <div className={s.posts}>
-      {posts &&
-        posts.map((post, i) => (
-          <div key={`${post.id}-${i}`}>
-            <PublicPost
-              handleClick={() => push(`${AppRoutes.PUBLIC_PROFILE}/${post.ownerId}`)}
-              post={post}
-            />
-          </div>
-        ))}
+      {posts.map((post, i) => (
+        <div key={`${post.id}-${i}`}>
+          <PublicPost
+            handleClick={() => push(`${AppRoutes.PUBLIC_PROFILE}/${post.ownerId}`)}
+            post={post}
+          />
+        </div>
+      ))}
     </div>
   )
 }
