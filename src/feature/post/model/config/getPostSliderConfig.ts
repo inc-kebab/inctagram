@@ -3,7 +3,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { SwiperModule } from 'swiper/types'
 
 interface Params {
-  classes?: string[]
+  classes?: (Record<string, boolean> | string)[]
   modules?: SwiperModule[]
 }
 

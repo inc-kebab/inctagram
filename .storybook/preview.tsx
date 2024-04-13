@@ -1,6 +1,11 @@
 import type { Preview } from '@storybook/react'
 import { Provider } from 'react-redux'
 
+import '@/shared/ui/Carousel/Carousel.scss'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
 import '@/app/styles/index.scss'
 import { store } from '../src/app'
 

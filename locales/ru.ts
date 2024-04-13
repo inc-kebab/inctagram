@@ -20,6 +20,8 @@ export const ru: LocaleType = {
     selectFromComputer: 'Выбрать с Компьютера',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
+    showLess: 'Показать меньше',
+    showMore: 'Показать больше',
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
     simple_save: 'Сохранить',

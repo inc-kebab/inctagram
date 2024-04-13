@@ -1,6 +1,6 @@
 export interface Owner {
-  firstName: string
-  lastName: string
+  firstname: string
+  lastname: string
 }
 
 export interface Image {
