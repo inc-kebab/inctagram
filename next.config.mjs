@@ -5,7 +5,7 @@ const nextConfig = {
     const fileLoaderRule = config.module.rules.find((rule) =>
         rule.test?.test?.('.svg'),
     )
-    
+
     config.module.rules.push(
         {
           ...fileLoaderRule,
@@ -21,7 +21,7 @@ const nextConfig = {
     )
 
     fileLoaderRule.exclude = /\.svg$/i
-    
+
     return config
   },
   i18n: {

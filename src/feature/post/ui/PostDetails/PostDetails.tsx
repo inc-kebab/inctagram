@@ -13,12 +13,18 @@ import { Typography } from '@/shared/ui/Typography'
 import s from './PostDetails.module.scss'
 
 type Props = {
+  isOwner: boolean
   item: Nullable<PostItem>
   onOpenConfirmDeleteModal: () => void
   onOpenEditModal: () => void
 }
 
-export const PostDetails = ({ item, onOpenConfirmDeleteModal, onOpenEditModal }: Props) => {
+export const PostDetails = ({
+  isOwner,
+  item,
+  onOpenConfirmDeleteModal,
+  onOpenEditModal,
+}: Props) => {
   const { t } = useTranslation()
 
   const { data } = useMeQuery()
@@ -27,28 +33,30 @@ export const PostDetails = ({ item, onOpenConfirmDeleteModal, onOpenEditModal }:
     return null
   }
 
+  const actions = isOwner ? (
+    <Dropdown.Menu
+      align="end"
+      trigger={
+        <Button style={{ padding: '0' }} variant="text">
+          <More />
+        </Button>
+      }
+    >
+      <Dropdown.Item onClick={onOpenEditModal} startIcon={<Edit />}>
+        <Typography variant="regular14">{t.pages.post.editPost}</Typography>
+      </Dropdown.Item>
+      <Dropdown.Item onClick={onOpenConfirmDeleteModal} startIcon={<Trash />}>
+        <Typography variant="regular14">{t.pages.post.deletePost}</Typography>
+      </Dropdown.Item>
+    </Dropdown.Menu>
+  ) : undefined
+
   return (
     <>
       <div className={s.postDetails}>
         <Carousel className={s.slider} imagesUrl={item.images} />
         <UserBanner
-          actions={
-            <Dropdown.Menu
-              align="end"
-              trigger={
-                <Button style={{ padding: '0' }} variant="text">
-                  <More />
-                </Button>
-              }
-            >
-              <Dropdown.Item onClick={onOpenEditModal} startIcon={<Edit />}>
-                <Typography variant="regular14">{t.pages.post.editPost}</Typography>
-              </Dropdown.Item>
-              <Dropdown.Item onClick={onOpenConfirmDeleteModal} startIcon={<Trash />}>
-                <Typography variant="regular14">{t.pages.post.deletePost}</Typography>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          }
+          actions={actions}
           avatar={item.avatarOwner}
           className={s.header}
           name={item.username}
@@ -65,7 +73,7 @@ export const PostDetails = ({ item, onOpenConfirmDeleteModal, onOpenEditModal }:
           datePost={item.createdAt}
           likesCount={2243}
         />
-        <PublishCommentForm className={s.form} />
+        {isOwner && <PublishCommentForm className={s.form} />}
       </div>
     </>
   )

@@ -72,6 +72,7 @@ const Profile: Page = () => {
       )}
       <PostDetailsDialogs
         currentPost={currentPost}
+        isOwner
         openPostDetailsModal={openPostDetailsModal}
         setCurrentPost={setCurrentPost}
         setOpenPostDetailsModal={setOpenPostDetailsModal}

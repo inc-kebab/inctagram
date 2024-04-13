@@ -20,11 +20,11 @@ export const DefenderAuthRoute = (Page: Page) => {
 
     useEffect(() => {
       if (data || currentData) {
-        void push(AppRoutes.PROFILE)
+        void push(AppRoutes.MY_PROFILE)
       }
     }, [data, push, currentData])
 
-    if (currentData) {
+    if (currentData || data) {
       return null
     }
 

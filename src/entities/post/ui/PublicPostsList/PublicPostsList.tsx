@@ -1,3 +1,6 @@
+import { AppRoutes } from '@/shared/const/routes'
+import { useRouter } from 'next/router'
+
 import s from './PublicPostsList.module.scss'
 
 import { PostItem } from '../../model/types/post.types'
@@ -6,13 +9,23 @@ import { PublicPost } from '../PublicPost/PublicPost'
 type Props = { posts: PostItem[] | undefined }
 
 export const PublicPostsList = ({ posts }: Props) => {
+  const { push } = useRouter()
+
   if (!posts || !posts.length) {
     return null
   }
 
   return (
     <div className={s.posts}>
-      {posts && posts.map(post => <PublicPost key={post.id} post={post} />)}
+      {posts &&
+        posts.map((post, i) => (
+          <div
+            key={`${post.id}-${i}`}
+            onClick={() => push(`${AppRoutes.PUBLIC_PROFILE}/${post.ownerId}`)}
+          >
+            <PublicPost post={post} />
+          </div>
+        ))}
     </div>
   )
 }

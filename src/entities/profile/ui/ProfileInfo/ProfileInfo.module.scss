@@ -1,48 +1,105 @@
+@import '@/app/styles/mixins';
+
 .ProfileInfo {
-  display: flex;
-  gap: 38px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-areas:
+    'avatar name settings'
+    'avatar subscriber .'
+    'avatar aboutMe aboutMe';
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  gap: 20px 38px;
+
   margin-bottom: 48px;
-}
 
-.info {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 20px;
-  align-items: flex-start;
-}
+  .aboutMe {
+    overflow: hidden;
+    display: -webkit-box;
+    grid-area: aboutMe;
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
+    text-overflow: ellipsis;
+    word-break: break-all;
 
-.name {
-  margin-bottom: 20px;
-}
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
 
-.subscriber {
-  display: flex;
-  gap: 80px;
-  align-items: center;
-  justify-content: space-between;
+  .settings {
+    grid-area: settings;
+  }
 
-  margin: 0;
-  padding: 0;
+  .avatar {
+    grid-area: avatar;
+    width: 200px;
+    height: 200px;
+  }
 
-  font-size: var(--font-size-s);
-  list-style: none;
+  .name {
+    grid-area: name;
+  }
 
-  & .item {
+  .subscriber {
     display: flex;
-    flex-direction: column;
-    line-height: var(--line-height-m);
+    grid-area: subscriber;
+    gap: 80px;
+    align-items: center;
 
-    & .count {
-      font-weight: var(--font-weight-bold);
+    margin: 0;
+    padding: 0;
+
+    font-size: var(--font-size-s);
+    list-style: none;
+
+    & .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: var(--line-height-m);
+
+      & .count {
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
+}
+
+@include mobile {
+  .ProfileInfo {
+    grid-template-areas:
+      'avatar subscriber'
+      'name .'
+      'aboutMe aboutMe';
+    row-gap: 10px;
+    place-items: center center;
+    margin-bottom: 29px;
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+    }
+
+    .settings {
+      display: none;
+    }
+
+    .name {
+      font-size: var(--font-size-m);
+      line-height: var(--line-height-m);
+    }
+
+    .subscriber {
+      gap: unset;
+      justify-content: space-between;
+      width: 100%;
+
+      .item {
+        font-size: var(--font-size-xs);
+      }
+    }
+
+    .aboutMe {
+      font-size: var(--font-size-s);
+      line-height: var(--line-height-m);
     }
   }
 }

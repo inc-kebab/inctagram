@@ -7,7 +7,6 @@ import { createWrapper } from 'next-redux-wrapper'
 
 export const store = configureStore({
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
-
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     posts: postsReducer,
