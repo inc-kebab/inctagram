@@ -6,12 +6,22 @@ import { PublicPost } from './PublicPost'
 
 const meta = {
   argTypes: {
-    handleClick: {
+    onNavigateToPost: {
       action: 'Redirect to page with post',
+      description: 'A function for redirecting to a page with a full description of the post',
+    },
+    post: {
+      control: false,
+      description: 'Post object',
     },
   },
   component: PublicPost,
   parameters: {
+    docs: {
+      description: {
+        component: 'The component for the preview of the post on the main page.',
+      },
+    },
     layout: 'centered',
   },
   tags: ['autodocs'],

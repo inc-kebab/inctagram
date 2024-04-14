@@ -21,11 +21,11 @@ export const PublicPostsList = ({ isAuth, posts }: Props) => {
   return (
     <div className={s.posts}>
       {posts.map((post, i) => {
-        const route = isAuth ? AppRoutes.PUBLIC_PROFILE : AppRoutes.PROFILE
+        const route = isAuth ? AppRoutes.PROFILE : AppRoutes.PUBLIC_PROFILE
 
         return (
           <div key={`${post.id}-${i}`}>
-            <PublicPost handleClick={() => push(`${route}/${post.ownerId}`)} post={post} />
+            <PublicPost onNavigateToPost={() => push(`${route}/${post.ownerId}`)} post={post} />
           </div>
         )
       })}

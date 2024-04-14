@@ -16,11 +16,11 @@ import s from './PublicPost.module.scss'
 import { PostItem } from '../../model/types/post.types'
 
 type Props = {
-  handleClick: () => void
+  onNavigateToPost: () => void
   post: PostItem
 }
 
-export const PublicPost = ({ handleClick, post }: Props) => {
+export const PublicPost = ({ onNavigateToPost, post }: Props) => {
   const { t } = useTranslation()
 
   const { locale } = useRouter()
@@ -32,7 +32,7 @@ export const PublicPost = ({ handleClick, post }: Props) => {
 
   const toggleIsExpanded = () => setIsExpanded(prev => !prev)
 
-  const timeAgo = formatDistanceToNowStrict(parseISO(post?.createdAt as string), {
+  const timeAgo = formatDistanceToNowStrict(parseISO(post.createdAt as string), {
     addSuffix: true,
     locale: locale === 'ru' ? ru : enUS,
   })
@@ -58,7 +58,7 @@ export const PublicPost = ({ handleClick, post }: Props) => {
               <Image
                 alt={'Post image ' + i}
                 height={240}
-                onClick={() => handleClick()}
+                onClick={onNavigateToPost}
                 src={image.url}
                 width={234}
               />

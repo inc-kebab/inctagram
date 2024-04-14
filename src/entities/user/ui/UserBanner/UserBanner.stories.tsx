@@ -6,7 +6,7 @@ import { UserBanner } from './UserBanner'
 const meta: Meta<typeof UserBanner> = {
   argTypes: {
     actions: {
-      action: 'action',
+      control: false,
       description: 'Actions or components to be rendered at the end of the user banner.',
     },
     avatar: {
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = { args: { name: 'UserName' } }
 
-export const WithButton: Story = {
+export const WithAction: Story = {
   args: {
     actions: <Button>Your component will be placed here.</Button>,
     name: 'UserName',
