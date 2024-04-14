@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 
+import { AppRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks'
 import { Meta, MetaProps } from '@/shared/seo/Meta'
 import { BackToPage } from '@/shared/ui/BackToPage'
@@ -16,13 +17,17 @@ type Props = {
 
 export const PublicLayout = ({ children, isAuth, ...rest }: Props) => {
   const { t } = useTranslation()
-  const router = useRouter()
+  const { push } = useRouter()
+
+  const handleNavigate = () => push(AppRoutes.HOME)
 
   return (
     <Meta {...rest}>
       <Header isUnauthorized={!isAuth} />
       <main className={s.main}>
-        {isAuth && <BackToPage className={s.back} onNavigate={router.back} title={t.button.back} />}
+        {isAuth && (
+          <BackToPage className={s.back} onNavigate={handleNavigate} title={t.button.backToHome} />
+        )}
         {children}
       </main>
     </Meta>

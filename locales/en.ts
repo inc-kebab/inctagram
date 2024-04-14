@@ -9,6 +9,7 @@ export const en = {
   button: {
     answer: 'Answer',
     back: 'Back',
+    backToHome: 'Back to home',
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',

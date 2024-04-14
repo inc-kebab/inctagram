@@ -7,6 +7,7 @@ export const ru: LocaleType = {
   button: {
     answer: 'Ответить',
     back: 'Вернуться',
+    backToHome: 'Вернутся на домашнюю',
     backToSignIn: 'Страница входа',
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
