@@ -68,7 +68,7 @@ const Public: Page = ({ isPostsError, isUsersError }: Props) => {
         {isPostsError ? (
           <Notification className={s.notification} error={t.pages.main.ssgErrorPosts} />
         ) : (
-          <PublicPostsList posts={dataPosts?.items} />
+          <PublicPostsList isAuth={!!currentUser} posts={dataPosts?.items} />
         )}
       </div>
     </PublicLayout>

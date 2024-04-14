@@ -1,7 +1,7 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
-import { GetServerSidePropsContext } from 'next'
+import { Context } from 'next-redux-wrapper'
 
 const mutex = new Mutex()
 
@@ -21,14 +21,20 @@ const baseQuery = fetchBaseQuery({
         headers.set('X-Url-lang', currentLangFront)
       }
     } else {
-      const extraSSR = extra as GetServerSidePropsContext | undefined
+      const ctx = extra as Context | undefined
 
-      if (extraSSR?.req?.cookies?.accessToken) {
-        headers.set('Authorization', `Bearer ${extraSSR.req.cookies.accessToken}`)
+      const isCtxWithReqExist = ctx && 'req' in ctx
+
+      if (isCtxWithReqExist && ctx.req && 'cookies' in ctx.req) {
+        const token = ctx.req.cookies.accessToken
+
+        token && headers.set('Authorization', `Bearer ${token}`)
       }
 
-      if (extraSSR?.locale) {
-        headers.set('X-Url-lang', extraSSR.locale)
+      if (ctx && 'locale' in ctx) {
+        const lang = ctx.locale
+
+        lang && headers.set('X-Url-lang', lang)
       }
     }
 
