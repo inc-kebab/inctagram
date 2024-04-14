@@ -9,8 +9,16 @@
   margin-top: 12px;
 }
 
+.isHidden {
+  display: none;
+}
+
 @include mobile {
   .PostsList {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .isHidden {
+    display: grid;
   }
 }
