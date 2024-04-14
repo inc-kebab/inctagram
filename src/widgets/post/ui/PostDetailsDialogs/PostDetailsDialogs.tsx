@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { ConfirmDialog } from '@/entities/dialog'
 import { PostItem } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
+import { EditPostForm, PostDetails, useDeletePostMutation, useEditPost } from '@/feature/post'
 import { Close } from '@/shared/assets/icons/common'
 import { handleErrorResponse } from '@/shared/helpers'
 import { useTranslation } from '@/shared/hooks'
@@ -12,11 +13,6 @@ import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import { useRouter } from 'next/router'
 
 import s from './PostDetailsDialogs.module.scss'
-
-import { useDeletePostMutation } from '../../api/post-api'
-import { useEditPost } from '../../model/hooks/useEditPost'
-import { EditPostForm } from '../EditPostForm/EditPostForm'
-import { PostDetails } from '../PostDetails/PostDetails'
 
 interface Props {
   currentPost: Nullable<PostItem>

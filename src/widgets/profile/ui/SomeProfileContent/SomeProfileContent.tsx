@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
-import { PostDetailsDialogs, useGetPublicPostQuery, useGetUsersPostsQuery } from '@/feature/post'
+import { useGetPublicPostQuery, useGetUsersPostsQuery } from '@/feature/post'
 import { useGetPublicProfileQuery } from '@/feature/profile'
 import { PublicLayout, SidebarLayout } from '@/widgets/layout'
+import { PostDetailsDialogs } from '@/widgets/post'
 import { useRouter } from 'next/router'
 
 import { useProfile } from '../../model/hooks/useProfile'
