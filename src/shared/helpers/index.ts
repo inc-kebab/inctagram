@@ -1,3 +1,4 @@
+export { getDefaultSwiperConfig } from './getDefaultSwiperConfig'
 export { getModifiedImage } from './getModifiedImage'
 export type { FilterImage } from './getModifiedImage'
 export { handleErrorResponse } from './handleErrorResponse'

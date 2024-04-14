@@ -1,8 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 
-import { UserBanner } from '@/entities/post'
-import { getPostSliderConfig } from '@/feature/post/model/config/getPostSliderConfig'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UserBanner } from '@/entities/user'
+import { getDefaultSwiperConfig } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Typography } from '@/shared/ui/Typography'
 import clsx from 'clsx'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
@@ -51,8 +51,8 @@ export const PublicPost = ({ handleClick, post }: Props) => {
 
   return (
     <div className={s.post}>
-      <Swiper {...getPostSliderConfig({ classes: [s.slider, { [s.sliderMin]: isExpanded }] })}>
-        {post?.images?.map((image, i) => {
+      <Swiper {...getDefaultSwiperConfig({ classes: [s.slider, { [s.sliderMin]: isExpanded }] })}>
+        {post.images.map((image, i) => {
           return (
             <SwiperSlide key={image.url + i}>
               <Image

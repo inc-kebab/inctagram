@@ -1,11 +1,10 @@
 import { ReactNode, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { ConfirmDialog } from '@/entities/dialog'
 import { MAX_SIZE_IMAGE_20MB, postsActions } from '@/entities/post'
 import { getModifiedImage, photoSchema } from '@/shared/helpers'
-import { useTranslation } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'

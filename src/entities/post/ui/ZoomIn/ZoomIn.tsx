@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
 import { Maximize } from '@/shared/assets/icons/outline'
+import { useAppDispatch } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { Slider } from '@/shared/ui/Slider'
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const ZoomIn = ({ aspect, imageURL, zoom }: Props) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const [open, setOpen] = useState(false)
 

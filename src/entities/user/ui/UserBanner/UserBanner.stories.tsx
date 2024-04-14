@@ -24,7 +24,7 @@ const meta: Meta<typeof UserBanner> = {
   },
   component: UserBanner,
   tags: ['autodocs'],
-  title: 'components/UserBanner',
+  title: 'entities/User/UserBanner',
 }
 
 export default meta

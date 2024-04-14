@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import { PostItem, UserBanner } from '@/entities/post'
+import { PostItem } from '@/entities/post'
+import { UserBanner } from '@/entities/user'
 import { Close } from '@/shared/assets/icons/common'
 import { handleErrorResponse } from '@/shared/helpers'
 import { useTranslation } from '@/shared/hooks'

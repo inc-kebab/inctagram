@@ -1,5 +1,7 @@
-import { ImageURL, UserBanner } from '@/entities/post'
+import { ImageURL } from '@/entities/post'
+import { UserBanner } from '@/entities/user'
 import { useGetMyProfileQuery } from '@/feature/profile'
+import { getDefaultSwiperConfig } from '@/shared/helpers'
 import { useTranslation } from '@/shared/hooks'
 import { Loader } from '@/shared/ui/Loader'
 import Image from 'next/image'
@@ -7,7 +9,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import s from './DescriptionScreen.module.scss'
 
-import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
 import { useCreatePost } from '../../model/hooks/useCreatePost'
 import { EditPostForm } from '../EditPostForm/EditPostForm'
 
@@ -31,7 +32,7 @@ export const DescriptionScreen = ({ images, onChangeStatus, onCloseModal }: Prop
 
   return (
     <div className={s.container}>
-      <Swiper {...getPostSliderConfig({ classes: [s.slider] })}>
+      <Swiper {...getDefaultSwiperConfig({ classes: [s.slider] })}>
         {images.map((image, i) => {
           const { imageURL } = image
 
