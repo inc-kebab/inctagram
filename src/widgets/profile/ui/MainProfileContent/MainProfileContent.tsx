@@ -54,6 +54,7 @@ export const MainProfileContent = () => {
       />
       <PostsList
         cursor={posts?.cursor}
+        isFetching={isFetching}
         list={posts?.items}
         onSetCurrentPost={handleChangeCurrentPost}
         ref={triggerRef}
