@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { UserBanner } from '@/entities/user'
 import { getDefaultSwiperConfig } from '@/shared/helpers'
@@ -37,7 +37,7 @@ export const PublicPost = ({ onNavigateToPost, post }: Props) => {
     locale: locale === 'ru' ? ru : enUS,
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (descriptionRef.current) {
       if (descriptionRef.current.clientHeight < descriptionRef.current.scrollHeight) {
         setIsTruncated(true)

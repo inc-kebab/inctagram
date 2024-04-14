@@ -25,7 +25,10 @@ export const PublicPostsList = ({ isAuth, posts }: Props) => {
 
         return (
           <div key={`${post.id}-${i}`}>
-            <PublicPost onNavigateToPost={() => push(`${route}/${post.ownerId}`)} post={post} />
+            <PublicPost
+              onNavigateToPost={() => push(`${route}/${post.ownerId}?post=${post.id}`)}
+              post={post}
+            />
           </div>
         )
       })}
