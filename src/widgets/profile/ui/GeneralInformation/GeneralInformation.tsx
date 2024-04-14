@@ -1,13 +1,14 @@
+import {
+  EditProfileForm,
+  ProfilePhoto,
+  useChangePhotoProfile,
+  useGetMyProfileQuery,
+  useRemovePhotoProfile,
+  useUpdateProfile,
+} from '@/feature/profile'
 import { useTranslation } from '@/shared/hooks'
 
 import s from './GeneralInformation.module.scss'
-
-import { useGetMyProfileQuery } from '../../api/profile-api'
-import { useChangePhotoProfile } from '../../model/hooks/useChangePhotoProfile'
-import { useRemovePhotoProfile } from '../../model/hooks/useRemovePhotoProfile'
-import { useUpdateProfile } from '../../model/hooks/useUpdateProfile'
-import { EditProfileForm } from '../EditProfileForm/EditProfileForm'
-import { ProfilePhoto } from '../ProfilePhoto/ProfilePhoto'
 
 export const GeneralInformation = () => {
   const { t } = useTranslation()

@@ -1,10 +1,18 @@
-.posts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+@import '@/app/styles/mixins';
 
-  width: 100%;
+.posts {
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+@include mobile {
+  .posts {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .wrapper {

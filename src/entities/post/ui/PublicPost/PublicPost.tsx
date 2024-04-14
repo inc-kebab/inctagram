@@ -1,8 +1,8 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { UserBanner } from '@/entities/post'
-import { getPostSliderConfig } from '@/feature/post/model/config/getPostSliderConfig'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { UserBanner } from '@/entities/user'
+import { getDefaultSwiperConfig } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Typography } from '@/shared/ui/Typography'
 import clsx from 'clsx'
 import { formatDistanceToNowStrict, parseISO } from 'date-fns'
@@ -16,11 +16,11 @@ import s from './PublicPost.module.scss'
 import { PostItem } from '../../model/types/post.types'
 
 type Props = {
-  handleClick: () => void
+  onNavigateToPost: () => void
   post: PostItem
 }
 
-export const PublicPost = ({ handleClick, post }: Props) => {
+export const PublicPost = ({ onNavigateToPost, post }: Props) => {
   const { t } = useTranslation()
 
   const { locale } = useRouter()
@@ -32,12 +32,12 @@ export const PublicPost = ({ handleClick, post }: Props) => {
 
   const toggleIsExpanded = () => setIsExpanded(prev => !prev)
 
-  const timeAgo = formatDistanceToNowStrict(parseISO(post?.createdAt as string), {
+  const timeAgo = formatDistanceToNowStrict(parseISO(post.createdAt as string), {
     addSuffix: true,
     locale: locale === 'ru' ? ru : enUS,
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (descriptionRef.current) {
       if (descriptionRef.current.clientHeight < descriptionRef.current.scrollHeight) {
         setIsTruncated(true)
@@ -51,14 +51,14 @@ export const PublicPost = ({ handleClick, post }: Props) => {
 
   return (
     <div className={s.post}>
-      <Swiper {...getPostSliderConfig({ classes: [s.slider, { [s.sliderMin]: isExpanded }] })}>
-        {post?.images?.map((image, i) => {
+      <Swiper {...getDefaultSwiperConfig({ classes: [s.slider, { [s.sliderMin]: isExpanded }] })}>
+        {post.images.map((image, i) => {
           return (
             <SwiperSlide key={image.url + i}>
               <Image
                 alt={'Post image ' + i}
                 height={240}
-                onClick={() => handleClick()}
+                onClick={onNavigateToPost}
                 src={image.url}
                 width={234}
               />

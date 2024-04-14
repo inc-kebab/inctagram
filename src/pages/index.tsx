@@ -13,13 +13,13 @@ import { GetStaticPropsResult } from 'next'
 
 import s from './index.module.scss'
 
-type ErrorArgs = {
+type Props = {
   isPostsError?: boolean
   isUsersError?: boolean
 }
 
 export const getStaticProps = wrapper.getStaticProps(
-  store => async (): Promise<GetStaticPropsResult<ErrorArgs>> => {
+  store => async (): Promise<GetStaticPropsResult<Props>> => {
     const users = await store.dispatch(
       getTotalUsersCount.initiate(undefined, { forceRefetch: true })
     )
@@ -51,11 +51,6 @@ export const getStaticProps = wrapper.getStaticProps(
   }
 )
 
-type Props = {
-  isPostsError?: boolean
-  isUsersError?: boolean
-}
-
 const Public: Page = ({ isPostsError, isUsersError }: Props) => {
   const { t } = useTranslation()
   const { data } = useGetTotalUsersCountQuery()
@@ -73,7 +68,7 @@ const Public: Page = ({ isPostsError, isUsersError }: Props) => {
         {isPostsError ? (
           <Notification className={s.notification} error={t.pages.main.ssgErrorPosts} />
         ) : (
-          <PublicPostsList posts={dataPosts?.items} />
+          <PublicPostsList isAuth={!!currentUser} posts={dataPosts?.items} />
         )}
       </div>
     </PublicLayout>

@@ -7,7 +7,7 @@ interface Params {
   modules?: SwiperModule[]
 }
 
-export const getPostSliderConfig = ({ classes = [], modules = [] }: Params) => {
+export const getDefaultSwiperConfig = ({ classes = [], modules = [] }: Params) => {
   return {
     className: clsx('post-single-slider', ...classes),
     modules: [Navigation, Pagination, ...modules],

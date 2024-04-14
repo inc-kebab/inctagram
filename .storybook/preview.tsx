@@ -7,7 +7,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 import '@/app/styles/index.scss'
-import { store } from '../src/app'
+import { makeStore } from '../src/app/store/store'
 
 const preview: Preview = {
   parameters: {
@@ -34,7 +34,7 @@ const preview: Preview = {
   },
   decorators: [
     Story => (
-      <Provider store={store}>
+      <Provider store={makeStore()}>
         <Story />
       </Provider>
     ),

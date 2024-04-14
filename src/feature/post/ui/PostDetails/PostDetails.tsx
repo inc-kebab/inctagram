@@ -1,5 +1,6 @@
 import { CommentsList } from '@/entities/comment'
-import { PostInfoAdditional, PostItem, UserBanner } from '@/entities/post'
+import { PostInfoAdditional, PostItem } from '@/entities/post'
+import { UserBanner } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
 import { PublishCommentForm, mockComments } from '@/feature/comment'
 import { More } from '@/shared/assets/icons/common'

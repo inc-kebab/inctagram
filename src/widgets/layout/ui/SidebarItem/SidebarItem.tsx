@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { CreatePostDialog } from '@/feature/post'
 import { Button } from '@/shared/ui/Button'
+import { CreatePostDialog } from '@/widgets/post'
 import clsx from 'clsx'
 import Link from 'next/link'
 

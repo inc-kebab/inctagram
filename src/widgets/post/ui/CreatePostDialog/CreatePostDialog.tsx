@@ -1,11 +1,11 @@
 import { ReactNode, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { useAppDispatch, useAppSelector } from '@/app/store/store'
 import { ConfirmDialog } from '@/entities/dialog'
 import { MAX_SIZE_IMAGE_20MB, postsActions } from '@/entities/post'
+import { CropperPostScreen, CurrentWindow, DescriptionScreen, FiltersScreen } from '@/feature/post'
 import { getModifiedImage, photoSchema } from '@/shared/helpers'
-import { useTranslation } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'
@@ -13,10 +13,6 @@ import clsx from 'clsx'
 
 import s from './CreatePostDialog.module.scss'
 
-import { CurrentWindow } from '../../model/types/post.types'
-import { CropperPostScreen } from '../CropperPostScreen/CropperPostScreen'
-import { DescriptionScreen } from '../DescriptionScreen/DescriptionScreen'
-import { FiltersScreen } from '../FiltersScreen/FiltersScreen'
 import { Title } from './Title/Title'
 
 type Props = {

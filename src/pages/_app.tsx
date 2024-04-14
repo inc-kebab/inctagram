@@ -11,7 +11,11 @@ import { setCookie } from 'cookies-next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 import 'react-toastify/dist/ReactToastify.css'
+import '@/shared/ui/Carousel/Carousel.scss'
 import '@/app/styles/nprogress.scss'
 import '@/app/styles/index.scss'
 
