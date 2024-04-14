@@ -45,20 +45,27 @@
   margin-left: 1.5rem;
 }
 
-/* .lang {
-  display: flex;
-}
-
-.langMobile {
+.mobile {
   display: none;
 }
 
-@include mobile-small {
-  .lang {
+@include mobile {
+  .content {
+    padding: 12px 18px;
+  }
+
+  .pc {
     display: none;
   }
 
-  .langMobile {
+  .mobile {
     display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 24px;
+    padding: 0;
+
+    color: var(--light-100);
   }
-} */
+}

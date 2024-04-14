@@ -1,0 +1,21 @@
+@import '@/app/styles/mixins';
+
+.posts {
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+@include mobile {
+  .posts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}

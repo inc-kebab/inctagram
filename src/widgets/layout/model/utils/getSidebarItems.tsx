@@ -8,49 +8,50 @@ import {
   Person as PersonOutline,
   PlusSquare as PlusSquareOutline,
 } from '@/shared/assets/icons/outline'
+import { AppRoutes } from '@/shared/const/routes'
 
-export const getSidebarItems = (t: LocaleType) => {
+export const getSidebarItems = (t: LocaleType, id?: number) => {
   return [
     {
       activeIcon: <Home />,
-      href: '/home',
+      href: AppRoutes.HOME,
       icon: <HomeOutline />,
       title: t.layout.sidebar.home,
     },
     {
       activeIcon: <PlusSquare />,
-      href: '/create',
+      href: AppRoutes.CREATE_POST,
       icon: <PlusSquareOutline />,
       title: t.layout.sidebar.create,
     },
     {
       activeIcon: <Person />,
-      href: '/profile',
+      href: AppRoutes.PROFILE + `/${id}`,
       icon: <PersonOutline />,
       title: t.layout.sidebar.profile,
     },
     {
       activeIcon: <MessageCircle />,
-      href: '/messenger',
+      href: AppRoutes.MESSENGER,
       icon: <MessageCircleOutline />,
       title: t.layout.sidebar.messenger,
     },
     {
       activeIcon: <Search />,
-      href: '/search',
+      href: AppRoutes.SEARCH,
       icon: <Search />,
       title: t.layout.sidebar.search,
     },
     {
       activeIcon: <Trending />,
-      href: '/statistics',
+      href: AppRoutes.STATISTICS,
       icon: <Trending />,
       showForOnlyPremium: true,
       title: t.layout.sidebar.statistics,
     },
     {
       activeIcon: <Bookmark />,
-      href: '/favorites',
+      href: AppRoutes.FAVORITES,
       icon: <BookmarkOutline />,
       title: t.layout.sidebar.favorites,
     },

@@ -1,7 +1,7 @@
 export {
+  me,
   useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
-  useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,

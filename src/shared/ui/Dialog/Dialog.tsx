@@ -21,7 +21,7 @@ export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>(
 
   return (
     <RadixDialog.Root {...rest}>
-      <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>
+      {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
       <RadixDialog.Portal>
         <RadixDialog.Overlay className={s.overlay} />
         <RadixDialog.Content className={clsx(s.content, className)} ref={ref}>

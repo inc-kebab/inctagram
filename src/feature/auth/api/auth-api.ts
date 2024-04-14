@@ -1,4 +1,4 @@
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { deleteCookie, setCookie } from 'cookies-next'
 
 import {
@@ -13,7 +13,7 @@ import {
   SignUpArgs,
 } from '../model/types/api.types'
 
-const authApi = baseApi.injectEndpoints({
+export const authApi = baseApi.injectEndpoints({
   endpoints: builder => ({
     checkRecoveryCode: builder.mutation<Email, CheckRecoveryCodeArgs>({
       query: body => ({
@@ -62,7 +62,7 @@ const authApi = baseApi.injectEndpoints({
         }
       },
     }),
-    me: builder.query<MeResponse, void>({
+    me: builder.query<MeResponse, undefined>({
       query: () => ({ url: '/auth/me' }),
     }),
     newPassword: builder.mutation<void, NewPasswordArgs>({
@@ -106,7 +106,6 @@ const authApi = baseApi.injectEndpoints({
 export const {
   useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
-  useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
@@ -116,3 +115,5 @@ export const {
   useResendRegLinkMutation,
   useSignUpMutation,
 } = authApi
+
+export const { me } = authApi.endpoints

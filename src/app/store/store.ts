@@ -1,20 +1,21 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-
 import { postsReducer } from '@/entities/post'
-import { baseApi } from '@/shared/api/base-api'
+import { baseApi } from '@/shared/api'
 import { configureStore } from '@reduxjs/toolkit'
+import { Context, createWrapper } from 'next-redux-wrapper'
 
-export const store = configureStore({
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
+export const makeStore = (context?: Context) => {
+  return configureStore({
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({ thunk: { extraArgument: context } }).concat(baseApi.middleware),
+    reducer: {
+      [baseApi.reducerPath]: baseApi.reducer,
+      posts: postsReducer,
+    },
+  })
+}
 
-  reducer: {
-    [baseApi.reducerPath]: baseApi.reducer,
-    posts: postsReducer,
-  },
-})
+type AppStore = ReturnType<typeof makeStore>
+export type RootState = ReturnType<AppStore['getState']>
+export type AppDispatch = AppStore['dispatch']
 
-type AppDispatch = typeof store.dispatch
-type RootState = ReturnType<typeof store.getState>
-
-export const useAppDispatch: () => AppDispatch = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const wrapper = createWrapper(makeStore, { debug: true })

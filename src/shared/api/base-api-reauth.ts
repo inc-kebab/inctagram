@@ -1,22 +1,41 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { Context } from 'next-redux-wrapper'
 
 const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BACKEND_API,
   credentials: 'include',
-  prepareHeaders: headers => {
-    const accessToken = getCookie('accessToken')
-    const currentLang = getCookie('NEXT_LOCALE')
+  prepareHeaders: (headers, { extra }) => {
+    if (typeof window !== 'undefined') {
+      const accessTokenFront = getCookie('accessToken')
+      const currentLangFront = getCookie('NEXT_LOCALE')
 
-    if (accessToken) {
-      headers.set('Authorization', `Bearer ${accessToken}`)
-    }
+      if (accessTokenFront) {
+        headers.set('Authorization', `Bearer ${accessTokenFront}`)
+      }
 
-    if (currentLang) {
-      headers.set('X-Url-lang', currentLang)
+      if (currentLangFront) {
+        headers.set('X-Url-lang', currentLangFront)
+      }
+    } else {
+      const ctx = extra as Context | undefined
+
+      const isCtxWithReqExist = ctx && 'req' in ctx
+
+      if (isCtxWithReqExist && ctx.req && 'cookies' in ctx.req) {
+        const token = ctx.req.cookies.accessToken
+
+        token && headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      if (ctx && 'locale' in ctx) {
+        const lang = ctx.locale
+
+        lang && headers.set('X-Url-lang', lang)
+      }
     }
 
     return headers

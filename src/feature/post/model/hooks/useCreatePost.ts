@@ -3,8 +3,7 @@ import { toast } from 'react-toastify'
 
 import { LocaleType } from '@/../locales'
 import { ImageURL } from '@/entities/post'
-import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { getModifiedImage, handleErrorResponse } from '@/shared/helpers'
 import { UseFormRef } from '@/shared/types/form'
 
 import { useAddImagesMutation, useCreatePostMutation } from '../../api/post-api'

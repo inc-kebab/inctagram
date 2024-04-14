@@ -63,6 +63,10 @@
       opacity: 0.8;
       background-color: var(--dark-500);
     }
+
+    &.swiper-button-disabled {
+      pointer-events: unset;
+    }
   }
 
   .post-images-filter {

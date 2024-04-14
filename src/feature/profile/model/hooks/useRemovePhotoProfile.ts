@@ -1,4 +1,4 @@
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { handleErrorResponse } from '@/shared/helpers'
 
 import { useRemoveProfilePhotoMutation } from '../../api/profile-api'
 

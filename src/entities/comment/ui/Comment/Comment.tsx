@@ -1,5 +1,6 @@
 import { Heart } from '@/shared/assets/icons/fill'
 import { Heart as HeartOutline } from '@/shared/assets/icons/outline'
+import { useTranslation } from '@/shared/hooks'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
@@ -32,6 +33,7 @@ export const Comment = ({
   name,
   time,
 }: Props) => {
+  const { t } = useTranslation()
   const { locale } = useRouter()
 
   const dateAgo = formatDistanceToNow(new Date(time), {
@@ -70,12 +72,12 @@ export const Comment = ({
           </Typography>
           {!!likesCount && (
             <Typography asComponent="span" variant="small">
-              {`Likes: ${likesCount}`}
+              {`${t.pages.post.likes}: ${likesCount}`}
             </Typography>
           )}
           {!isOwner && (
             <Button asComponent="span" className={s.answerBtn} variant="text">
-              <Typography variant="smallSemiBold">Answer</Typography>
+              <Typography variant="smallSemiBold">{t.button.answer}</Typography>
             </Button>
           )}
         </div>

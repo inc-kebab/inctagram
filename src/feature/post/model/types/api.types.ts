@@ -1,6 +1,6 @@
 import { Image, PostItem } from '@/entities/post'
 
-export interface GetMyPostsResponse {
+export interface GetPostsResponse {
   cursor: number
   hasMore: boolean
   items: PostItem[]
@@ -9,12 +9,18 @@ export interface GetMyPostsResponse {
   totalCount: number
 }
 
-export interface GetMyPostsArgs {
+export type GetPublicPostsResponse = {
+  userId: number
+} & GetPostsResponse
+
+export interface GetPostsArgs {
   cursor?: number
   pageSize?: number
   sortBy?: string
   sortDirection?: 'asc' | 'desc'
 }
+
+export type GetAllPostsArgs = GetPostsArgs & { userId: number }
 
 export type DeletePostArgs = {
   id: number

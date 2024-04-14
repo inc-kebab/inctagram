@@ -1,4 +1,3 @@
-import { useAppDispatch } from '@/app/store/store'
 import { Expand } from '@/shared/assets/icons/common'
 import {
   HorizontalRectangle,
@@ -6,6 +5,7 @@ import {
   Square,
   VerticalRectangle,
 } from '@/shared/assets/icons/outline'
+import { useAppDispatch } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import clsx from 'clsx'

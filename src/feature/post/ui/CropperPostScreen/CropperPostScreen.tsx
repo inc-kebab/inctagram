@@ -1,21 +1,15 @@
 import { useState } from 'react'
 
-import { useAppDispatch } from '@/app/store/store'
 import { ExpandBtn, ImageObj, LoadedImagesList, ZoomIn, postsActions } from '@/entities/post'
-import { handleErrorResponse } from '@/shared/helpers/handleErrorResponse'
+import { getDefaultSwiperConfig, handleErrorResponse } from '@/shared/helpers'
+import { useAppDispatch } from '@/shared/hooks'
 import Image from 'next/image'
 import { Controller } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
-import '@/shared/ui/Carousel/Carousel.scss'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-
 import s from './CropperPostScreen.module.scss'
 
 import { useDeleteImageMutation } from '../../api/post-api'
-import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
 import { CurrentWindow } from '../../model/types/post.types'
 import { CropperImage } from './CropperImage'
 
@@ -68,7 +62,7 @@ export const CropperPostScreen = ({ images, onChangeCurrentWindow }: Props) => {
   return (
     <div className={s.container}>
       <Swiper
-        {...getPostSliderConfig({ classes: [s.slider], modules: [Controller] })}
+        {...getDefaultSwiperConfig({ classes: [s.slider], modules: [Controller] })}
         controller={{ control: controlledSwiper }}
         onSwiper={setControlledSwiper}
         simulateTouch={false}

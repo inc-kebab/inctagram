@@ -1,6 +1,6 @@
 import { Point } from 'react-easy-crop'
 
-import { FilterImage } from '@/shared/helpers/getModifiedImage'
+import { FilterImage } from '@/shared/helpers'
 
 export type ImageURL = {
   imageURL: string

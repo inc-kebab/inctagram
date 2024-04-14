@@ -1,7 +1,7 @@
 import Cropper, { Point } from 'react-easy-crop'
 
-import { useAppDispatch } from '@/app'
 import { ImageObj, postsActions } from '@/entities/post'
+import { useAppDispatch } from '@/shared/hooks'
 
 type Props = {
   image: ImageObj

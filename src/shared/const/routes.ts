@@ -14,21 +14,13 @@ export enum GeneralRoutes {
 }
 
 export enum AppRoutes {
+  CREATE_POST = '/create',
   FAVORITES = '/favorites',
   HOME = '/home',
   MAIN = '/',
   MESSENGER = '/messenger',
   PROFILE = '/profile',
-  PROFILE_SETTINGS = '/profile/settings',
+  PUBLIC_PROFILE = '/public-profile',
   SEARCH = '/search',
   STATISTICS = '/statistics',
 }
-
-export const PublicRoutes: string[] = [
-  AuthRoutes.SIGN_UP,
-  AuthRoutes.SIGN_IN,
-  AuthRoutes.CREATE_NEW_PASSWORD,
-  AuthRoutes.FORGOT_PASSWORD,
-  AuthRoutes.PASSWORD_RECOVERY,
-  AuthRoutes.CONFIRM_EMAIL,
-]

@@ -7,12 +7,15 @@
 /* eslint-disable max-lines */
 export const en = {
   button: {
+    answer: 'Answer',
     back: 'Back',
+    backToHome: 'Back to home',
     backToSignIn: 'Back to Sign In',
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     discard: 'Discard',
     no: 'No',
+    profileSettings: 'Profile settings',
     publish: 'Publish',
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
@@ -20,6 +23,8 @@ export const en = {
     selectFromComputer: 'Select from Computer',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
+    showLess: 'Show less',
+    showMore: 'Show more',
     signIn: 'Sign In',
     signUp: 'Sign Up',
     simple_save: 'Save',
@@ -109,6 +114,11 @@ export const en = {
     },
     main: {
       metaTitle: 'Main',
+      ssgErrorPosts:
+        'An error occurred while retrieving about posts data. Try again after one minute.',
+      ssgErrorUsersCount:
+        'An error occurred while retrieving about users data. Try again after one minute.',
+      usersTitle: 'Registered users',
     },
     post: {
       addPhoto: 'Add Photo',
@@ -131,6 +141,7 @@ export const en = {
         areaLabel: 'Add publication descriptions',
       },
       filters: 'Filters',
+      likes: 'Likes',
       maxPost: 'A maximum of 10 images can be uploaded',
       next: 'Next',
       publication: 'Publication',
@@ -183,10 +194,13 @@ export const en = {
       addProfilePhoto: 'Add a Profile Photo',
       deletePhoto: 'Delete Photo',
       deleteProfilePhoto: 'Are you sure you want to delete the photo?',
+      followers: 'Followers',
+      following: 'Following',
       logOutConfirmation: 'Are you really want to log out of your account',
       metaDescription:
         'Discover detailed information about users, their interests, skills and experience.',
       metaTitle: 'Profile',
+      publications: 'Publications',
     },
     profileSettings: {
       metaDescription:

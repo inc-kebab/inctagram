@@ -1,7 +1,7 @@
 import { FormEvent, Ref, forwardRef, useImperativeHandle } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { useTranslation } from '@/shared/hooks'
 import { UseFormRef } from '@/shared/types/form'
 import { Button } from '@/shared/ui/Button'
 import { ControlledTextField } from '@/shared/ui_controlled/ControlledTextField'

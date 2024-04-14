@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import Close from '@/shared/assets/icons/common/close.svg'
-import { getModifiedImage } from '@/shared/helpers/getModifiedImage'
-import { useTranslation } from '@/shared/hooks/useTranslation'
+import { Close } from '@/shared/assets/icons/common'
+import { getModifiedImage, photoSchema } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { Avatar } from '@/shared/ui/Avatar'
 import { Button } from '@/shared/ui/Button'
+import { Dialog } from '@/shared/ui/Dialog'
+import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 import clsx from 'clsx'
 
 import s from './ProfilePhoto.module.scss'
 
-import { AddProfilePhotoDialog } from '../AddProfilePhotoDialog/AddProfilePhotoDialog'
+import { CropperPhoto } from '../CropperPhoto/CropperPhoto'
 
 type Props = {
   avaUrlFromServer?: string
@@ -41,6 +43,10 @@ export const ProfilePhoto = ({
   const handleChangeOpenAdd = (open: boolean) => {
     setOpenAdd(open)
     setAvatarUrl('')
+  }
+
+  const handleSetPhoto = (file: File) => {
+    setAvatarUrl(URL.createObjectURL(file))
   }
 
   const handleDeletePhoto = () => {
@@ -84,12 +90,9 @@ export const ProfilePhoto = ({
           )}
         </div>
       </div>
-      <AddProfilePhotoDialog
-        avatarUrl={avatarUrl}
-        disabled={disabledUpdate}
-        onAvatarUrl={setAvatarUrl}
+      <Dialog
+        className={s.dialog}
         onOpenChange={handleChangeOpenAdd}
-        onSetCroppedArea={handleUpdatePhoto}
         open={openAdd}
         title={t.pages.profile.addProfilePhoto}
         trigger={
@@ -97,7 +100,17 @@ export const ProfilePhoto = ({
             {t.pages.profile.addProfilePhoto}
           </Button>
         }
-      />
+      >
+        {avatarUrl ? (
+          <CropperPhoto
+            avatarUrl={avatarUrl}
+            disabled={disabledUpdate}
+            onSetCroppedArea={handleUpdatePhoto}
+          />
+        ) : (
+          <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t)} />
+        )}
+      </Dialog>
     </div>
   )
 }

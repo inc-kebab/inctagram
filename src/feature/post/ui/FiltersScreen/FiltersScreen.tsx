@@ -1,16 +1,14 @@
 import { useCallback, useMemo, useState } from 'react'
 
-import { useAppDispatch } from '@/app/store/store'
 import { CroppedImage, postsActions } from '@/entities/post'
-import { FilterImage } from '@/shared/helpers/getModifiedImage'
+import { FilterImage, getDefaultSwiperConfig } from '@/shared/helpers'
+import { useAppDispatch } from '@/shared/hooks'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { Controller } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './FiltersScreen.module.scss'
-
-import { getPostSliderConfig } from '../../model/config/getPostSliderConfig'
 
 const filtersScreen: { name: string; value: FilterImage }[] = [
   { name: 'Normal', value: 'image_filter--normal' },
@@ -70,7 +68,7 @@ export const FiltersScreen = ({ croppedImages }: Props) => {
   return (
     <div className={s.container}>
       <Swiper
-        {...getPostSliderConfig({ classes: [s.slider], modules: [Controller] })}
+        {...getDefaultSwiperConfig({ classes: [s.slider], modules: [Controller] })}
         controller={{ control: controlledSwiper }}
         onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
         onSwiper={setControlledSwiper}

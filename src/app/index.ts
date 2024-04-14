@@ -1,2 +1,3 @@
 export { ErrorBoundary } from './providers/ErrorBoundary'
-export { store, useAppDispatch, useAppSelector } from './store/store'
+export { wrapper } from './store/store'
+export type { AppDispatch, RootState } from './store/store'
