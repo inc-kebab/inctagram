@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins';
 
-.postsListSkeleton {
+.list {
   display: grid;
   grid-auto-rows: min-content;
   grid-template-columns: repeat(4, 1fr);
@@ -10,9 +10,10 @@
 }
 
 @include mobile {
-  .postsListSkeleton {
+  .list {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .hidden {
     display: none;
   }

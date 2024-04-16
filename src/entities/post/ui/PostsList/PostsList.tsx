@@ -21,10 +21,13 @@ export const PostsList = forwardRef<HTMLDivElement, Props>(
     if (!list || !list.length) {
       return null
     }
-    const skeletonMobileCount = 3 - (list.length % 3) < 3 && 3 - (list.length % 3)
+
+    const missingSkeletons = 3 - (list.length % 3)
+
+    const skeletonMobileCount = missingSkeletons < 3 && missingSkeletons
 
     return (
-      <div className={clsx(s.PostsList, className)}>
+      <div className={clsx(s.list, className)}>
         {list.map(el => (
           <PostPreviewCard
             description={el.description}
@@ -34,12 +37,11 @@ export const PostsList = forwardRef<HTMLDivElement, Props>(
             ref={el.id === cursor ? ref : undefined}
           />
         ))}
-
         {skeletonMobileCount &&
           isFetching &&
           new Array(skeletonMobileCount)
             .fill(null)
-            .map((_, i) => <Skeleton className={s.isHidden} key={i} />)}
+            .map((_, i) => <Skeleton className={s.hidden} key={i} />)}
       </div>
     )
   }

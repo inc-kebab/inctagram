@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins';
 
-.PostsList {
+.list {
   display: grid;
   grid-auto-rows: min-content;
   grid-template-columns: repeat(4, 1fr);
@@ -9,16 +9,16 @@
   margin-top: 12px;
 }
 
-.isHidden {
+.hidden {
   display: none;
 }
 
 @include mobile {
-  .PostsList {
+  .list {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .isHidden {
+  .hidden {
     display: grid;
   }
 }
