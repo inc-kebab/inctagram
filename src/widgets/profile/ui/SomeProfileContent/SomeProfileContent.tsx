@@ -58,6 +58,7 @@ export const SomeProfileContent = ({ isPublicPage }: Props) => {
       />
       <PostsList
         cursor={posts?.cursor}
+        isFetching={isFetching}
         list={posts?.items}
         onSetCurrentPost={handleChangeCurrentPost}
         ref={triggerRef}
