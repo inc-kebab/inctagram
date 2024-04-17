@@ -25,7 +25,7 @@ export const DefenderProtectedRoute = (Page: Page) => {
     }, [data, push, isError])
 
     if (!data || isFetching) {
-      return <Loader containerHeight />
+      return <Loader fullHeight size={200} />
     }
 
     return getLayout(<Page {...pageProps} />, t)

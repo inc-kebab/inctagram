@@ -1,4 +1,4 @@
-import { Loader as LoaderIcon } from '@/shared/assets/icons/common'
+import { LoaderLogo, LoaderLogoW } from '@/shared/assets/icons/other'
 import clsx from 'clsx'
 
 import s from './Loader.module.scss'
@@ -14,12 +14,13 @@ type SizeProps =
     }
 
 interface BaseProps {
+  isWhite?: boolean
   size?: number
 }
 
 type Props = SizeProps & BaseProps
 
-export const Loader = ({ containerHeight, fullHeight, size }: Props) => {
+export const Loader = ({ containerHeight, fullHeight, isWhite, size }: Props) => {
   return (
     <div
       className={clsx(s.loader, {
@@ -27,7 +28,11 @@ export const Loader = ({ containerHeight, fullHeight, size }: Props) => {
         [s.fullHeight]: fullHeight,
       })}
     >
-      <LoaderIcon height={size ? size + 'px' : '100px'} width={size ? size + 'px' : '100px'} />
+      {isWhite ? (
+        <LoaderLogoW height={size ? size + 'px' : '100px'} width={size ? size + 'px' : '100px'} />
+      ) : (
+        <LoaderLogo height={size ? size + 'px' : '100px'} width={size ? size + 'px' : '100px'} />
+      )}
     </div>
   )
 }
