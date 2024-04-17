@@ -60,6 +60,7 @@ export const PublicPost = ({ onNavigateToPost, post }: Props) => {
                 height={240}
                 onClick={onNavigateToPost}
                 src={image.url}
+                style={{ objectFit: 'cover' }}
                 width={234}
               />
             </SwiperSlide>
