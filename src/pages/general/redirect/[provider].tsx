@@ -22,6 +22,11 @@ const RedirectProvider = () => {
 
         if (token) {
           setCookie('accessToken', token, { maxAge: 30 * 60 }) // 30min
+
+          const message = JSON.stringify({ action: 'success_sign-in' })
+
+          localStorage.setItem('sign-in', message)
+
           void replace(AppRoutes.PROFILE + `/${userId}`, AppRoutes.PROFILE + `/${userId}`)
         } else {
           void replace(AppRoutes.MAIN, AppRoutes.MAIN)
@@ -30,7 +35,7 @@ const RedirectProvider = () => {
     }
   }, [query.provider, params, replace])
 
-  return <Loader fullHeight />
+  return <Loader fullHeight size={200} />
 }
 
 export default RedirectProvider

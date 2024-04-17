@@ -31,6 +31,8 @@ export const SidebarLayout = ({ children, ...rest }: Props) => {
   const handleLogout = () => {
     logout().then(res => {
       if ('data' in res) {
+        localStorage.removeItem('sign-in')
+
         void push(AuthRoutes.SIGN_IN)
       }
       if ('error' in res) {

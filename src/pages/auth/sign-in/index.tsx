@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { SignInForm, SignInFormValues, useLoginMutation } from '@/feature/auth'
 import { AppRoutes } from '@/shared/const/routes'
@@ -20,6 +20,10 @@ const SignIn: Page = () => {
   const handleSignIn = (data: SignInFormValues) => {
     signIn(data).then(res => {
       if ('data' in res) {
+        const message = JSON.stringify({ action: 'success_sign-in' })
+
+        localStorage.setItem('sign-in', message)
+
         void push(AppRoutes.PROFILE + `/${res.data.userId}`)
       }
       if ('error' in res && ref.current) {
@@ -33,6 +37,22 @@ const SignIn: Page = () => {
       }
     })
   }
+
+  useEffect(() => {
+    const handleMessage = (e: StorageEvent) => {
+      if (e.newValue) {
+        const message = JSON.parse(e.newValue)
+
+        message.action === 'success_sign-in' && void push(AppRoutes.HOME)
+      }
+    }
+
+    window.addEventListener('storage', handleMessage)
+
+    return () => {
+      window.addEventListener('storage', handleMessage)
+    }
+  }, [push])
 
   return (
     <SignInForm
