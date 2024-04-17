@@ -79,7 +79,7 @@ const CreateNewPassword: Page = () => {
   }, [recoveryCode, checkRecoveryCode])
 
   if (showLoader) {
-    return <Loader fullHeight />
+    return <Loader fullHeight size={200} />
   }
 
   return data ? (
