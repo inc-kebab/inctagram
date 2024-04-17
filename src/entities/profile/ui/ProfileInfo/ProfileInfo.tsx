@@ -14,20 +14,20 @@ interface Props {
   className?: string
   myProfile?: boolean
   ownerId?: number
-  userData?: Profile
+  userData: Profile
 }
 
 export const ProfileInfo = ({ className, myProfile = true, ownerId, userData }: Props) => {
   const { t } = useTranslation()
 
+  const username = userData.username || ''
+
   return (
     <div className={clsx(s.ProfileInfo, className)}>
       <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} wrapperSize={200} />
-
-      <Typography asComponent="h2" className={s.name} variant="h1">
-        {userData?.username}
+      <Typography asComponent="h2" className={s.name} title={userData?.username} variant="h1">
+        {username.length > 15 ? username.slice(0, 15) + '...' : username}
       </Typography>
-
       {myProfile && ownerId && (
         <Button
           asComponent={Link}
@@ -38,7 +38,6 @@ export const ProfileInfo = ({ className, myProfile = true, ownerId, userData }: 
           {t.button.profileSettings}
         </Button>
       )}
-
       <ul className={s.subscriber}>
         <li className={s.item}>
           <span className={s.count}>2 218</span> {t.pages.profile.following}
@@ -50,7 +49,6 @@ export const ProfileInfo = ({ className, myProfile = true, ownerId, userData }: 
           <span className={s.count}>2 764</span> {t.pages.profile.publications}
         </li>
       </ul>
-
       {userData?.aboutMe && (
         <Typography className={s.aboutMe} variant="regular16">
           {userData.aboutMe}

@@ -9,7 +9,12 @@
   margin-top: 12px;
 }
 
-@include mobile {
+.skeleton {
+  margin: 0 auto;
+  padding-top: 100%;
+}
+
+@include pc {
   .list {
     grid-template-columns: repeat(3, 1fr);
   }

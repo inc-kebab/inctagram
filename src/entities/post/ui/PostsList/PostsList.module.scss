@@ -13,12 +13,15 @@
   display: none;
 }
 
-@include mobile {
+@include pc {
   .list {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .hidden {
     display: grid;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
   }
 }

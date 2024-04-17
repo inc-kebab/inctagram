@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 import s from './SidebarItem.module.scss'
 
-import { SidebarElement } from '../../model/types/sidebar'
+import { SidebarElement } from '../../../model/types/sidebar'
 
 type Props = {
   disabled?: boolean
