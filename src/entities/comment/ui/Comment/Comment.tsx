@@ -20,6 +20,7 @@ type Props = {
   like?: boolean
   likesCount?: number
   name: string
+  shortenedComments?: boolean
   time: string
 }
 
@@ -31,6 +32,7 @@ export const Comment = ({
   like,
   likesCount,
   name,
+  shortenedComments,
   time,
 }: Props) => {
   const { t } = useTranslation()
@@ -55,7 +57,11 @@ export const Comment = ({
               </Typography>
             </Link>
             {commentText && (
-              <Typography asComponent="span" className={s.text} variant="regular14">
+              <Typography
+                asComponent="span"
+                className={clsx(s.text, shortenedComments && s.shortenedComments)}
+                variant="regular14"
+              >
                 {commentText}
               </Typography>
             )}

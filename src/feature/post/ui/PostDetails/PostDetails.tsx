@@ -1,15 +1,18 @@
+import { useState } from 'react'
+
 import { CommentsList } from '@/entities/comment'
 import { PostInfoAdditional, PostItem } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
 import { PublishCommentForm, mockComments } from '@/feature/comment'
-import { More } from '@/shared/assets/icons/common'
+import { Arrow, More } from '@/shared/assets/icons/common'
 import { Edit, Trash } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { Typography } from '@/shared/ui/Typography'
+import clsx from 'clsx'
 
 import s from './PostDetails.module.scss'
 
@@ -27,8 +30,8 @@ export const PostDetails = ({
   onOpenEditModal,
 }: Props) => {
   const { t } = useTranslation()
-
   const { data } = useMeQuery(undefined)
+  const [comments, setComments] = useState(false)
 
   if (!item) {
     return null
@@ -54,7 +57,7 @@ export const PostDetails = ({
 
   return (
     <>
-      <div className={s.postDetails}>
+      <div className={clsx(s.postDetails, comments && s.hide)}>
         <Carousel className={s.slider} imagesUrl={item.images} />
         <UserBanner
           actions={actions}
@@ -65,7 +68,9 @@ export const PostDetails = ({
         <CommentsList
           className={s.content}
           comments={mockComments.items}
+          maxMobileComments={2}
           postItem={item}
+          shortenedComments
           userId={data?.id}
         />
         <PostInfoAdditional
@@ -74,7 +79,24 @@ export const PostDetails = ({
           datePost={item.createdAt}
           likesCount={2243}
         />
+        <Typography className={s.viewComments} onClick={() => setComments(true)} variant="small">
+          {`View all comments (${mockComments.items.length})`}
+        </Typography>
         {isOwner && <PublishCommentForm className={s.form} />}
+      </div>
+
+      <div className={clsx(s.commentsDetails, !comments && s.hide)}>
+        <div className={s.titleWrapper}>
+          <Arrow onClick={() => setComments(false)} />
+          <Typography variant="h2">Comments</Typography>
+          <div></div>
+        </div>
+        <CommentsList
+          className={s.content}
+          comments={mockComments.items}
+          postItem={item}
+          userId={data?.id}
+        />
       </div>
     </>
   )

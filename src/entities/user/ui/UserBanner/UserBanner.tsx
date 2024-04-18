@@ -24,7 +24,7 @@ export const UserBanner = ({ actions, avatar, avatarSize = 36, className, name }
           iconSize={(avatarSize / 100) * 60}
           wrapperSize={avatarSize}
         />
-        <Typography>{name}</Typography>
+        <Typography className={s.name}>{name}</Typography>
       </div>
       {actions}
     </div>

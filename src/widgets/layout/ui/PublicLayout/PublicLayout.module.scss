@@ -2,6 +2,7 @@
 
 .main {
   max-width: 992px;
+  height: calc(100vh - var(--header-height));
   margin: 0 auto;
   padding: 36px 10px;
 }
