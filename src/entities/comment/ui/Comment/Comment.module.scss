@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .comment {
   display: flex;
 }
@@ -62,4 +64,18 @@
 .answerBtn {
   padding: unset;
   color: var(--light-900);
+}
+
+@include mobile {
+  .shortenedComments {
+    overflow: hidden;
+    display: -webkit-box;
+    grid-area: aboutMe;
+
+    text-overflow: ellipsis;
+    word-break: break-all;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 }

@@ -93,7 +93,7 @@ export const PostDetailsDialogs = ({
         onOpenChange={handlerChangeOpenPostDetailsModal}
         open={openPostDetailsModal}
       >
-        <DialogClose>
+        <DialogClose className={s.dialogClose}>
           <Close className={s.closeIcon} />
         </DialogClose>
         <PostDetails

@@ -1,3 +1,7 @@
+@import '@/app/styles/mixins';
+
+
+
 .userBanner {
   display: flex;
   align-items: center;
@@ -9,4 +13,10 @@
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+@include mobile {
+  .name {
+    font-size: 12px;
+  }
 }
