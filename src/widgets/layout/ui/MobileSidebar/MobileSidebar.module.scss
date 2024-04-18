@@ -1,0 +1,25 @@
+@import '@/app/styles/mixins';
+
+.sidebar {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+
+  display: none;
+
+  width: 100%;
+  height: var(--header-height);
+  padding: 0.75rem var(--container-padding);
+
+  background-color: var(--dark-700);
+  border-top: 1px solid var(--dark-300);
+}
+
+@include mobile {
+  .sidebar {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

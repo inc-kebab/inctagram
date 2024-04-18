@@ -4,9 +4,17 @@ import { Loader } from './Loader'
 
 const meta = {
   argTypes: {
+    containerHeight: {
+      control: false,
+      description: 'Flag for render loader with height: `100%`',
+    },
     fullHeight: {
       control: 'boolean',
       description: 'Flag for render loader with height: `100vh`',
+    },
+    isWhite: {
+      control: 'boolean',
+      description: 'Flag for render white color loader',
     },
     size: {
       control: 'number',

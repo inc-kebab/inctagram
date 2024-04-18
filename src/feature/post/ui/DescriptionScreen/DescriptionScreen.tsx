@@ -45,7 +45,7 @@ export const DescriptionScreen = ({ images, onChangeStatus, onCloseModal }: Prop
       </Swiper>
       <div className={s.description}>
         {isLoading ? (
-          <Loader containerHeight />
+          <Loader containerHeight isWhite />
         ) : (
           <>
             <UserBanner

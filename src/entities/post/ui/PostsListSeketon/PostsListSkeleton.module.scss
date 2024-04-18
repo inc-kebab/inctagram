@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .list {
   display: grid;
   grid-auto-rows: min-content;
@@ -5,4 +7,19 @@
   gap: 12px;
 
   margin-top: 12px;
+}
+
+.skeleton {
+  margin: 0 auto;
+  padding-top: 100%;
+}
+
+@include pc {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hidden {
+    display: none;
+  }
 }

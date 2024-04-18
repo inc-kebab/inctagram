@@ -31,7 +31,7 @@ export const DefenderAuthRoute = (Page: Page) => {
     }
 
     if (isFetching) {
-      return <Loader fullHeight />
+      return <Loader fullHeight size={200} />
     }
 
     return getLayout(<Page {...pageProps} />, t)

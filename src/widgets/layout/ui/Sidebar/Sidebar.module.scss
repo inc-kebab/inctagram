@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .sidebar {
   position: sticky;
   top: var(--header-height);
@@ -21,4 +23,10 @@
 
   width: 100%;
   padding: 0;
+}
+
+@include mobile {
+  .sidebar {
+    display: none;
+  }
 }

@@ -10,8 +10,9 @@
   align-items: center;
   justify-content: center;
 
-  width: 238px;
+  width: 100%;
   height: 238px;
+  margin: 0 auto;
 
   border-radius: 3px;
 
@@ -19,12 +20,12 @@
     transition: all 0.2s linear;
 
     &:hover {
-      transform: scale(1.02, 1.02);
+      transform: scale(1.1, 1.1);
     }
   }
 }
 
-@include mobile {
+@include pc {
   .image {
     width: 100%;
     height: 100%;

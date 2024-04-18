@@ -47,7 +47,7 @@ const ConfirmEmail: Page = () => {
   }, [confirmationCode, confirmEmail])
 
   if (showLoader) {
-    return <Loader fullHeight />
+    return <Loader fullHeight size={200} />
   }
 
   return isSuccess ? (

@@ -1,0 +1,6 @@
+<svg viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="108" height="108" rx="15" fill="white"/>
+<circle id='circle' cx="54" cy="54" r="25" fill="#4C8DFF" stroke="#333333" stroke-width="10" stroke-dasharray="157">
+<animate id='load' repeatCount="indefinite" attributeName="stroke-dashoffset" from="314" to="0" dur="2s" fill="freeze"/>
+</circle>
+</svg>
