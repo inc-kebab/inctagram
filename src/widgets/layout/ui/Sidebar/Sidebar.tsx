@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import s from './Sidebar.module.scss'
 
 import { SidebarElement } from '../../model/types/sidebar'
-import { SidebarItem } from '../SidebarItem/SidebarItem'
+import { SidebarItem } from './SidebarItem/SidebarItem'
 
 type Props = {
   buttonName?: string

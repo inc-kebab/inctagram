@@ -14,7 +14,14 @@ export const PostsListSkeleton = ({ className, count = 4 }: Props) => {
       {new Array(count).fill(0).map((_, i) => {
         const isFourthEl = i > 0 && i % 3 === 0
 
-        return <Skeleton className={clsx(isFourthEl && s.hidden)} key={i} />
+        return (
+          <Skeleton
+            className={clsx(s.skeleton, isFourthEl && s.hidden)}
+            height="100%"
+            key={i}
+            width="100%"
+          />
+        )
       })}
     </div>
   )

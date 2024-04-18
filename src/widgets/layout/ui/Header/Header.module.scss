@@ -49,11 +49,13 @@
   display: none;
 }
 
-@include mobile {
+@include tablet {
   .content {
     padding: 12px 18px;
   }
+}
 
+@include mobile {
   .pc {
     display: none;
   }
