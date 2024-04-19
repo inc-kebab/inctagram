@@ -1,4 +1,5 @@
 import { baseApi } from '@/shared/api'
+import { accessCookieParams } from '@/shared/const/cookie'
 import { deleteCookie, setCookie } from 'cookies-next'
 
 import {
@@ -34,7 +35,7 @@ export const authApi = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
 
-          setCookie('accessToken', data.accessToken, { maxAge: 30 * 60 }) // 30min
+          setCookie('accessToken', data.accessToken, accessCookieParams)
         } catch {
           deleteCookie('accessToken')
         }

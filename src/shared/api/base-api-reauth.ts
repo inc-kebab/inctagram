@@ -1,7 +1,10 @@
+import { accessCookieParams } from '@/shared/const/cookie'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import { Context } from 'next-redux-wrapper'
+
+const isNotServer = typeof window !== 'undefined'
 
 const mutex = new Mutex()
 
@@ -9,7 +12,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BACKEND_API,
   credentials: 'include',
   prepareHeaders: (headers, { extra }) => {
-    if (typeof window !== 'undefined') {
+    if (isNotServer) {
       const accessTokenFront = getCookie('accessToken')
       const currentLangFront = getCookie('NEXT_LOCALE')
 
@@ -21,18 +24,20 @@ const baseQuery = fetchBaseQuery({
         headers.set('X-Url-lang', currentLangFront)
       }
     } else {
-      const ctx = extra as Context | undefined
+      const context = extra as Context | undefined
 
-      const isCtxWithReqExist = ctx && 'req' in ctx
+      const isContextReqExist = context && 'req' in context
 
-      if (isCtxWithReqExist && ctx.req && 'cookies' in ctx.req) {
-        const token = ctx.req.cookies.accessToken
+      if (isContextReqExist && context.req && 'cookies' in context.req) {
+        const token = context.req.cookies.accessToken
+        const refresh = context.req.cookies.refreshToken
 
         token && headers.set('Authorization', `Bearer ${token}`)
+        refresh && headers.set('Cookie', `refreshToken=${refresh}`)
       }
 
-      if (ctx && 'locale' in ctx) {
-        const lang = ctx.locale
+      if (context && 'locale' in context) {
+        const lang = context.locale
 
         lang && headers.set('X-Url-lang', lang)
       }
@@ -54,7 +59,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   if (result.error && result.error.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire()
-      // try to get a new token
+
       const refreshResult = await baseQuery(
         { method: 'POST', url: '/auth/update-token' },
         api,
@@ -62,19 +67,30 @@ export const baseQueryWithReauth: BaseQueryFn<
       )
 
       if (refreshResult.meta?.response?.status === 200) {
-        // set token to LS
         const data = refreshResult.data as { accessToken: string }
 
-        setCookie('accessToken', data.accessToken, { maxAge: 30 * 60 }) // 30min
+        if (isNotServer) {
+          setCookie('accessToken', data.accessToken, accessCookieParams)
+        } else {
+          const context = api.extra as Context | undefined
 
-        // retry the initial query
+          const isContextReqExist = context && 'req' in context
+
+          if (isContextReqExist && context.req && 'cookies' in context.req) {
+            const accessTokenCookie = `accessToken=${data.accessToken}; Max-Age=1800; Path=/; Secure; SameSite=None`
+            const refreshTokenCookie = refreshResult.meta.response.headers.getSetCookie()
+
+            context.res?.setHeader('Set-cookie', [...refreshTokenCookie, accessTokenCookie])
+            context.req.cookies.accessToken = data.accessToken
+          }
+        }
+
         result = await baseQuery(args, api, extraOptions)
       } else {
         deleteCookie('accessToken')
       }
       release()
     } else {
-      // wait until the mutex is available without locking it
       await mutex.waitForUnlock()
       result = await baseQuery(args, api, extraOptions)
     }
