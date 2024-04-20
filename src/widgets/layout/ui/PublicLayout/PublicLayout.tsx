@@ -23,7 +23,7 @@ export const PublicLayout = ({ children, isAuth, ...rest }: Props) => {
 
   return (
     <Meta {...rest}>
-      <Header isUnauthorized={!isAuth} />
+      <Header isAuthorized={isAuth} />
       <main className={s.main}>
         {isAuth && (
           <BackToPage className={s.back} onNavigate={handleNavigate} title={t.button.backToHome} />

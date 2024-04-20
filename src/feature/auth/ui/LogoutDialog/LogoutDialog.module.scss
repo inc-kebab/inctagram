@@ -1,3 +1,6 @@
+@import '@/app/styles/mixins';
+
+
 .logout {
   justify-content: start;
 
@@ -12,4 +15,12 @@
 
 .email {
   font-weight: var(--font-weight-bold);
+}
+
+@include mobile {
+  .logout {
+    margin-top: unset;
+    padding: unset;
+
+  }
 }

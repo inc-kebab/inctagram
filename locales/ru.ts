@@ -12,6 +12,8 @@ export const ru: LocaleType = {
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
     discard: 'Отменить',
+    favorites: 'Избранное',
+    logOut: 'Выйти',
     no: 'Нет',
     profileSettings: 'Настройки профиля',
     publish: 'Опубликовать',
@@ -26,6 +28,7 @@ export const ru: LocaleType = {
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
     simple_save: 'Сохранить',
+    statistics: 'Статистика',
     yes: 'Да',
   },
   dates: {

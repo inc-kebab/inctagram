@@ -14,6 +14,8 @@ export const en = {
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     discard: 'Discard',
+    favorites: 'Favorites',
+    logOut: 'Log out',
     no: 'No',
     profileSettings: 'Profile settings',
     publish: 'Publish',
@@ -28,6 +30,7 @@ export const en = {
     signIn: 'Sign In',
     signUp: 'Sign Up',
     simple_save: 'Save',
+    statistics: 'Statistics',
     yes: 'Yes',
   },
   dates: {

@@ -70,4 +70,22 @@
 
     color: var(--light-100);
   }
+
+  .option {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+  }
+
+  .optionLogout {
+    all: unset;
+
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-m);
+  }
 }

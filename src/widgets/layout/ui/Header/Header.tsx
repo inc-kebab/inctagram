@@ -1,4 +1,5 @@
-import { More } from '@/shared/assets/icons/common'
+import { Logout, More, Trending } from '@/shared/assets/icons/common'
+import { Bookmark, Settings } from '@/shared/assets/icons/outline'
 import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
@@ -7,15 +8,18 @@ import { Typography } from '@/shared/ui/Typography'
 import { LangSwitcher } from '@/widgets/lang-switcher'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import s from './Header.module.scss'
 
 interface Props {
-  isUnauthorized?: boolean
+  isAuthorized?: boolean
+  onLogout?: () => void
 }
 
-export const Header = ({ isUnauthorized }: Props) => {
+export const Header = ({ isAuthorized, onLogout }: Props) => {
   const { t } = useTranslation()
+  const { asPath } = useRouter()
 
   return (
     <header className={s.header}>
@@ -29,9 +33,57 @@ export const Header = ({ isUnauthorized }: Props) => {
         >
           Inctagram
         </Typography>
+
         <div className={s.actions}>
           <LangSwitcher />
-          {isUnauthorized && (
+
+          {isAuthorized ? (
+            <Dropdown.Menu
+              align="end"
+              sideOffset={6}
+              trigger={<Button className={s.mobile} startIcon={<More />} variant="text" />}
+            >
+              <Dropdown.Item>
+                <Typography
+                  asComponent={Link}
+                  className={s.option}
+                  href={`${asPath}${AppRoutes.PROFILE_SETTINGS}`}
+                  variant="regular14"
+                >
+                  <Settings />
+                  {t.button.profileSettings}
+                </Typography>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Typography
+                  asComponent={Link}
+                  className={s.option}
+                  href={AppRoutes.STATISTICS}
+                  variant="regular14"
+                >
+                  <Trending />
+                  {t.button.statistics}
+                </Typography>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Typography
+                  asComponent={Link}
+                  className={s.option}
+                  href={AppRoutes.FAVORITES}
+                  variant="regular14"
+                >
+                  <Bookmark />
+                  {t.button.favorites}
+                </Typography>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                {/*<LogoutDialog onLogout={onLogout} /> //добавить Диалог в Дропдаун?*/}
+                <Button className={s.optionLogout} onClick={onLogout} startIcon={<Logout />}>
+                  {t.button.logOut}
+                </Button>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          ) : (
             <>
               <div className={s.pc}>
                 <Button
