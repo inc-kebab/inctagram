@@ -10,6 +10,8 @@ import { useTranslation } from '@/shared/hooks'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
+import { EditPostDialog } from '@/widgets/post/ui/EditPostDialog/EditPostDialog'
+import clsx from 'clsx'
 import { useRouter } from 'next/router'
 
 import s from './PostDetailsDialogs.module.scss'
@@ -103,28 +105,16 @@ export const PostDetailsDialogs = ({
           onOpenEditModal={() => setOpenEditModal(true)}
         />
       </Dialog>
-      <Dialog
-        className={s.dialog}
-        onOpenChange={handleChangeOpenEditModal}
-        open={openEditModal}
-        title={t.pages.post.editPost}
-      >
-        <div className={s.editDialog}>
-          <Carousel className={s.slider} imagesUrl={currentPost?.images} />
-          <UserBanner
-            avatar={currentPost?.avatarOwner}
-            className={s.header}
-            name={currentPost?.username || ''}
-          />
-          <EditPostForm
-            currentDescription={currentPost?.description}
-            disabled={isEditLoad}
-            onSubmit={handleSubmitEditPost}
-            ref={editPostRef}
-            style={{ height: '100%' }}
-          />
-        </div>
-      </Dialog>
+
+      <EditPostDialog
+        currentPost={currentPost}
+        editPostRef={editPostRef}
+        handleChangeOpenEditModal={handleChangeOpenEditModal}
+        handleSubmitEditPost={handleSubmitEditPost}
+        isEditLoad={isEditLoad}
+        openEditModal={openEditModal}
+      />
+
       <ConfirmDialog
         confirmCallback={handleCloseEditModalWithConfirm}
         content={t.pages.post.editInfoModal.message}

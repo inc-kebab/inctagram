@@ -32,6 +32,7 @@ export const ConfirmDialog = ({
 
   return (
     <Dialog
+      className={s.mobilePost}
       onOpenChange={onOpenChange}
       open={open}
       title={title || t.label.confirmAction}
@@ -40,14 +41,14 @@ export const ConfirmDialog = ({
       <div className={s.dialog}>
         <div className={s.content}>{content}</div>
         {customActions || (
-          <div className={s.actions}>
-            <Button disabled={disabled} onClick={confirmCallback} variant="outline">
-              {t.button.yes}
-            </Button>
-            <DialogClose>
-              <Button disabled={disabled}>{t.button.no}</Button>
-            </DialogClose>
-          </div>
+          <Button className={s.yes} disabled={disabled} onClick={confirmCallback} variant="outline">
+            {t.button.yes}
+          </Button>
+        )}
+        {customActions || (
+          <DialogClose className={s.no}>
+            <Button disabled={disabled}>{t.button.no}</Button>
+          </DialogClose>
         )}
       </div>
     </Dialog>

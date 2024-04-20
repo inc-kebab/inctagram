@@ -2,22 +2,24 @@
 
 .comments {
   scrollbar-color: var(--dark-100) transparent;
-
   overflow: hidden auto;
-
   height: 336px;
-  padding: 24px;
-
   border-bottom: 1px solid var(--dark-100);
 }
 
 @include mobile {
   .comments {
-    height: unset;
+    height: calc(100vh - var(--header-height) - var(--header-height) - var(--comment-title-height));
+    padding-top: 5px;
     border-bottom: unset;
 
     .hidden {
       display: none;
+    }
+
+    .line {
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--dark-100);
     }
   }
 }

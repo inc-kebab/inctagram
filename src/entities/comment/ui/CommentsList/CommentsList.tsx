@@ -30,8 +30,10 @@ export const CommentsList = ({
         commentText={postItem.description}
         isOwner={userId === postItem.ownerId}
         name={postItem.username}
+        shortenedComments={shortenedComments}
         time={postItem.createdAt}
       />
+      {!shortenedComments && <div className={s.line} />}
       {comments.map((comment, i) => {
         return (
           <Comment

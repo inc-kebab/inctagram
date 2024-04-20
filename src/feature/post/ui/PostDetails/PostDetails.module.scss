@@ -1,6 +1,6 @@
 @import '@/app/styles/mixins';
-.dd {
-}
+
+
 .postDetails {
   display: grid;
   grid-template-areas:
@@ -16,6 +16,7 @@
     width: 100%;
     border-right: 1px solid var(--dark-100);
   }
+
   .header {
     grid-area: header;
   }
@@ -36,21 +37,28 @@
 .commentsDetails {
   display: none;
 }
+
 .viewComments {
   display: none;
 }
 
 @include mobile {
   .postDetails {
-    grid-template-areas: 'header' 'slider' 'footer' 'content' 'form' 'viewComments';
+    grid-template-areas: 'header' 'slider' 'footer' 'viewComments' 'content' 'form';
     grid-template-columns: 1fr;
     background-color: unset;
 
     .viewComments {
-      display: block;
+      display: inline;
       grid-area: viewComments;
-      padding: 0 0 24px 24px;
+
+      margin: 0 auto 0 0;
+      padding: 18px 0 0 22px;
+
       color: var(--light-900);
+
+      background-color: unset;
+      border: none;
     }
 
     .slider {
@@ -58,13 +66,17 @@
       border: none;
     }
   }
+
   .commentsDetails {
     display: block;
 
     .titleWrapper {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      margin: 24px 24px 2px 24px;
+
+      height: var(--comment-title-height);
+      margin: 0 24px;
     }
   }
 

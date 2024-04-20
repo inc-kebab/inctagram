@@ -58,13 +58,27 @@ export const PostDetails = ({
   return (
     <>
       <div className={clsx(s.postDetails, comments && s.hide)}>
-        <Carousel className={s.slider} imagesUrl={item.images} />
         <UserBanner
           actions={actions}
           avatar={item.avatarOwner}
           className={s.header}
           name={item.username}
         />
+        <Carousel className={s.slider} imagesUrl={item.images} />
+        <PostInfoAdditional
+          avatars={mockComments.lastThreeLikes}
+          className={s.footer}
+          datePost={item.createdAt}
+          likesCount={2243}
+        />
+        <Typography
+          asComponent="button"
+          className={s.viewComments}
+          onClick={() => setComments(true)}
+          variant="small"
+        >
+          {`${t.pages.post.veiwComments} (${mockComments.items.length})`}
+        </Typography>
         <CommentsList
           className={s.content}
           comments={mockComments.items}
@@ -73,15 +87,6 @@ export const PostDetails = ({
           shortenedComments
           userId={data?.id}
         />
-        <PostInfoAdditional
-          avatars={mockComments.lastThreeLikes}
-          className={s.footer}
-          datePost={item.createdAt}
-          likesCount={2243}
-        />
-        <Typography className={s.viewComments} onClick={() => setComments(true)} variant="small">
-          {`View all comments (${mockComments.items.length})`}
-        </Typography>
         {isOwner && <PublishCommentForm className={s.form} />}
       </div>
 

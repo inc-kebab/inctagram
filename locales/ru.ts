@@ -121,6 +121,7 @@ export const ru: LocaleType = {
     },
     post: {
       addPhoto: 'Добавить Фото',
+      cancel: 'Отмена',
       confirmCloseCreateModal: {
         message:
           'Вы действительно хотите закрыть создание публикации? Если вы закроете ее, все будет удалено',
@@ -145,7 +146,9 @@ export const ru: LocaleType = {
       next: 'Далее',
       publication: 'Публикация',
       publish: 'Опубликовать',
+      save: 'Сохранить',
       successCreate: 'Пост успешно создан!',
+      veiwComments: 'Посмотреть комментарии',
     },
     privacy: {
       changes:

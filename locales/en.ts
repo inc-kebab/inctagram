@@ -122,6 +122,7 @@ export const en = {
     },
     post: {
       addPhoto: 'Add Photo',
+      cancel: 'Cancel',
       confirmCloseCreateModal: {
         message:
           'Do you really want to close the creation of a publication? If you close everything will be deleted',
@@ -146,7 +147,9 @@ export const en = {
       next: 'Next',
       publication: 'Publication',
       publish: 'Publish',
+      save: 'Save',
       successCreate: 'Success create post!',
+      veiwComments: 'View all comments',
     },
     privacy: {
       changes:

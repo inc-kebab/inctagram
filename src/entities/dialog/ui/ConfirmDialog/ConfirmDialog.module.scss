@@ -1,19 +1,48 @@
+@import '@/app/styles/mixins';
+
 .dialog {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas:
+          'content content  '
+              'yes  no ';
+  gap: 24px;
+  place-items: center;
 
   width: 100%;
   max-width: 438px;
   padding: 30px 24px 36px;
 }
 
-.content {
-  align-self: start;
-  margin-bottom: 30px;
+.yes {
+  grid-area: yes;
 }
 
-.actions {
-  display: flex;
-  gap: 24px;
-  align-self: end;
+.no {
+  grid-area: no;
+}
+
+.content {
+  grid-area: content;
+}
+
+
+@include mobile {
+  .mobilePost {
+    width: 95%;
+  }
+
+  .dialog {
+    grid-template-areas: 'content' 'yes' 'no';
+    max-width: unset;
+  }
+
+  .yes {
+    width: 100%;
+    height: 50px;
+  }
+
+  .no {
+    width: 100%;
+    height: 50px;
+  }
 }

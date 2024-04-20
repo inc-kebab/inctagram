@@ -45,9 +45,17 @@ export const Comment = ({
 
   return (
     <div className={clsx(s.comment, className)}>
-      <Link className={s.link} href="#">
-        <Avatar avatarUrl={avatarUrl} circle className={s.avatar} iconSize={21} wrapperSize={36} />
-      </Link>
+      {!shortenedComments && (
+        <Link className={s.link} href="#">
+          <Avatar
+            avatarUrl={avatarUrl}
+            circle
+            className={s.avatar}
+            iconSize={21}
+            wrapperSize={36}
+          />
+        </Link>
+      )}
       <div className={s.commentContent}>
         <div className={s.textContent}>
           <div className={s.message}>

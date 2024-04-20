@@ -2,11 +2,13 @@
 
 .ProfileInfo {
   display: grid;
-  grid-template: auto / auto 1fr;
+  grid-template: auto auto auto auto / auto 1fr;
   grid-template-areas:
-    'avatar name settings'
-    'avatar subscriber subscriber'
-    'avatar aboutMe aboutMe';
+    'avatar   settings'
+    'avatar subscriber'
+    'avatar    aboutMe'
+    'name            .'
+;
   gap: 20px 38px;
 
   margin-bottom: 48px;
@@ -26,12 +28,14 @@
 
 .settings {
   grid-area: settings;
+  margin-left: auto;
 }
 
 .avatar {
   grid-area: avatar;
   width: 200px;
   height: 200px;
+  object-fit: cover;
 }
 
 .name {
