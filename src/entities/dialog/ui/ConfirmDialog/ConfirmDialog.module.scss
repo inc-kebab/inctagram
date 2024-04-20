@@ -3,8 +3,8 @@
 .dialog {
   display: grid;
   grid-template-areas:
-          'content content  '
-              'yes  no ';
+    'content content  '
+    'yes  no ';
   gap: 24px;
   place-items: center;
 
@@ -24,7 +24,6 @@
 .content {
   grid-area: content;
 }
-
 
 @include mobile {
   .mobilePost {
