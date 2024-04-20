@@ -43,8 +43,14 @@
 
 @include mobile {
   .postDetails {
+    scrollbar-color: var(--dark-100) transparent;
+
+    overflow: hidden auto;
     grid-template-areas: 'header' 'slider' 'footer' 'viewComments' 'content' 'form';
     grid-template-columns: 1fr;
+
+    height: 100%;
+
     background-color: unset;
 
     .viewComments {
