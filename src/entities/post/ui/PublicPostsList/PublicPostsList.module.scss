@@ -9,7 +9,7 @@
   margin-top: 12px;
 }
 
-@include mobile {
+@include tablet {
   .posts {
     place-items: center;
   }
