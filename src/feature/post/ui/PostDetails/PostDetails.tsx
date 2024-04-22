@@ -61,49 +61,48 @@ export const PostDetails = ({
 
   return (
     <>
-      {isShowOnlyComments ? (
-        <CommentsDetails
-          item={item}
-          onHide={() => setIsShowOnlyComments(false)}
+      <div className={clsx(s.postDetails, isShowOnlyComments && s.hidden)}>
+        <UserBanner
+          actions={actions}
+          avatar={item.avatarOwner}
+          className={s.header}
+          name={item.username}
+        />
+        <Carousel className={s.slider} imagesUrl={item.images} />
+        <PostInfoAdditional
+          avatars={mockComments.lastThreeLikes}
+          className={s.footer}
+          datePost={item.createdAt}
+          isActiveCommentForm={openMobileCommentForm}
+          likesCount={2243}
+          toggleShowCommentForm={toggleShowCommentForm}
+        />
+        <Typography
+          asComponent="button"
+          className={s.viewComments}
+          onClick={() => setIsShowOnlyComments(true)}
+          variant="small"
+        >
+          {`${t.pages.post.veiwComments} (${mockComments.items.length})`}
+        </Typography>
+        <CommentsList
+          className={s.content}
+          classNameAvatar={s.hidden}
+          comments={mockComments.items}
+          maxMobileComments={2}
+          postItem={item}
           userId={data?.id}
         />
-      ) : (
-        <div className={clsx(s.postDetails)}>
-          <UserBanner
-            actions={actions}
-            avatar={item.avatarOwner}
-            className={s.header}
-            name={item.username}
-          />
-          <Carousel className={s.slider} imagesUrl={item.images} />
-          <PostInfoAdditional
-            avatars={mockComments.lastThreeLikes}
-            className={s.footer}
-            datePost={item.createdAt}
-            isActiveCommentForm={openMobileCommentForm}
-            likesCount={2243}
-            toggleShowCommentForm={toggleShowCommentForm}
-          />
-          <Typography
-            asComponent="button"
-            className={s.viewComments}
-            onClick={() => setIsShowOnlyComments(true)}
-            variant="small"
-          >
-            {`${t.pages.post.veiwComments} (${mockComments.items.length})`}
-          </Typography>
-          <CommentsList
-            className={s.content}
-            comments={mockComments.items}
-            maxMobileComments={2}
-            postItem={item}
-            userId={data?.id}
-          />
-          {isOwner && (
-            <PublishCommentForm className={clsx(s.form, openMobileCommentForm && s.mobileForm)} />
-          )}
-        </div>
-      )}
+        {isOwner && (
+          <PublishCommentForm className={clsx(s.form, openMobileCommentForm && s.mobileForm)} />
+        )}
+      </div>
+      <CommentsDetails
+        className={clsx(!isShowOnlyComments && s.hidden)}
+        item={item}
+        onHide={() => setIsShowOnlyComments(false)}
+        userId={data?.id}
+      />
     </>
   )
 }

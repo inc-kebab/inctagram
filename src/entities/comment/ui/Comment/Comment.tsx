@@ -15,6 +15,7 @@ import s from './Comment.module.scss'
 type Props = {
   avatarUrl: Nullable<string>
   className?: string
+  classNameAvatar?: string
   commentText: Nullable<string>
   isOwner: boolean
   like?: boolean
@@ -26,6 +27,7 @@ type Props = {
 export const Comment = ({
   avatarUrl,
   className,
+  classNameAvatar,
   commentText,
   isOwner,
   like,
@@ -43,7 +45,13 @@ export const Comment = ({
 
   return (
     <div className={clsx(s.comment, className)}>
-      <Avatar avatarUrl={avatarUrl} circle className={s.avatar} iconSize={21} wrapperSize={36} />
+      <Avatar
+        avatarUrl={avatarUrl}
+        circle
+        className={clsx(s.avatar, classNameAvatar)}
+        iconSize={21}
+        wrapperSize={36}
+      />
       <div className={s.content}>
         <Typography asComponent={Link} href="#" variant="regularBold14">
           {name + ' '}

@@ -8,6 +8,7 @@ import { Comment } from '../../ui/Comment/Comment'
 
 type Props = {
   className?: string
+  classNameAvatar?: string
   classNameDescription?: string
   comments: CommentData[]
   maxMobileComments?: number
@@ -17,6 +18,7 @@ type Props = {
 
 export const CommentsList = ({
   className,
+  classNameAvatar,
   classNameDescription,
   comments,
   maxMobileComments,
@@ -27,7 +29,8 @@ export const CommentsList = ({
     <div className={clsx(s.comments, className)}>
       <Comment
         avatarUrl={postItem.avatarOwner}
-        className={classNameDescription}
+        className={clsx(s.first, classNameDescription)}
+        classNameAvatar={classNameAvatar}
         commentText={postItem.description}
         isOwner={userId === postItem.ownerId}
         name={postItem.username}
@@ -40,6 +43,7 @@ export const CommentsList = ({
           <Comment
             avatarUrl={comment.avatarUrl}
             className={clsx(isHiddenComment && s.hidden)}
+            classNameAvatar={classNameAvatar}
             commentText={comment.commentText}
             isOwner={userId === comment.idUser}
             key={comment.idUser + comment.time}

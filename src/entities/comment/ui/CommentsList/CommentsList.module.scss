@@ -11,6 +11,10 @@
   border-bottom: 1px solid var(--dark-100);
 }
 
+.first {
+  margin-bottom: 20px;
+}
+
 @include mobile {
   .comments {
     height: min-content;
