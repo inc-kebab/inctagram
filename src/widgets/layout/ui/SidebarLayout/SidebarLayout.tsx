@@ -51,7 +51,7 @@ export const SidebarLayout = ({ children, ...rest }: Props) => {
 
   return (
     <Meta {...rest}>
-      <Header isAuthorized={!!data} onLogout={handleLogout} />
+      <Header disabled={isLoading} isAuth={!!data} onLogout={handleLogout} ownerId={data?.id} />
       <div className={clsx('main_container', s.wrapper)}>
         <Sidebar
           buttonName={t.layout.sidebar.logout}

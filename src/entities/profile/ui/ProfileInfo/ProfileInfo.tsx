@@ -24,7 +24,7 @@ export const ProfileInfo = ({ className, myProfile = true, ownerId, userData }: 
 
   return (
     <div className={clsx(s.ProfileInfo, className)}>
-      <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} />
+      <Avatar avatarUrl={userData?.avatar} circle className={s.avatar} wrapperSize={200} />
       <Typography asComponent="h2" className={s.name} title={userData?.username} variant="h1">
         {username.length > 15 ? username.slice(0, 15) + '...' : username}
       </Typography>

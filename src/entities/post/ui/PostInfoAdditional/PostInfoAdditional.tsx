@@ -14,27 +14,42 @@ type Props = {
   avatars: string[]
   className?: string
   datePost: string
+  isActiveCommentForm?: boolean
   likesCount: number
+  toggleShowCommentForm?: () => void
 }
 
-export const PostInfoAdditional = ({ avatars, className, datePost, likesCount }: Props) => {
+export const PostInfoAdditional = ({
+  avatars,
+  className,
+  datePost,
+  isActiveCommentForm,
+  likesCount,
+  toggleShowCommentForm,
+}: Props) => {
   const { t } = useTranslation()
   const { locale } = useRouter()
+
   const formatDate = formatWithOptions(
     { locale: locale === 'ru' ? ru : enUS },
     locale === 'ru' ? 'd MMMM yyyy' : 'MMMM d yyyy'
   )
+
   const date = formatDate(datePost)
 
   return (
     <div className={clsx(s.postInfo, className)}>
-      <div className={s.icons}>
-        <div className={s.firstIcons}>
+      <div className={s.actions}>
+        <div className={s.wrapper}>
           <Button className={s.iconBtn} variant="text">
             <Heart className={s.icon} />
           </Button>
-          <Button className={clsx(s.iconBtn, s.messageBtn)} variant="text">
-            <MessageCircle className={s.icon} />
+          <Button
+            className={clsx(s.iconBtn, s.messageBtn)}
+            onClick={toggleShowCommentForm}
+            variant="text"
+          >
+            <MessageCircle className={clsx(s.icon, isActiveCommentForm && s.active)} />
           </Button>
           <Button className={s.iconBtn} variant="text">
             <PaperPlane className={s.icon} />
@@ -44,12 +59,12 @@ export const PostInfoAdditional = ({ avatars, className, datePost, likesCount }:
           <Bookmark className={s.icon} />
         </Button>
       </div>
-      <div className={s.iconsList}>
+      <div className={s.avatars}>
         {avatars.map((a, i) => (
           <Avatar
             avatarUrl={a}
             circle
-            className={s.iconInList}
+            className={s.avatar}
             iconSize={18}
             key={i + new Date().toString()}
             style={{ left: `${-(i * 15)}px` }}

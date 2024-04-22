@@ -1,19 +1,22 @@
 @import '@/app/styles/mixins';
 
+.active {
+  color: var(--primary-500);
+}
+
 .postInfo {
   padding: 12px 24px 7px;
-  border-bottom: 1px solid var(--dark-100);
 }
 
-.firstIcons {
-  display: flex;
-  gap: 24px;
-}
-
-.icons {
+.actions {
   display: flex;
   justify-content: space-between;
   margin-bottom: 19px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 24px;
 }
 
 .iconBtn {
@@ -30,13 +33,13 @@
   display: none;
 }
 
-.iconsList {
+.avatars {
   position: relative;
   display: flex;
   margin-left: 30px;
 }
 
-.iconInList {
+.avatar {
   position: absolute;
 }
 
@@ -55,10 +58,6 @@
   }
 
   .likesCount {
-    font-size: 14px;
-  }
-
-  .postInfo {
-    border: none;
+    font-size: var(--font-size-s);
   }
 }

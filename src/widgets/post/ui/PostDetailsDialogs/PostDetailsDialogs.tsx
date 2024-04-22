@@ -2,16 +2,19 @@ import { useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
 import { PostItem } from '@/entities/post'
-import { PostDetails, useDeletePostMutation, useEditPost } from '@/feature/post'
+import { UserBanner } from '@/entities/user'
+import { EditPostForm, PostDetails, useDeletePostMutation, useEditPost } from '@/feature/post'
 import { Close } from '@/shared/assets/icons/common'
 import { handleErrorResponse } from '@/shared/helpers'
 import { useTranslation } from '@/shared/hooks'
+import { Carousel } from '@/shared/ui/Carousel'
 import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
-import { EditPostDialog } from '@/widgets/post/ui/EditPostDialog/EditPostDialog'
 import { useRouter } from 'next/router'
 
 import s from './PostDetailsDialogs.module.scss'
+
+import { EditPostDialogTitle } from './EditPostDialogTitle/EditPostDialogTitle'
 
 interface Props {
   currentPost: Nullable<PostItem>
@@ -102,16 +105,29 @@ export const PostDetailsDialogs = ({
           onOpenEditModal={() => setOpenEditModal(true)}
         />
       </Dialog>
-
-      <EditPostDialog
-        currentPost={currentPost}
-        editPostRef={editPostRef}
-        handleChangeOpenEditModal={handleChangeOpenEditModal}
-        handleSubmitEditPost={handleSubmitEditPost}
-        isEditLoad={isEditLoad}
-        openEditModal={openEditModal}
-      />
-
+      <Dialog
+        className={s.dialog}
+        customTitleComponent={<EditPostDialogTitle />}
+        onOpenChange={handleChangeOpenEditModal}
+        open={openEditModal}
+      >
+        <div className={s.editDialog}>
+          <Carousel className={s.editSlider} imagesUrl={currentPost?.images} />
+          <div className={s.editContent}>
+            <UserBanner avatar={currentPost?.avatarOwner} name={currentPost?.username || ''} />
+            <EditPostForm
+              className={s.editForm}
+              classNameSubmit={s.editSubmit}
+              currentDescription={currentPost?.description}
+              disabled={isEditLoad}
+              onSubmit={handleSubmitEditPost}
+              ref={editPostRef}
+              style={{ height: '100%' }}
+              titleSubmit={t.pages.post.save}
+            />
+          </div>
+        </div>
+      </Dialog>
       <ConfirmDialog
         confirmCallback={handleCloseEditModalWithConfirm}
         content={t.pages.post.editInfoModal.message}

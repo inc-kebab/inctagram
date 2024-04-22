@@ -15,16 +15,16 @@ import { AdditionalRefProps } from '../../model/types/post.types'
 import { EditPostFormValues, editPostSchema } from '../../model/utils/validators/editPostSchema'
 
 type Props = {
+  classNameSubmit?: string
   currentDescription?: Nullable<string>
   disabled?: boolean
   onSubmit: (data: EditPostFormValues) => void
-  submitBtnClass?: string
   titleSubmit?: string
 } & Omit<ComponentPropsWithoutRef<'form'>, 'onSubmit'>
 
 export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, AdditionalRefProps>, Props>(
   (
-    { className, currentDescription, disabled, onSubmit, submitBtnClass, titleSubmit, ...rest },
+    { className, classNameSubmit, currentDescription, disabled, onSubmit, titleSubmit, ...rest },
     ref
   ) => {
     const { locale, t } = useTranslation()
@@ -69,7 +69,7 @@ export const EditPostForm = forwardRef<UseFormRef<EditPostFormValues, Additional
           >{`${watch('description').length}/500`}</Typography>
         </div>
         <Button
-          className={clsx(s.btn, submitBtnClass)}
+          className={clsx(s.btn, classNameSubmit)}
           disabled={disabled || !isValid}
           type="submit"
         >

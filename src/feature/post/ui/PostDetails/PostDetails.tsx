@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { CommentsList } from '@/entities/comment'
+import { CommentsDetails, CommentsList } from '@/entities/comment'
 import { PostInfoAdditional, PostItem } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
@@ -31,7 +31,10 @@ export const PostDetails = ({
 }: Props) => {
   const { t } = useTranslation()
   const { data } = useMeQuery(undefined)
-  const [comments, setComments] = useState(false)
+  const [isShowOnlyComments, setIsShowOnlyComments] = useState(false)
+  const [openMobileCommentForm, setOpenMobileCommentForm] = useState(false)
+
+  const toggleShowCommentForm = () => setOpenMobileCommentForm(prev => !prev)
 
   if (!item) {
     return null
@@ -40,6 +43,7 @@ export const PostDetails = ({
   const actions = isOwner ? (
     <Dropdown.Menu
       align="end"
+      modal={false}
       trigger={
         <Button style={{ padding: '0' }} variant="text">
           <More />
@@ -57,52 +61,49 @@ export const PostDetails = ({
 
   return (
     <>
-      <div className={clsx(s.postDetails, comments && s.hide)}>
-        <UserBanner
-          actions={actions}
-          avatar={item.avatarOwner}
-          className={s.header}
-          name={item.username}
-        />
-        <Carousel className={s.slider} imagesUrl={item.images} />
-        <PostInfoAdditional
-          avatars={mockComments.lastThreeLikes}
-          className={s.footer}
-          datePost={item.createdAt}
-          likesCount={2243}
-        />
-        <Typography
-          asComponent="button"
-          className={s.viewComments}
-          onClick={() => setComments(true)}
-          variant="small"
-        >
-          {`${t.pages.post.veiwComments} (${mockComments.items.length})`}
-        </Typography>
-        <CommentsList
-          className={s.content}
-          comments={mockComments.items}
-          maxMobileComments={2}
-          postItem={item}
-          shortenedComments
+      {isShowOnlyComments ? (
+        <CommentsDetails
+          item={item}
+          onHide={() => setIsShowOnlyComments(false)}
           userId={data?.id}
         />
-        {isOwner && <PublishCommentForm className={s.form} />}
-      </div>
-
-      <div className={clsx(s.commentsDetails, !comments && s.hide)}>
-        <div className={s.titleWrapper}>
-          <Arrow onClick={() => setComments(false)} />
-          <Typography variant="h2">Comments</Typography>
-          <div></div>
+      ) : (
+        <div className={clsx(s.postDetails)}>
+          <UserBanner
+            actions={actions}
+            avatar={item.avatarOwner}
+            className={s.header}
+            name={item.username}
+          />
+          <Carousel className={s.slider} imagesUrl={item.images} />
+          <PostInfoAdditional
+            avatars={mockComments.lastThreeLikes}
+            className={s.footer}
+            datePost={item.createdAt}
+            isActiveCommentForm={openMobileCommentForm}
+            likesCount={2243}
+            toggleShowCommentForm={toggleShowCommentForm}
+          />
+          <Typography
+            asComponent="button"
+            className={s.viewComments}
+            onClick={() => setIsShowOnlyComments(true)}
+            variant="small"
+          >
+            {`${t.pages.post.veiwComments} (${mockComments.items.length})`}
+          </Typography>
+          <CommentsList
+            className={s.content}
+            comments={mockComments.items}
+            maxMobileComments={2}
+            postItem={item}
+            userId={data?.id}
+          />
+          {isOwner && (
+            <PublishCommentForm className={clsx(s.form, openMobileCommentForm && s.mobileForm)} />
+          )}
         </div>
-        <CommentsList
-          className={s.content}
-          comments={mockComments.items}
-          postItem={item}
-          userId={data?.id}
-        />
-      </div>
+      )}
     </>
   )
 }

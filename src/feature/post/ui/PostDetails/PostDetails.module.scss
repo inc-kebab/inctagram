@@ -22,6 +22,7 @@
 
   .content {
     grid-area: content;
+    padding-top: 24px;
   }
 
   .footer {
@@ -33,10 +34,6 @@
   }
 }
 
-.commentsDetails {
-  display: none;
-}
-
 .viewComments {
   display: none;
 }
@@ -46,46 +43,53 @@
     scrollbar-color: var(--dark-100) transparent;
 
     overflow: hidden auto;
-    grid-template-areas: 'header' 'slider' 'footer' 'viewComments' 'content' 'form';
+    grid-template-areas: 'header' 'slider' 'footer' 'viewComments' 'content';
     grid-template-columns: 1fr;
 
-    height: 100%;
+    height: calc(100vh - (2 * var(--header-height)));
 
     background-color: unset;
-
-    .viewComments {
-      display: inline;
-      grid-area: viewComments;
-
-      margin: 0 auto 0 0;
-      padding: 18px 0 0 22px;
-
-      color: var(--light-900);
-
-      background-color: unset;
-      border: none;
-    }
 
     .slider {
       height: 324px;
       border: none;
     }
-  }
 
-  .commentsDetails {
-    display: block;
-
-    .titleWrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      height: var(--comment-title-height);
-      margin: 0 24px;
+    .content {
+      grid-area: content;
+      padding-top: 0;
     }
   }
 
-  .hide {
+  .viewComments {
+    cursor: pointer;
+
+    display: inline;
+    grid-area: viewComments;
+
+    margin: 0 auto 0 0;
+    padding: 18px 0 0 22px;
+
+    color: var(--light-900);
+
+    background-color: unset;
+    border: none;
+  }
+
+  .form {
     display: none;
+  }
+
+  .mobileForm {
+    position: fixed;
+    z-index: 11;
+    bottom: 120px;
+
+    display: flex;
+
+    width: 100%;
+    height: var(--header-height);
+
+    background-color: var(--dark-700);
   }
 }

@@ -45,6 +45,8 @@ export const Avatar = ({
       className={clsx(s.iconWrapper, className)}
       style={{
         borderRadius: circle ? '50%' : '',
+        height: `${wrapperSize}px`,
+        width: `${wrapperSize}px`,
         ...style,
       }}
     >
