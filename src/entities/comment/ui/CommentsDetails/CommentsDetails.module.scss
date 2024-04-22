@@ -1,0 +1,43 @@
+@import '@/app/styles/mixins';
+
+.root {
+  display: none;
+}
+
+@include mobile {
+  .root {
+    scrollbar-color: var(--dark-100) transparent;
+    overflow-y: auto;
+    display: block;
+    height: 100%;
+
+    & .content {
+      height: unset;
+    }
+  }
+
+  .title {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: var(--header-height);
+  }
+
+  .button {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+
+    padding: 0;
+
+    color: var(--light-100);
+  }
+
+  .description {
+    border-bottom: 1px solid var(--dark-100);
+  }
+}

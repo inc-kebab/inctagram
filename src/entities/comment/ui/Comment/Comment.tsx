@@ -15,6 +15,7 @@ import s from './Comment.module.scss'
 type Props = {
   avatarUrl: Nullable<string>
   className?: string
+  classNameAvatar?: string
   commentText: Nullable<string>
   isOwner: boolean
   like?: boolean
@@ -26,6 +27,7 @@ type Props = {
 export const Comment = ({
   avatarUrl,
   className,
+  classNameAvatar,
   commentText,
   isOwner,
   like,
@@ -43,38 +45,40 @@ export const Comment = ({
 
   return (
     <div className={clsx(s.comment, className)}>
-      <Link className={s.link} href="#">
-        <Avatar avatarUrl={avatarUrl} circle className={s.avatar} iconSize={21} wrapperSize={36} />
-      </Link>
-      <div className={s.commentContent}>
-        <div className={s.textContent}>
-          <div className={s.message}>
-            <Link href="#">
-              <Typography asComponent="span" variant="regularBold14">
-                {name + ' '}
-              </Typography>
-            </Link>
-            {commentText && (
-              <Typography asComponent="span" className={s.text} variant="regular14">
-                {commentText}
-              </Typography>
+      <Avatar
+        avatarUrl={avatarUrl}
+        circle
+        className={clsx(s.avatar, classNameAvatar)}
+        iconSize={21}
+        wrapperSize={36}
+      />
+      <div className={s.content}>
+        <Typography asComponent={Link} href="#" variant="regularBold14">
+          {name + ' '}
+        </Typography>
+        {commentText && (
+          <div className={s.textWrapper}>
+            <Typography
+              asComponent="span"
+              className={clsx(s.text, s.shortText)}
+              variant="regular14"
+            >
+              {commentText}
+            </Typography>
+            {!isOwner && (
+              <Button asComponent="span" className={s.buttonHeart} variant="text">
+                {like ? <Heart className={s.heart} /> : <HeartOutline className={s.heartOutline} />}
+              </Button>
             )}
           </div>
-          {!isOwner && (
-            <Button asComponent="span" className={s.buttonHeart} variant="text">
-              {like ? <Heart className={s.heart} /> : <HeartOutline className={s.heartOutline} />}
-            </Button>
-          )}
-        </div>
-        <div className={s.commentFooter}>
+        )}
+        <div className={s.footer}>
           <Typography asComponent="span" variant="small">
             {dateAgo}
           </Typography>
-          {!!likesCount && (
-            <Typography asComponent="span" variant="small">
-              {`${t.pages.post.likes}: ${likesCount}`}
-            </Typography>
-          )}
+          <Typography asComponent="span" variant="small">
+            {`${t.pages.post.likes}: ${likesCount || 0}`}
+          </Typography>
           {!isOwner && (
             <Button asComponent="span" className={s.answerBtn} variant="text">
               <Typography variant="smallSemiBold">{t.button.answer}</Typography>

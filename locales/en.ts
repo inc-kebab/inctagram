@@ -14,6 +14,8 @@ export const en = {
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     discard: 'Discard',
+    favorites: 'Favorites',
+    logOut: 'Log out',
     no: 'No',
     profileSettings: 'Profile settings',
     publish: 'Publish',
@@ -28,6 +30,7 @@ export const en = {
     signIn: 'Sign In',
     signUp: 'Sign Up',
     simple_save: 'Save',
+    statistics: 'Statistics',
     yes: 'Yes',
   },
   dates: {
@@ -122,6 +125,7 @@ export const en = {
     },
     post: {
       addPhoto: 'Add Photo',
+      cancel: 'Cancel',
       confirmCloseCreateModal: {
         message:
           'Do you really want to close the creation of a publication? If you close everything will be deleted',
@@ -146,7 +150,9 @@ export const en = {
       next: 'Next',
       publication: 'Publication',
       publish: 'Publish',
+      save: 'Save',
       successCreate: 'Success create post!',
+      veiwComments: 'View all comments',
     },
     privacy: {
       changes:

@@ -3,18 +3,25 @@
 .comments {
   scrollbar-color: var(--dark-100) transparent;
 
-  overflow: hidden auto;
+  overflow-y: auto;
 
   height: 336px;
-  padding: 24px;
 
   border-top: 1px solid var(--dark-100);
   border-bottom: 1px solid var(--dark-100);
 }
 
+.first {
+  margin-bottom: 20px;
+}
+
 @include mobile {
   .comments {
-    height: unset;
-    border-bottom: unset;
+    height: min-content;
+    border: unset;
+
+    & .hidden {
+      display: none;
+    }
   }
 }

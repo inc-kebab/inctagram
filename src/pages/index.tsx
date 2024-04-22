@@ -26,6 +26,7 @@ export const getStaticProps = wrapper.getStaticProps(
     const posts = await store.dispatch(getAllPublicPosts.initiate({}, { forceRefetch: true }))
 
     await Promise.all(store.dispatch(getRunningQueriesThunk()))
+
     if (!posts) {
       return {
         props: {
