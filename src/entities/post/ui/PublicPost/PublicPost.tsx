@@ -77,7 +77,7 @@ export const PublicPost = ({ onNavigateToPost, post }: Props) => {
             {post.description}
           </div>
           {isTruncated && (
-            <span className={s.toggleText} onClick={toggleIsExpanded}>
+            <span className={s.toggleText} data-content="data-content" onClick={toggleIsExpanded}>
               {isExpanded ? t.button.showLess : t.button.showMore}
             </span>
           )}

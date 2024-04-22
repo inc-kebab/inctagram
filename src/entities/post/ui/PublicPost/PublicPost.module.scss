@@ -23,10 +23,12 @@
 }
 
 .description {
+  position: relative;
+
   overflow: hidden;
   display: -webkit-box;
 
-  height: 60px;
+  height: 58px;
 
   text-overflow: ellipsis;
   word-break: break-all;
@@ -38,9 +40,9 @@
 }
 
 .descriptionMax {
-  height: 180px;
+  height: 173px;
 
-  -webkit-line-clamp: 8;
+  -webkit-line-clamp: 9;
 }
 
 .toggleText {
