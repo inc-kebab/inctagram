@@ -1,5 +1,6 @@
 .post {
   width: 234px;
+  margin: 0 auto;
 
   & .banner {
     padding: 12px 0;
@@ -40,7 +41,7 @@
 }
 
 .descriptionMax {
-  height: 173px;
+  height: 178px;
 
   -webkit-line-clamp: 9;
 }
