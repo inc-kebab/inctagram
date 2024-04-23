@@ -1,0 +1,21 @@
+.button {
+  padding: 0;
+  color: var(--light-100);
+}
+
+.link {
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: var(--primary-100);
+  }
+}
+
+.active {
+  color: var(--primary-500);
+}
+
+.disabled {
+  pointer-events: none;
+  color: var(--dark-100);
+}

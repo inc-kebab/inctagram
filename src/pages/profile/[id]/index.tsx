@@ -28,8 +28,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
   const queryPostId = postId ? `?post=${postId}` : ''
 
   if (!meResponse.data) {
-    // TODO refresh-token
-
     return {
       redirect: {
         destination: AppRoutes.PUBLIC_PROFILE + `/${userId}` + queryPostId,

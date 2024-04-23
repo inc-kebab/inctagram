@@ -11,8 +11,10 @@ import { useRouter } from 'next/router'
 
 import s from './SidebarLayout.module.scss'
 
+import { getMobileSidebarItems } from '../../model/utils/getMobileSidebarItems'
 import { getSidebarItems } from '../../model/utils/getSidebarItems'
 import { Header } from '../Header/Header'
+import { MobileSidebar } from '../MobileSidebar/MobileSidebar'
 import { Sidebar } from '../Sidebar/Sidebar'
 
 type Props = PropsWithChildren & Omit<MetaProps, 'children'>
@@ -49,7 +51,7 @@ export const SidebarLayout = ({ children, ...rest }: Props) => {
 
   return (
     <Meta {...rest}>
-      <Header />
+      <Header disabled={isLoading} isAuth={!!data} onLogout={handleLogout} ownerId={data?.id} />
       <div className={clsx('main_container', s.wrapper)}>
         <Sidebar
           buttonName={t.layout.sidebar.logout}
@@ -59,6 +61,7 @@ export const SidebarLayout = ({ children, ...rest }: Props) => {
         />
         <main className={s.main}>{children}</main>
       </div>
+      <MobileSidebar isLoading={isLoading} items={getMobileSidebarItems(t, data?.id)} />
     </Meta>
   )
 }

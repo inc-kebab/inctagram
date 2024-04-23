@@ -1,15 +1,18 @@
-import { CommentsList } from '@/entities/comment'
+import { useState } from 'react'
+
+import { CommentsDetails, CommentsList } from '@/entities/comment'
 import { PostInfoAdditional, PostItem } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
 import { PublishCommentForm, mockComments } from '@/feature/comment'
-import { More } from '@/shared/assets/icons/common'
+import { Arrow, More } from '@/shared/assets/icons/common'
 import { Edit, Trash } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { Typography } from '@/shared/ui/Typography'
+import clsx from 'clsx'
 
 import s from './PostDetails.module.scss'
 
@@ -27,8 +30,11 @@ export const PostDetails = ({
   onOpenEditModal,
 }: Props) => {
   const { t } = useTranslation()
-
   const { data } = useMeQuery(undefined)
+  const [isShowOnlyComments, setIsShowOnlyComments] = useState(false)
+  const [openMobileCommentForm, setOpenMobileCommentForm] = useState(false)
+
+  const toggleShowCommentForm = () => setOpenMobileCommentForm(prev => !prev)
 
   if (!item) {
     return null
@@ -37,6 +43,7 @@ export const PostDetails = ({
   const actions = isOwner ? (
     <Dropdown.Menu
       align="end"
+      modal={false}
       trigger={
         <Button style={{ padding: '0' }} variant="text">
           <More />
@@ -54,28 +61,48 @@ export const PostDetails = ({
 
   return (
     <>
-      <div className={s.postDetails}>
-        <Carousel className={s.slider} imagesUrl={item.images} />
+      <div className={clsx(s.postDetails, isShowOnlyComments && s.hidden)}>
         <UserBanner
           actions={actions}
           avatar={item.avatarOwner}
           className={s.header}
           name={item.username}
         />
-        <CommentsList
-          className={s.content}
-          comments={mockComments.items}
-          postItem={item}
-          userId={data?.id}
-        />
+        <Carousel className={s.slider} imagesUrl={item.images} />
         <PostInfoAdditional
           avatars={mockComments.lastThreeLikes}
           className={s.footer}
           datePost={item.createdAt}
+          isActiveCommentForm={openMobileCommentForm}
           likesCount={2243}
+          toggleShowCommentForm={toggleShowCommentForm}
         />
-        {isOwner && <PublishCommentForm className={s.form} />}
+        <Typography
+          asComponent="button"
+          className={s.viewComments}
+          onClick={() => setIsShowOnlyComments(true)}
+          variant="small"
+        >
+          {`${t.pages.post.veiwComments} (${mockComments.items.length})`}
+        </Typography>
+        <CommentsList
+          className={s.content}
+          classNameAvatar={s.hidden}
+          comments={mockComments.items}
+          maxMobileComments={2}
+          postItem={item}
+          userId={data?.id}
+        />
+        {isOwner && (
+          <PublishCommentForm className={clsx(s.form, openMobileCommentForm && s.mobileForm)} />
+        )}
       </div>
+      <CommentsDetails
+        className={clsx(!isShowOnlyComments && s.hidden)}
+        item={item}
+        onHide={() => setIsShowOnlyComments(false)}
+        userId={data?.id}
+      />
     </>
   )
 }

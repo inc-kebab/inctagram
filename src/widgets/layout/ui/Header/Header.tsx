@@ -1,8 +1,6 @@
-import { More } from '@/shared/assets/icons/common'
 import { AppRoutes, AuthRoutes } from '@/shared/const/routes'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
-import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { Typography } from '@/shared/ui/Typography'
 import { LangSwitcher } from '@/widgets/lang-switcher'
 import clsx from 'clsx'
@@ -10,11 +8,16 @@ import Link from 'next/link'
 
 import s from './Header.module.scss'
 
+import { MobileMenu } from './MobileMenu/MobileMenu'
+
 interface Props {
-  isUnauthorized?: boolean
+  disabled?: boolean
+  isAuth?: boolean
+  onLogout?: () => void
+  ownerId?: number
 }
 
-export const Header = ({ isUnauthorized }: Props) => {
+export const Header = ({ disabled, isAuth, onLogout, ownerId }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -29,47 +32,30 @@ export const Header = ({ isUnauthorized }: Props) => {
         >
           Inctagram
         </Typography>
+
         <div className={s.actions}>
           <LangSwitcher />
-          {isUnauthorized && (
-            <>
-              <div className={s.pc}>
-                <Button
-                  asComponent={Link}
-                  className={s.login}
-                  href={AuthRoutes.SIGN_IN}
-                  variant="text"
-                >
-                  {t.button.signIn}
-                </Button>
-                <Button
-                  asComponent={Link}
-                  className={s.register}
-                  href={AuthRoutes.SIGN_UP}
-                  variant="primary"
-                >
-                  {t.button.signUp}
-                </Button>
-              </div>
-
-              <Dropdown.Menu
-                align="end"
-                sideOffset={6}
-                trigger={<Button className={s.mobile} startIcon={<More />} variant="text" />}
+          {!isAuth && (
+            <div className={s.auth}>
+              <Button
+                asComponent={Link}
+                className={s.login}
+                href={AuthRoutes.SIGN_IN}
+                variant="text"
               >
-                <Dropdown.Item>
-                  <Typography asComponent={Link} href={AuthRoutes.SIGN_IN} variant="regular14">
-                    {t.button.signIn}
-                  </Typography>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Typography asComponent={Link} href={AuthRoutes.SIGN_UP} variant="regular14">
-                    {t.button.signUp}
-                  </Typography>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </>
+                {t.button.signIn}
+              </Button>
+              <Button
+                asComponent={Link}
+                className={s.register}
+                href={AuthRoutes.SIGN_UP}
+                variant="primary"
+              >
+                {t.button.signUp}
+              </Button>
+            </div>
           )}
+          <MobileMenu disabled={disabled} isAuth={isAuth} onLogout={onLogout} ownerId={ownerId} />
         </div>
       </div>
     </header>

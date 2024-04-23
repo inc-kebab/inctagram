@@ -3,10 +3,18 @@
 @forward 'boilerplate';
 @forward 'toastify';
 
+@import '@/app/styles/mixins';
+
 .main_container {
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
+  margin: var(--header-height) auto 0;
+}
+
+@include mobile {
+  .main_container {
+    margin-bottom: var(--header-height);
+  }
 }
 
 .image_filter--normal {

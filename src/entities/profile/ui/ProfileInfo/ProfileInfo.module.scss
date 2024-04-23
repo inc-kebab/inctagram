@@ -2,64 +2,82 @@
 
 .ProfileInfo {
   display: grid;
+  grid-template: auto / auto 1fr;
   grid-template-areas:
     'avatar name settings'
-    'avatar subscriber .'
+    'avatar subscriber subscriber'
     'avatar aboutMe aboutMe';
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto;
   gap: 20px 38px;
 
   margin-bottom: 48px;
+}
 
-  .aboutMe {
-    overflow: hidden;
-    display: -webkit-box;
-    grid-area: aboutMe;
+.aboutMe {
+  overflow: hidden;
+  display: -webkit-box;
+  grid-area: aboutMe;
 
-    text-overflow: ellipsis;
-    word-break: break-all;
+  text-overflow: ellipsis;
+  word-break: break-all;
 
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.settings {
+  grid-area: settings;
+}
+
+.avatar {
+  grid-area: avatar;
+  object-fit: cover;
+}
+
+.name {
+  grid-area: name;
+}
+
+.subscriber {
+  display: flex;
+  grid-area: subscriber;
+  gap: 80px;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: var(--font-size-s);
+  list-style: none;
+
+  & .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: var(--line-height-m);
+
+    & .count {
+      font-weight: var(--font-weight-bold);
+    }
   }
+}
 
-  .settings {
-    grid-area: settings;
-  }
-
-  .avatar {
-    grid-area: avatar;
-    width: 200px;
-    height: 200px;
-  }
-
-  .name {
-    grid-area: name;
+@include tablet {
+  .ProfileInfo {
+    grid-template-areas:
+      'avatar settings'
+      'avatar subscriber'
+      'avatar aboutMe'
+      'name .';
+    grid-template-rows: 36px min-content auto;
   }
 
   .subscriber {
-    display: flex;
-    grid-area: subscriber;
-    gap: 80px;
-    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+  }
 
-    margin: 0;
-    padding: 0;
-
-    font-size: var(--font-size-s);
-    list-style: none;
-
-    & .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      line-height: var(--line-height-m);
-
-      & .count {
-        font-weight: var(--font-weight-bold);
-      }
-    }
+  .name {
+    text-align: center !important;
   }
 }
 
@@ -69,38 +87,39 @@
       'avatar subscriber'
       'name .'
       'aboutMe aboutMe';
+    grid-template-rows: auto;
     row-gap: 10px;
     place-items: center center;
-    margin-bottom: 29px;
 
-    .avatar {
-      width: 72px;
-      height: 72px;
+    margin-bottom: 30px;
+  }
+
+  .avatar {
+    width: 72px !important;
+    height: 72px !important;
+  }
+
+  .name {
+    font-size: var(--font-size-m);
+    line-height: var(--line-height-m);
+  }
+
+  .subscriber {
+    gap: 10px;
+    width: 100%;
+
+    & .item {
+      font-size: var(--font-size-xs);
     }
+  }
 
-    .settings {
-      display: none;
-    }
+  .aboutMe {
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+  }
 
-    .name {
-      font-size: var(--font-size-m);
-      line-height: var(--line-height-m);
-    }
-
-    .subscriber {
-      gap: unset;
-      justify-content: space-between;
-      width: 100%;
-
-      .item {
-        font-size: var(--font-size-xs);
-      }
-    }
-
-    .aboutMe {
-      font-size: var(--font-size-s);
-      line-height: var(--line-height-m);
-    }
+  .settings {
+    display: none;
   }
 }
 

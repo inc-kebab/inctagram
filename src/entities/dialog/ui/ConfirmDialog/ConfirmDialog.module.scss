@@ -1,4 +1,6 @@
-.dialog {
+@import '@/app/styles/mixins';
+
+.wrapper {
   display: flex;
   flex-direction: column;
 
@@ -16,4 +18,25 @@
   display: flex;
   gap: 24px;
   align-self: end;
+}
+
+@include mobile {
+  .root {
+    width: 95%;
+  }
+
+  .wrapper {
+    max-width: unset;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-self: unset;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px 24px;
+  }
 }

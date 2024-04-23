@@ -14,6 +14,8 @@ import { useRouter } from 'next/router'
 
 import s from './PostDetailsDialogs.module.scss'
 
+import { EditPostDialogTitle } from './EditPostDialogTitle/EditPostDialogTitle'
+
 interface Props {
   currentPost: Nullable<PostItem>
   isOwner: boolean
@@ -93,7 +95,7 @@ export const PostDetailsDialogs = ({
         onOpenChange={handlerChangeOpenPostDetailsModal}
         open={openPostDetailsModal}
       >
-        <DialogClose>
+        <DialogClose className={s.dialogClose}>
           <Close className={s.closeIcon} />
         </DialogClose>
         <PostDetails
@@ -105,24 +107,25 @@ export const PostDetailsDialogs = ({
       </Dialog>
       <Dialog
         className={s.dialog}
+        customTitleComponent={<EditPostDialogTitle />}
         onOpenChange={handleChangeOpenEditModal}
         open={openEditModal}
-        title={t.pages.post.editPost}
       >
         <div className={s.editDialog}>
-          <Carousel className={s.slider} imagesUrl={currentPost?.images} />
-          <UserBanner
-            avatar={currentPost?.avatarOwner}
-            className={s.header}
-            name={currentPost?.username || ''}
-          />
-          <EditPostForm
-            currentDescription={currentPost?.description}
-            disabled={isEditLoad}
-            onSubmit={handleSubmitEditPost}
-            ref={editPostRef}
-            style={{ height: '100%' }}
-          />
+          <Carousel className={s.editSlider} imagesUrl={currentPost?.images} />
+          <div className={s.editContent}>
+            <UserBanner avatar={currentPost?.avatarOwner} name={currentPost?.username || ''} />
+            <EditPostForm
+              className={s.editForm}
+              classNameSubmit={s.editSubmit}
+              currentDescription={currentPost?.description}
+              disabled={isEditLoad}
+              onSubmit={handleSubmitEditPost}
+              ref={editPostRef}
+              style={{ height: '100%' }}
+              titleSubmit={t.pages.post.save}
+            />
+          </div>
         </div>
       </Dialog>
       <ConfirmDialog
