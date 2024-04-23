@@ -11,6 +11,7 @@ type Props = {
   classNameAvatar?: string
   classNameDescription?: string
   comments: CommentData[]
+  isShortenComments?: boolean
   maxMobileComments?: number
   postItem: PostItem
   userId?: number
@@ -21,6 +22,7 @@ export const CommentsList = ({
   classNameAvatar,
   classNameDescription,
   comments,
+  isShortenComments,
   maxMobileComments,
   postItem,
   userId,
@@ -33,6 +35,7 @@ export const CommentsList = ({
         classNameAvatar={classNameAvatar}
         commentText={postItem.description}
         isOwner={userId === postItem.ownerId}
+        isShortenComment={isShortenComments}
         name={postItem.username}
         time={postItem.createdAt}
       />
@@ -46,6 +49,7 @@ export const CommentsList = ({
             classNameAvatar={classNameAvatar}
             commentText={comment.commentText}
             isOwner={userId === comment.idUser}
+            isShortenComment={isShortenComments}
             key={comment.idUser + comment.time}
             like={comment.like}
             likesCount={comment.likesCount}

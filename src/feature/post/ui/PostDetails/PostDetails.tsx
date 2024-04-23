@@ -89,6 +89,7 @@ export const PostDetails = ({
           className={s.content}
           classNameAvatar={s.hidden}
           comments={mockComments.items}
+          isShortenComments
           maxMobileComments={2}
           postItem={item}
           userId={data?.id}
