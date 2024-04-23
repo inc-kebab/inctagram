@@ -20,7 +20,7 @@ export const CounterRegisteredUsers = ({ className, count }: Props) => {
 
   return (
     <div className={clsx(s.root, className)}>
-      <Typography asComponent="h2" variant="h1">
+      <Typography asComponent="h2" className={s.title} variant="h1">
         {t.pages.main.usersTitle}:
       </Typography>
       <div className={s.counter}>

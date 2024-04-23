@@ -10,3 +10,9 @@
 .back {
   margin-bottom: 24px;
 }
+
+@include tablet {
+  .main {
+    padding: 18px;
+  }
+}

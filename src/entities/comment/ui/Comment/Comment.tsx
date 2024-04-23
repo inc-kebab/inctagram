@@ -18,6 +18,7 @@ type Props = {
   classNameAvatar?: string
   commentText: Nullable<string>
   isOwner: boolean
+  isShortenComment?: boolean
   like?: boolean
   likesCount?: number
   name: string
@@ -30,6 +31,7 @@ export const Comment = ({
   classNameAvatar,
   commentText,
   isOwner,
+  isShortenComment,
   like,
   likesCount,
   name,
@@ -60,7 +62,7 @@ export const Comment = ({
           <div className={s.textWrapper}>
             <Typography
               asComponent="span"
-              className={clsx(s.text, s.shortText)}
+              className={clsx(s.text, isShortenComment && s.shortText)}
               variant="regular14"
             >
               {commentText}
