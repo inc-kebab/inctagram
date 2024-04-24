@@ -1,37 +1,34 @@
 import { useCallback, useMemo, useState } from 'react'
+import { toast } from 'react-toastify'
 
-import { CroppedImage, postsActions } from '@/entities/post'
-import { FilterImage, getDefaultSwiperConfig } from '@/shared/helpers'
-import { useAppDispatch } from '@/shared/hooks'
-import clsx from 'clsx'
+import { postsActions } from '@/entities/post'
+import { FilterImage, getDefaultSwiperConfig, getModifiedImage } from '@/shared/helpers'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import Image from 'next/image'
 import { Controller } from 'swiper/modules'
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './FiltersScreen.module.scss'
 
-const filtersScreen: { name: string; value: FilterImage }[] = [
-  { name: 'Normal', value: 'image_filter--normal' },
-  { name: 'Clarendon', value: 'image_filter--clarendon' },
-  { name: 'Lark', value: 'image_filter--lark' },
-  { name: 'Gingham', value: 'image_filter--gingham' },
-  { name: 'Moon', value: 'image_filter--moon' },
-  { name: 'Xray', value: 'image_filter--xRay' },
-  { name: 'Shabby', value: 'image_filter--shabby' },
-  { name: 'Old school', value: 'image_filter--oldSchool' },
-  { name: 'Silent Hill', value: 'image_filter--silentHill' },
-]
+import { filters } from '../../model/const/filters'
+import { CurrentWindow } from '../../model/types/post.types'
+import { FilterBlock } from '../FilterBlock/FilterBlock'
+import { TitleBlock } from '../TitleBlock/TitleBlock'
 
 type Props = {
-  croppedImages: CroppedImage[]
+  onChangeWindow?: (window: CurrentWindow) => void
 }
 
-export const FiltersScreen = ({ croppedImages }: Props) => {
-  const [activeIndex, setActiveIndex] = useState(0)
+export const FiltersScreen = ({ onChangeWindow }: Props) => {
+  const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
 
   const [controlledSwiper, setControlledSwiper] = useState<SwiperClass | null>(null)
+
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const croppedImages = useAppSelector(state => state.posts.croppedImages)
 
   const handleChangeFilter = useCallback(
     (filter: FilterImage) => {
@@ -43,53 +40,81 @@ export const FiltersScreen = ({ croppedImages }: Props) => {
   )
 
   const filtersArray = useMemo(() => {
-    return filtersScreen.map((filter, i) => {
-      const activeFilter = filter.value === croppedImages[activeIndex].filter
+    return filters.map((filter, i) => {
+      const isActiveFilter = filter.value === croppedImages[activeIndex].filter
 
       return (
-        <div
-          className={clsx(s.filter, { [s.active]: activeFilter })}
+        <FilterBlock
+          filter={filter}
+          imageURL={croppedImages[activeIndex].imageURL}
+          isActive={isActiveFilter}
           key={`${filter.name}` + i}
-          onClick={() => handleChangeFilter(filter.value)}
-        >
-          <Image
-            alt={filter.name}
-            className={clsx(filter.value, s.item)}
-            height={100}
-            src={croppedImages[activeIndex].imageURL}
-            width={100}
-          />
-          <div className={s.name}>{filter.name}</div>
-        </div>
+          onSetActiveFilter={() => handleChangeFilter(filter.value)}
+        />
       )
     })
   }, [croppedImages, activeIndex, handleChangeFilter])
 
-  return (
-    <div className={s.container}>
-      <Swiper
-        {...getDefaultSwiperConfig({ classes: [s.slider], modules: [Controller] })}
-        controller={{ control: controlledSwiper }}
-        onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
-        onSwiper={setControlledSwiper}
-      >
-        {croppedImages.map((image, i) => {
-          const { filter, imageURL } = image
+  const handleClickBack = () => {
+    onChangeWindow?.('expand')
+    dispatch(postsActions.resetCroppedImages())
+  }
 
-          return (
-            <SwiperSlide key={imageURL + i}>
-              <Image
-                alt={filter}
-                className={filter}
-                fill
-                src={imageURL}
-                style={{ objectFit: 'contain' }}
-              />
-            </SwiperSlide>
-          )
-        })}
-      </Swiper>
-      <div className={s.filtersContainer}>{filtersArray}</div>
-    </div>
+  const handleClickNext = () => {
+    const promises = croppedImages.map(el => {
+      return getModifiedImage({
+        filter: el.filter,
+        imageSrc: el.imageURL,
+        mode: 'filters',
+        t,
+      }) as Promise<string>
+    })
+
+    Promise.all(promises)
+      .then(images => {
+        dispatch(postsActions.setImagesWithFilters(images))
+        onChangeWindow?.('description')
+      })
+      .catch(e => toast.error(e.message))
+  }
+
+  return (
+    <>
+      <TitleBlock
+        onBackClick={handleClickBack}
+        onNextClick={handleClickNext}
+        showLeftButton
+        showRightButton
+        title={t.pages.post.filters}
+      />
+      <div className={s.container}>
+        <Swiper
+          {...getDefaultSwiperConfig({
+            classes: [s.slider],
+            modules: [Controller],
+          })}
+          controller={{ control: controlledSwiper }}
+          onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
+          onSwiper={setControlledSwiper}
+        >
+          {croppedImages.map((image, i) => {
+            const { filter, imageURL } = image
+
+            return (
+              <SwiperSlide key={imageURL + i}>
+                <Image
+                  alt={filter}
+                  className={filter}
+                  fill
+                  src={imageURL}
+                  style={{ objectFit: 'contain' }}
+                />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
+        <div className={s.filtersContainer}>{filtersArray}</div>
+      </div>
+    </>
   )
 }
