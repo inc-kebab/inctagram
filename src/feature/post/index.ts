@@ -1,5 +1,4 @@
 export { getMyPosts, useGetMyPostsQuery } from './api/post-api'
-export { useDeletePostMutation } from './api/post-api'
 export {
   getAllPublicPosts,
   getPublicPost,
@@ -8,6 +7,7 @@ export {
   useGetPublicPostQuery,
   useGetUsersPostsQuery,
 } from './api/public-posts-api'
+export { useDeletePost } from './model/hooks/useDeletePost'
 export { useEditPost } from './model/hooks/useEditPost'
 export type { CurrentWindow } from './model/types/post.types'
 export { CropperPostScreen } from './ui/CropperPostScreen/CropperPostScreen'

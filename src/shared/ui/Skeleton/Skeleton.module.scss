@@ -15,7 +15,7 @@
   width: 238px;
   height: 238px;
 
-  background-color: var(--primary-900);
+  background-color: var(--dark-500);
   border-radius: 4px;
 
   &::before {
@@ -30,7 +30,7 @@
     width: 80%;
     height: 100%;
 
-    background: linear-gradient(to right, transparent 0%, var(--primary-700) 50%, transparent 100%);
+    background: linear-gradient(to right, transparent 0%, var(--dark-400) 50%, transparent 100%);
 
     animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
