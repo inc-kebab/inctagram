@@ -25,7 +25,7 @@ export const ZoomIn = ({ aspect, imageURL, zoom }: Props) => {
     setOpen(open)
 
     if (open && aspect === 0) {
-      dispatch(postsActions.updateImage({ aspect: 0.1 / 0.1, imageURL }))
+      dispatch(postsActions.updateImage({ aspect: 1, imageURL }))
     }
   }
 

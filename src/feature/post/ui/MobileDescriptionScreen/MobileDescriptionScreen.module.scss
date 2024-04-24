@@ -5,23 +5,9 @@
 }
 
 .slider {
-  overflow-x: auto;
-  display: flex;
-  gap: 10px;
-
   width: 100%;
-  padding-bottom: 5px;
+  height: 300px;
 }
-
-.slide {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-//.image {
-//  position: unset;
-//}
 
 .userBanner p {
   font-size: var(--font-size-m);

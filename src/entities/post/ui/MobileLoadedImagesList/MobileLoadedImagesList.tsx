@@ -77,7 +77,6 @@ export const MobileLoadedImagesList = ({
         })}
         <InputFile
           accept=".png, .jpg, .jpeg"
-          multiple
           setError={setError}
           setFile={handleSetPhoto}
           zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)}

@@ -37,7 +37,7 @@ export const TitleBlock = ({
       </Typography>
       {showRightButton && (
         <Button className={s.right} onClick={onNextClick} variant="text">
-          {t.pages.post.next}
+          {t.button.next}
         </Button>
       )}
     </div>

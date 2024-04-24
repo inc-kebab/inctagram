@@ -7,3 +7,8 @@ export type AdditionalRefProps = {
 export type CurrentWindow = 'description' | 'expand' | 'filter' | 'upload'
 
 export type CurrentWindowMobile = 'description' | 'expand' | 'upload'
+
+export type FilterPost = {
+  name: string
+  value: FilterImage
+}
