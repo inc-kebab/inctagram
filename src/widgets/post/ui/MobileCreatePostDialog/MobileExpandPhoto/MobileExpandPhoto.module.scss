@@ -1,0 +1,20 @@
+.viewport {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--dark-500);
+  border: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+
+  color: var(--light-900);
+
+  background-color: var(--dark-300);
+  border-radius: 5px;
+}
+
+.activeItem {
+  color: var(--light-100);
+}

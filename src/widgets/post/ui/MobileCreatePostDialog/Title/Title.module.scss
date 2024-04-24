@@ -1,0 +1,36 @@
+@import '@/app/styles/mixins';
+
+.title {
+  position: relative;
+  margin: 0;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--dark-100);
+}
+
+.left {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+
+  padding: 0;
+
+  color: var(--light-100);
+}
+
+.right {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+@include mobile {
+  .title {
+    padding: 12px 15px;
+  }
+
+  .right {
+    padding: 6px 8px;
+  }
+}

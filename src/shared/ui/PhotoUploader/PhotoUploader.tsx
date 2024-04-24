@@ -11,11 +11,12 @@ import { ZodEffects } from 'zod'
 import s from './PhotoUploader.module.scss'
 
 type Props = {
+  multiple?: boolean
   setPhoto: (photo: File) => void
   zodSchema: ZodEffects<any>
 }
 
-export const PhotoUploader = ({ setPhoto, zodSchema }: Props) => {
+export const PhotoUploader = ({ multiple, setPhoto, zodSchema }: Props) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
 
@@ -35,6 +36,7 @@ export const PhotoUploader = ({ setPhoto, zodSchema }: Props) => {
       </div>
       <InputFile
         accept=".png, .jpg, .jpeg"
+        multiple={multiple}
         setError={setError}
         setFile={setPhoto}
         zodSchema={zodSchema}

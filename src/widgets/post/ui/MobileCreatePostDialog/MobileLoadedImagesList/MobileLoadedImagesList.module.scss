@@ -1,0 +1,47 @@
+.images {
+  display: flex;
+}
+
+.imagesArray {
+  overflow-x: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.image {
+  position: relative;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.deleteBtn {
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  right: 2px;
+
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+
+  background-color: rgba(#171717, 0.8);
+}
+
+.addImageBtn {
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+  height: 100px;
+
+  background-color: var(--dark-300);
+
+  transition: all 0.2s linear;
+}

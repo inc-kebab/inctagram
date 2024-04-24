@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { postsActions } from '@/entities/post'
 import { Maximize } from '@/shared/assets/icons/outline'
 import { useAppDispatch } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { Slider } from '@/shared/ui/Slider'
 
-import s from './ZoomIn.module.scss'
-
-import { postsActions } from '../../model/slice/post-slice'
+import s from './MobileZoomIn.module.scss'
 
 type Props = {
   aspect: number
@@ -16,10 +15,16 @@ type Props = {
   zoom: number
 }
 
-export const ZoomIn = ({ aspect, imageURL, zoom }: Props) => {
+export const MobileZoomIn = ({ aspect, imageURL, zoom }: Props) => {
   const dispatch = useAppDispatch()
 
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (zoom !== 1) {
+      setOpen(true)
+    }
+  }, [zoom])
 
   const handleChangeOpen = (open: boolean) => {
     setOpen(open)
@@ -43,7 +48,7 @@ export const ZoomIn = ({ aspect, imageURL, zoom }: Props) => {
       portal={false}
       side="top"
       sideOffset={2}
-      style={{ width: '150px' }}
+      style={{ width: '250px' }}
       trigger={
         <Button
           className={s.expandBtn}
