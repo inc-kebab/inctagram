@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .title {
   position: relative;
   margin: 0;
@@ -19,6 +21,12 @@
 .right {
   position: absolute;
   top: 50%;
-  right: 20px;
+  right: 24px;
   transform: translateY(-50%);
+}
+
+@include mobile {
+  .right {
+    padding: 0;
+  }
 }

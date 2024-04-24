@@ -16,7 +16,7 @@
 }
 
 @include mobile {
-  .dialog {
+  .dialogMobile {
     max-width: unset;
     height: calc(100vh - (2 * var(--header-height)));
     margin: 0;

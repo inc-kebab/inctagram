@@ -1,6 +1,5 @@
 import { Button } from '@/shared/ui/Button'
 import { CreatePostDialog } from '@/widgets/post'
-import { MobileCreatePostDialog } from '@/widgets/post/ui/MobileCreatePostDialog/MobileCreatePostDialog'
 import clsx from 'clsx'
 import Link from 'next/link'
 
@@ -17,7 +16,7 @@ interface Props {
 
 export const MobileSidebarItem = ({ disabled, isActive, isCreatePostModal, item }: Props) => {
   return isCreatePostModal ? (
-    <MobileCreatePostDialog
+    <CreatePostDialog
       trigger={
         <Button
           className={clsx(s.button, {

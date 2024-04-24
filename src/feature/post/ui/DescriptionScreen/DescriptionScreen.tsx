@@ -66,6 +66,7 @@ export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal
                 name={data?.username || ''}
               />
               <EditPostForm
+                classNameSubmit={s.submit}
                 disabled={isCreatePostLoad}
                 onSubmit={handleSubmitCreatePost}
                 ref={createPostRef}
