@@ -3,9 +3,8 @@ import { useState } from 'react'
 import { ConfirmDialog } from '@/entities/dialog'
 import { PostItem } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
-import { EditPostForm, PostDetails, useDeletePostMutation, useEditPost } from '@/feature/post'
+import { EditPostForm, PostDetails, useDeletePost, useEditPost } from '@/feature/post'
 import { Close } from '@/shared/assets/icons/common'
-import { handleErrorResponse } from '@/shared/helpers'
 import { useTranslation } from '@/shared/hooks'
 import { Carousel } from '@/shared/ui/Carousel'
 import { Dialog } from '@/shared/ui/Dialog'
@@ -18,130 +17,116 @@ import { EditPostDialogTitle } from './EditPostDialogTitle/EditPostDialogTitle'
 
 interface Props {
   currentPost: Nullable<PostItem>
-  isOwner: boolean
-  openPostDetailsModal: boolean
+  isAuth: boolean
+  onOpenChange: (open: boolean) => void
+  open: boolean
   setCurrentPost: (post: Nullable<PostItem>) => void
-  setOpenPostDetailsModal: (open: boolean) => void
 }
 
 export const PostDetailsDialogs = ({
   currentPost,
-  isOwner,
-  openPostDetailsModal,
+  isAuth,
+  onOpenChange,
+  open,
   setCurrentPost,
-  setOpenPostDetailsModal,
 }: Props) => {
   const { t } = useTranslation()
   const { query, replace } = useRouter()
 
-  const [openConfirmDeleteModal, setOpenConfirmDeleteModal] = useState(false)
-  const [openEditModal, setOpenEditModal] = useState(false)
-  const [openConfirmCloseEditModal, setOpenConfirmCloseEditModal] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false)
+  const [openConfirmEdit, setOpenConfirmEdit] = useState(false)
 
-  const handleCloseEditModal = () => setOpenEditModal(false)
+  const handleDeactivateEditMode = () => setEditMode(false)
 
-  const handleClosePostDetailsModal = () => {
+  const handleActivateEditMode = () => setEditMode(true)
+
+  const handleChangeOpen = (open: boolean) => {
+    if (editMode) {
+      editPostRef.current?.isDirty ? setOpenConfirmEdit(true) : setEditMode(open)
+    } else {
+      onOpenChange(open)
+    }
+  }
+
+  const handleClose = () => {
+    onOpenChange(false)
+    openConfirmDelete && setOpenConfirmDelete(false)
+
     void replace(query.id ? { query: { id: query.id } } : {}, undefined, {
       shallow: true,
     })
   }
 
-  const handleCloseEditModalWithConfirm = () => {
-    setOpenConfirmCloseEditModal(false)
-    setOpenEditModal(false)
+  const handleCancelEditPost = () => {
+    setOpenConfirmEdit(false)
+    setEditMode(false)
   }
 
   const { editPostRef, handleSubmitEditPost, isEditLoad } = useEditPost(
     currentPost!,
-    handleCloseEditModal,
+    handleDeactivateEditMode,
     setCurrentPost
   )
 
-  const [deletePost, { isLoading: isDeletePostLoad }] = useDeletePostMutation()
-
-  const handleDeletePost = () => {
-    currentPost &&
-      deletePost({ id: currentPost.id }).then(res => {
-        if ('error' in res) {
-          handleErrorResponse(res.error)
-        } else {
-          setOpenPostDetailsModal(false)
-          handleClosePostDetailsModal()
-          setOpenConfirmDeleteModal(false)
-          setCurrentPost(null)
-        }
-      })
-  }
-
-  const handleChangeOpenEditModal = (open: boolean) => {
-    if (!open) {
-      editPostRef.current?.isDirty ? setOpenConfirmCloseEditModal(true) : setOpenEditModal(false)
-    } else {
-      setOpenEditModal(true)
-    }
-  }
-
-  const handlerChangeOpenPostDetailsModal = (open: boolean) => {
-    if (!open) {
-      handleClosePostDetailsModal()
-    }
-    setOpenPostDetailsModal(open)
-  }
+  const { handleDeletePost, isDeletePostLoad } = useDeletePost(
+    currentPost!,
+    handleClose,
+    setCurrentPost
+  )
 
   return (
     <>
       <Dialog
         className={s.dialog}
-        onOpenChange={handlerChangeOpenPostDetailsModal}
-        open={openPostDetailsModal}
+        customTitleComponent={editMode ? <EditPostDialogTitle /> : undefined}
+        onOpenChange={handleChangeOpen}
+        open={open}
       >
-        <DialogClose className={s.dialogClose}>
-          <Close className={s.closeIcon} />
-        </DialogClose>
-        <PostDetails
-          isOwner={isOwner}
-          item={currentPost}
-          onOpenConfirmDeleteModal={() => setOpenConfirmDeleteModal(true)}
-          onOpenEditModal={() => setOpenEditModal(true)}
-        />
-      </Dialog>
-      <Dialog
-        className={s.dialog}
-        customTitleComponent={<EditPostDialogTitle />}
-        onOpenChange={handleChangeOpenEditModal}
-        open={openEditModal}
-      >
-        <div className={s.editDialog}>
-          <Carousel className={s.editSlider} imagesUrl={currentPost?.images} />
-          <div className={s.editContent}>
-            <UserBanner avatar={currentPost?.avatarOwner} name={currentPost?.username || ''} />
-            <EditPostForm
-              className={s.editForm}
-              classNameSubmit={s.editSubmit}
-              currentDescription={currentPost?.description}
-              disabled={isEditLoad}
-              onSubmit={handleSubmitEditPost}
-              ref={editPostRef}
-              style={{ height: '100%' }}
-              titleSubmit={t.pages.post.save}
-            />
+        {editMode ? (
+          <div className={s.editDialog}>
+            <Carousel className={s.editSlider} imagesUrl={currentPost?.images} />
+            <div className={s.editContent}>
+              <UserBanner avatar={currentPost?.avatarOwner} name={currentPost?.username || ''} />
+              <EditPostForm
+                className={s.editForm}
+                classNameSubmit={s.editSubmit}
+                currentDescription={currentPost?.description}
+                disabled={isEditLoad}
+                onSubmit={handleSubmitEditPost}
+                ref={editPostRef}
+                titleSubmit={t.pages.post.save}
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <>
+            <DialogClose className={s.dialogClose}>
+              <Close className={s.closeIcon} />
+            </DialogClose>
+            <PostDetails
+              isAuth={isAuth}
+              item={currentPost}
+              onOpenConfirmDeleteModal={() => setOpenConfirmDelete(true)}
+              onOpenEditModal={handleActivateEditMode}
+            />
+          </>
+        )}
       </Dialog>
       <ConfirmDialog
-        confirmCallback={handleCloseEditModalWithConfirm}
+        confirmCallback={handleCancelEditPost}
         content={t.pages.post.editInfoModal.message}
         disabled={isEditLoad}
-        onOpenChange={setOpenConfirmCloseEditModal}
-        open={openConfirmCloseEditModal}
+        onOpenChange={setOpenConfirmEdit}
+        open={openConfirmEdit}
         title={t.pages.post.editInfoModal.title}
       />
       <ConfirmDialog
         confirmCallback={handleDeletePost}
         content={t.pages.post.deletePostQuestion}
         disabled={isDeletePostLoad}
-        onOpenChange={setOpenConfirmDeleteModal}
-        open={openConfirmDeleteModal}
+        onOpenChange={setOpenConfirmDelete}
+        open={openConfirmDelete}
         title={t.pages.post.deletePost}
       />
     </>

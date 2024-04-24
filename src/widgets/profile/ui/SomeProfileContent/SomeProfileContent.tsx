@@ -34,9 +34,9 @@ export const SomeProfileContent = ({ isPublicPage }: Props) => {
   const {
     currentPost,
     handleChangeCurrentPost,
-    openPostDetailsModal,
+    openPostDetails,
     setCurrentPost,
-    setOpenPostDetailsModal,
+    setOpenPostDetails,
     triggerRef,
   } = useProfile({ cursor: posts?.cursor, hasMore: posts?.hasMore, router, setCurrentCursor })
 
@@ -66,10 +66,10 @@ export const SomeProfileContent = ({ isPublicPage }: Props) => {
       {isFetching && <PostsListSkeleton />}
       <PostDetailsDialogs
         currentPost={currentPost}
-        isOwner={false}
-        openPostDetailsModal={openPostDetailsModal}
+        isAuth={false}
+        onOpenChange={setOpenPostDetails}
+        open={openPostDetails}
         setCurrentPost={setCurrentPost}
-        setOpenPostDetailsModal={setOpenPostDetailsModal}
       />
     </>
   )

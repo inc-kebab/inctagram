@@ -11,7 +11,7 @@ import { EditPostFormValues } from '../../model/utils/validators/editPostSchema'
 export const useEditPost = (
   post: PostItem,
   confirmEdit: () => void,
-  setCurrentPost: (post: PostItem) => void
+  setCurrentPost: (post: Nullable<PostItem>) => void
 ) => {
   const editPostRef = useRef<Nullable<UseFormRef<EditPostFormValues, AdditionalRefProps>>>(null)
 

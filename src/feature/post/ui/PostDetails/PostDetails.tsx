@@ -5,7 +5,7 @@ import { PostInfoAdditional, PostItem } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useMeQuery } from '@/feature/auth'
 import { PublishCommentForm, mockComments } from '@/feature/comment'
-import { Arrow, More } from '@/shared/assets/icons/common'
+import { More } from '@/shared/assets/icons/common'
 import { Edit, Trash } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
@@ -17,18 +17,13 @@ import clsx from 'clsx'
 import s from './PostDetails.module.scss'
 
 type Props = {
-  isOwner: boolean
+  isAuth: boolean
   item: Nullable<PostItem>
   onOpenConfirmDeleteModal: () => void
   onOpenEditModal: () => void
 }
 
-export const PostDetails = ({
-  isOwner,
-  item,
-  onOpenConfirmDeleteModal,
-  onOpenEditModal,
-}: Props) => {
+export const PostDetails = ({ isAuth, item, onOpenConfirmDeleteModal, onOpenEditModal }: Props) => {
   const { t } = useTranslation()
   const { data } = useMeQuery(undefined)
   const [isShowOnlyComments, setIsShowOnlyComments] = useState(false)
@@ -40,7 +35,7 @@ export const PostDetails = ({
     return null
   }
 
-  const actions = isOwner ? (
+  const actions = isAuth ? (
     <Dropdown.Menu
       align="end"
       modal={false}
@@ -94,7 +89,7 @@ export const PostDetails = ({
           postItem={item}
           userId={data?.id}
         />
-        {isOwner && (
+        {isAuth && (
           <PublishCommentForm className={clsx(s.form, openMobileCommentForm && s.mobileForm)} />
         )}
       </div>
