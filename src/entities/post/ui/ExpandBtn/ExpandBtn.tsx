@@ -39,7 +39,7 @@ export const ExpandBtn = ({ className, classNameTrigger, currentAspect, imageURL
       trigger={
         <Button
           className={clsx(s.expandBtn, classNameTrigger)}
-          startIcon={<Expand height={24} width={24} />}
+          startIcon={<Expand className={s.icon} />}
           variant="text"
         />
       }
