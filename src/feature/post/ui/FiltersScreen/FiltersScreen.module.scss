@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .container {
   display: flex;
   width: 100%;
@@ -14,4 +16,25 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 3px;
   width: 50%;
+}
+
+@include mobile {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - (2 * var(--header-height)) - 60px);
+  }
+
+  .slider {
+    width: 100%;
+  }
+
+  .filtersContainer {
+    overflow: scroll hidden;
+    display: flex;
+    gap: 8px;
+
+    width: 100%;
+    padding-bottom: 18px;
+  }
 }
