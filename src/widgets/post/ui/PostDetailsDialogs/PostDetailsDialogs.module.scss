@@ -35,8 +35,15 @@
   flex-grow: 1;
 }
 
+@include tablet {
+  .dialog {
+    width: 90%;
+  }
+}
+
 @include mobile {
   .dialog {
+    width: 100%;
     height: calc(100vh - 2 * var(--header-height));
     background-color: var(--dark-700);
     border: none;

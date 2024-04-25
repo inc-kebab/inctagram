@@ -8,6 +8,8 @@ import { SidebarLayout } from '@/widgets/layout'
 import { GeneralInformation } from '@/widgets/profile'
 import { useRouter } from 'next/router'
 
+import s from './index.module.scss'
+
 const valuesTabs = ['general', 'devices', 'management', 'payments']
 
 const ProfileSettings: Page = () => {
@@ -40,9 +42,9 @@ const ProfileSettings: Page = () => {
 
   return (
     <Tabs.Root defaultValue={tabs[0].value} onValueChange={handleChangeTabValue} value={activeTab}>
-      <Tabs.List>
+      <Tabs.List className={s.tabs}>
         {tabs.map(el => (
-          <Tabs.Item key={el.value} value={el.value}>
+          <Tabs.Item className={s.item} key={el.value} value={el.value}>
             {el.children}
           </Tabs.Item>
         ))}
