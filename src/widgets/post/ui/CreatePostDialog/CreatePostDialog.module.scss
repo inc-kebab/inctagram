@@ -16,6 +16,15 @@
 }
 
 @include mobile {
+  .dialog {
+    margin: 0;
+  }
+
+  .confirmActions {
+    flex-direction: column;
+    gap: 24px;
+  }
+
   .dialogMobile {
     max-width: unset;
     height: calc(100vh - (2 * var(--header-height)));
