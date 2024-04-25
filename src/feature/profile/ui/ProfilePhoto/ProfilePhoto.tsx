@@ -70,25 +70,23 @@ export const ProfilePhoto = ({
 
   return (
     <div className={clsx(s.container, className)}>
-      <div className={s.circle}>
-        <div className={s.avatarWpapper}>
-          <Avatar avatarUrl={avaUrlFromServer} circle wrapperSize={192} />
-          {avaUrlFromServer && (
-            <ConfirmDialog
-              confirmCallback={handleDeletePhoto}
-              content={t.pages.profile.deleteProfilePhoto}
-              disabled={disabledDelete}
-              onOpenChange={setOpenDelete}
-              open={openDelete}
-              title={t.pages.profile.deletePhoto}
-              trigger={
-                <Button className={s.deleteAvatar} variant="text">
-                  <Close className={s.closeIcon} viewBox="0 0 24 24" />
-                </Button>
-              }
-            />
-          )}
-        </div>
+      <div className={s.wrapper}>
+        <Avatar avatarUrl={avaUrlFromServer} circle className={s.avatar} wrapperSize={192} />
+        {avaUrlFromServer && (
+          <ConfirmDialog
+            confirmCallback={handleDeletePhoto}
+            content={t.pages.profile.deleteProfilePhoto}
+            disabled={disabledDelete}
+            onOpenChange={setOpenDelete}
+            open={openDelete}
+            title={t.pages.profile.deletePhoto}
+            trigger={
+              <Button className={s.deleteAvatar} variant="text">
+                <Close className={s.closeIcon} viewBox="0 0 24 24" />
+              </Button>
+            }
+          />
+        )}
       </div>
       <Dialog
         className={s.dialog}
@@ -96,7 +94,7 @@ export const ProfilePhoto = ({
         open={openAdd}
         title={t.pages.profile.addProfilePhoto}
         trigger={
-          <Button asComponent="button" variant="outline">
+          <Button asComponent="button" className={s.addBtn} variant="outline">
             {t.pages.profile.addProfilePhoto}
           </Button>
         }

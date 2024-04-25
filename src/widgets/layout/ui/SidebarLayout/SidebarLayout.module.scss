@@ -6,11 +6,12 @@
 
 .main {
   flex-grow: 1;
+  min-width: 0;
   padding: 36px var(--container-padding) 36px 24px;
 }
 
 @include tablet {
   .main {
-    padding: 36px 18px calc(var(--header-height) + 36px);
+    padding: 36px 18px 18px;
   }
 }

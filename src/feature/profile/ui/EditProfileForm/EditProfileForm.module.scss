@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .form {
   display: flex;
   flex-direction: column;
@@ -24,5 +26,11 @@
       content: '*';
       color: var(--danger-500);
     }
+  }
+}
+
+@include mobile {
+  .submit {
+    align-self: unset;
   }
 }

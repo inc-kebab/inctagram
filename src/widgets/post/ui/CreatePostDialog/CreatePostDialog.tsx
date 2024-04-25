@@ -86,7 +86,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         className={clsx(
           s.dialog,
           isBigSizeScreen && s.extendedDialog,
-          window !== 'upload' && s.dialogMobile
+          window === 'upload' ? s.dialogUpload : s.dialogMobile
         )}
         onOpenChange={handleChangeOpen}
         open={open}

@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .root {
   display: flex;
   gap: 40px;
@@ -7,4 +9,15 @@
 .photo {
   flex-shrink: 0;
   width: 240px;
+}
+
+@include tablet {
+  .root {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photo {
+    width: 100%;
+  }
 }
