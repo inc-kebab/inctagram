@@ -83,7 +83,11 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   return (
     <>
       <Dialog
-        className={clsx(s.dialog, isBigSizeScreen && s.extendedDialog)}
+        className={clsx(
+          s.dialog,
+          isBigSizeScreen && s.extendedDialog,
+          window !== 'upload' && s.dialogMobile
+        )}
         onOpenChange={handleChangeOpen}
         open={open}
         trigger={trigger}

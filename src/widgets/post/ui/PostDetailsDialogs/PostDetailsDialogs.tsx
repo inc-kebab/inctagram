@@ -79,6 +79,7 @@ export const PostDetailsDialogs = ({
     <>
       <Dialog
         className={s.dialog}
+        classNameOverlay={s.overlay}
         customTitleComponent={editMode ? <EditPostDialogTitle /> : undefined}
         onOpenChange={handleChangeOpen}
         open={open}

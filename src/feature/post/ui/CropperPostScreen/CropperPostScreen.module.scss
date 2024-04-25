@@ -1,5 +1,8 @@
+@import '@/app/styles/mixins';
+
 .container {
   display: flex;
+  gap: 10px;
   width: 100%;
   height: 502px;
 }
@@ -9,23 +12,98 @@
   height: 100%;
 }
 
-.image {
-  object-fit: contain;
+.sliderPreview {
+  display: none;
 }
 
 .actions {
   position: absolute;
-  bottom: 11px;
-  left: 11px;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
 
   display: flex;
   gap: 30px;
   align-items: center;
+
+  width: 100%;
+  padding: 10px;
+
+  & .right {
+    margin-left: auto;
+  }
+
+  & .rightMobile {
+    display: none;
+  }
 }
 
-.list {
-  position: absolute;
-  z-index: 1;
-  right: 11px;
-  bottom: 11px;
+@include mobile {
+  .container {
+    flex-direction: column;
+    height: calc(100vh - (2 * var(--header-height)) - 60px);
+  }
+
+  .sliderPreview {
+    display: block;
+    width: 100%;
+    max-width: 355px;
+    height: 150px;
+  }
+
+  .actions {
+    position: static;
+
+    & .right {
+      display: none;
+    }
+
+    & .rightLabel {
+      margin-left: auto;
+    }
+
+    & .rightMobile {
+      cursor: pointer;
+
+      display: block;
+
+      width: 52px;
+      height: 52px;
+      padding: 6px;
+
+      background-color: rgba(#171717, 0.7); // dark-500
+
+      transition: all 0.2s linear;
+
+      &:hover {
+        color: var(--primary-500);
+      }
+    }
+  }
+
+  .deleteBtn {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    right: 2px;
+
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+
+    background-color: rgba(#171717, 0.8);
+
+    & .icon {
+      width: 20px;
+      height: 20px;
+      color: var(--light-100);
+    }
+  }
+}
+
+@include mobile-small {
+  .container {
+    height: calc(100vh - (2 * var(--header-height)) - 50px);
+  }
 }

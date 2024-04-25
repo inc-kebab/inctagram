@@ -1,4 +1,5 @@
 export { MAX_SIZE_IMAGE_20MB } from './model/const'
+export { useAddPhoto } from './model/hooks/useAddPhoto'
 export { postsActions, postsReducer } from './model/slice/post-slice'
 export type { Image, Owner, PostItem } from './model/types/post.types'
 export type { CroppedImage, ImageObj, ImageURL } from './model/types/postSlice.types'

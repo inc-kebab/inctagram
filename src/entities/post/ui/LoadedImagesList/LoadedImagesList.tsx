@@ -14,13 +14,14 @@ import Image from 'next/image'
 import s from './LoadedImagesList.module.scss'
 
 import { MAX_SIZE_IMAGE_20MB } from '../../model/const'
+import { useAddPhoto } from '../../model/hooks/useAddPhoto'
 import { ImageObj } from '../../model/types/postSlice.types'
 
 type Props = {
   className?: string
   classNameTrigger?: string
   images: ImageObj[]
-  onDeleteImage: (imageObj: ImageObj) => void
+  onDeleteImage: (imageObj: ImageObj, idx: number) => void
   onSelectSlide?: (idx: number) => void
   onSetImage: (imageUrl: string) => void
 }
@@ -33,29 +34,7 @@ export const LoadedImagesList = ({
   onSelectSlide,
   onSetImage,
 }: Props) => {
-  const { t } = useTranslation()
-
-  const [error, setError] = useState('')
-
-  const handleSetPhoto = (file: File) => {
-    if (images.length > 9) {
-      setError(t.pages.post.maxPost)
-
-      return
-    }
-
-    if (!error) {
-      onSetImage(URL.createObjectURL(file))
-    }
-    setError('')
-  }
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error)
-      setError('')
-    }
-  }, [error])
+  const { handleSetPhoto, setError, t } = useAddPhoto(onSetImage, images.length > 9)
 
   return (
     <Dropdown.Menu
@@ -68,7 +47,7 @@ export const LoadedImagesList = ({
       trigger={
         <Button
           className={clsx(s.expandBtn, classNameTrigger)}
-          startIcon={<ImageIcon height={24} width={24} />}
+          startIcon={<ImageIcon className={s.icon} />}
           variant="text"
         />
       }
@@ -82,8 +61,8 @@ export const LoadedImagesList = ({
               <div className={s.image} key={imageURL + i}>
                 <Button
                   className={s.deleteBtn}
-                  onClick={() => onDeleteImage(image)}
-                  startIcon={<Close color="var(--light-100)" height={13} width={13} />}
+                  onClick={() => onDeleteImage(image, i)}
+                  startIcon={<Close className={s.icon} />}
                   variant="text"
                 />
                 <Image

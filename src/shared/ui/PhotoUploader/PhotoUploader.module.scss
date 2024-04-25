@@ -34,7 +34,6 @@
 }
 
 .button {
-  width: 100%;
   max-width: 300px;
 }
 
@@ -48,6 +47,6 @@
   }
 
   .svgWrapper {
-    margin-bottom: 36px;
+    display: none;
   }
 }

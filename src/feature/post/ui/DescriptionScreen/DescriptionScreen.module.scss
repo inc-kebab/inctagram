@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .container {
   display: flex;
   width: 100%;
@@ -13,4 +15,37 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+
+@include mobile {
+  .container {
+    flex-direction: column;
+    height: calc(100vh - (2 * var(--header-height)) - 60px);
+  }
+
+  .slider {
+    width: 100%;
+  }
+
+  .description {
+    width: 100%;
+  }
+
+  .submit {
+    position: absolute;
+    top: 12px;
+    right: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    color: var(--primary-500);
+
+    background-color: transparent;
+
+    &:hover {
+      color: var(--primary-100);
+      background-color: transparent;
+    }
+  }
 }
