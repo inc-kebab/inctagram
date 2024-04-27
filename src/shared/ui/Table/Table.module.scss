@@ -1,0 +1,29 @@
+.root {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--dark-500);
+}
+
+.row {
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--dark-500);
+  }
+}
+
+.title {
+  padding: 0.75rem 1.5rem;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-m);
+  text-align: left;
+
+  background-color: var(--dark-500);
+}
+
+.cell {
+  padding: 0.75rem 1.5rem;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
