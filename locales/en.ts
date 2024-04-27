@@ -14,6 +14,10 @@ export const en = {
     backToSignUp: 'Back to Sign Up',
     createNewPassword: 'Create new password',
     discard: 'Discard',
+    done: 'Done',
+    favorites: 'Favorites',
+    logOut: 'Log out',
+    next: 'Next',
     no: 'No',
     profileSettings: 'Profile settings',
     publish: 'Publish',
@@ -28,6 +32,7 @@ export const en = {
     signIn: 'Sign In',
     signUp: 'Sign Up',
     simple_save: 'Save',
+    statistics: 'Statistics',
     yes: 'Yes',
   },
   dates: {
@@ -60,8 +65,10 @@ export const en = {
     firstName: 'First Name',
     lastName: 'Last Name',
     newPassword: 'New Password',
+    onPage: 'on page',
     password: 'Password',
     reCaptcha: 'I’m not a robot',
+    show: 'Show',
     successUpdateProfile: 'Your settings are saved!',
     userName: 'Username',
     warningUpdateProfile: 'High load. It may take up to several minutes to replace the image.',
@@ -122,6 +129,7 @@ export const en = {
     },
     post: {
       addPhoto: 'Add Photo',
+      cancel: 'Cancel',
       confirmCloseCreateModal: {
         message:
           'Do you really want to close the creation of a publication? If you close everything will be deleted',
@@ -143,10 +151,12 @@ export const en = {
       filters: 'Filters',
       likes: 'Likes',
       maxPost: 'A maximum of 10 images can be uploaded',
-      next: 'Next',
+      newPublication: 'New Publication',
       publication: 'Publication',
       publish: 'Publish',
+      save: 'Save',
       successCreate: 'Success create post!',
+      veiwComments: 'View all comments',
     },
     privacy: {
       changes:

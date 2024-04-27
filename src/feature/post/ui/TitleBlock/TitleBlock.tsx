@@ -3,17 +3,17 @@ import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
 
-import s from './Title.module.scss'
+import s from './TitleBlock.module.scss'
 
 interface Props {
-  onBackClick: () => void
-  onNextClick: () => void
+  onBackClick?: () => void
+  onNextClick?: () => void
   showLeftButton?: boolean
   showRightButton?: boolean
   title: string
 }
 
-export const Title = ({
+export const TitleBlock = ({
   onBackClick,
   onNextClick,
   showLeftButton,
@@ -37,7 +37,7 @@ export const Title = ({
       </Typography>
       {showRightButton && (
         <Button className={s.right} onClick={onNextClick} variant="text">
-          {t.pages.post.next}
+          {t.button.next}
         </Button>
       )}
     </div>

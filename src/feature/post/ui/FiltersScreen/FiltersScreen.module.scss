@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .container {
   display: flex;
   width: 100%;
@@ -16,31 +18,23 @@
   width: 50%;
 }
 
-.name {
-  line-height: var(--line-height-lg);
-}
-
-.item {
-  object-fit: cover;
-}
-
-.filter {
-  cursor: pointer;
-
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-
-  transition: all 0.2s linear;
-
-  &:hover {
-    color: var(--primary-500);
+@include mobile {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - (2 * var(--header-height)) - 60px);
   }
 
-  &.active {
-    font-weight: var(--font-weight-semibold);
-    color: var(--primary-500);
+  .slider {
+    width: 100%;
+  }
+
+  .filtersContainer {
+    overflow: scroll hidden;
+    display: flex;
+    gap: 8px;
+
+    width: 100%;
+    padding-bottom: 18px;
   }
 }

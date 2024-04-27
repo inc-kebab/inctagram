@@ -29,9 +29,9 @@ export const MainProfileContent = () => {
   const {
     currentPost,
     handleChangeCurrentPost,
-    openPostDetailsModal,
+    openPostDetails,
     setCurrentPost,
-    setOpenPostDetailsModal,
+    setOpenPostDetails,
     triggerRef,
   } = useProfile({ cursor: posts?.cursor, hasMore: posts?.hasMore, router, setCurrentCursor })
 
@@ -62,10 +62,10 @@ export const MainProfileContent = () => {
       {isFetching && <PostsListSkeleton />}
       <PostDetailsDialogs
         currentPost={currentPost}
-        isOwner
-        openPostDetailsModal={openPostDetailsModal}
+        isAuth
+        onOpenChange={setOpenPostDetails}
+        open={openPostDetails}
         setCurrentPost={setCurrentPost}
-        setOpenPostDetailsModal={setOpenPostDetailsModal}
       />
     </SidebarLayout>
   )

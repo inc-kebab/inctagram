@@ -1,0 +1,57 @@
+@import '@/app/styles/mixins';
+
+.root {
+  display: none;
+}
+
+.menu {
+  display: none;
+}
+
+.item {
+  padding: 0;
+}
+
+@include mobile {
+  .root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 24px;
+    padding: 0;
+
+    color: var(--light-100);
+  }
+
+  .menu {
+    display: block;
+  }
+
+  .option {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .link {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .logout {
+    width: 100%;
+    padding: 0.75rem;
+    outline: none;
+    transition: all 0.2s linear;
+
+    &:hover {
+      color: var(--light-100);
+      background-color: var(--dark-100);
+    }
+  }
+}

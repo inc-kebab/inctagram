@@ -43,11 +43,10 @@ export const ZoomIn = ({ aspect, imageURL, zoom }: Props) => {
       portal={false}
       side="top"
       sideOffset={2}
-      style={{ width: '150px' }}
       trigger={
         <Button
           className={s.expandBtn}
-          startIcon={<Maximize height={24} width={24} />}
+          startIcon={<Maximize className={s.icon} />}
           variant="text"
         />
       }

@@ -1,0 +1,49 @@
+@import '@/app/styles/mixins';
+
+.header {
+  position: relative;
+  margin: 0;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--dark-100);
+}
+
+.closeIcon {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+
+  width: 24px;
+  height: 24px;
+
+  color: var(--light-100);
+}
+
+.closeBtn {
+  display: none;
+}
+
+@include mobile {
+  .header {
+    border: none;
+  }
+
+  .edit {
+    text-align: center !important;
+  }
+
+  .closeIcon {
+    display: none;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+
+    display: block;
+  }
+}

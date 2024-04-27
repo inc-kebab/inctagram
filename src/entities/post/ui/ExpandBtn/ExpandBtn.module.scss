@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .viewport {
   background-color: rgba(#171717, 0.7); // dark-500
   border: none;
@@ -7,6 +9,11 @@
   padding: 6px;
   color: var(--light-100);
   background-color: rgba(#171717, 0.7); // dark-500
+
+  & .icon {
+    width: 24px;
+    height: 24px;
+  }
 
   &[data-state='open'] {
     color: var(--primary-500);
@@ -20,4 +27,26 @@
 
 .activeItem {
   color: var(--light-100);
+}
+
+@include mobile {
+  .viewport {
+    width: 100vw;
+    background-color: transparent;
+  }
+
+  .expandBtn {
+    background-color: var(--dark-500);
+
+    & .icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .item {
+    margin: 0 10px;
+    font-size: var(--font-size-xl);
+    background-color: var(--dark-500);
+  }
 }

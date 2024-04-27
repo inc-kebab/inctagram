@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { accessCookieParams } from '@/shared/const/cookie'
 import { AppRoutes } from '@/shared/const/routes'
 import { Loader } from '@/shared/ui/Loader'
 import { setCookie } from 'cookies-next'
@@ -21,7 +22,7 @@ const RedirectProvider = () => {
         userId = params?.get('userId')
 
         if (token) {
-          setCookie('accessToken', token, { maxAge: 30 * 60 }) // 30min
+          setCookie('accessToken', token, accessCookieParams)
 
           const message = JSON.stringify({ action: 'success_sign-in' })
 

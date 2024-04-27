@@ -4,7 +4,11 @@ import { Header } from './Header'
 
 const meta = {
   argTypes: {
-    isUnauthorized: {
+    disabled: {
+      control: false,
+      description: 'Flag for disable buttons',
+    },
+    isAuth: {
       control: 'boolean',
       description: 'Flag for show/hide sign-in/sign-up links',
     },
@@ -27,9 +31,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Auth: Story = {
-  args: {},
+  args: { isAuth: true },
 }
 
 export const NoAuth: Story = {
-  args: { isUnauthorized: true },
+  args: { isAuth: false },
 }

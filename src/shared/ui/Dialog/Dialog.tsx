@@ -11,19 +11,21 @@ import { DialogClose } from './DialogClose'
 
 export type Props = {
   className?: string
+  classNameOverlay?: string
   customTitleComponent?: ReactNode
   title?: string
   trigger?: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixDialog.Root>
 
 export const Dialog = forwardRef<ElementRef<typeof RadixDialog.Content>, Props>((props, ref) => {
-  const { children, className, customTitleComponent, title, trigger, ...rest } = props
+  const { children, className, classNameOverlay, customTitleComponent, title, trigger, ...rest } =
+    props
 
   return (
     <RadixDialog.Root {...rest}>
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
       <RadixDialog.Portal>
-        <RadixDialog.Overlay className={s.overlay} />
+        <RadixDialog.Overlay className={clsx(s.overlay, classNameOverlay)} />
         <RadixDialog.Content className={clsx(s.content, className)} ref={ref}>
           {customTitleComponent ||
             (title && (

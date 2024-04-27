@@ -1,17 +1,10 @@
+@import '@/app/styles/mixins';
+
 .container {
   display: flex;
   flex-direction: column;
+  gap: 24px;
   align-items: center;
-}
-
-.circle {
-  position: relative;
-
-  width: 192px;
-  height: 192px;
-  margin-bottom: 24px;
-
-  background: inherit;
 }
 
 .image {
@@ -19,11 +12,9 @@
   height: 42px;
 }
 
-.avatarWrapper {
+.wrapper {
   position: relative;
-  z-index: 10;
 
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,8 +22,7 @@
   width: 192px;
   height: 192px;
 
-  background: inherit;
-  background: var(--dark-500);
+  background-color: var(--dark-500);
   border-radius: 50%;
 }
 
@@ -66,5 +56,36 @@
 .dialog {
   width: 100%;
   max-width: 492px;
-  margin: 0 15px;
+}
+
+@include tablet {
+  .wrapper {
+    width: 250px;
+    height: 250px;
+  }
+
+  .avatar {
+    width: 250px !important;
+    height: 250px !important;
+  }
+
+  .deleteAvatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .closeIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@include mobile {
+  .addBtn {
+    width: 100%;
+  }
+
+  .dialog {
+    width: 95%;
+  }
 }

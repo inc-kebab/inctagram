@@ -20,6 +20,7 @@ export enum AppRoutes {
   MAIN = '/',
   MESSENGER = '/messenger',
   PROFILE = '/profile',
+  PROFILE_SETTINGS = '/settings',
   PUBLIC_PROFILE = '/public-profile',
   SEARCH = '/search',
   STATISTICS = '/statistics',

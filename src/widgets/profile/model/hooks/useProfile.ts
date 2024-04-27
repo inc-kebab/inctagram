@@ -18,11 +18,11 @@ export const useProfile = ({ cursor, hasMore, router, setCurrentCursor }: Params
 
   const [currentPost, setCurrentPost] = useState<Nullable<PostItem>>(null)
 
-  const [openPostDetailsModal, setOpenPostDetailsModal] = useState(false)
+  const [openPostDetails, setOpenPostDetails] = useState(false)
 
   const handleChangeCurrentPost = (post: PostItem) => {
     setCurrentPost(post)
-    setOpenPostDetailsModal(true)
+    setOpenPostDetails(true)
     void replace({ query: { id: query.id, post: post.id } }, undefined, { shallow: true })
   }
 
@@ -35,9 +35,9 @@ export const useProfile = ({ cursor, hasMore, router, setCurrentCursor }: Params
   return {
     currentPost,
     handleChangeCurrentPost,
-    openPostDetailsModal,
+    openPostDetails,
     setCurrentPost,
-    setOpenPostDetailsModal,
+    setOpenPostDetails,
     triggerRef,
   }
 }

@@ -1,5 +1,6 @@
 .post {
   width: 234px;
+  margin: 0 auto;
 
   & .banner {
     padding: 12px 0;
@@ -23,10 +24,12 @@
 }
 
 .description {
+  position: relative;
+
   overflow: hidden;
   display: -webkit-box;
 
-  height: 60px;
+  height: 58px;
 
   text-overflow: ellipsis;
   word-break: break-all;
@@ -38,9 +41,9 @@
 }
 
 .descriptionMax {
-  height: 180px;
+  height: 178px;
 
-  -webkit-line-clamp: 8;
+  -webkit-line-clamp: 9;
 }
 
 .toggleText {

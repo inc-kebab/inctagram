@@ -30,8 +30,7 @@
 
 .avatar {
   grid-area: avatar;
-  width: 200px;
-  height: 200px;
+  object-fit: cover;
 }
 
 .name {
@@ -96,8 +95,8 @@
   }
 
   .avatar {
-    width: 72px;
-    height: 72px;
+    width: 72px !important;
+    height: 72px !important;
   }
 
   .name {

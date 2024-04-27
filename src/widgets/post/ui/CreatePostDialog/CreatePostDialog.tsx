@@ -1,19 +1,20 @@
 import { ReactNode, useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import { MAX_SIZE_IMAGE_20MB, postsActions } from '@/entities/post'
-import { CropperPostScreen, CurrentWindow, DescriptionScreen, FiltersScreen } from '@/feature/post'
-import { getModifiedImage, photoSchema } from '@/shared/helpers'
-import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
+import { postsActions } from '@/entities/post'
+import {
+  CropperPostScreen,
+  CurrentWindow,
+  DescriptionScreen,
+  FiltersScreen,
+  UploadImagesScreen,
+} from '@/feature/post'
+import { useAppDispatch, useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
-import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 import clsx from 'clsx'
 
 import s from './CreatePostDialog.module.scss'
-
-import { Title } from './Title/Title'
 
 type Props = {
   trigger: ReactNode
@@ -22,103 +23,20 @@ type Props = {
 export const CreatePostDialog = ({ trigger }: Props) => {
   const { t } = useTranslation()
 
+  const dispatch = useAppDispatch()
+
   const [open, setOpen] = useState(false)
   const [openConfirm, setOpenConfirm] = useState(false)
 
   const [isRequest, setIsRequest] = useState(false)
 
-  const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('upload')
+  const [window, setWindow] = useState<CurrentWindow>('upload')
 
-  const images = useAppSelector(state => state.posts.images)
-  const croppedImages = useAppSelector(state => state.posts.croppedImages)
-  const imagesWithFilters = useAppSelector(state => state.posts.imagesWithFilters)
-
-  const dispatch = useAppDispatch()
-
-  const titles: Record<CurrentWindow, string> = {
-    description: t.pages.post.publication,
-    expand: t.pages.post.cropping,
-    filter: t.pages.post.filters,
-    upload: t.pages.post.addPhoto,
-  }
-
-  const isBigSizeScreen = currentWindow === 'filter' || currentWindow === 'description'
-
-  const isShowUploadScreen = currentWindow === 'upload' && images.length === 0
-
-  const handleSetPhoto = (file: File) => {
-    dispatch(postsActions.addImage(URL.createObjectURL(file)))
-    setCurrentWindow('expand')
-  }
-
-  const handleSetCroppedImages = () => {
-    const promises = images.map(el => {
-      const crop = el.aspect === 0 ? null : el.croppedAreaPixels
-
-      return getModifiedImage({ crop, imageSrc: el.imageURL, mode: 'url', t }) as Promise<string>
-    })
-
-    Promise.all(promises)
-      .then(images => {
-        dispatch(postsActions.setCroppedImages(images))
-        setCurrentWindow('filter')
-      })
-      .catch(e => toast.error(e.message))
-  }
-
-  const handleSetImagesWithFilters = () => {
-    const promises = croppedImages.map(el => {
-      return getModifiedImage({
-        filter: el.filter,
-        imageSrc: el.imageURL,
-        mode: 'filters',
-        t,
-      }) as Promise<string>
-    })
-
-    Promise.all(promises)
-      .then(images => {
-        dispatch(postsActions.setImagesWithFilters(images))
-        setCurrentWindow('description')
-      })
-      .catch(e => toast.error(e.message))
-  }
-
-  const handleClickNext = () => {
-    if (currentWindow === 'expand') {
-      handleSetCroppedImages()
-    } else if (currentWindow === 'filter') {
-      handleSetImagesWithFilters()
-    }
-  }
-
-  const handleClickBack = () => {
-    switch (true) {
-      case currentWindow === 'expand': {
-        setCurrentWindow('upload')
-        dispatch(postsActions.resetImages())
-        break
-      }
-      case currentWindow === 'description': {
-        setCurrentWindow('filter')
-        dispatch(postsActions.resetImagesWithFilters())
-        break
-      }
-      case currentWindow === 'filter': {
-        setCurrentWindow('expand')
-        dispatch(postsActions.resetCroppedImages())
-        break
-      }
-      default: {
-        dispatch(postsActions.resetImages())
-        break
-      }
-    }
-  }
+  const isBigSizeScreen = window === 'filter' || window === 'description'
 
   const handleChangeOpen = (open: boolean) => {
     if (!open) {
-      if (currentWindow === 'upload') {
+      if (window === 'upload') {
         setOpen(false)
       } else if (!isRequest) {
         setOpenConfirm(true)
@@ -128,15 +46,11 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     }
   }
 
-  const handleCloseModal = () => {
-    setOpen(false)
-    setCurrentWindow('upload')
-    dispatch(postsActions.resetAllImages())
-  }
-
   const handleCloseModals = () => {
     setOpenConfirm(false)
-    handleCloseModal()
+    setOpen(false)
+    setWindow('upload')
+    dispatch(postsActions.resetAllImages())
   }
 
   const handleCloseConfirmModal = () => {
@@ -145,26 +59,21 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
-      case images.length === 0 && currentWindow === 'upload': {
-        return (
-          <PhotoUploader
-            setPhoto={handleSetPhoto}
-            zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)}
-          />
-        )
+      case currentWindow === 'upload': {
+        return <UploadImagesScreen onChangeWindow={setWindow} />
       }
       case currentWindow === 'expand': {
-        return <CropperPostScreen images={images} onChangeCurrentWindow={setCurrentWindow} />
+        return <CropperPostScreen onChangeWindow={setWindow} />
       }
       case currentWindow === 'filter': {
-        return <FiltersScreen croppedImages={croppedImages} />
+        return <FiltersScreen onChangeWindow={setWindow} />
       }
       case currentWindow === 'description': {
         return (
           <DescriptionScreen
-            images={imagesWithFilters}
             onChangeStatus={setIsRequest}
-            onCloseModal={handleCloseModal}
+            onChangeWindow={setWindow}
+            onCloseModal={handleCloseModals}
           />
         )
       }
@@ -174,21 +83,16 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   return (
     <>
       <Dialog
-        className={clsx(s.dialog, isBigSizeScreen && s.extendedDialog)}
-        customTitleComponent={
-          <Title
-            onBackClick={handleClickBack}
-            onNextClick={handleClickNext}
-            showLeftButton={currentWindow !== 'upload'}
-            showRightButton={currentWindow !== 'description' && !isShowUploadScreen}
-            title={titles[currentWindow]}
-          />
-        }
+        className={clsx(
+          s.dialog,
+          isBigSizeScreen && s.extendedDialog,
+          window === 'upload' ? s.dialogUpload : s.dialogMobile
+        )}
         onOpenChange={handleChangeOpen}
         open={open}
         trigger={trigger}
       >
-        {renderWindow(currentWindow)}
+        {renderWindow(window)}
       </Dialog>
       <ConfirmDialog
         content={t.pages.post.confirmCloseCreateModal.message}

@@ -12,6 +12,10 @@ export const ru: LocaleType = {
     backToSignUp: 'Вернуться к регистрации',
     createNewPassword: 'Создать новый пароль',
     discard: 'Отменить',
+    done: 'Готово',
+    favorites: 'Избранное',
+    logOut: 'Выйти',
+    next: 'Далее',
     no: 'Нет',
     profileSettings: 'Настройки профиля',
     publish: 'Опубликовать',
@@ -26,6 +30,7 @@ export const ru: LocaleType = {
     signIn: 'Войти',
     signUp: 'Зарегистрироваться',
     simple_save: 'Сохранить',
+    statistics: 'Статистика',
     yes: 'Да',
   },
   dates: {
@@ -58,8 +63,10 @@ export const ru: LocaleType = {
     firstName: 'Имя',
     lastName: 'Фамилия',
     newPassword: 'Новый пароль',
+    onPage: 'на странице',
     password: 'Пароль',
     reCaptcha: 'Я не робот',
+    show: 'Показать',
     successUpdateProfile: 'Ваши настройки сохранены!',
     userName: 'Имя пользователя',
     warningUpdateProfile: 'Высокая нагрузка. Замена изображения может занять до нескольких минут.',
@@ -121,6 +128,7 @@ export const ru: LocaleType = {
     },
     post: {
       addPhoto: 'Добавить Фото',
+      cancel: 'Отмена',
       confirmCloseCreateModal: {
         message:
           'Вы действительно хотите закрыть создание публикации? Если вы закроете ее, все будет удалено',
@@ -142,10 +150,12 @@ export const ru: LocaleType = {
       filters: 'Фильтры',
       likes: 'Нравится',
       maxPost: 'Может быть загружено не более 10 изображений',
-      next: 'Далее',
+      newPublication: 'Новый Пост',
       publication: 'Публикация',
       publish: 'Опубликовать',
+      save: 'Сохранить',
       successCreate: 'Пост успешно создан!',
+      veiwComments: 'Посмотреть комментарии',
     },
     privacy: {
       changes:
