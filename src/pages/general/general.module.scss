@@ -1,0 +1,38 @@
+.block {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.radioBlock {
+  margin-bottom: 42px;
+  padding: 12px 24px;
+}
+
+.icon {
+  cursor: pointer;
+  border: 1px solid var(--light-900);
+  border-radius: 8px;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 2px 2px rgb(25 225 215 / 50%);
+    transition: all 0.2s;
+  }
+}
+
+.title {
+  margin-bottom: 6px;
+}
+
+.between {
+  padding: 0 54px;
+}
+
+.payment {
+  display: flex;
+  place-items: center;
+  justify-content: end;
+  margin-top: -18px;
+}
