@@ -122,4 +122,8 @@
   gap: 12px;
   align-items: center;
   line-height: var(--line-height-m);
+
+  &.small {
+    line-height: unset;
+  }
 }

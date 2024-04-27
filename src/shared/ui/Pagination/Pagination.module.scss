@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin: 5px;
+}
+
+.pagination {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  .item {
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 8px;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+
+    transition: all 0.2s linear;
+
+    .right {
+      transform: rotate(180deg);
+    }
+
+    &.dots:hover {
+      cursor: default;
+      color: var(--light-100);
+      background-color: transparent;
+    }
+
+    &:hover {
+      background-color: var(--dark-500);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary-900);
+    }
+
+    &.selected {
+      cursor: pointer;
+      color: var(--dark-900);
+      background-color: var(--light-100);
+    }
+
+    &.disabled {
+      pointer-events: none;
+      color: var(--dark-300);
+
+      &:hover {
+        cursor: default;
+        background-color: transparent;
+      }
+
+      .left,
+      .right {
+        cursor: default;
+        color: var(--dark-100);
+      }
+    }
+  }
+}
+
+.selectContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  & .select {
+    width: 3.2rem;
+  }
+}
+
+@media screen and (width <= 640px) {
+  .container {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+
+  .pagination {
+    gap: 3px;
+  }
+}

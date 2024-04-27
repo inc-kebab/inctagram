@@ -14,7 +14,7 @@ export interface Options {
 
 type Ref = ElementRef<typeof SelectRadix.Trigger>
 
-type SelectProps = {
+export type SelectProps = {
   className?: string
   classNames?: { icon?: string; trigger?: string; viewport?: string }
   label?: string
@@ -65,7 +65,7 @@ export const Select = forwardRef<Ref, SelectProps>(
           {options.map(option => (
             <SelectRadix.Item className={cNames.item} key={option.value} value={option.value}>
               <SelectRadix.ItemText>
-                <span className={s.text}>
+                <span className={clsx(s.text, pagination && s.small)}>
                   {option.icon}
                   {option.name}
                 </span>
