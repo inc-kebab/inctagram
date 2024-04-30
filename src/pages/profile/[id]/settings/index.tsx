@@ -6,6 +6,7 @@ import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
 import { SidebarLayout } from '@/widgets/layout'
 import { GeneralInformation } from '@/widgets/profile'
+import { AccountManagement } from '@/widgets/profile/ui/AccountManagement/AccountManagement'
 import { useRouter } from 'next/router'
 
 import s from './index.module.scss'
@@ -56,7 +57,7 @@ const ProfileSettings: Page = () => {
         Devices
       </Tabs.Content>
       <Tabs.Content style={{ padding: 20 }} value={tabs[2].value}>
-        Account management
+        <AccountManagement />
       </Tabs.Content>
       <Tabs.Content style={{ padding: 20 }} value={tabs[3].value}>
         My payments
