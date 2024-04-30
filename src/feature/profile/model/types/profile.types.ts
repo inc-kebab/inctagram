@@ -57,6 +57,6 @@ export type GetMyPaymentsResponse = {
 }
 
 export type PurchaseParams = {
-  paymentSystem: 'Paypal' | 'Stripe' | 'none'
+  paymentSystem: 'Paypal' | 'Stripe'
   productPriceId: string
 }
