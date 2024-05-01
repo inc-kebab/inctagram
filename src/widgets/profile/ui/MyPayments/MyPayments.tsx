@@ -2,13 +2,11 @@ import { GetMyPaymentsResponse } from '@/feature/profile/model/types/profile.typ
 import { useTranslation } from '@/shared/hooks'
 import { Pagination } from '@/shared/ui/Pagination'
 import { Table } from '@/shared/ui/Table'
-import { Typography } from '@/shared/ui/Typography'
-import { MobileMyPayments } from '@/widgets/profile/ui/MyPayments/MobileMyPayments/MobileMyPayments'
-import { MyPaymentsList } from '@/widgets/profile/ui/MyPayments/MyPaymentsList'
+import { format } from 'date-fns'
 
 import s from './MyPayments.module.scss'
 
-const dataList: GetMyPaymentsResponse[] = [
+const myPayments: GetMyPaymentsResponse[] = [
   {
     dateOfPayments: '2024-04-26T16:32:04.911Z',
     endDateOfSubscription: '2024-04-27T16:32:04.615Z',
@@ -35,38 +33,45 @@ export const MyPayments = () => {
   return (
     <>
       <Table.Root className={s.table}>
-        <Table.Head>
+        <Table.Head className={s.tableHead}>
           <Table.Row>
-            <Table.TitleCell>
-              <Typography asComponent="h3" variant="h3">
-                {t.pages.myPayments.dateOfPayment}
-              </Typography>
-            </Table.TitleCell>
-            <Table.TitleCell>
-              <Typography asComponent="h3" variant="h3">
-                {t.pages.myPayments.endDateOfSubscription}
-              </Typography>
-            </Table.TitleCell>
-            <Table.TitleCell>
-              <Typography asComponent="h3" variant="h3">
-                {t.pages.myPayments.price}
-              </Typography>
-            </Table.TitleCell>
-            <Table.TitleCell>
-              <Typography asComponent="h3" variant="h3">
-                {t.pages.myPayments.subscriptionType}
-              </Typography>
-            </Table.TitleCell>
-            <Table.TitleCell>
-              <Typography asComponent="h3" variant="h3">
-                {t.pages.myPayments.paymentType}
-              </Typography>
-            </Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.dateOfPayment}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.endDateOfSubscription}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.price}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.subscriptionType}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.paymentType}</Table.TitleCell>
           </Table.Row>
         </Table.Head>
-        <MyPaymentsList myPayments={dataList} />
+        <Table.Body className={s.body}>
+          {myPayments.map(el => {
+            const dateOfPayments = format(new Date(el.dateOfPayments), 'dd.MM.yyyy')
+            const endDateOfSubscription = format(new Date(el.endDateOfSubscription), 'dd.MM.yyyy')
+
+            return (
+              <Table.Row className={s.row} key={el.id}>
+                <Table.Cell className={s.cell} data-label={t.pages.myPayments.dateOfPayment}>
+                  {dateOfPayments}
+                </Table.Cell>
+                <Table.Cell
+                  className={s.cell}
+                  data-label={t.pages.myPayments.endDateOfSubscription}
+                >
+                  {endDateOfSubscription}
+                </Table.Cell>
+                <Table.Cell className={s.cell} data-label={t.pages.myPayments.price}>
+                  ${el.price}
+                </Table.Cell>
+                <Table.Cell className={s.cell} data-label={t.pages.myPayments.subscriptionType}>
+                  {el.subscriptionType}
+                </Table.Cell>
+                <Table.Cell className={s.cell} data-label={t.pages.myPayments.paymentType}>
+                  {el.paymentType}
+                </Table.Cell>
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
       </Table.Root>
-      <MobileMyPayments className={s.mobileTable} myPayments={dataList} />
       <Pagination
         currentPage={1}
         onChangePage={() => {}}

@@ -5,16 +5,32 @@
   margin-bottom: 36px;
 }
 
-.mobileTable {
-  display: none;
-}
-
 @include tablet {
-  .table {
+  .tableHead {
     display: none;
   }
 
-  .mobileTable {
+  .body {
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .body .row {
+    display: block;
+    padding: 19px 12px 17px;
+    background-color: var(--dark-500);
+    border: 1px solid var(--dark-300);
+  }
+
+  .cell::before {
+    content: attr(data-label);
+    font-weight: 400;
+  }
+
+  .cell {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
   }
 }
