@@ -5,7 +5,7 @@ import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
 import { SidebarLayout } from '@/widgets/layout'
-import { GeneralInformation, MyPayments } from '@/widgets/profile'
+import { AccountManagement, GeneralInformation, MyPayments } from '@/widgets/profile'
 import { useRouter } from 'next/router'
 
 import s from './index.module.scss'
@@ -55,8 +55,8 @@ const ProfileSettings: Page = () => {
       <Tabs.Content style={{ padding: 20 }} value={tabs[1].value}>
         Devices
       </Tabs.Content>
-      <Tabs.Content style={{ padding: 20 }} value={tabs[2].value}>
-        Account management
+      <Tabs.Content value={tabs[2].value}>
+        <AccountManagement />
       </Tabs.Content>
       <Tabs.Content value={tabs[3].value}>
         <MyPayments />
