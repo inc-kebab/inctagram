@@ -1,0 +1,67 @@
+@import '@/app/styles/mixins';
+
+.root {
+  padding: 30px 0 12px;
+}
+
+.current {
+  margin-bottom: 13px;
+}
+
+.table {
+  display: grid;
+  grid-template: 1fr 1fr/1fr 1fr;
+  gap: 12px 48px;
+  max-width: min-content;
+}
+
+.titleCell {
+  color: var(--light-900);
+  white-space: nowrap;
+}
+
+.dataCell {
+  font-weight: var(--font-weight-semibold);
+}
+
+.type {
+  margin-bottom: 30px;
+}
+
+.sub {
+  margin-bottom: 24px;
+}
+
+.payment {
+  display: flex;
+  gap: 54px;
+  align-items: center;
+  justify-content: end;
+
+  & .icon {
+    cursor: pointer;
+
+    background-color: var(--dark-500);
+    border: 1px solid var(--dark-300);
+    border-radius: 8px;
+
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}
+
+@include mobile {
+  .payment {
+    gap: 24px;
+    justify-content: center;
+  }
+}
+
+@include mobile-small {
+  .payment {
+    justify-content: space-between;
+  }
+}
