@@ -1,13 +1,18 @@
+import { baseApi } from '@/shared/api'
+
 import {
-  GetListOfSubscriptionsResponse,
+  CurrentSubscription,
   GetMyPaymentsResponse,
   PurchaseParams,
-} from '@/feature/profile/model/types/profile.types'
-import { baseApi } from '@/shared/api'
+  Subscription,
+} from '../model/types/api.types'
 
 const accountAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
-    getListOfSubscriptions: builder.query<GetListOfSubscriptionsResponse[], void>({
+    getCurrentSubscription: builder.query<CurrentSubscription, void>({
+      query: () => ({ url: '/subscription/current' }),
+    }),
+    getListOfSubscriptions: builder.query<Subscription[], void>({
       query: () => ({ url: '/subscription/products' }),
     }),
     getMyPayments: builder.query<GetMyPaymentsResponse[], void>({
@@ -20,6 +25,7 @@ const accountAPI = baseApi.injectEndpoints({
 })
 
 export const {
+  useGetCurrentSubscriptionQuery,
   useGetListOfSubscriptionsQuery,
   useGetMyPaymentsQuery,
   usePurchaseSubscriptionMutation,

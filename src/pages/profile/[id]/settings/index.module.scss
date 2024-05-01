@@ -1,3 +1,9 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .tabs {
   scrollbar-width: none;
   overflow-x: scroll;
@@ -12,4 +18,8 @@
   & .item {
     flex-shrink: 0;
   }
+}
+
+.content {
+  flex-grow: 1;
 }

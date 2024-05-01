@@ -41,7 +41,12 @@ const ProfileSettings: Page = () => {
   }, [push, query.tab, query.id])
 
   return (
-    <Tabs.Root defaultValue={tabs[0].value} onValueChange={handleChangeTabValue} value={activeTab}>
+    <Tabs.Root
+      className={s.root}
+      defaultValue={tabs[0].value}
+      onValueChange={handleChangeTabValue}
+      value={activeTab}
+    >
       <Tabs.List className={s.tabs}>
         {tabs.map(el => (
           <Tabs.Item className={s.item} key={el.value} value={el.value}>
@@ -55,7 +60,7 @@ const ProfileSettings: Page = () => {
       <Tabs.Content style={{ padding: 20 }} value={tabs[1].value}>
         Devices
       </Tabs.Content>
-      <Tabs.Content value={tabs[2].value}>
+      <Tabs.Content className={s.content} value={tabs[2].value}>
         <AccountManagement />
       </Tabs.Content>
       <Tabs.Content style={{ padding: 20 }} value={tabs[3].value}>

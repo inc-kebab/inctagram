@@ -4,10 +4,12 @@ import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
+import clsx from 'clsx'
 
 import s from './ConfirmDialog.module.scss'
 
 interface Props {
+  className?: string
   confirmCallback?: () => void
   content: ReactNode
   customActions?: ReactNode
@@ -19,6 +21,7 @@ interface Props {
 }
 
 export const ConfirmDialog = ({
+  className,
   confirmCallback,
   content,
   customActions,
@@ -32,7 +35,7 @@ export const ConfirmDialog = ({
 
   return (
     <Dialog
-      className={s.root}
+      className={clsx(s.root, className)}
       onOpenChange={onOpenChange}
       open={open}
       title={title || t.label.confirmAction}

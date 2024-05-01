@@ -35,28 +35,3 @@ export interface GetTotalUsersResponse {
   lastUserId: number
   totalUsersCount: number
 }
-
-export type GetListOfSubscriptionsResponse = {
-  id: number
-  interval: string
-  paypalPlanId: string
-  period: number
-  price: number
-  productPriceId: string
-  subscriptionPriceId: string
-}
-
-export type GetMyPaymentsResponse = {
-  dateOfPayments: string
-  endDateOfSubscription: string
-  id: number
-  paymentType: string
-  price: number
-  subscriptionType: string
-  userId: number
-}
-
-export type PurchaseParams = {
-  paymentSystem: 'Paypal' | 'Stripe'
-  productPriceId: string
-}
