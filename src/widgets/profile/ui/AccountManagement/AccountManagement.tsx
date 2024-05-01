@@ -1,14 +1,17 @@
 import { ContentWrapper } from '@/feature/payment'
 import { Paypal, Stripe } from '@/shared/assets/icons/other'
+import { useTranslation } from '@/shared/hooks'
 import { RadioGroup, RadioOption } from '@/shared/ui/RadioGroup'
 import { Typography } from '@/shared/ui/Typography'
 
 import s from './AccountManagement.module.scss'
 
 export const AccountManagement = () => {
+  const { t } = useTranslation()
+
   const accountTypeOptions: RadioOption[] = [
-    { label: 'Personal', value: 'Personal' },
-    { label: 'Business', value: 'Business' },
+    { label: t.label.personal, value: t.label.personal },
+    { label: t.label.business, value: t.label.business },
   ]
 
   const subscriptionOptions: RadioOption[] = [
@@ -20,13 +23,13 @@ export const AccountManagement = () => {
 
   return (
     <div className={s.root}>
-      <ContentWrapper className={s.current} title="Current Subscription:">
+      <ContentWrapper className={s.current} title={t.label.currentSubscription}>
         <div className={s.table}>
           <Typography className={s.titleCell} variant="regular14">
-            Expire at
+            {t.label.expireAt}
           </Typography>
           <Typography className={s.titleCell} variant="regular14">
-            Next payment
+            {t.label.nextPayment}
           </Typography>
           <Typography className={s.dataCell} variant="regular14">
             12.12.2024
@@ -36,10 +39,10 @@ export const AccountManagement = () => {
           </Typography>
         </div>
       </ContentWrapper>
-      <ContentWrapper className={s.type} title="Account type:">
+      <ContentWrapper className={s.type} title={t.label.accountType}>
         <RadioGroup options={accountTypeOptions} />
       </ContentWrapper>
-      <ContentWrapper className={s.sub} title="Change your subscription:">
+      <ContentWrapper className={s.sub} title={t.label.changeSubscription}>
         <RadioGroup options={subscriptionOptions} />
       </ContentWrapper>
       <div className={s.payment}>
