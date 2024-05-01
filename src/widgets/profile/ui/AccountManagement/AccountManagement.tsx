@@ -5,7 +5,6 @@ import { ContentWrapper, useAccountTypeManagement, useListSubscription } from '@
 import { Paypal, Stripe } from '@/shared/assets/icons/other'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
-import { Dialog } from '@/shared/ui/Dialog'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import { Loader } from '@/shared/ui/Loader'
 import { RadioGroup } from '@/shared/ui/RadioGroup'
@@ -101,7 +100,6 @@ export const AccountManagement = () => {
           <div className={s.payment}>
             <Button
               className={s.payBtn}
-              disabled={!productPriceId}
               onClick={handlePayment('Paypal')}
               startIcon={<Paypal />}
               variant="text"
@@ -109,7 +107,6 @@ export const AccountManagement = () => {
             <div className={s.between}>Or</div>
             <Button
               className={s.payBtn}
-              disabled={!productPriceId}
               onClick={handlePayment('Stripe')}
               startIcon={<Stripe />}
               variant="text"

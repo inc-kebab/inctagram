@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { handleErrorResponse } from '@/shared/helpers'
+import { useTranslation } from '@/shared/hooks'
 import { RadioOption } from '@/shared/ui/RadioGroup'
 
 import {
@@ -10,6 +11,15 @@ import {
 import { PaymentSystem } from '../types/payment.types'
 
 export const useListSubscription = () => {
+  const { t } = useTranslation()
+
+  const hashTranslates: Record<string, string> = {
+    day: t.label.perDay,
+    month: t.label.perMonth,
+    week: t.label.perWeek,
+    year: t.label.perYear,
+  }
+
   const { data: listOfSubs, isLoading: isGetSubsLoad } = useGetListOfSubscriptionsQuery()
 
   const [productPriceId, setProductPriceId] = useState<string | undefined>(undefined)
@@ -34,7 +44,10 @@ export const useListSubscription = () => {
   }
 
   const subsOptions: RadioOption[] | undefined = listOfSubs?.map(option => {
-    return { label: `${option.price} $ per ${option.interval}`, value: option.productPriceId }
+    return {
+      label: `${option.price}$ ${hashTranslates[option.interval]}`,
+      value: option.productPriceId,
+    }
   })
 
   useEffect(() => {
