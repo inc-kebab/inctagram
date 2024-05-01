@@ -1,0 +1,44 @@
+@import '@/app/styles/mixins';
+
+.root {
+  padding: 24px 0;
+}
+
+.table {
+  margin-bottom: 36px;
+}
+
+@include tablet {
+  .tableHead {
+    display: none;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    & .row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      padding: 19px 12px 17px;
+
+      background-color: var(--dark-500);
+      border: 1px solid var(--dark-300);
+    }
+  }
+
+  .cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    font-weight: var(--font-weight-bold);
+
+    &::before {
+      content: attr(data-label);
+      font-weight: var(--font-weight-regular);
+    }
+  }
+}

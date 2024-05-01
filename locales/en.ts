@@ -134,6 +134,13 @@ export const en = {
         'An error occurred while retrieving about users data. Try again after one minute.',
       usersTitle: 'Registered users',
     },
+    myPayments: {
+      dateOfPayment: 'Date of Payment',
+      endDateOfSubscription: 'End date of subscription',
+      paymentType: 'Payment Type',
+      price: 'Price',
+      subscriptionType: 'Subscription Type',
+    },
     post: {
       addPhoto: 'Add Photo',
       cancel: 'Cancel',

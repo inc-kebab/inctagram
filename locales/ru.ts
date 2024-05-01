@@ -133,6 +133,13 @@ export const ru: LocaleType = {
         'Произошла ошибка при получении данных о пользователях. Повторите попытку через минуту.',
       usersTitle: 'Зарегистрированные пользователи',
     },
+    myPayments: {
+      dateOfPayment: 'Дата оплаты',
+      endDateOfSubscription: 'Дата окончания подписки',
+      paymentType: 'Способ оплаты',
+      price: 'Цена',
+      subscriptionType: 'Тип подписки',
+    },
     post: {
       addPhoto: 'Добавить Фото',
       cancel: 'Отмена',
