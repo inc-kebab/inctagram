@@ -58,7 +58,7 @@ const ProfileSettings: Page = () => {
       <Tabs.Content style={{ padding: 20 }} value={tabs[2].value}>
         Account management
       </Tabs.Content>
-      <Tabs.Content style={{ padding: 20 }} value={tabs[3].value}>
+      <Tabs.Content style={{ paddingTop: 20 }} value={tabs[3].value}>
         <MyPayments />
       </Tabs.Content>
     </Tabs.Root>

@@ -1,3 +1,5 @@
+@import '@/app/styles/mixins';
+
 .container {
   display: flex;
   gap: 24px;
@@ -81,7 +83,7 @@
   }
 }
 
-@media screen and (width <= 920px) {
+@include tablet {
   .container {
     flex-direction: column-reverse;
     justify-content: center;
