@@ -31,7 +31,7 @@ export const MyPayments = () => {
   const { t } = useTranslation()
 
   return (
-    <>
+    <div className={s.root}>
       <Table.Root className={s.table}>
         <Table.Head className={s.tableHead}>
           <Table.Row>
@@ -79,6 +79,6 @@ export const MyPayments = () => {
         pageSize={3}
         totalCount={32}
       />
-    </>
+    </div>
   )
 }
