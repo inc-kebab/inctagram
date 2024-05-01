@@ -35,3 +35,13 @@ export interface GetTotalUsersResponse {
   lastUserId: number
   totalUsersCount: number
 }
+
+export type GetMyPaymentsResponse = {
+  dateOfPayments: string
+  endDateOfSubscription: string
+  id: number
+  paymentType: string
+  price: number
+  subscriptionType: string
+  userId: number
+}
