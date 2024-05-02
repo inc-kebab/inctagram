@@ -1,6 +1,7 @@
 @import '@/app/styles/mixins';
 
 .root {
+  height: 100%;
   padding: 30px 0 12px;
 }
 
@@ -9,10 +10,15 @@
 }
 
 .table {
-  display: grid;
-  grid-template: 1fr 1fr/1fr 1fr;
-  gap: 12px 48px;
-  max-width: min-content;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+
+  & .column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 
 .titleCell {
@@ -24,11 +30,7 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.type {
-  margin-bottom: 30px;
-}
-
-.sub {
+.item {
   margin-bottom: 24px;
 }
 
@@ -36,7 +38,7 @@
   display: flex;
   gap: 54px;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 
   & .icon {
     cursor: pointer;
@@ -53,10 +55,47 @@
   }
 }
 
+.payBtn {
+  padding: 0;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 8px;
+
+  transition: all 0.2s;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover:not(:disabled) {
+    transform: scale(1.04);
+  }
+}
+
+.dialog {
+  width: 100%;
+  max-width: 366px;
+}
+
 @include mobile {
   .payment {
     gap: 24px;
     justify-content: center;
+  }
+
+  .loader {
+    margin-top: 50px;
+  }
+
+  .current,
+  .item {
+    margin-bottom: 10px;
+  }
+
+  .dialog {
+    width: 95%;
+    max-width: unset;
   }
 }
 
