@@ -34,15 +34,16 @@ type ActiveSubscription = {
   paypalSubscriptionId: Nullable<string>
   period: number
   productPriceId: string
+  profileUserId: Nullable<number>
   stripeSubscriptionId: Nullable<string>
   subscriptionId: number
   subscriptionPriceId: string
-  subscriptionStatus: string
+  /*subscriptionStatus: string*/
   userId: number
 }
 
 export type CurrentSubscription = {
-  expireAt: number
-  nextPayment: Nullable<string>
-  subscriptions: ActiveSubscription[]
+  expireAt: string
+  /*  nextPayment: Nullable<string> */
+  subscription?: ActiveSubscription
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { LocaleType } from '@/../locales'
 import { handleErrorResponse } from '@/shared/helpers'
-import { useTranslation } from '@/shared/hooks'
 import { RadioOption } from '@/shared/ui/RadioGroup'
 
 import {
@@ -10,9 +10,7 @@ import {
 } from '../../api/account-api'
 import { PaymentSystem } from '../types/payment.types'
 
-export const useListSubscription = () => {
-  const { t } = useTranslation()
-
+export const useListSubscription = (t: LocaleType) => {
   const hashTranslates: Record<string, string> = {
     day: t.label.perDay,
     month: t.label.perMonth,

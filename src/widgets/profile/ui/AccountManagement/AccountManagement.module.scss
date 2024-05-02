@@ -10,10 +10,15 @@
 }
 
 .table {
-  display: grid;
-  grid-template: 1fr 1fr/1fr 1fr;
-  gap: 12px 48px;
-  max-width: min-content;
+  display: flex;
+  gap: 48px;
+  align-items: center;
+
+  & .column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 
 .titleCell {
