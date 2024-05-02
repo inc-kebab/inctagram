@@ -58,6 +58,7 @@ export const ru: LocaleType = {
   label: {
     aboutMe: 'Обо мне',
     accountType: 'Тип аккаунта:',
+    autoRenewal: 'Авто-продление',
     birthDate: 'Дата рождения',
     business: 'Бизнес',
     changeSubscription: 'Обновите вашу подписку:',

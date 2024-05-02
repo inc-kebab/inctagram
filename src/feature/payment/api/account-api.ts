@@ -9,7 +9,12 @@ import {
 
 const accountAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
+    autoRenewal: builder.mutation<void, { autoRenewal: boolean; subscriptionId: number }>({
+      invalidatesTags: (_, error) => (error ? [] : ['autoRenewal']),
+      query: body => ({ body, method: 'PUT', url: '/subscription/auto-renewal' }),
+    }),
     getCurrentSubscription: builder.query<CurrentSubscription, void>({
+      providesTags: ['autoRenewal'],
       query: () => ({ url: '/subscription/current' }),
     }),
     getListOfSubscriptions: builder.query<Subscription[], void>({
@@ -26,6 +31,7 @@ const accountAPI = baseApi.injectEndpoints({
 })
 
 export const {
+  useAutoRenewalMutation,
   useGetCurrentSubscriptionQuery,
   useGetListOfSubscriptionsQuery,
   useGetMyPaymentsQuery,

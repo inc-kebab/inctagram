@@ -60,6 +60,7 @@ export const en = {
   label: {
     aboutMe: 'About me',
     accountType: 'Account type:',
+    autoRenewal: 'Auto-Renewal',
     birthDate: 'Date of Birth',
     business: 'Business',
     changeSubscription: 'Change your subscription:',

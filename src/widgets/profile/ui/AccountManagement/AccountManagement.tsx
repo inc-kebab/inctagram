@@ -5,6 +5,7 @@ import { ContentWrapper, useAccountTypeManagement, useListSubscription } from '@
 import { Paypal, Stripe } from '@/shared/assets/icons/other'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
+import { Checkbox } from '@/shared/ui/Checkbox'
 import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import { Loader } from '@/shared/ui/Loader'
 import { RadioGroup } from '@/shared/ui/RadioGroup'
@@ -21,8 +22,14 @@ export const AccountManagement = () => {
 
   const [open, setOpen] = useState(false)
 
-  const { accountTypeOptions, currentSubData, handleChangeType, isCurrentSubsLoad, type } =
-    useAccountTypeManagement(t)
+  const {
+    accountTypeOptions,
+    autoRenewal,
+    currentSubData,
+    handleChangeType,
+    isCurrentSubsLoad,
+    type,
+  } = useAccountTypeManagement(t)
 
   const { handleChangeProductPriceId, handlePayment, isGetSubsLoad, productPriceId, subsOptions } =
     useListSubscription(t)
@@ -75,6 +82,15 @@ export const AccountManagement = () => {
             )}
           </div>
         </ContentWrapper>
+      )}
+      {type === 'Business' && currentSubData && (
+        <Checkbox
+          checked={autoRenewal.checked}
+          className={s.item}
+          disabled={autoRenewal.disabled}
+          label={t.label.autoRenewal}
+          onCheckedChange={autoRenewal.handleChange}
+        />
       )}
       <ContentWrapper className={s.item} title={t.label.accountType}>
         <RadioGroup onValueChange={handleChangeType} options={accountTypeOptions} value={type} />

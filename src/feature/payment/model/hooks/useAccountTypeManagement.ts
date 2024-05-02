@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { LocaleType } from '@/../locales'
+import { handleErrorResponse } from '@/shared/helpers'
 
-import { useGetCurrentSubscriptionQuery } from '../../api/account-api'
+import { useAutoRenewalMutation, useGetCurrentSubscriptionQuery } from '../../api/account-api'
 
 export const useAccountTypeManagement = (t: LocaleType) => {
   const accountTypeOptions = useMemo(() => {
@@ -12,9 +13,23 @@ export const useAccountTypeManagement = (t: LocaleType) => {
     ]
   }, [])
 
+  const [type, setType] = useState<string>(accountTypeOptions[0].value)
+
   const { data: currentSubData, isLoading: isCurrentSubsLoad } = useGetCurrentSubscriptionQuery()
 
-  const [type, setType] = useState<string>(accountTypeOptions[0].value)
+  const [changeAutoRenewal, { isLoading: isAutoRenewalLoad }] = useAutoRenewalMutation()
+
+  const handleChangeAutoRenewal = (autoRenewal: boolean) => {
+    const subscriptionId = currentSubData?.subscription?.subscriptionId
+
+    if (subscriptionId) {
+      changeAutoRenewal({ autoRenewal, subscriptionId }).then(data => {
+        if ('error' in data) {
+          handleErrorResponse(data.error)
+        }
+      })
+    }
+  }
 
   const handleChangeType = (value: string) => {
     setType(value)
@@ -26,5 +41,16 @@ export const useAccountTypeManagement = (t: LocaleType) => {
     }
   }, [currentSubData, accountTypeOptions])
 
-  return { accountTypeOptions, currentSubData, handleChangeType, isCurrentSubsLoad, type }
+  return {
+    accountTypeOptions,
+    autoRenewal: {
+      checked: currentSubData?.subscription?.autoRenewal,
+      disabled: isAutoRenewalLoad,
+      handleChange: handleChangeAutoRenewal,
+    },
+    currentSubData,
+    handleChangeType,
+    isCurrentSubsLoad,
+    type,
+  }
 }
