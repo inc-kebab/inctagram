@@ -152,6 +152,12 @@ export const en = {
       price: 'Price',
       subscriptionType: 'Subscription Type',
     },
+    notFound: {
+      backTo: 'Back to ',
+      description: "We're sorry, we couldn't find the page you requested.",
+      mainPage: 'main page',
+      notFound: 'Page not found',
+    },
     post: {
       addPhoto: 'Add Photo',
       cancel: 'Cancel',

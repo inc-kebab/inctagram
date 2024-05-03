@@ -151,6 +151,12 @@ export const ru: LocaleType = {
       price: 'Цена',
       subscriptionType: 'Тип подписки',
     },
+    notFound: {
+      backTo: 'Вернуться на ',
+      description: 'К сожалению, мы не смогли найти запрошенную вами страницу.',
+      mainPage: 'главную страницу',
+      notFound: 'Страница не найдена',
+    },
     post: {
       addPhoto: 'Добавить Фото',
       cancel: 'Отмена',
