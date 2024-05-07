@@ -10,7 +10,6 @@ import { DialogClose } from '@/shared/ui/Dialog/DialogClose'
 import { Loader } from '@/shared/ui/Loader'
 import { RadioGroup } from '@/shared/ui/RadioGroup'
 import { Typography } from '@/shared/ui/Typography'
-import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 
 import s from './AccountManagement.module.scss'
@@ -67,7 +66,7 @@ export const AccountManagement = () => {
                 {t.label.expireAt}
               </Typography>
               <Typography className={s.dataCell} variant="regular14">
-                {format(currentSubData.expireAt, 'dd.MM.yyyy')}
+                {currentSubData.expireAt}
               </Typography>
             </div>
             {currentSubData.subscription?.autoRenewal && (
