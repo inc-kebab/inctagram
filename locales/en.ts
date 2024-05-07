@@ -248,6 +248,12 @@ export const en = {
         'Customize your profile to suit your needs. Update your information, add a profile photo. Make your profile unique and informative to stand out and attract attention.',
       metaTitle: 'Profile settings',
     },
+    serverError: {
+      description:
+        "Don't worry, our development team has automatically been notified of this issue, and they are working on it. Please try again in a few minutes. Alternatively, you can return to the ",
+      internalServerError: 'Internal Server Error',
+      startPage: 'start page.',
+    },
     signIn: {
       forgotPassword: 'Forgot Password',
       metaDescription: 'Log in to your account to access personalized features and content.',
