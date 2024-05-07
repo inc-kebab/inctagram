@@ -86,6 +86,7 @@ export const en = {
     reCaptcha: 'I’m not a robot',
     show: 'Show',
     success: 'Success',
+    successAutoRenewal: 'The current subscription has been successfully renewed!',
     successPayment: 'Payment was successful!',
     successUpdateProfile: 'Your settings are saved!',
     transactionFailed: 'Transaction failed. Please, write to support',

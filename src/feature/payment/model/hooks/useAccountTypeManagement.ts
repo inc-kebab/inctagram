@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { LocaleType } from '@/../locales'
 import { handleErrorResponse } from '@/shared/helpers'
@@ -15,17 +16,24 @@ export const useAccountTypeManagement = (t: LocaleType) => {
 
   const [type, setType] = useState<string>(accountTypeOptions[0].value)
 
-  const { data: currentSubData, isLoading: isCurrentSubsLoad } = useGetCurrentSubscriptionQuery()
+  const {
+    data,
+    isFetching: isCurrentSubFetch,
+    isLoading: isCurrentSubLoad,
+  } = useGetCurrentSubscriptionQuery()
 
   const [changeAutoRenewal, { isLoading: isAutoRenewalLoad }] = useAutoRenewalMutation()
 
   const handleChangeAutoRenewal = (autoRenewal: boolean) => {
-    const subscriptionId = currentSubData?.subscription?.subscriptionId
+    const subscriptionId = data?.subscription?.subscriptionId
 
     if (subscriptionId) {
-      changeAutoRenewal({ autoRenewal, subscriptionId }).then(data => {
-        if ('error' in data) {
-          handleErrorResponse(data.error)
+      changeAutoRenewal({ autoRenewal, subscriptionId }).then(res => {
+        if ('data' in res) {
+          toast.success(t.label.successAutoRenewal)
+        }
+        if ('error' in res) {
+          handleErrorResponse(res.error)
         }
       })
     }
@@ -36,21 +44,24 @@ export const useAccountTypeManagement = (t: LocaleType) => {
   }
 
   useEffect(() => {
-    if (currentSubData) {
+    if (data) {
       setType(accountTypeOptions[1].value)
     }
-  }, [currentSubData, accountTypeOptions])
+  }, [data, accountTypeOptions])
 
   return {
     accountTypeOptions,
     autoRenewal: {
-      checked: currentSubData?.subscription?.autoRenewal,
-      disabled: isAutoRenewalLoad,
+      checked: data?.subscription?.autoRenewal,
       handleChange: handleChangeAutoRenewal,
+      isLoading: isAutoRenewalLoad,
     },
-    currentSubData,
+    currentSub: {
+      data,
+      isFetching: isCurrentSubFetch,
+      isLoading: isCurrentSubLoad,
+    },
     handleChangeType,
-    isCurrentSubsLoad,
     type,
   }
 }

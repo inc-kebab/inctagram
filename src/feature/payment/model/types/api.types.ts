@@ -44,6 +44,6 @@ type ActiveSubscription = {
 
 export type CurrentSubscription = {
   expireAt: string
-  /*  nextPayment: Nullable<string> */
+  nextPayment?: string
   subscription?: ActiveSubscription
 }

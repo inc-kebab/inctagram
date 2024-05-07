@@ -9,9 +9,14 @@ import {
 
 const accountAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
-    autoRenewal: builder.mutation<void, { autoRenewal: boolean; subscriptionId: number }>({
+    autoRenewal: builder.mutation<string, { autoRenewal: boolean; subscriptionId: number }>({
       invalidatesTags: (_, error) => (error ? [] : ['autoRenewal']),
-      query: body => ({ body, method: 'PUT', url: '/subscription/auto-renewal' }),
+      query: body => ({
+        body,
+        method: 'PUT',
+        responseHandler: 'text',
+        url: '/subscription/auto-renewal',
+      }),
     }),
     getCurrentSubscription: builder.query<CurrentSubscription, void>({
       providesTags: ['autoRenewal'],
