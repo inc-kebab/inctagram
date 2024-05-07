@@ -26,6 +26,7 @@
 
 .settings {
   grid-area: settings;
+  align-self: center;
 }
 
 .avatar {
@@ -35,6 +36,7 @@
 
 .name {
   grid-area: name;
+  align-self: center;
 }
 
 .subscriber {
