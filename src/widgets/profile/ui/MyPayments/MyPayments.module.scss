@@ -1,6 +1,7 @@
 @import '@/app/styles/mixins';
 
 .root {
+  height: 100%;
   padding: 24px 0;
 }
 
@@ -11,6 +12,10 @@
 @include tablet {
   .tableHead {
     display: none;
+  }
+
+  .loader {
+    margin-top: 50px;
   }
 
   .body {

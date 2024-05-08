@@ -38,7 +38,7 @@ export const Pagination = ({
     return (
       <Typography asComponent="div" className={s.selectContainer} variant="regular14">
         {t.label.show}
-        <Select {...selectProps} pagination />
+        <Select {...selectProps} className={s.select} pagination />
         {t.label.onPage}
       </Typography>
     )
@@ -99,7 +99,7 @@ export const Pagination = ({
       </div>
       <Typography asComponent="div" className={s.selectContainer} variant="regular14">
         {t.label.show}
-        <Select {...selectProps} className={clsx(s.select)} pagination />
+        <Select {...selectProps} className={s.select} pagination />
         {t.label.onPage}
       </Typography>
     </div>

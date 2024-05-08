@@ -26,9 +26,11 @@ const accountAPI = baseApi.injectEndpoints({
       query: () => ({ url: '/subscription/products' }),
       transformResponse: (res: Subscription[]) => res.sort((a, b) => a.period - b.period),
     }),
-    getMyPayments: builder.query<GetMyPaymentsResponse[], void>({
-      query: () => ({ url: '/subscription/my-payments' }),
-    }),
+    getMyPayments: builder.query<GetMyPaymentsResponse, { pageNumber?: number; pageSize?: number }>(
+      {
+        query: params => ({ params, url: '/subscription/my-payments' }),
+      }
+    ),
     purchaseSubscription: builder.mutation<{ url: string }, PurchaseParams>({
       query: body => ({ body, method: 'POST', url: '/subscription/purchase' }),
     }),
