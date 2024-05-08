@@ -63,7 +63,7 @@ const ProfileSettings: Page = () => {
       <Tabs.Content className={s.content} value={tabs[2].value}>
         <AccountManagement />
       </Tabs.Content>
-      <Tabs.Content value={tabs[3].value}>
+      <Tabs.Content className={s.content} value={tabs[3].value}>
         <MyPayments />
       </Tabs.Content>
     </Tabs.Root>

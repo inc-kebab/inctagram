@@ -24,7 +24,9 @@ export const UserBanner = ({ actions, avatar, avatarSize = 36, className, name }
           iconSize={(avatarSize / 100) * 60}
           wrapperSize={avatarSize}
         />
-        <Typography className={s.name}>{name}</Typography>
+        <Typography className={s.name}>
+          {name.length > 15 ? name.slice(0, 15) + '...' : name}
+        </Typography>
       </div>
       {actions}
     </div>

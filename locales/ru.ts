@@ -58,6 +58,7 @@ export const ru: LocaleType = {
   label: {
     aboutMe: 'Обо мне',
     accountType: 'Тип аккаунта:',
+    autoRenewal: 'Авто-продление',
     birthDate: 'Дата рождения',
     business: 'Бизнес',
     changeSubscription: 'Обновите вашу подписку:',
@@ -83,6 +84,7 @@ export const ru: LocaleType = {
     reCaptcha: 'Я не робот',
     show: 'Показать',
     success: 'Успешно',
+    successAutoRenewal: 'Текущая подписка успешно продлена!',
     successPayment: 'Оплата прошла успешно!',
     successUpdateProfile: 'Ваши настройки сохранены!',
     transactionFailed: 'Оплата провалилась. Пожалуйста, обратитесь в поддержку',

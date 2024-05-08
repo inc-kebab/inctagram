@@ -10,7 +10,7 @@ export type Subscription = {
   subscriptionPriceId: string
 }
 
-export type GetMyPaymentsResponse = {
+interface MyPayment {
   dateOfPayments: string
   endDateOfSubscription: string
   id: number
@@ -18,6 +18,14 @@ export type GetMyPaymentsResponse = {
   price: number
   subscriptionType: string
   userId: number
+}
+
+export type GetMyPaymentsResponse = {
+  items: MyPayment[]
+  pageNumber: number
+  pageSize: number
+  pagesCount: number
+  totalCount: number
 }
 
 export type PurchaseParams = {
@@ -44,6 +52,6 @@ type ActiveSubscription = {
 
 export type CurrentSubscription = {
   expireAt: string
-  /*  nextPayment: Nullable<string> */
+  nextPayment?: string
   subscription?: ActiveSubscription
 }
