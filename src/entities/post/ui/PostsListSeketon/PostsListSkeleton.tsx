@@ -1,4 +1,4 @@
-import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { Skeleton } from '@/shared/ui/Skeleton'
 import clsx from 'clsx'
 
 import s from './PostsListSkeleton.module.scss'

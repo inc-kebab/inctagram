@@ -9,7 +9,15 @@
   margin-bottom: 36px;
 }
 
+.skeleton {
+  padding: 0;
+}
+
 @include tablet {
+  .table {
+    border: 0;
+  }
+
   .tableHead {
     display: none;
   }

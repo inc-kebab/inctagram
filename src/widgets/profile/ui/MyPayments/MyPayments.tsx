@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import s from './MyPayments.module.scss'
 
 import { usePaginationPayments } from '../../model/hooks/usePaginationPayments'
+import { PaymentsSkeleton } from './PaymentsSkeleton'
 
 export const MyPayments = () => {
   const { t } = useTranslation()
@@ -26,21 +27,21 @@ export const MyPayments = () => {
 
   return (
     <div className={s.root}>
-      {request.isFetching ? (
-        <Loader className={s.loader} containerHeight />
-      ) : (
-        <Table.Root className={s.table}>
-          <Table.Head className={s.tableHead}>
-            <Table.Row>
-              <Table.TitleCell>{t.pages.myPayments.dateOfPayment}</Table.TitleCell>
-              <Table.TitleCell>{t.pages.myPayments.endDateOfSubscription}</Table.TitleCell>
-              <Table.TitleCell>{t.pages.myPayments.price}</Table.TitleCell>
-              <Table.TitleCell>{t.pages.myPayments.subscriptionType}</Table.TitleCell>
-              <Table.TitleCell>{t.pages.myPayments.paymentType}</Table.TitleCell>
-            </Table.Row>
-          </Table.Head>
-          <Table.Body className={s.body}>
-            {request.data?.items.map(el => {
+      <Table.Root className={s.table}>
+        <Table.Head className={s.tableHead}>
+          <Table.Row>
+            <Table.TitleCell>{t.pages.myPayments.dateOfPayment}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.endDateOfSubscription}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.price}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.subscriptionType}</Table.TitleCell>
+            <Table.TitleCell>{t.pages.myPayments.paymentType}</Table.TitleCell>
+          </Table.Row>
+        </Table.Head>
+        <Table.Body className={s.body}>
+          {request.isFetching ? (
+            <PaymentsSkeleton countCell={pageSize} />
+          ) : (
+            request.data?.items.map(el => {
               const dateOfPayments = format(new Date(el.dateOfPayments), 'dd.MM.yyyy')
               const endDateOfSubscription = format(new Date(el.endDateOfSubscription), 'dd.MM.yyyy')
 
@@ -66,10 +67,10 @@ export const MyPayments = () => {
                   </Table.Cell>
                 </Table.Row>
               )
-            })}
-          </Table.Body>
-        </Table.Root>
-      )}
+            })
+          )}
+        </Table.Body>
+      </Table.Root>
       <Pagination
         currentPage={pageNumber}
         onChangePage={handleChangePageNumber}
