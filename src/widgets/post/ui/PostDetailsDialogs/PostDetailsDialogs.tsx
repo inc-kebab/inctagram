@@ -18,6 +18,7 @@ import { EditPostDialogTitle } from './EditPostDialogTitle/EditPostDialogTitle'
 interface Props {
   currentPost: Nullable<PostItem>
   isAuth: boolean
+  isOwner?: boolean
   onOpenChange: (open: boolean) => void
   open: boolean
   setCurrentPost: (post: Nullable<PostItem>) => void
@@ -26,6 +27,7 @@ interface Props {
 export const PostDetailsDialogs = ({
   currentPost,
   isAuth,
+  isOwner,
   onOpenChange,
   open,
   setCurrentPost,
@@ -107,6 +109,7 @@ export const PostDetailsDialogs = ({
             </DialogClose>
             <PostDetails
               isAuth={isAuth}
+              isOwner={isOwner}
               item={currentPost}
               onOpenConfirmDeleteModal={() => setOpenConfirmDelete(true)}
               onOpenEditModal={handleActivateEditMode}

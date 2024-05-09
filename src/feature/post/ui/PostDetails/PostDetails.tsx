@@ -18,14 +18,21 @@ import s from './PostDetails.module.scss'
 
 type Props = {
   isAuth: boolean
+  isOwner?: boolean
   item: Nullable<PostItem>
   onOpenConfirmDeleteModal: () => void
   onOpenEditModal: () => void
 }
 
-export const PostDetails = ({ isAuth, item, onOpenConfirmDeleteModal, onOpenEditModal }: Props) => {
+export const PostDetails = ({
+  isAuth,
+  isOwner,
+  item,
+  onOpenConfirmDeleteModal,
+  onOpenEditModal,
+}: Props) => {
   const { t } = useTranslation()
-  const { data } = useMeQuery(undefined)
+  const { data, isError } = useMeQuery(undefined)
   const [isShowOnlyComments, setIsShowOnlyComments] = useState(false)
   const [openMobileCommentForm, setOpenMobileCommentForm] = useState(false)
 
@@ -35,7 +42,7 @@ export const PostDetails = ({ isAuth, item, onOpenConfirmDeleteModal, onOpenEdit
     return null
   }
 
-  const actions = isAuth ? (
+  const actions = isOwner ? (
     <Dropdown.Menu
       align="end"
       modal={false}
@@ -69,6 +76,7 @@ export const PostDetails = ({ isAuth, item, onOpenConfirmDeleteModal, onOpenEdit
           className={s.footer}
           datePost={item.createdAt}
           isActiveCommentForm={openMobileCommentForm}
+          isAuth={!isError}
           likesCount={2243}
           toggleShowCommentForm={toggleShowCommentForm}
         />

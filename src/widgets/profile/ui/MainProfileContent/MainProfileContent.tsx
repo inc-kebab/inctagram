@@ -18,7 +18,7 @@ export const MainProfileContent = () => {
 
   const [currentCursor, setCurrentCursor] = useState<number | undefined>(undefined)
 
-  const { data: me } = useMeQuery(undefined)
+  const { data: me, isError } = useMeQuery(undefined)
   const { data } = useGetMyProfileQuery(undefined, { skip: !me })
   const { data: posts, isFetching } = useGetMyPostsQuery({ cursor: currentCursor }, { skip: !me })
   const { data: publicPost } = useGetPublicPostQuery(
@@ -62,7 +62,8 @@ export const MainProfileContent = () => {
       {isFetching && <PostsListSkeleton />}
       <PostDetailsDialogs
         currentPost={currentPost}
-        isAuth
+        isAuth={!isError}
+        isOwner
         onOpenChange={setOpenPostDetails}
         open={openPostDetails}
         setCurrentPost={setCurrentPost}
