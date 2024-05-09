@@ -26,7 +26,7 @@ export const en = {
     resendVerificationLink: 'Resend verification link',
     save: 'Save changes',
     saveDraft: 'Save draft',
-    selectFromComputer: 'Select from Computer',
+    selectFromDevice: 'Select from device',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     showLess: 'Show less',

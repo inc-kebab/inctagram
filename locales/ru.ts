@@ -24,7 +24,7 @@ export const ru: LocaleType = {
     resendVerificationLink: 'Отправить повторное подтверждение',
     save: 'Сохранить изменения',
     saveDraft: 'Сохранить черновик',
-    selectFromComputer: 'Выбрать с Компьютера',
+    selectFromDevice: 'Выбрать с устройства',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку повторно',
     showLess: 'Показать меньше',
