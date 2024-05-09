@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { PostsList, PostsListSkeleton } from '@/entities/post'
 import { ProfileInfo } from '@/entities/profile'
+import { useMeQuery } from '@/feature/auth'
 import { useGetPublicPostQuery, useGetUsersPostsQuery } from '@/feature/post'
 import { useGetPublicProfileQuery } from '@/feature/profile'
 import { PublicLayout, SidebarLayout } from '@/widgets/layout'
@@ -21,6 +22,7 @@ export const SomeProfileContent = ({ isPublicPage }: Props) => {
 
   const [currentCursor, setCurrentCursor] = useState<number | undefined>(undefined)
 
+  const { data: me, isError } = useMeQuery(undefined)
   const { data } = useGetPublicProfileQuery(Number(query.id))
   const { data: posts, isFetching } = useGetUsersPostsQuery({
     cursor: currentCursor,
@@ -66,7 +68,8 @@ export const SomeProfileContent = ({ isPublicPage }: Props) => {
       {isFetching && <PostsListSkeleton />}
       <PostDetailsDialogs
         currentPost={currentPost}
-        isAuth={false}
+        isAuth={!isError}
+        isOwner={false}
         onOpenChange={setOpenPostDetails}
         open={openPostDetails}
         setCurrentPost={setCurrentPost}

@@ -34,6 +34,7 @@ export const CommentsList = ({
         className={clsx(s.first, classNameDescription)}
         classNameAvatar={classNameAvatar}
         commentText={postItem.description}
+        isComment={false}
         isOwner={userId === postItem.ownerId}
         isShortenComment={isShortenComments}
         name={postItem.username}
