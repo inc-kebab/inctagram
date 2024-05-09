@@ -31,7 +31,7 @@
 
   .dialogMobile {
     max-width: unset;
-    height: calc(100vh - (2 * var(--header-height)));
+    height: calc(100dvh - (2 * var(--header-height)));
     margin: 0;
 
     background-color: var(--dark-700);

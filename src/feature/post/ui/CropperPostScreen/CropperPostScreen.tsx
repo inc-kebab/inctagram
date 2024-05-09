@@ -5,13 +5,15 @@ import {
   ExpandBtn,
   ImageObj,
   LoadedImagesList,
-  MAX_SIZE_IMAGE_20MB,
+  ScreenWrapper,
+  TitleBlock,
   ZoomIn,
   postsActions,
   useAddPhoto,
 } from '@/entities/post'
 import { Close } from '@/shared/assets/icons/common'
 import { PlusCircle } from '@/shared/assets/icons/outline'
+import { MAX_SIZE_IMAGE_20MB } from '@/shared/const/sizes'
 import { getDefaultSwiperConfig, getModifiedImage, photoSchema } from '@/shared/helpers'
 import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
@@ -23,7 +25,6 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 import s from './CropperPostScreen.module.scss'
 
 import { CurrentWindow } from '../../model/types/post.types'
-import { TitleBlock } from '../TitleBlock/TitleBlock'
 import { CropperImage } from './CropperImage'
 
 type Props = {
@@ -100,7 +101,7 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
         showRightButton
         title={t.pages.post.cropping}
       />
-      <div className={s.container}>
+      <ScreenWrapper>
         <Swiper
           {...getDefaultSwiperConfig({
             classes: [s.slider],
@@ -188,7 +189,7 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
             <PlusCircle className={s.rightMobile} />
           </InputFile>
         </div>
-      </div>
+      </ScreenWrapper>
     </>
   )
 }

@@ -40,7 +40,7 @@ export const PhotoUploader = ({ setPhoto, zodSchema }: Props) => {
         zodSchema={zodSchema}
       >
         <Button asComponent="span" className={s.button}>
-          {t.button.selectFromComputer}
+          {t.button.selectFromDevice}
         </Button>
       </InputFile>
     </div>

@@ -9,7 +9,7 @@
   flex-shrink: 0;
 
   width: 13.75rem;
-  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   padding: 4.5rem 0 2.25rem var(--container-padding);
 
   background-color: var(--dark-700);
