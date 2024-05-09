@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { postsActions } from '@/entities/post'
+import { FilterBlock, ScreenWrapper, TitleBlock, filters, postsActions } from '@/entities/post'
 import { FilterImage, getDefaultSwiperConfig, getModifiedImage } from '@/shared/helpers'
 import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import Image from 'next/image'
@@ -10,10 +10,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './FiltersScreen.module.scss'
 
-import { filters } from '../../model/const/filters'
 import { CurrentWindow } from '../../model/types/post.types'
-import { FilterBlock } from '../FilterBlock/FilterBlock'
-import { TitleBlock } from '../TitleBlock/TitleBlock'
 
 type Props = {
   onChangeWindow?: (window: CurrentWindow) => void
@@ -87,7 +84,7 @@ export const FiltersScreen = ({ onChangeWindow }: Props) => {
         showRightButton
         title={t.pages.post.filters}
       />
-      <div className={s.container}>
+      <ScreenWrapper>
         <Swiper
           {...getDefaultSwiperConfig({
             classes: [s.slider],
@@ -114,7 +111,7 @@ export const FiltersScreen = ({ onChangeWindow }: Props) => {
           })}
         </Swiper>
         <div className={s.filtersContainer}>{filtersArray}</div>
-      </div>
+      </ScreenWrapper>
     </>
   )
 }

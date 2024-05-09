@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
-
 import { Close } from '@/shared/assets/icons/common'
 import { Image as ImageIcon, PlusCircle } from '@/shared/assets/icons/outline'
+import { MAX_SIZE_IMAGE_20MB } from '@/shared/const/sizes'
 import { photoSchema } from '@/shared/helpers'
-import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dropdown } from '@/shared/ui/DropDownMenu'
 import { InputFile } from '@/shared/ui/InputFile'
@@ -13,7 +10,6 @@ import Image from 'next/image'
 
 import s from './LoadedImagesList.module.scss'
 
-import { MAX_SIZE_IMAGE_20MB } from '../../model/const'
 import { useAddPhoto } from '../../model/hooks/useAddPhoto'
 import { ImageObj } from '../../model/types/postSlice.types'
 

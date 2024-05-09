@@ -1,4 +1,4 @@
-import { postsActions } from '@/entities/post'
+import { ScreenWrapper, TitleBlock, postsActions } from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { getDefaultSwiperConfig } from '@/shared/helpers'
@@ -12,7 +12,6 @@ import s from './DescriptionScreen.module.scss'
 import { useCreatePost } from '../../model/hooks/useCreatePost'
 import { CurrentWindow } from '../../model/types/post.types'
 import { EditPostForm } from '../EditPostForm/EditPostForm'
-import { TitleBlock } from '../TitleBlock/TitleBlock'
 
 interface Props {
   onChangeStatus?: (status: boolean) => void
@@ -44,7 +43,7 @@ export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal
   return (
     <>
       <TitleBlock onBackClick={handleClickBack} showLeftButton title={t.pages.post.publication} />
-      <div className={s.container}>
+      <ScreenWrapper>
         <Swiper {...getDefaultSwiperConfig({ classes: [s.slider] })}>
           {imagesWithFilters.map((image, i) => {
             const { imageURL } = image
@@ -76,7 +75,7 @@ export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal
             </>
           )}
         </div>
-      </div>
+      </ScreenWrapper>
     </>
   )
 }

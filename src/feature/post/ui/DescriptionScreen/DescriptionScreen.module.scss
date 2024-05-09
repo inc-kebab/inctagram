@@ -1,11 +1,5 @@
 @import '@/app/styles/mixins';
 
-.container {
-  display: flex;
-  width: 100%;
-  height: 502px;
-}
-
 .slider {
   width: 50%;
   height: 100%;
@@ -18,11 +12,6 @@
 }
 
 @include mobile {
-  .container {
-    flex-direction: column;
-    height: calc(100vh - (2 * var(--header-height)) - 60px);
-  }
-
   .slider {
     width: 100%;
   }

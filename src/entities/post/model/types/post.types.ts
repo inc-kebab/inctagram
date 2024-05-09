@@ -1,3 +1,10 @@
+import { FilterImage } from '@/shared/helpers'
+
+export type FilterPost = {
+  name: string
+  value: FilterImage
+}
+
 export interface Owner {
   firstname: string
   lastname: string
