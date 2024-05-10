@@ -57,7 +57,7 @@ const ProfileSettings: Page = () => {
       <Tabs.Content value={tabs[0].value}>
         <GeneralInformation />
       </Tabs.Content>
-      <Tabs.Content value={tabs[1].value}>
+      <Tabs.Content className={s.content} value={tabs[1].value}>
         <Devices />
       </Tabs.Content>
       <Tabs.Content className={s.content} value={tabs[2].value}>

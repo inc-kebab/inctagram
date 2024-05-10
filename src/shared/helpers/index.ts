@@ -1,3 +1,4 @@
+export { getBrowser } from './getBrowser'
 export { getDefaultSwiperConfig } from './getDefaultSwiperConfig'
 export { getModifiedImage } from './getModifiedImage'
 export type { FilterImage } from './getModifiedImage'
