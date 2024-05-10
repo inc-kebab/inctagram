@@ -7,19 +7,20 @@ import clsx from 'clsx'
 import s from './ContentWrapper.module.scss'
 
 type Props = {
-  className?: { card?: string; container?: string }
+  className?: string
+  classNameCard?: string
   title?: string
 } & PropsWithChildren
 
-export const ContentWrapper = ({ children, className, title }: Props) => {
+export const ContentWrapper = ({ children, className, classNameCard, title }: Props) => {
   return (
-    <div className={className?.container}>
+    <div className={clsx(s.root, className)}>
       {title && (
-        <Typography asComponent="h3" className={s.title} variant="h3">
+        <Typography asComponent="h3" variant="h3">
           {title}
         </Typography>
       )}
-      <Card className={clsx(s.content, className?.card)}>{children}</Card>
+      <Card className={clsx(s.content, classNameCard)}>{children}</Card>
     </div>
   )
 }

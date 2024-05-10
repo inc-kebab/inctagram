@@ -1,15 +1,7 @@
 @import '@/app/styles/mixins';
 
 .container {
-  margin-top: 30px;
-}
-
-.activeSessions {
-  margin-bottom: 12px;
-
-  &:last-child {
-    margin: 0;
-  }
+  padding-top: 30px;
 }
 
 .card {
@@ -17,8 +9,25 @@
   column-gap: 12px;
   min-height: 120px;
 
-  .icon {
+  & .icon {
     margin-top: 6px;
+  }
+}
+
+.title {
+  margin-bottom: 12px;
+}
+
+.terminate {
+  display: block;
+  margin: 24px 0 18px auto;
+}
+
+.activeSessions {
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin: 0;
   }
 }
 
@@ -31,16 +40,6 @@
   color: var(--light-100);
 }
 
-
-.terminate {
-  display: flex;
-  margin: 24px 0 18px auto;
-}
-
-.title {
-  margin-bottom: 12px;
-}
-
 .lastVisit {
   margin-top: 5px;
 }
@@ -48,6 +47,6 @@
 @include mobile {
   .terminate {
     width: 100%;
-    margin: 24px 0 31px;
+    margin: 24px 0 30px;
   }
 }

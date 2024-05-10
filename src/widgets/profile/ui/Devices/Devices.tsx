@@ -4,6 +4,7 @@ import { Chrome, Phone, Tablet } from '@/shared/assets/icons/other'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Typography } from '@/shared/ui/Typography'
+import { format } from 'date-fns'
 
 import s from './Devices.module.scss'
 
@@ -17,7 +18,7 @@ const temp = [
   },
   {
     deviceId: 'e0f21cd7-b3c2-4946-9eee-a19842390058',
-    ip: ':10.244.0.189',
+    ip: '::ffff:10.244.0.189',
     lastActiveDate: '2024-05-10T13:24:39.117Z',
     title: 'PostmanRuntime/7.37.3',
   },
@@ -28,7 +29,7 @@ export const Devices = () => {
 
   return (
     <section className={s.container}>
-      <ContentWrapper className={{ card: s.card }} title={t.pages.profileSettings.currentDevice}>
+      <ContentWrapper classNameCard={s.card} title={t.pages.profileSettings.currentDevice}>
         <Chrome className={s.icon} />
         <div>
           <Typography className={s.title} variant="regularBold16">
@@ -37,18 +38,14 @@ export const Devices = () => {
           <Typography variant="regular14">IP: 22.345.345.12</Typography>
         </div>
       </ContentWrapper>
-
       <Button className={s.terminate} variant="outline">
         {t.pages.profileSettings.terminate}
       </Button>
-
       {temp.map((device, i) => {
-        const date = new Date(device.lastActiveDate)
-        const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
-
         return (
           <ContentWrapper
-            className={{ card: s.card, container: s.activeSessions }}
+            className={s.activeSessions}
+            classNameCard={s.card}
             key={device.deviceId + device.title}
             title={i === 0 ? t.pages.profileSettings.activeSessions : ''}
           >
@@ -59,7 +56,7 @@ export const Devices = () => {
               </Typography>
               <Typography variant="regular14">{device.ip}</Typography>
               <Typography className={s.lastVisit} variant="small">
-                {t.pages.profileSettings.lastVisit}: {formattedDate}
+                {t.pages.profileSettings.lastVisit}: {format(device.lastActiveDate, 'dd.MM.yyyy')}
               </Typography>
             </div>
             <Button className={s.logOut} startIcon={<Logout />} variant="text">

@@ -1,7 +1,9 @@
 @import '@/app/styles/mixins';
 
-.title {
-  margin-bottom: 18px;
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .content {
