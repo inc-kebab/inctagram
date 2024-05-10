@@ -5,7 +5,7 @@ import { useTranslation } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { Tabs } from '@/shared/ui/Tabs'
 import { SidebarLayout } from '@/widgets/layout'
-import { GeneralInformation } from '@/widgets/profile'
+import { AccountManagement, GeneralInformation, MyPayments } from '@/widgets/profile'
 import { useRouter } from 'next/router'
 
 import s from './index.module.scss'
@@ -41,7 +41,12 @@ const ProfileSettings: Page = () => {
   }, [push, query.tab, query.id])
 
   return (
-    <Tabs.Root defaultValue={tabs[0].value} onValueChange={handleChangeTabValue} value={activeTab}>
+    <Tabs.Root
+      className={s.root}
+      defaultValue={tabs[0].value}
+      onValueChange={handleChangeTabValue}
+      value={activeTab}
+    >
       <Tabs.List className={s.tabs}>
         {tabs.map(el => (
           <Tabs.Item className={s.item} key={el.value} value={el.value}>
@@ -55,11 +60,11 @@ const ProfileSettings: Page = () => {
       <Tabs.Content style={{ padding: 20 }} value={tabs[1].value}>
         Devices
       </Tabs.Content>
-      <Tabs.Content style={{ padding: 20 }} value={tabs[2].value}>
-        Account management
+      <Tabs.Content className={s.content} value={tabs[2].value}>
+        <AccountManagement />
       </Tabs.Content>
-      <Tabs.Content style={{ padding: 20 }} value={tabs[3].value}>
-        My payments
+      <Tabs.Content className={s.content} value={tabs[3].value}>
+        <MyPayments />
       </Tabs.Content>
     </Tabs.Root>
   )

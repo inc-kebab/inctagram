@@ -1,10 +1,10 @@
-import { MAX_SIZE_IMAGE_20MB, postsActions } from '@/entities/post'
+import { TitleBlock, postsActions } from '@/entities/post'
+import { MAX_SIZE_IMAGE_20MB } from '@/shared/const/sizes'
 import { photoSchema } from '@/shared/helpers'
 import { useAppDispatch, useTranslation } from '@/shared/hooks'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'
 
 import { CurrentWindow } from '../../model/types/post.types'
-import { TitleBlock } from '../TitleBlock/TitleBlock'
 
 interface Props {
   onChangeWindow?: (window: CurrentWindow) => void

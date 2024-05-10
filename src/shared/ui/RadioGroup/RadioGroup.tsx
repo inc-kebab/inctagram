@@ -19,11 +19,16 @@ export type RadioGroupProps = {
 
 export const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Root>, RadioGroupProps>(
   (props, ref) => {
-    const { className, options, ...rest } = props
+    const { className, disabled, options, ...rest } = props
 
     return (
-      <RadixRadioGroup.Root className={clsx(s.root, className)} {...rest} ref={ref}>
-        {options?.map((el, index) => <Radio key={index} {...el} />)}
+      <RadixRadioGroup.Root
+        className={clsx(s.root, className)}
+        {...rest}
+        disabled={disabled}
+        ref={ref}
+      >
+        {options?.map((el, index) => <Radio disabled={disabled} key={index} {...el} />)}
       </RadixRadioGroup.Root>
     )
   }

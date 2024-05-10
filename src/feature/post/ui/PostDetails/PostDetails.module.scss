@@ -46,7 +46,7 @@
     grid-template-areas: 'header' 'slider' 'footer' 'viewComments' 'content';
     grid-template-columns: 1fr;
 
-    height: calc(100vh - (2 * var(--header-height)));
+    height: calc(100dvh - (2 * var(--header-height)));
 
     background-color: unset;
 
@@ -83,7 +83,7 @@
   .mobileForm {
     position: fixed;
     z-index: 11;
-    bottom: 120px;
+    bottom: 0;
 
     display: flex;
 

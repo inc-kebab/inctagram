@@ -14,19 +14,24 @@ type SizeProps =
     }
 
 interface BaseProps {
+  className?: string
   isWhite?: boolean
   size?: number
 }
 
 type Props = SizeProps & BaseProps
 
-export const Loader = ({ containerHeight, fullHeight, isWhite, size }: Props) => {
+export const Loader = ({ className, containerHeight, fullHeight, isWhite, size }: Props) => {
   return (
     <div
-      className={clsx(s.loader, {
-        [s.containerHeight]: containerHeight,
-        [s.fullHeight]: fullHeight,
-      })}
+      className={clsx(
+        s.loader,
+        {
+          [s.containerHeight]: containerHeight,
+          [s.fullHeight]: fullHeight,
+        },
+        className
+      )}
     >
       {isWhite ? (
         <LoaderLogoW height={size ? size + 'px' : '100px'} width={size ? size + 'px' : '100px'} />

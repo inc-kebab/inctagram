@@ -17,6 +17,7 @@ type Props = {
   className?: string
   classNameAvatar?: string
   commentText: Nullable<string>
+  isComment?: boolean
   isOwner: boolean
   isShortenComment?: boolean
   like?: boolean
@@ -30,6 +31,7 @@ export const Comment = ({
   className,
   classNameAvatar,
   commentText,
+  isComment = true,
   isOwner,
   isShortenComment,
   like,
@@ -78,13 +80,17 @@ export const Comment = ({
           <Typography asComponent="span" variant="small">
             {dateAgo}
           </Typography>
-          <Typography asComponent="span" variant="small">
-            {`${t.pages.post.likes}: ${likesCount || 0}`}
-          </Typography>
-          {!isOwner && (
-            <Button asComponent="span" className={s.answerBtn} variant="text">
-              <Typography variant="smallSemiBold">{t.button.answer}</Typography>
-            </Button>
+          {isComment && (
+            <>
+              <Typography asComponent="span" variant="small">
+                {`${t.pages.post.likes}: ${likesCount || 0}`}
+              </Typography>
+              {!isOwner && (
+                <Button asComponent="span" className={s.answerBtn} variant="text">
+                  <Typography variant="smallSemiBold">{t.button.answer}</Typography>
+                </Button>
+              )}
+            </>
           )}
         </div>
       </div>

@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import s from './Skeleton.module.scss'
 
 interface Props {
-  border?: string
+  border?: number | string
   className?: string
   height?: number | string
   width?: number | string

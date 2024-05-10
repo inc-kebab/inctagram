@@ -1,0 +1,106 @@
+@import '@/app/styles/mixins';
+
+.root {
+  height: 100%;
+  padding: 30px 0 12px;
+}
+
+.current {
+  margin-bottom: 13px;
+}
+
+.table {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+
+  & .column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.titleCell {
+  color: var(--light-900);
+  white-space: nowrap;
+}
+
+.dataCell {
+  font-weight: var(--font-weight-semibold);
+}
+
+.item {
+  margin-bottom: 24px;
+}
+
+.payment {
+  display: flex;
+  gap: 54px;
+  align-items: center;
+  justify-content: flex-end;
+
+  & .icon {
+    cursor: pointer;
+
+    background-color: var(--dark-500);
+    border: 1px solid var(--dark-300);
+    border-radius: 8px;
+
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.payBtn {
+  padding: 0;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 8px;
+
+  transition: all 0.2s;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover:not(:disabled) {
+    transform: scale(1.04);
+  }
+}
+
+.dialog {
+  width: 100%;
+  max-width: 366px;
+}
+
+@include mobile {
+  .payment {
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .loader {
+    margin-top: 50px;
+  }
+
+  .current,
+  .item {
+    margin-bottom: 10px;
+  }
+
+  .dialog {
+    width: 95%;
+    max-width: unset;
+  }
+}
+
+@include mobile-small {
+  .payment {
+    justify-content: space-between;
+  }
+}

@@ -15,6 +15,7 @@ type Props = {
   className?: string
   datePost: string
   isActiveCommentForm?: boolean
+  isAuth: boolean
   likesCount: number
   toggleShowCommentForm?: () => void
 }
@@ -24,6 +25,7 @@ export const PostInfoAdditional = ({
   className,
   datePost,
   isActiveCommentForm,
+  isAuth,
   likesCount,
   toggleShowCommentForm,
 }: Props) => {
@@ -44,13 +46,15 @@ export const PostInfoAdditional = ({
           <Button className={s.iconBtn} variant="text">
             <Heart className={s.icon} />
           </Button>
-          <Button
-            className={clsx(s.iconBtn, s.messageBtn)}
-            onClick={toggleShowCommentForm}
-            variant="text"
-          >
-            <MessageCircle className={clsx(s.icon, isActiveCommentForm && s.active)} />
-          </Button>
+          {isAuth && (
+            <Button
+              className={clsx(s.iconBtn, s.messageBtn)}
+              onClick={toggleShowCommentForm}
+              variant="text"
+            >
+              <MessageCircle className={clsx(s.icon, isActiveCommentForm && s.active)} />
+            </Button>
+          )}
           <Button className={s.iconBtn} variant="text">
             <PaperPlane className={s.icon} />
           </Button>

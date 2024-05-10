@@ -1,0 +1,20 @@
+@import '@/app/styles/mixins';
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 502px;
+}
+
+@include mobile {
+  .container {
+    flex-direction: column;
+    height: calc(100dvh - (3 * var(--header-height))); // header - sidebar - dialog title
+  }
+}
+
+@include mobile-small {
+  .container {
+    height: calc(100dvh - (2 * var(--header-height)) - 50px);
+  }
+}
