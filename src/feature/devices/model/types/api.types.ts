@@ -5,4 +5,9 @@ export type Device = {
   title: string
 }
 
+export type GetDevicesResponse = {
+  current: Device
+  others: Device[]
+}
+
 export type DeactivateDeviceArgs = { deviceId: string }

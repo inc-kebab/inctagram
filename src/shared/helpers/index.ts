@@ -1,5 +1,5 @@
-export { getBrowser } from './getBrowser'
 export { getDefaultSwiperConfig } from './getDefaultSwiperConfig'
+export { getDeviceInfo } from './getDeviceInfo'
 export { getModifiedImage } from './getModifiedImage'
 export type { FilterImage } from './getModifiedImage'
 export { handleErrorResponse } from './handleErrorResponse'
