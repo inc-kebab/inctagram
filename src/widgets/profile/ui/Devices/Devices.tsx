@@ -35,22 +35,9 @@ export const Devices = () => {
   const [deactivateOther, { isLoading: isDeactivateOtherLoad }] =
     useDeactivateAllOtherDevicesMutation()
 
-  const devices = useMemo(() => {
-    let current: Device | undefined
-    const other: Device[] = []
-
-    data?.forEach(el => {
-      if (el.title === navigator.userAgent) {
-        current = el
-      } else {
-        other.push(el)
-      }
-    })
-
-    return { current, other }
-  }, [data])
-
-  const currentDeviceInfo = devices.current ? getDeviceInfo(devices.current.title) : null
+  const currentDeviceInfo = data?.current
+    ? { data: data.current, ...getDeviceInfo(data.current.title) }
+    : null
 
   const handleDeactivateOtherDevices = () => {
     deactivateOther().then(res => {
@@ -72,26 +59,31 @@ export const Devices = () => {
     <section className={s.container}>
       {currentDeviceInfo && (
         <ContentWrapper classNameCard={s.card} title={t.pages.profileSettings.currentDevice}>
-          {hashDevicesIcons[currentDeviceInfo.type]}
+          {hashDevicesIcons[currentDeviceInfo.type] || <PC className={s.icon} />}
           <div>
             <Typography className={s.title} variant="regularBold16">
               {currentDeviceInfo.name}
             </Typography>
-            <Typography variant="regular14">{devices.current?.ip}</Typography>
+            <Typography variant="regular14">{currentDeviceInfo.data.ip}</Typography>
             <Typography className={clsx(s.lastVisit, s.online)} variant="small">
               {t.pages.profileSettings.online}
             </Typography>
           </div>
         </ContentWrapper>
       )}
-      <Button className={s.terminate} onClick={handleDeactivateOtherDevices} variant="outline">
+      <Button
+        className={s.terminate}
+        disabled={data?.others.length === 0}
+        onClick={handleDeactivateOtherDevices}
+        variant="outline"
+      >
         {t.pages.profileSettings.terminate}
       </Button>
       <Typography asComponent="h3" className={s.title} variant="h3">
         {t.pages.profileSettings.activeSessions}
       </Typography>
-      {devices.other.length ? (
-        devices.other.map(device => {
+      {data?.others.length ? (
+        data.others.map(device => {
           const handleDeactivateCurrentDevice = () => {
             deactivate({ deviceId: device.deviceId }).then(res => {
               if ('error' in res) {

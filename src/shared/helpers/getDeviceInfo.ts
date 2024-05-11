@@ -4,7 +4,20 @@
 
 import { UAParser } from 'ua-parser-js'
 
+const isPostmanRuntime = (ua: string) => {
+  return ua.startsWith('Postman')
+}
+
 export const getDeviceInfo = (ua: string) => {
+  if (isPostmanRuntime(ua)) {
+    const data = ua.split('/')
+
+    return {
+      name: `${data[0]} ${data[1]}`,
+      type: 'pc',
+    }
+  }
+
   const parser = new UAParser(ua)
 
   const { getBrowser, getDevice, getOS } = parser

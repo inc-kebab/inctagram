@@ -1,6 +1,6 @@
 import { baseApi } from '@/shared/api'
 
-import { DeactivateDeviceArgs, Device } from '../model/types/api.types'
+import { DeactivateDeviceArgs, GetDevicesResponse } from '../model/types/api.types'
 
 const devicesAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -12,7 +12,7 @@ const devicesAPI = baseApi.injectEndpoints({
       invalidatesTags: (_, error) => (error ? [] : ['devices']),
       query: ({ deviceId }) => ({ method: 'DELETE', url: `/devices/${deviceId}` }),
     }),
-    getDevices: builder.query<Device[], void>({
+    getDevices: builder.query<GetDevicesResponse, void>({
       providesTags: (_, error) => (error ? [] : ['devices']),
       query: () => ({ method: 'GET', url: '/devices' }),
     }),
