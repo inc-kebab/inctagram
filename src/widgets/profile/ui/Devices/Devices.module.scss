@@ -1,6 +1,7 @@
 @import '@/app/styles/mixins';
 
 .container {
+  height: 100%;
   padding-top: 30px;
 }
 
@@ -42,6 +43,16 @@
 
 .lastVisit {
   margin-top: 5px;
+}
+
+.emptyList {
+  margin-top: 84px;
+}
+
+@include tablet {
+  .loader {
+    margin-top: 50px;
+  }
 }
 
 @include mobile {
