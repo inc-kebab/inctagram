@@ -1,29 +1,15 @@
-import { DeactivateDeviceArgs, Device } from '@/feature/devices'
 import { baseApi } from '@/shared/api'
+
+import { DeactivateDeviceArgs, Device } from '../model/types/api.types'
 
 const devicesAPI = baseApi.injectEndpoints({
   endpoints: builder => ({
+    deactivateAllOtherDevices: builder.mutation<void, void>({
+      invalidatesTags: (_, error) => (error ? [] : ['devices']),
+      query: () => ({ method: 'DELETE', url: `/devices` }),
+    }),
     deactivateDevice: builder.mutation<void, DeactivateDeviceArgs>({
-      invalidatesTags: ['devices'],
-      // onQueryStarted: async ({ deviceId }, { dispatch, queryFulfilled }) => {
-      //   const patchResult = dispatch(
-      //     devicesAPI.util.updateQueryData('getDevices', undefined, draft => {
-      //       if (draft) {
-      //         const deleteDevice = draft.findIndex(el => el.deviceId === deviceId)
-      //
-      //         if (deleteDevice !== -1) {
-      //           draft.splice(deleteDevice, 1)
-      //         }
-      //       }
-      //     })
-      //   )
-      //
-      //   try {
-      //     await queryFulfilled
-      //   } catch (e) {
-      //     patchResult.undo
-      //   }
-      // },
+      invalidatesTags: (_, error) => (error ? [] : ['devices']),
       query: ({ deviceId }) => ({ method: 'DELETE', url: `/devices/${deviceId}` }),
     }),
     getDevices: builder.query<Device[], void>({
@@ -33,4 +19,8 @@ const devicesAPI = baseApi.injectEndpoints({
   }),
 })
 
-export const { useDeactivateDeviceMutation, useGetDevicesQuery } = devicesAPI
+export const {
+  useDeactivateAllOtherDevicesMutation,
+  useDeactivateDeviceMutation,
+  useGetDevicesQuery,
+} = devicesAPI

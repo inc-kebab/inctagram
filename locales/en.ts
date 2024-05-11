@@ -253,6 +253,7 @@ export const en = {
       metaDescription:
         'Customize your profile to suit your needs. Update your information, add a profile photo. Make your profile unique and informative to stand out and attract attention.',
       metaTitle: 'Profile settings',
+      online: 'Online',
       terminate: 'Terminate all other session',
     },
     serverError: {
