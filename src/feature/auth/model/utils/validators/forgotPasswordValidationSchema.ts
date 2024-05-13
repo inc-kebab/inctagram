@@ -8,9 +8,12 @@ export const forgotPasswordSchema = (t: LocaleType) =>
       .trim()
       .min(1, t.validation.required)
       .email({ message: t.validation.emailVerification }),
-    recaptcha: z.string().refine(value => value, {
-      message: t.validation.required,
-    }),
+    recaptcha: z
+      .string()
+      .nullable()
+      .refine(value => value, {
+        message: t.validation.required,
+      }),
   })
 
 export type ForgotPasswordFormValues = z.infer<ReturnType<typeof forgotPasswordSchema>>

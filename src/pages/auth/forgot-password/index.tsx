@@ -28,12 +28,14 @@ const ForgotPassword: Page = () => {
   const [resendRecoveryPassword, { isLoading: isResendRecoveryLoad }] =
     useResendRecoveryPasswordMutation()
 
-  const handlePromiseSubmit = (promise: Promise<QueryPromiseResult>) => {
+  const handlePromiseSubmit = (promise: Promise<QueryPromiseResult>, email?: string) => {
     promise.then(res => {
       if ('data' in res) {
         setOpen(true)
       }
       if ('error' in res && ref.current) {
+        ref.current.reset({ email })
+
         const setError = ref.current.setError
 
         const errors = handleErrorResponse<ForgotPasswordFormValues>(res.error)
@@ -50,7 +52,7 @@ const ForgotPassword: Page = () => {
   }
 
   const handleSubmit = (data: ForgotPasswordFormValues) => {
-    handlePromiseSubmit(recoveryPassword(data))
+    handlePromiseSubmit(recoveryPassword(data), data.email)
   }
 
   return (

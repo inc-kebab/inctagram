@@ -89,12 +89,7 @@ export const ForgotPasswordForm = forwardRef(
             {t.pages.forgotPassword.success}
           </Typography>
         )}
-        <Button
-          className={s.button}
-          disabled={disabled || !isValid || isError}
-          fullWidth
-          type="submit"
-        >
+        <Button className={s.button} disabled={disabled || !isValid} fullWidth type="submit">
           {isSuccess ? t.button.sendLinkAgain : t.button.sendLink}
         </Button>
         <Button
