@@ -5,58 +5,9 @@
   padding-top: 30px;
 }
 
-.card {
-  display: flex;
-  gap: 12px;
-  min-height: 120px;
-
-  & .icon {
-    margin-top: 6px;
-  }
-}
-
-.title {
-  margin-bottom: 12px;
-}
-
-.online {
-  color: var(--primary-500);
-}
-
 .terminate {
   display: block;
   margin: 24px 0 18px auto;
-}
-
-.activeSessions {
-  margin-bottom: 12px;
-
-  &:last-child {
-    margin: 0;
-  }
-}
-
-.session {
-  display: flex;
-  gap: 12px;
-}
-
-.logOut {
-  margin-left: auto;
-  padding: 0;
-
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-medium);
-  color: var(--light-100);
-
-  &:disabled {
-    cursor: unset;
-    color: var(--light-900);
-  }
-}
-
-.lastVisit {
-  margin-top: 5px;
 }
 
 .emptyList {
@@ -73,18 +24,5 @@
   .terminate {
     width: 100%;
     margin: 24px 0 30px;
-  }
-}
-
-@include mobile-small {
-  .card,
-  .session {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logOut {
-    margin-left: 0;
   }
 }
