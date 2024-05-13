@@ -1,0 +1,28 @@
+@import '@/app/styles/mixins';
+
+.container {
+  height: 100%;
+  padding-top: 30px;
+}
+
+.terminate {
+  display: block;
+  margin: 24px 0 18px auto;
+}
+
+.emptyList {
+  margin-top: 84px;
+}
+
+@include tablet {
+  .loader {
+    margin-top: 50px;
+  }
+}
+
+@include mobile {
+  .terminate {
+    width: 100%;
+    margin: 24px 0 30px;
+  }
+}

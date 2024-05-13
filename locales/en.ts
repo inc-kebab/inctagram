@@ -246,9 +246,15 @@ export const en = {
       publications: 'Publications',
     },
     profileSettings: {
+      activeSessions: 'Active sessions',
+      currentDevice: 'Current device',
+      emptyDevicesList: 'You have not yet logged in from other devices',
+      lastVisit: 'Last visit',
       metaDescription:
         'Customize your profile to suit your needs. Update your information, add a profile photo. Make your profile unique and informative to stand out and attract attention.',
       metaTitle: 'Profile settings',
+      online: 'Online',
+      terminate: 'Terminate all other session',
     },
     serverError: {
       description:
