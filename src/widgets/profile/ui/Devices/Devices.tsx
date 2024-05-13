@@ -33,6 +33,8 @@ export const Devices = () => {
     })
   }
 
+  const disabled = isDeactivateLoad || isDeactivateOtherLoad || isFetching
+
   if (isLoading) {
     return <Loader className={s.loader} containerHeight />
   }
@@ -42,7 +44,7 @@ export const Devices = () => {
       {currentDeviceInfo && <CurrentDevice deviceData={currentDeviceInfo} />}
       <Button
         className={s.terminate}
-        disabled={data?.others.length === 0 || isFetching}
+        disabled={data?.others.length === 0 || disabled}
         onClick={handleDeactivateOtherDevices}
         variant="outline"
       >
@@ -61,7 +63,7 @@ export const Devices = () => {
           return (
             <OtherDevice
               device={device}
-              disabled={isDeactivateLoad || isDeactivateOtherLoad || isFetching}
+              disabled={disabled}
               isFirst={i === 0}
               key={device.deviceId + device.title}
               onDeactivate={handleDeactivateCurrentDevice}
