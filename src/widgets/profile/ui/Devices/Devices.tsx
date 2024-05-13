@@ -1,16 +1,15 @@
-import { ReactElement, useMemo } from 'react'
+import { ReactElement } from 'react'
 
 import {
-  Device,
   useDeactivateAllOtherDevicesMutation,
   useDeactivateDeviceMutation,
   useGetDevicesQuery,
 } from '@/feature/devices'
 import { ContentWrapper } from '@/feature/payment'
-import ServerError from '@/pages/500'
 import { Logout } from '@/shared/assets/icons/common'
 import { PC, Phone, Tablet } from '@/shared/assets/icons/other'
 import { getDeviceInfo, handleErrorResponse } from '@/shared/helpers'
+import { extractIPAddress } from '@/shared/helpers/extractIPAddress'
 import { useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Loader } from '@/shared/ui/Loader'
@@ -29,7 +28,7 @@ const hashDevicesIcons: Record<string, ReactElement> = {
 export const Devices = () => {
   const { t } = useTranslation()
 
-  const { data, isError, isLoading } = useGetDevicesQuery()
+  const { data, isLoading } = useGetDevicesQuery()
 
   const [deactivate, { isLoading: isDeactivateLoad }] = useDeactivateDeviceMutation()
   const [deactivateOther, { isLoading: isDeactivateOtherLoad }] =
@@ -51,10 +50,6 @@ export const Devices = () => {
     return <Loader className={s.loader} containerHeight />
   }
 
-  if (isError) {
-    return <ServerError />
-  }
-
   return (
     <section className={s.container}>
       {currentDeviceInfo && (
@@ -64,7 +59,9 @@ export const Devices = () => {
             <Typography className={s.title} variant="regularBold16">
               {currentDeviceInfo.name}
             </Typography>
-            <Typography variant="regular14">{currentDeviceInfo.data.ip}</Typography>
+            <Typography variant="regular14">
+              IP: {extractIPAddress(currentDeviceInfo.data.ip)}
+            </Typography>
             <Typography className={clsx(s.lastVisit, s.online)} variant="small">
               {t.pages.profileSettings.online}
             </Typography>
@@ -108,7 +105,7 @@ export const Devices = () => {
                   <Typography className={s.title} variant="regularBold16">
                     {name}
                   </Typography>
-                  <Typography variant="regular14">IP: {device.ip}</Typography>
+                  <Typography variant="regular14">IP: {extractIPAddress(device.ip)}</Typography>
                   <Typography className={s.lastVisit} variant="small">
                     {t.pages.profileSettings.lastVisit}:{' '}
                     {format(device.lastActiveDate, 'dd.MM.yyyy - kk:mm:ss')}
