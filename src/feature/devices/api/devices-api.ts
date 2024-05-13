@@ -13,7 +13,7 @@ const devicesAPI = baseApi.injectEndpoints({
       query: ({ deviceId }) => ({ method: 'DELETE', url: `/devices/${deviceId}` }),
     }),
     getDevices: builder.query<GetDevicesResponse, void>({
-      providesTags: (_, error) => (error ? [] : ['devices']),
+      providesTags: ['devices'],
       query: () => ({ method: 'GET', url: '/devices' }),
     }),
   }),

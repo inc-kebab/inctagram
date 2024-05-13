@@ -11,7 +11,7 @@ type Props = PropsWithChildren & Omit<MetaProps, 'children'>
 export const AuthLayout = ({ children, ...rest }: Props) => {
   return (
     <Meta {...rest}>
-      <Header />
+      <Header isAuth />
       <main className={s.main}>{children}</main>
     </Meta>
   )
