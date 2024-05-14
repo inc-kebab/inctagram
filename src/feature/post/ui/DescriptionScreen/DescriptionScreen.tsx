@@ -1,4 +1,12 @@
-import { ScreenWrapper, TitleBlock, postsActions } from '@/entities/post'
+import {
+  DraftPost,
+  ScreenWrapper,
+  Stores,
+  TitleBlock,
+  getStoreData,
+  postsActions,
+  updateDraftPost,
+} from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { getDefaultSwiperConfig } from '@/shared/helpers'
@@ -34,6 +42,16 @@ export const DescriptionScreen = ({ onChangeStatus, onCloseModal }: Props) => {
   })
 
   const handleClickBack = () => {
+    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      const oldDraftPost = res[0]
+
+      void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+        ...oldDraftPost,
+        imagesWithFilters: [],
+        window: 'filter',
+      })
+    })
+
     dispatch(postsActions.setWindow('filter'))
     dispatch(postsActions.resetImagesWithFilters())
   }

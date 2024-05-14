@@ -7,17 +7,14 @@ import {
   ImageObj,
   LoadedImagesList,
   ScreenWrapper,
+  Stores,
   TitleBlock,
   ZoomIn,
+  getStoreData,
   postsActions,
+  updateDraftPost,
   useAddPhoto,
 } from '@/entities/post'
-import {
-  Stores,
-  addDraftPost,
-  getStoreData,
-  updateDraftPost,
-} from '@/entities/post/model/services/saveDraftPost'
 import { Close } from '@/shared/assets/icons/common'
 import { PlusCircle } from '@/shared/assets/icons/outline'
 import { MAX_SIZE_IMAGE_20MB } from '@/shared/const/sizes'
@@ -75,6 +72,16 @@ export const CropperPostScreen = () => {
   }
 
   const handleClickBack = () => {
+    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      const oldDraftPost = res[0]
+
+      void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+        ...oldDraftPost,
+        images: [],
+        window: 'upload',
+      })
+    })
+
     dispatch(postsActions.setWindow('upload'))
     dispatch(postsActions.resetImages())
   }
@@ -88,16 +95,15 @@ export const CropperPostScreen = () => {
 
     Promise.all(promises)
       .then(images => {
-        getStoreData<DraftPost>(Stores.DRAFT_POST)
-          .then(res => res[0])
-          .then(res =>
-            updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
-              ...res,
-              croppedImages: images,
-              imagesWithFilters: [],
-              window: 'filter',
-            })
-          )
+        getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+          const oldDraftPost = res[0]
+
+          void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+            ...oldDraftPost,
+            croppedImages: images,
+            window: 'filter',
+          })
+        })
 
         dispatch(postsActions.setCroppedImages(images))
         dispatch(postsActions.setWindow('filter'))

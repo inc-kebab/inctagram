@@ -29,6 +29,26 @@ const postsSlice = createSlice({
         zoom: 1,
       })
     },
+    initDraftPost(state, action: PayloadAction<DraftPost>) {
+      const { croppedImages, images, imagesWithFilters, window } = action.payload
+
+      state.window = window
+      state.images = images.map(el => ({
+        aspect: 0,
+        crop: { x: 0, y: 0 },
+        croppedAreaPixels: null,
+        imageURL: URL.createObjectURL(el),
+        uploadId: null,
+        zoom: 1,
+      }))
+
+      state.croppedImages = croppedImages.map(el => ({
+        filter: 'image_filter--normal',
+        imageURL: URL.createObjectURL(el),
+      }))
+
+      state.imagesWithFilters = imagesWithFilters.map(el => ({ imageURL: URL.createObjectURL(el) }))
+    },
     removeImage(state, action: PayloadAction<string>) {
       state.images = state.images.filter(image => image.imageURL !== action.payload)
     },

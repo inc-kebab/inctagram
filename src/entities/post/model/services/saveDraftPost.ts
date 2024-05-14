@@ -1,6 +1,6 @@
+const dbName = 'draft_post'
 let request: IDBOpenDBRequest
 let db: IDBDatabase
-const dbName = 'draft_post'
 let version = 1
 
 export enum Stores {
@@ -24,9 +24,9 @@ export const initDB = (): Promise<boolean> => {
     }
 
     request.onsuccess = () => {
+      console.log(`Success - initDB v${version}`)
       db = request.result
       version = db.version
-      console.log('request.onsuccess - initDB', version)
       resolve(true)
     }
 
@@ -36,12 +36,12 @@ export const initDB = (): Promise<boolean> => {
   })
 }
 
-export const addDraftPost = <T>(storeName: string, data: T): Promise<boolean> => {
+export const createDraftPost = <T>(storeName: string, data: T): Promise<boolean> => {
   return new Promise(resolve => {
     request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
-      console.log('request.onsuccess - addData', data)
+      console.log('Success - createDraftPost', data)
       db = request.result
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
@@ -61,7 +61,7 @@ export const updateDraftPost = <T>(storeName: string, data: T): Promise<boolean>
     request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
-      console.log('request.onsuccess - updateData', data)
+      console.log('Success - updateDraftPost', data)
       db = request.result
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
@@ -81,7 +81,7 @@ export const getStoreData = <T>(storeName: Stores): Promise<T[]> => {
     request = indexedDB.open(dbName)
 
     request.onsuccess = () => {
-      console.log('request.onsuccess - getAllData')
+      console.log('Success - getStoreData')
       db = request.result
       const tx = db.transaction(storeName, 'readonly')
       const store = tx.objectStore(storeName)
@@ -90,6 +90,20 @@ export const getStoreData = <T>(storeName: Stores): Promise<T[]> => {
       res.onsuccess = () => {
         resolve(res.result)
       }
+    }
+  })
+}
+
+export const deleteDB = (): Promise<boolean> => {
+  return new Promise(resolve => {
+    // again open the connection
+    request = indexedDB.deleteDatabase(dbName)
+
+    request.onsuccess = () => {
+      resolve(true)
+    }
+    request.onerror = () => {
+      resolve(false)
     }
   })
 }

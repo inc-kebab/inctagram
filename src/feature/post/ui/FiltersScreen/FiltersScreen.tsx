@@ -5,11 +5,13 @@ import {
   DraftPost,
   FilterBlock,
   ScreenWrapper,
+  Stores,
   TitleBlock,
   filters,
+  getStoreData,
   postsActions,
+  updateDraftPost,
 } from '@/entities/post'
-import { Stores, getStoreData, updateDraftPost } from '@/entities/post/model/services/saveDraftPost'
 import { FilterImage, getDefaultSwiperConfig, getModifiedImage } from '@/shared/helpers'
 import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import Image from 'next/image'
@@ -55,6 +57,16 @@ export const FiltersScreen = () => {
   }, [croppedImages, activeIndex, handleChangeFilter])
 
   const handleClickBack = () => {
+    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      const oldDraftPost = res[0]
+
+      void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+        ...oldDraftPost,
+        croppedImages: [],
+        window: 'expand',
+      })
+    })
+
     dispatch(postsActions.setWindow('expand'))
     dispatch(postsActions.resetCroppedImages())
   }
@@ -71,15 +83,15 @@ export const FiltersScreen = () => {
 
     Promise.all(promises)
       .then(images => {
-        getStoreData<DraftPost>(Stores.DRAFT_POST)
-          .then(res => res[0])
-          .then(res =>
-            updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
-              ...res,
-              imagesWithFilters: images,
-              window: 'description',
-            })
-          )
+        getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+          const oldDraftPost = res[0]
+
+          void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+            ...oldDraftPost,
+            imagesWithFilters: images,
+            window: 'description',
+          })
+        })
 
         dispatch(postsActions.setImagesWithFilters(images))
         dispatch(postsActions.setWindow('description'))

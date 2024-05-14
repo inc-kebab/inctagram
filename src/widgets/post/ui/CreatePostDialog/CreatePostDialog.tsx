@@ -1,8 +1,7 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import { CurrentWindow, DraftPost, PostsState, postsActions } from '@/entities/post'
-import { Stores, getStoreData, initDB } from '@/entities/post/model/services/saveDraftPost'
+import { CurrentWindow, deleteDB, postsActions } from '@/entities/post'
 import {
   CropperPostScreen,
   DescriptionScreen,
@@ -30,28 +29,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const [isRequest, setIsRequest] = useState(false)
 
-  const [isDBReady, setIsDBReady] = useState(false)
-
   const window = useAppSelector(state => state.posts.window)
-
-  useEffect(() => {
-    if (open) {
-      initDB().then(res => setIsDBReady(res))
-    }
-  }, [open])
-
-  const handleGetDraft = () => {
-    if (isDBReady) {
-      getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
-        const newState = res[0]
-
-        dispatch(postsActions.setWindow(newState.window))
-        dispatch(postsActions.setImages(newState.images))
-        dispatch(postsActions.setCroppedImages(newState.croppedImages))
-        dispatch(postsActions.setImagesWithFilters(newState.imagesWithFilters))
-      })
-    }
-  }
 
   const isBigSizeScreen = window === 'filter' || window === 'description'
 
@@ -67,15 +45,16 @@ export const CreatePostDialog = ({ trigger }: Props) => {
     }
   }
 
-  const handleCloseModals = () => {
+  const handleSaveDraft = () => {
     setOpenConfirm(false)
     setOpen(false)
     dispatch(postsActions.setWindow('upload'))
     dispatch(postsActions.resetAllImages())
   }
 
-  const handleCloseConfirmModal = () => {
-    setOpenConfirm(false)
+  const handleDiscard = () => {
+    void deleteDB()
+    handleSaveDraft()
   }
 
   const renderWindow = (currentWindow: CurrentWindow) => {
@@ -90,7 +69,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         return <FiltersScreen />
       }
       case currentWindow === 'description': {
-        return <DescriptionScreen onChangeStatus={setIsRequest} onCloseModal={handleCloseModals} />
+        return <DescriptionScreen onChangeStatus={setIsRequest} onCloseModal={handleSaveDraft} />
       }
     }
   }
@@ -108,16 +87,15 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         trigger={trigger}
       >
         {renderWindow(window)}
-        <button onClick={handleGetDraft}>get indexeddb data</button>
       </Dialog>
       <ConfirmDialog
         content={t.pages.post.confirmCloseCreateModal.message}
         customActions={
           <div className={s.confirmActions}>
-            <Button onClick={handleCloseConfirmModal} variant="outline">
+            <Button onClick={handleDiscard} variant="outline">
               {t.button.discard}
             </Button>
-            <Button onClick={handleCloseModals}>{t.button.saveDraft}</Button>
+            <Button onClick={handleSaveDraft}>{t.button.saveDraft}</Button>
           </div>
         }
         onOpenChange={setOpenConfirm}
