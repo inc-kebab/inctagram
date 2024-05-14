@@ -2,6 +2,8 @@ import { Point } from 'react-easy-crop'
 
 import { FilterImage } from '@/shared/helpers'
 
+export type CurrentWindow = 'description' | 'expand' | 'filter' | 'upload'
+
 export type ImageURL = {
   imageURL: string
 }
@@ -24,4 +26,13 @@ export type PostsState = {
   croppedImages: CroppedImage[]
   images: ImageObj[]
   imagesWithFilters: ImageURL[]
+  window: CurrentWindow
+}
+
+export type DraftPost = {
+  croppedImages: Blob[]
+  id: 'draft_post'
+  images: Blob[]
+  imagesWithFilters: Blob[]
+  window: CurrentWindow
 }

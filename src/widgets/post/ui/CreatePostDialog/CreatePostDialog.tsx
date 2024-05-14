@@ -1,15 +1,15 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import { postsActions } from '@/entities/post'
+import { CurrentWindow, DraftPost, PostsState, postsActions } from '@/entities/post'
+import { Stores, getStoreData, initDB } from '@/entities/post/model/services/saveDraftPost'
 import {
   CropperPostScreen,
-  CurrentWindow,
   DescriptionScreen,
   FiltersScreen,
   UploadImagesScreen,
 } from '@/feature/post'
-import { useAppDispatch, useTranslation } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import clsx from 'clsx'
@@ -30,7 +30,28 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const [isRequest, setIsRequest] = useState(false)
 
-  const [window, setWindow] = useState<CurrentWindow>('upload')
+  const [isDBReady, setIsDBReady] = useState(false)
+
+  const window = useAppSelector(state => state.posts.window)
+
+  useEffect(() => {
+    if (open) {
+      initDB().then(res => setIsDBReady(res))
+    }
+  }, [open])
+
+  const handleGetDraft = () => {
+    if (isDBReady) {
+      getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+        const newState = res[0]
+
+        dispatch(postsActions.setWindow(newState.window))
+        dispatch(postsActions.setImages(newState.images))
+        dispatch(postsActions.setCroppedImages(newState.croppedImages))
+        dispatch(postsActions.setImagesWithFilters(newState.imagesWithFilters))
+      })
+    }
+  }
 
   const isBigSizeScreen = window === 'filter' || window === 'description'
 
@@ -49,7 +70,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   const handleCloseModals = () => {
     setOpenConfirm(false)
     setOpen(false)
-    setWindow('upload')
+    dispatch(postsActions.setWindow('upload'))
     dispatch(postsActions.resetAllImages())
   }
 
@@ -60,22 +81,16 @@ export const CreatePostDialog = ({ trigger }: Props) => {
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
       case currentWindow === 'upload': {
-        return <UploadImagesScreen onChangeWindow={setWindow} />
+        return <UploadImagesScreen />
       }
       case currentWindow === 'expand': {
-        return <CropperPostScreen onChangeWindow={setWindow} />
+        return <CropperPostScreen />
       }
       case currentWindow === 'filter': {
-        return <FiltersScreen onChangeWindow={setWindow} />
+        return <FiltersScreen />
       }
       case currentWindow === 'description': {
-        return (
-          <DescriptionScreen
-            onChangeStatus={setIsRequest}
-            onChangeWindow={setWindow}
-            onCloseModal={handleCloseModals}
-          />
-        )
+        return <DescriptionScreen onChangeStatus={setIsRequest} onCloseModal={handleCloseModals} />
       }
     }
   }
@@ -93,6 +108,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         trigger={trigger}
       >
         {renderWindow(window)}
+        <button onClick={handleGetDraft}>get indexeddb data</button>
       </Dialog>
       <ConfirmDialog
         content={t.pages.post.confirmCloseCreateModal.message}

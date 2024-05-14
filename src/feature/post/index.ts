@@ -9,7 +9,6 @@ export {
 } from './api/public-posts-api'
 export { useDeletePost } from './model/hooks/useDeletePost'
 export { useEditPost } from './model/hooks/useEditPost'
-export type { CurrentWindow } from './model/types/post.types'
 export { CropperPostScreen } from './ui/CropperPostScreen/CropperPostScreen'
 export { DescriptionScreen } from './ui/DescriptionScreen/DescriptionScreen'
 export { EditPostForm } from './ui/EditPostForm/EditPostForm'

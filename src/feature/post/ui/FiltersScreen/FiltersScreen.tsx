@@ -1,7 +1,15 @@
 import { useCallback, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { FilterBlock, ScreenWrapper, TitleBlock, filters, postsActions } from '@/entities/post'
+import {
+  DraftPost,
+  FilterBlock,
+  ScreenWrapper,
+  TitleBlock,
+  filters,
+  postsActions,
+} from '@/entities/post'
+import { Stores, getStoreData, updateDraftPost } from '@/entities/post/model/services/saveDraftPost'
 import { FilterImage, getDefaultSwiperConfig, getModifiedImage } from '@/shared/helpers'
 import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import Image from 'next/image'
@@ -10,13 +18,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './FiltersScreen.module.scss'
 
-import { CurrentWindow } from '../../model/types/post.types'
-
-type Props = {
-  onChangeWindow?: (window: CurrentWindow) => void
-}
-
-export const FiltersScreen = ({ onChangeWindow }: Props) => {
+export const FiltersScreen = () => {
   const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
@@ -53,7 +55,7 @@ export const FiltersScreen = ({ onChangeWindow }: Props) => {
   }, [croppedImages, activeIndex, handleChangeFilter])
 
   const handleClickBack = () => {
-    onChangeWindow?.('expand')
+    dispatch(postsActions.setWindow('expand'))
     dispatch(postsActions.resetCroppedImages())
   }
 
@@ -64,13 +66,23 @@ export const FiltersScreen = ({ onChangeWindow }: Props) => {
         imageSrc: el.imageURL,
         mode: 'filters',
         t,
-      }) as Promise<string>
+      }) as Promise<Blob>
     })
 
     Promise.all(promises)
       .then(images => {
+        getStoreData<DraftPost>(Stores.DRAFT_POST)
+          .then(res => res[0])
+          .then(res =>
+            updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+              ...res,
+              imagesWithFilters: images,
+              window: 'description',
+            })
+          )
+
         dispatch(postsActions.setImagesWithFilters(images))
-        onChangeWindow?.('description')
+        dispatch(postsActions.setWindow('description'))
       })
       .catch(e => toast.error(e.message))
   }

@@ -1,11 +1,18 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { CroppedImage, PostsState, UpdateImageModel } from '../types/postSlice.types'
+import {
+  CroppedImage,
+  CurrentWindow,
+  DraftPost,
+  PostsState,
+  UpdateImageModel,
+} from '../types/postSlice.types'
 
 const initialState: PostsState = {
   croppedImages: [],
   images: [],
   imagesWithFilters: [],
+  window: 'upload',
 }
 
 const postsSlice = createSlice({
@@ -39,14 +46,27 @@ const postsSlice = createSlice({
     resetImagesWithFilters(state) {
       state.imagesWithFilters = []
     },
-    setCroppedImages(state, action: PayloadAction<string[]>) {
+    setCroppedImages(state, action: PayloadAction<Blob[]>) {
       state.croppedImages = action.payload.map(el => ({
         filter: 'image_filter--normal',
-        imageURL: el,
+        imageURL: URL.createObjectURL(el),
       }))
     },
-    setImagesWithFilters(state, action: PayloadAction<string[]>) {
-      state.imagesWithFilters = action.payload.map(el => ({ imageURL: el }))
+    setImages(state, action: PayloadAction<Blob[]>) {
+      state.images = action.payload.map(el => ({
+        aspect: 0,
+        crop: { x: 0, y: 0 },
+        croppedAreaPixels: null,
+        imageURL: URL.createObjectURL(el),
+        uploadId: null,
+        zoom: 1,
+      }))
+    },
+    setImagesWithFilters(state, action: PayloadAction<Blob[]>) {
+      state.imagesWithFilters = action.payload.map(el => ({ imageURL: URL.createObjectURL(el) }))
+    },
+    setWindow(state, action: PayloadAction<CurrentWindow>) {
+      state.window = action.payload
     },
     updateFilterCroppedImage(state, action: PayloadAction<CroppedImage>) {
       const { filter, imageURL } = action.payload

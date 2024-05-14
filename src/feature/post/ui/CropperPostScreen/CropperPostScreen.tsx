@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 import {
+  DraftPost,
   ExpandBtn,
   ImageObj,
   LoadedImagesList,
@@ -11,6 +12,12 @@ import {
   postsActions,
   useAddPhoto,
 } from '@/entities/post'
+import {
+  Stores,
+  addDraftPost,
+  getStoreData,
+  updateDraftPost,
+} from '@/entities/post/model/services/saveDraftPost'
 import { Close } from '@/shared/assets/icons/common'
 import { PlusCircle } from '@/shared/assets/icons/outline'
 import { MAX_SIZE_IMAGE_20MB } from '@/shared/const/sizes'
@@ -24,14 +31,9 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './CropperPostScreen.module.scss'
 
-import { CurrentWindow } from '../../model/types/post.types'
 import { CropperImage } from './CropperImage'
 
-type Props = {
-  onChangeWindow?: (window: CurrentWindow) => void
-}
-
-export const CropperPostScreen = ({ onChangeWindow }: Props) => {
+export const CropperPostScreen = () => {
   const dispatch = useAppDispatch()
 
   const [controlledSwiper, setControlledSwiper] = useState<SwiperClass | null>(null)
@@ -58,7 +60,7 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
     dispatch(postsActions.removeImage(imageObj.imageURL))
 
     if (images.length === 1) {
-      onChangeWindow?.('upload')
+      dispatch(postsActions.setWindow('upload'))
     }
   }
 
@@ -73,7 +75,7 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
   }
 
   const handleClickBack = () => {
-    onChangeWindow?.('upload')
+    dispatch(postsActions.setWindow('upload'))
     dispatch(postsActions.resetImages())
   }
 
@@ -81,13 +83,24 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
     const promises = images.map(el => {
       const crop = el.aspect === 0 ? null : el.croppedAreaPixels
 
-      return getModifiedImage({ crop, imageSrc: el.imageURL, mode: 'url', t }) as Promise<string>
+      return getModifiedImage({ crop, imageSrc: el.imageURL, mode: 'blob', t }) as Promise<Blob>
     })
 
     Promise.all(promises)
       .then(images => {
+        getStoreData<DraftPost>(Stores.DRAFT_POST)
+          .then(res => res[0])
+          .then(res =>
+            updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+              ...res,
+              croppedImages: images,
+              imagesWithFilters: [],
+              window: 'filter',
+            })
+          )
+
         dispatch(postsActions.setCroppedImages(images))
-        onChangeWindow?.('filter')
+        dispatch(postsActions.setWindow('filter'))
       })
       .catch(e => toast.error(e.message))
   }

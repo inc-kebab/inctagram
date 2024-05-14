@@ -10,16 +10,14 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import s from './DescriptionScreen.module.scss'
 
 import { useCreatePost } from '../../model/hooks/useCreatePost'
-import { CurrentWindow } from '../../model/types/post.types'
 import { EditPostForm } from '../EditPostForm/EditPostForm'
 
 interface Props {
   onChangeStatus?: (status: boolean) => void
-  onChangeWindow?: (window: CurrentWindow) => void
   onCloseModal: () => void
 }
 
-export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal }: Props) => {
+export const DescriptionScreen = ({ onChangeStatus, onCloseModal }: Props) => {
   const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
@@ -36,7 +34,7 @@ export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal
   })
 
   const handleClickBack = () => {
-    onChangeWindow?.('filter')
+    dispatch(postsActions.setWindow('filter'))
     dispatch(postsActions.resetImagesWithFilters())
   }
 
