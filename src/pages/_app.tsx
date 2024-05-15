@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Provider } from 'react-redux'
 
 import { ErrorBoundary, wrapper } from '@/app'
+import { initDB } from '@/entities/post'
 import { useLoader } from '@/shared/hooks'
 import { Page } from '@/shared/types/layout'
 import { ToastProvider } from '@/widgets/toast'
@@ -11,13 +12,13 @@ import { setCookie } from 'cookies-next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 
+import '@/app/styles/index.scss'
+import '@/app/styles/nprogress.scss'
+import '@/shared/ui/Carousel/Carousel.scss'
+import 'react-toastify/dist/ReactToastify.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import 'react-toastify/dist/ReactToastify.css'
-import '@/shared/ui/Carousel/Carousel.scss'
-import '@/app/styles/nprogress.scss'
-import '@/app/styles/index.scss'
 
 type Props = AppProps & {
   Component: Page
@@ -35,6 +36,10 @@ export function App({ Component, pageProps }: Props) {
   useEffect(() => {
     setCookie('NEXT_LOCALE', locale, { maxAge: 100 * 365 * 24 * 60 * 60 }) // 1year
   }, [locale])
+
+  useEffect(() => {
+    void initDB()
+  }, [])
 
   return (
     <Provider store={store}>

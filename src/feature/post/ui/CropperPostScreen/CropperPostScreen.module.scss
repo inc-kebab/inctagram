@@ -26,7 +26,7 @@
     margin-left: auto;
   }
 
-  & .rightMobile {
+  & .rightLabel {
     display: none;
   }
 }
@@ -49,13 +49,12 @@
     }
 
     & .rightLabel {
+      display: block;
       margin-left: auto;
     }
 
     & .rightMobile {
       cursor: pointer;
-
-      display: block;
 
       width: 52px;
       height: 52px;

@@ -89,7 +89,7 @@ export const getModifiedImage = ({
 
           formData.append(fileName, blob)
           resolve(formData)
-        } else if (mode === 'url' || mode === 'filters') {
+        } else if (mode === 'url') {
           resolve(URL.createObjectURL(blob))
         } else {
           resolve(blob)
