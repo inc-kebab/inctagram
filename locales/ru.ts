@@ -19,6 +19,7 @@ export const ru: LocaleType = {
     next: 'Далее',
     no: 'Нет',
     ok: 'OK',
+    openDraft: 'Открыть черновик',
     profileSettings: 'Настройки профиля',
     publish: 'Опубликовать',
     resendVerificationLink: 'Отправить повторное подтверждение',

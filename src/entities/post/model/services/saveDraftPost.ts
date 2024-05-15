@@ -36,26 +36,6 @@ export const initDB = (): Promise<boolean> => {
   })
 }
 
-export const createDraftPost = <T>(storeName: string, data: T): Promise<boolean> => {
-  return new Promise(resolve => {
-    request = indexedDB.open(dbName, version)
-
-    request.onsuccess = () => {
-      console.log('Success - createDraftPost', data)
-      db = request.result
-      const tx = db.transaction(storeName, 'readwrite')
-      const store = tx.objectStore(storeName)
-
-      store.add(data)
-      resolve(true)
-    }
-
-    request.onerror = () => {
-      resolve(false)
-    }
-  })
-}
-
 export const updateDraftPost = <T>(storeName: string, data: T): Promise<boolean> => {
   return new Promise(resolve => {
     request = indexedDB.open(dbName, version)
@@ -94,12 +74,17 @@ export const getStoreData = <T>(storeName: Stores): Promise<T[]> => {
   })
 }
 
-export const deleteDB = (): Promise<boolean> => {
+export const deleteDB = (storeName: Stores): Promise<boolean> => {
   return new Promise(resolve => {
-    // again open the connection
-    request = indexedDB.deleteDatabase(dbName)
+    request = indexedDB.open(dbName)
 
     request.onsuccess = () => {
+      console.log('Success - deleteDB')
+      db = request.result
+      const tx = db.transaction(storeName, 'readwrite')
+      const store = tx.objectStore(storeName)
+
+      store.delete(storeName)
       resolve(true)
     }
     request.onerror = () => {

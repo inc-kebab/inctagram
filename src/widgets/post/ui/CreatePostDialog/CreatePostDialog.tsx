@@ -1,7 +1,15 @@
 import { ReactNode, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import { CurrentWindow, deleteDB, postsActions } from '@/entities/post'
+import {
+  CurrentWindow,
+  DraftPost,
+  Stores,
+  deleteDB,
+  getStoreData,
+  postsActions,
+  updateDraftPost,
+} from '@/entities/post'
 import {
   CropperPostScreen,
   DescriptionScreen,
@@ -42,18 +50,29 @@ export const CreatePostDialog = ({ trigger }: Props) => {
       }
     } else {
       setOpen(true)
+      dispatch(postsActions.setWindow('upload'))
     }
   }
 
   const handleSaveDraft = () => {
     setOpenConfirm(false)
     setOpen(false)
-    dispatch(postsActions.setWindow('upload'))
+    dispatch(postsActions.setWindow(null))
     dispatch(postsActions.resetAllImages())
   }
 
   const handleDiscard = () => {
-    void deleteDB()
+    /*getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      const oldDraftPost = res[0]
+
+      void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+        ...oldDraftPost,
+        images: [],
+        window: 'upload',
+      })
+    })*/
+
+    deleteDB(Stores.DRAFT_POST)
     handleSaveDraft()
   }
 

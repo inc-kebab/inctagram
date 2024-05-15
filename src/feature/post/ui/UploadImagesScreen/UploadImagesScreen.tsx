@@ -4,27 +4,27 @@ import {
   DraftPost,
   Stores,
   TitleBlock,
-  createDraftPost,
   getStoreData,
-  initDB,
   postsActions,
+  updateDraftPost,
 } from '@/entities/post'
 import { MAX_SIZE_IMAGE_20MB } from '@/shared/const/sizes'
 import { photoSchema } from '@/shared/helpers'
 import { useAppDispatch, useTranslation } from '@/shared/hooks'
+import { Button } from '@/shared/ui/Button'
 import { PhotoUploader } from '@/shared/ui/PhotoUploader'
+
+import s from './UploadImagesScreen.module.scss'
 
 export const UploadImagesScreen = () => {
   const { t } = useTranslation()
-
-  const [isDBReady, setIsDBReady] = useState(false)
 
   const [isDraftExist, setIsDraftExist] = useState(false)
 
   const dispatch = useAppDispatch()
 
   const handleSetPhoto = (file: File) => {
-    void createDraftPost<DraftPost>(Stores.DRAFT_POST, {
+    void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
       croppedImages: [],
       id: Stores.DRAFT_POST,
       images: [file],
@@ -36,37 +36,33 @@ export const UploadImagesScreen = () => {
   }
 
   const handleGetDraft = () => {
-    if (isDBReady) {
-      getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      if (res.length) {
         const newState = res[0]
 
         dispatch(postsActions.initDraftPost(newState))
-      })
-    }
+      }
+    })
   }
 
   useEffect(() => {
-    initDB().then(res => setIsDBReady(res))
+    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      if (res.length) {
+        setIsDraftExist(true)
+      }
+    })
   }, [])
-
-  useEffect(() => {
-    if (isDBReady) {
-      getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
-        if (res.length) {
-          setIsDraftExist(true)
-        }
-      })
-    }
-  }, [isDBReady])
 
   return (
     <>
       <TitleBlock title={t.pages.post.addPhoto} />
-      {isDraftExist ? (
-        <button onClick={handleGetDraft}>get indexeddb data</button>
-      ) : (
-        <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)} />
-      )}
+      <PhotoUploader setPhoto={handleSetPhoto} zodSchema={photoSchema(t, MAX_SIZE_IMAGE_20MB)}>
+        {isDraftExist && (
+          <Button className={s.button} fullWidth onClick={handleGetDraft} variant="outline">
+            {t.button.openDraft}
+          </Button>
+        )}
+      </PhotoUploader>
     </>
   )
 }

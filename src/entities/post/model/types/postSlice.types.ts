@@ -2,7 +2,7 @@ import { Point } from 'react-easy-crop'
 
 import { FilterImage } from '@/shared/helpers'
 
-export type CurrentWindow = 'description' | 'expand' | 'filter' | 'upload'
+export type CurrentWindow = 'description' | 'expand' | 'filter' | 'upload' | null
 
 export type ImageURL = {
   imageURL: string

@@ -12,7 +12,7 @@ const initialState: PostsState = {
   croppedImages: [],
   images: [],
   imagesWithFilters: [],
-  window: 'upload',
+  window: null,
 }
 
 const postsSlice = createSlice({

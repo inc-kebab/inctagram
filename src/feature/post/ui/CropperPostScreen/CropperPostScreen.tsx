@@ -72,16 +72,6 @@ export const CropperPostScreen = () => {
   }
 
   const handleClickBack = () => {
-    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
-      const oldDraftPost = res[0]
-
-      void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
-        ...oldDraftPost,
-        images: [],
-        window: 'upload',
-      })
-    })
-
     dispatch(postsActions.setWindow('upload'))
     dispatch(postsActions.resetImages())
   }
@@ -133,12 +123,17 @@ export const CropperPostScreen = () => {
           simulateTouch={false}
         >
           {images.map((el, i) => {
-            const { aspect, imageURL, zoom } = el
+            const { aspect, imageURL } = el
 
             return (
               <SwiperSlide key={imageURL + i}>
                 {aspect === 0 ? (
-                  <Image alt={`Slide ${i + 1}`} fill objectFit="contain" src={imageURL} />
+                  <Image
+                    alt={`Slide ${i + 1}`}
+                    fill
+                    src={imageURL}
+                    style={{ objectFit: 'contain' }}
+                  />
                 ) : (
                   <CropperImage image={el} onChangeZoom={handleChangeZoom(imageURL)} />
                 )}
@@ -166,10 +161,9 @@ export const CropperPostScreen = () => {
               >
                 <Image
                   alt={`Slide ${imageURL}`}
-                  className={s.imagePreview}
                   fill
-                  objectFit="cover"
                   src={imageURL}
+                  style={{ objectFit: 'cover' }}
                 />
                 <Button
                   className={s.deleteBtn}
