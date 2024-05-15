@@ -1,4 +1,12 @@
-import { ScreenWrapper, TitleBlock, postsActions } from '@/entities/post'
+import {
+  DraftPost,
+  ScreenWrapper,
+  Stores,
+  TitleBlock,
+  getStoreData,
+  postsActions,
+  updateDraftPost,
+} from '@/entities/post'
 import { UserBanner } from '@/entities/user'
 import { useGetMyProfileQuery } from '@/feature/profile'
 import { getDefaultSwiperConfig } from '@/shared/helpers'
@@ -10,16 +18,14 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import s from './DescriptionScreen.module.scss'
 
 import { useCreatePost } from '../../model/hooks/useCreatePost'
-import { CurrentWindow } from '../../model/types/post.types'
 import { EditPostForm } from '../EditPostForm/EditPostForm'
 
 interface Props {
   onChangeStatus?: (status: boolean) => void
-  onChangeWindow?: (window: CurrentWindow) => void
   onCloseModal: () => void
 }
 
-export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal }: Props) => {
+export const DescriptionScreen = ({ onChangeStatus, onCloseModal }: Props) => {
   const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
@@ -36,7 +42,17 @@ export const DescriptionScreen = ({ onChangeStatus, onChangeWindow, onCloseModal
   })
 
   const handleClickBack = () => {
-    onChangeWindow?.('filter')
+    getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+      const oldDraftPost = res[0]
+
+      void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+        ...oldDraftPost,
+        imagesWithFilters: [],
+        window: 'filter',
+      })
+    })
+
+    dispatch(postsActions.setWindow('filter'))
     dispatch(postsActions.resetImagesWithFilters())
   }
 

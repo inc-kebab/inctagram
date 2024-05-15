@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { PropsWithChildren, useState } from 'react'
 
 import { Image as ImageSvg } from '@/shared/assets/icons/outline'
 import { useTranslation } from '@/shared/hooks'
@@ -13,9 +13,9 @@ import s from './PhotoUploader.module.scss'
 type Props = {
   setPhoto: (photo: File) => void
   zodSchema: ZodEffects<any>
-}
+} & PropsWithChildren
 
-export const PhotoUploader = ({ setPhoto, zodSchema }: Props) => {
+export const PhotoUploader = ({ children, setPhoto, zodSchema }: Props) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
 
@@ -35,14 +35,16 @@ export const PhotoUploader = ({ setPhoto, zodSchema }: Props) => {
       </div>
       <InputFile
         accept=".png, .jpg, .jpeg"
+        classNameLabel={s.label}
         setError={setError}
         setFile={setPhoto}
         zodSchema={zodSchema}
       >
-        <Button asComponent="span" className={s.button}>
+        <Button asComponent="span" className={s.button} fullWidth>
           {t.button.selectFromDevice}
         </Button>
       </InputFile>
+      {children}
     </div>
   )
 }

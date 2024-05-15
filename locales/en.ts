@@ -21,6 +21,7 @@ export const en = {
     next: 'Next',
     no: 'No',
     ok: 'OK',
+    openDraft: 'Open draft',
     profileSettings: 'Profile settings',
     publish: 'Publish',
     resendVerificationLink: 'Resend verification link',

@@ -1,15 +1,14 @@
 import { ReactNode, useState } from 'react'
 
 import { ConfirmDialog } from '@/entities/dialog'
-import { postsActions } from '@/entities/post'
+import { CurrentWindow, Stores, clearDB, postsActions } from '@/entities/post'
 import {
   CropperPostScreen,
-  CurrentWindow,
   DescriptionScreen,
   FiltersScreen,
   UploadImagesScreen,
 } from '@/feature/post'
-import { useAppDispatch, useTranslation } from '@/shared/hooks'
+import { useAppDispatch, useAppSelector, useTranslation } from '@/shared/hooks'
 import { Button } from '@/shared/ui/Button'
 import { Dialog } from '@/shared/ui/Dialog'
 import clsx from 'clsx'
@@ -30,7 +29,7 @@ export const CreatePostDialog = ({ trigger }: Props) => {
 
   const [isRequest, setIsRequest] = useState(false)
 
-  const [window, setWindow] = useState<CurrentWindow>('upload')
+  const window = useAppSelector(state => state.posts.window)
 
   const isBigSizeScreen = window === 'filter' || window === 'description'
 
@@ -43,39 +42,35 @@ export const CreatePostDialog = ({ trigger }: Props) => {
       }
     } else {
       setOpen(true)
+      dispatch(postsActions.setWindow('upload'))
     }
   }
 
-  const handleCloseModals = () => {
+  const handleSaveDraft = () => {
     setOpenConfirm(false)
     setOpen(false)
-    setWindow('upload')
+    dispatch(postsActions.setWindow(null))
     dispatch(postsActions.resetAllImages())
   }
 
-  const handleCloseConfirmModal = () => {
-    setOpenConfirm(false)
+  const handleDiscard = () => {
+    void clearDB(Stores.DRAFT_POST)
+    handleSaveDraft()
   }
 
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
       case currentWindow === 'upload': {
-        return <UploadImagesScreen onChangeWindow={setWindow} />
+        return <UploadImagesScreen />
       }
       case currentWindow === 'expand': {
-        return <CropperPostScreen onChangeWindow={setWindow} />
+        return <CropperPostScreen />
       }
       case currentWindow === 'filter': {
-        return <FiltersScreen onChangeWindow={setWindow} />
+        return <FiltersScreen />
       }
       case currentWindow === 'description': {
-        return (
-          <DescriptionScreen
-            onChangeStatus={setIsRequest}
-            onChangeWindow={setWindow}
-            onCloseModal={handleCloseModals}
-          />
-        )
+        return <DescriptionScreen onChangeStatus={setIsRequest} onCloseModal={handleSaveDraft} />
       }
     }
   }
@@ -98,10 +93,10 @@ export const CreatePostDialog = ({ trigger }: Props) => {
         content={t.pages.post.confirmCloseCreateModal.message}
         customActions={
           <div className={s.confirmActions}>
-            <Button onClick={handleCloseConfirmModal} variant="outline">
+            <Button onClick={handleDiscard} variant="outline">
               {t.button.discard}
             </Button>
-            <Button onClick={handleCloseModals}>{t.button.saveDraft}</Button>
+            <Button onClick={handleSaveDraft}>{t.button.saveDraft}</Button>
           </div>
         }
         onOpenChange={setOpenConfirm}

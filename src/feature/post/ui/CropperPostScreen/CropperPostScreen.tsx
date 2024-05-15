@@ -2,13 +2,17 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 import {
+  DraftPost,
   ExpandBtn,
   ImageObj,
   LoadedImagesList,
   ScreenWrapper,
+  Stores,
   TitleBlock,
   ZoomIn,
+  getStoreData,
   postsActions,
+  updateDraftPost,
   useAddPhoto,
 } from '@/entities/post'
 import { Close } from '@/shared/assets/icons/common'
@@ -24,14 +28,9 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react'
 
 import s from './CropperPostScreen.module.scss'
 
-import { CurrentWindow } from '../../model/types/post.types'
 import { CropperImage } from './CropperImage'
 
-type Props = {
-  onChangeWindow?: (window: CurrentWindow) => void
-}
-
-export const CropperPostScreen = ({ onChangeWindow }: Props) => {
+export const CropperPostScreen = () => {
   const dispatch = useAppDispatch()
 
   const [controlledSwiper, setControlledSwiper] = useState<SwiperClass | null>(null)
@@ -58,7 +57,7 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
     dispatch(postsActions.removeImage(imageObj.imageURL))
 
     if (images.length === 1) {
-      onChangeWindow?.('upload')
+      dispatch(postsActions.setWindow('upload'))
     }
   }
 
@@ -73,7 +72,7 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
   }
 
   const handleClickBack = () => {
-    onChangeWindow?.('upload')
+    dispatch(postsActions.setWindow('upload'))
     dispatch(postsActions.resetImages())
   }
 
@@ -81,13 +80,23 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
     const promises = images.map(el => {
       const crop = el.aspect === 0 ? null : el.croppedAreaPixels
 
-      return getModifiedImage({ crop, imageSrc: el.imageURL, mode: 'url', t }) as Promise<string>
+      return getModifiedImage({ crop, imageSrc: el.imageURL, mode: 'blob', t }) as Promise<Blob>
     })
 
     Promise.all(promises)
       .then(images => {
+        getStoreData<DraftPost>(Stores.DRAFT_POST).then(res => {
+          const oldDraftPost = res[0]
+
+          void updateDraftPost<DraftPost>(Stores.DRAFT_POST, {
+            ...oldDraftPost,
+            croppedImages: images,
+            window: 'filter',
+          })
+        })
+
         dispatch(postsActions.setCroppedImages(images))
-        onChangeWindow?.('filter')
+        dispatch(postsActions.setWindow('filter'))
       })
       .catch(e => toast.error(e.message))
   }
@@ -114,12 +123,17 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
           simulateTouch={false}
         >
           {images.map((el, i) => {
-            const { aspect, imageURL, zoom } = el
+            const { aspect, imageURL } = el
 
             return (
               <SwiperSlide key={imageURL + i}>
                 {aspect === 0 ? (
-                  <Image alt={`Slide ${i + 1}`} fill objectFit="contain" src={imageURL} />
+                  <Image
+                    alt={`Slide ${i + 1}`}
+                    fill
+                    src={imageURL}
+                    style={{ objectFit: 'contain' }}
+                  />
                 ) : (
                   <CropperImage image={el} onChangeZoom={handleChangeZoom(imageURL)} />
                 )}
@@ -147,10 +161,9 @@ export const CropperPostScreen = ({ onChangeWindow }: Props) => {
               >
                 <Image
                   alt={`Slide ${imageURL}`}
-                  className={s.imagePreview}
                   fill
-                  objectFit="cover"
                   src={imageURL}
+                  style={{ objectFit: 'cover' }}
                 />
                 <Button
                   className={s.deleteBtn}

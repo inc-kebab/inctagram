@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { DraftPost } from '@/entities/post'
+import { Stores, getStoreData, updateDraftPost } from '@/entities/post/model/services/saveDraftPost'
 import { useTranslation } from '@/shared/hooks'
 
 export const useAddPhoto = (callback: (url: string) => void, errorCondition: boolean) => {
@@ -17,6 +19,11 @@ export const useAddPhoto = (callback: (url: string) => void, errorCondition: boo
 
     if (!error) {
       callback(URL.createObjectURL(file))
+      getStoreData<DraftPost>(Stores.DRAFT_POST)
+        .then(res => res[0])
+        .then(res =>
+          updateDraftPost<DraftPost>(Stores.DRAFT_POST, { ...res, images: [...res.images, file] })
+        )
     }
     setError('')
   }
