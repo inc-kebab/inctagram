@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { toast } from 'react-toastify'
 
 import { LocaleType } from '@/../locales'
-import { ImageURL } from '@/entities/post'
+import { ImageURL, Stores, clearDB } from '@/entities/post'
 import { getModifiedImage, handleErrorResponse } from '@/shared/helpers'
 import { UseFormRef } from '@/shared/types/form'
 
@@ -59,6 +59,7 @@ export const useCreatePost = ({ callback, changeStatus, imagesWithFilters, t }: 
         if (response) {
           if ('data' in response) {
             callback?.()
+            void clearDB(Stores.DRAFT_POST)
             toast.success(t.pages.post.successCreate)
           } else {
             handleErrorResponse(response.error)
